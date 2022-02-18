@@ -177,7 +177,7 @@ namespace test
 		Floor.GetTransform().SetTranslation({ 0.0f, 0.5f, 0.0f });
 		Floor.GetTransform().SetScale({ 3.0f, 1.0f, 3.0f });
 
-		GameObjects.emplace(Floor.GetID(), std::move(Floor)); //
+		GameObjects.emplace(Floor.GetID(), std::move(Floor));
 
 	// Point light:
 		

@@ -99,11 +99,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application\FApplication.cpp" />
+    <ClCompile Include="src\Components\CComponentSystem.cpp" />
     <ClCompile Include="src\Components\CMovementComponent.cpp" />
+    <ClCompile Include="src\Components\CPointLightComponent.cpp" />
     <ClCompile Include="src\Components\CRigidBody2DComponent.cpp" />
     <ClCompile Include="src\Components\CTransform2DComponent.cpp" />
     <ClCompile Include="src\Components\CTransform3DComponent.cpp" />
-    <ClCompile Include="src\Components\FKeyMap.cpp" />
     <ClCompile Include="src\Components\IComponent.cpp" />
     <ClCompile Include="src\EntryPoint\Main.cpp" />
     <ClCompile Include="src\Events\FEventSystem.cpp" />
@@ -220,11 +221,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h" />
+    <ClInclude Include="src\Components\CComponentSystem.h" />
     <ClInclude Include="src\Components\CMovementComponent.h" />
+    <ClInclude Include="src\Components\CPointLightComponent.h" />
     <ClInclude Include="src\Components\CRigidBody2DComponent.h" />
     <ClInclude Include="src\Components\CTransform2DComponent.h" />
     <ClInclude Include="src\Components\CTransform3DComponent.h" />
-    <ClInclude Include="src\Components\FKeyMap.h" />
     <ClInclude Include="src\Components\IComponent.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />
     <ClInclude Include="src\Events\EEventType.h" />
@@ -288,6 +290,7 @@
     <ClInclude Include="src\Templates\TArray.h" />
     <ClInclude Include="src\Templates\THashFunctions.h" />
     <ClInclude Include="src\Templates\TImage.h" />
+    <ClInclude Include="src\Templates\TPointer.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Timer\FTimeStamp.h" />

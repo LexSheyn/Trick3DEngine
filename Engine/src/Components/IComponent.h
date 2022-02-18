@@ -5,5 +5,11 @@
 namespace t3d
 {
 	class IComponent
-	{};
+	{
+	public:
+
+		IComponent() {};
+
+		virtual ~IComponent() {};
+	};
 }

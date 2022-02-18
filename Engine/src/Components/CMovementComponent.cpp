@@ -9,10 +9,10 @@ namespace t3d
 	{
 		glm::vec3 Rotation{0.0f};
 
-		if (FKeyboard::IsKeyPressed(Keys.LookRight)) { Rotation.y += 1.0f; }
-		if (FKeyboard::IsKeyPressed(Keys.LookLeft) ) { Rotation.y -= 1.0f; }
-		if (FKeyboard::IsKeyPressed(Keys.LookUp)   ) { Rotation.x += 1.0f; }
-		if (FKeyboard::IsKeyPressed(Keys.LookDown) ) { Rotation.x -= 1.0f; }
+		if (FKeyboard::IsKeyPressed(FKey::Right)) { Rotation.y += 1.0f; }
+		if (FKeyboard::IsKeyPressed(FKey::Left) ) { Rotation.y -= 1.0f; }
+		if (FKeyboard::IsKeyPressed(FKey::Up)   ) { Rotation.x += 1.0f; }
+		if (FKeyboard::IsKeyPressed(FKey::Down) ) { Rotation.x -= 1.0f; }
 
 		// Temporary hardcoded implementation:
 	//	if (FMouse::GetX() >= Window.GetWidth() - 1 ) { Rotation.y += 1.0f; }
@@ -40,12 +40,12 @@ namespace t3d
 
 		glm::vec3 MoveDirection{0.0f};
 
-		if (FKeyboard::IsKeyPressed(Keys.MoveForward) ) { MoveDirection += ForwardDirection; }
-		if (FKeyboard::IsKeyPressed(Keys.MoveBackward)) { MoveDirection -= ForwardDirection; }
-		if (FKeyboard::IsKeyPressed(Keys.MoveRight)   ) { MoveDirection += RightDirection;   }
-		if (FKeyboard::IsKeyPressed(Keys.MoveLeft)    ) { MoveDirection -= RightDirection;   }
-		if (FKeyboard::IsKeyPressed(Keys.MoveUp)      ) { MoveDirection += UpDirection;      }
-		if (FKeyboard::IsKeyPressed(Keys.MoveDown)    ) { MoveDirection -= UpDirection;      }
+		if (FKeyboard::IsKeyPressed(FKey::W)) { MoveDirection += ForwardDirection; }
+		if (FKeyboard::IsKeyPressed(FKey::S)) { MoveDirection -= ForwardDirection; }
+		if (FKeyboard::IsKeyPressed(FKey::D)) { MoveDirection += RightDirection;   }
+		if (FKeyboard::IsKeyPressed(FKey::A)) { MoveDirection -= RightDirection;   }
+		if (FKeyboard::IsKeyPressed(FKey::E)) { MoveDirection += UpDirection;      }
+		if (FKeyboard::IsKeyPressed(FKey::Q)) { MoveDirection -= UpDirection;      }
 
 		if (MoveDirection != glm::vec3(0.0f))
 	//	if (glm::dot(MoveDirection, MoveDirection) > std::numeric_limits<float32>::epsilon())
