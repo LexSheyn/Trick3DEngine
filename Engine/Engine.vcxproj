@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{b33d219f-f921-4289-84c3-093d0b14a469}</ProjectGuid>
+    <RootNamespace>Engine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\Output\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\Output\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;shadercd.lib;shaderc_combinedd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;shaderc.lib;shaderc_combined.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application\FApplication.cpp" />
+    <ClCompile Include="src\Components\CMovementComponent.cpp" />
+    <ClCompile Include="src\Components\CRigidBody2DComponent.cpp" />
+    <ClCompile Include="src\Components\CTransform2DComponent.cpp" />
+    <ClCompile Include="src\Components\CTransform3DComponent.cpp" />
+    <ClCompile Include="src\Components\FKeyMap.cpp" />
+    <ClCompile Include="src\Components\IComponent.cpp" />
+    <ClCompile Include="src\EntryPoint\Main.cpp" />
+    <ClCompile Include="src\Events\FEventSystem.cpp" />
+    <ClCompile Include="src\Exception\FException.cpp" />
+    <ClCompile Include="src\Exception\FVulkanException.cpp" />
+    <ClCompile Include="src\GameObjects\IObject.cpp" />
+    <ClCompile Include="src\GameObjects\OGameObject.cpp" />
+    <ClCompile Include="src\Input\Gamepad\FGamepad.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Input\Keyboard\FKeyboard.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Input\Mouse\FMouse.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Logger\FLogger.cpp" />
+    <ClCompile Include="src\PrecompiledHeaders\t3dpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Core\FCamera.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Core\FDevice.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Core\FDeviceBuffer.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Core\FPushConstantData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Core\FRenderer.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Core\FSwapchain.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Objects\Billboard\FBillboard.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Objects\Mesh\FMesh.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Objects\Mesh\FMeshData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Objects\Mesh\FVertex.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Objects\PointLight\FPointLight.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Objects\Skybox\FSkybox.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Pipeline\FDescriptorPool.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Pipeline\FDescriptorSetLayout.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Pipeline\FDescriptorWriter.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Pipeline\FPipeline.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Systems\FBillboardRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Systems\FMeshRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Systems\FPointLightRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\ResourceManagers\FImageLoader.cpp" />
+    <ClCompile Include="src\ThirdParty\stb_image.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ThirdParty\tiny_obj_loader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Timer\FTimeStamp.cpp" />
+    <ClCompile Include="src\Window\FWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Application\FApplication.h" />
+    <ClInclude Include="src\Components\CMovementComponent.h" />
+    <ClInclude Include="src\Components\CRigidBody2DComponent.h" />
+    <ClInclude Include="src\Components\CTransform2DComponent.h" />
+    <ClInclude Include="src\Components\CTransform3DComponent.h" />
+    <ClInclude Include="src\Components\FKeyMap.h" />
+    <ClInclude Include="src\Components\IComponent.h" />
+    <ClInclude Include="src\Events\EEventCategory.h" />
+    <ClInclude Include="src\Events\EEventType.h" />
+    <ClInclude Include="src\Events\EventData.h" />
+    <ClInclude Include="src\Events\FEvent.h" />
+    <ClInclude Include="src\Events\FEventSystem.h" />
+    <ClInclude Include="src\Events\IEventListener.h" />
+    <ClInclude Include="src\Exception\FException.h" />
+    <ClInclude Include="src\Exception\FVulkanException.h" />
+    <ClInclude Include="src\GameObjects\IObject.h" />
+    <ClInclude Include="src\GameObjects\OGameObject.h" />
+    <ClInclude Include="src\Input\Gamepad\FGamepad.h" />
+    <ClInclude Include="src\Input\IInputDevice.h" />
+    <ClInclude Include="src\Input\Keyboard\FCharEvent.h" />
+    <ClInclude Include="src\Input\Keyboard\FKey.h" />
+    <ClInclude Include="src\Input\Keyboard\FKeyboard.h" />
+    <ClInclude Include="src\Input\Keyboard\FKeyEvent.h" />
+    <ClInclude Include="src\Input\Keyboard\FKeyState.h" />
+    <ClInclude Include="src\Input\Mouse\FMouse.h" />
+    <ClInclude Include="src\Input\Mouse\FMouseButton.h" />
+    <ClInclude Include="src\Input\Mouse\FMouseButtonState.h" />
+    <ClInclude Include="src\Logger\FLogger.h" />
+    <ClInclude Include="src\PrecompiledHeaders\t3dpch.h" />
+    <ClInclude Include="src\Render\Core\FCamera.h" />
+    <ClInclude Include="src\Render\Core\FDevice.h" />
+    <ClInclude Include="src\Render\Core\FDeviceBuffer.h" />
+    <ClInclude Include="src\Render\Core\FFrameInfo.h" />
+    <ClInclude Include="src\Render\Core\FMaterial.h" />
+    <ClInclude Include="src\Render\Core\FPushConstantData.h" />
+    <ClInclude Include="src\Render\Core\FQueueFamilyIndices.h" />
+    <ClInclude Include="src\Render\Core\FRenderer.h" />
+    <ClInclude Include="src\Render\Core\FSwapchain.h" />
+    <ClInclude Include="src\Render\Core\FSwapchainSupportDetails.h" />
+    <ClInclude Include="src\Render\Core\FTexture.h" />
+    <ClInclude Include="src\Render\Core\FUniformBufferData.h" />
+    <ClInclude Include="src\Render\Objects\Billboard\FBillboard.h" />
+    <ClInclude Include="src\Render\Objects\Billboard\FBillboardPushConstant.h" />
+    <ClInclude Include="src\Render\Objects\Billboard\FBillboardUniform.h" />
+    <ClInclude Include="src\Render\Objects\Mesh\FMesh.h" />
+    <ClInclude Include="src\Render\Objects\Mesh\FMeshData.h" />
+    <ClInclude Include="src\Render\Objects\Mesh\FMeshPushConstant.h" />
+    <ClInclude Include="src\Render\Objects\Mesh\FMeshUniform.h" />
+    <ClInclude Include="src\Render\Objects\Mesh\FVertex.h" />
+    <ClInclude Include="src\Render\Objects\PointLight\FPointLight.h" />
+    <ClInclude Include="src\Render\Objects\PointLight\FPointLightPushConstant.h" />
+    <ClInclude Include="src\Render\Objects\PointLight\FPointLightUniform.h" />
+    <ClInclude Include="src\Render\Objects\Skybox\FSkybox.h" />
+    <ClInclude Include="src\Render\Objects\Skybox\FSkyboxPushConstant.h" />
+    <ClInclude Include="src\Render\Objects\Skybox\FSkyboxUniform.h" />
+    <ClInclude Include="src\Render\Pipeline\FDescriptorPool.h" />
+    <ClInclude Include="src\Render\Pipeline\FDescriptorSetLayout.h" />
+    <ClInclude Include="src\Render\Pipeline\FDescriptorWriter.h" />
+    <ClInclude Include="src\Render\Pipeline\FPipeline.h" />
+    <ClInclude Include="src\Render\Pipeline\FPipelineConfigInfo.h" />
+    <ClInclude Include="src\Render\Systems\FBillboardRenderSystem.h" />
+    <ClInclude Include="src\Render\Systems\FMeshRenderSystem.h" />
+    <ClInclude Include="src\Render\Systems\FPointLightRenderSystem.h" />
+    <ClInclude Include="src\ResourceManagers\EColorFormat.h" />
+    <ClInclude Include="src\ResourceManagers\FImageLoader.h" />
+    <ClInclude Include="src\ResourceManagers\FImagePNG.h" />
+    <ClInclude Include="src\Templates\TArray.h" />
+    <ClInclude Include="src\Templates\THashFunctions.h" />
+    <ClInclude Include="src\Templates\TImage.h" />
+    <ClInclude Include="src\ThirdParty\stb_image.h" />
+    <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
+    <ClInclude Include="src\Timer\FTimeStamp.h" />
+    <ClInclude Include="src\Types\Types.h" />
+    <ClInclude Include="src\Window\FWindow.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
