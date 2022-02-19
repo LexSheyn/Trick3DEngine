@@ -5,7 +5,7 @@
 #pragma warning( push ) // Vulkan SDK - Begin
 #pragma warning( disable : 26812 ) // Uncoped Enum
 
-#include "../Objects/Mesh/FVertex.h"
+#include "../Primitives/Mesh/FVertex.h"
 
 namespace t3d
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..//Objects/PointLight/FPointLight.h"
+#include "../Primitives/PointLight/FPointLight.h"
 
 namespace t3d
 {

@@ -155,27 +155,27 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Objects\Billboard\FBillboard.cpp">
+    <ClCompile Include="src\Render\Primitives\Billboard\FBillboard.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Objects\Mesh\FMesh.cpp">
+    <ClCompile Include="src\Render\Primitives\Mesh\FMesh.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Objects\Mesh\FMeshData.cpp">
+    <ClCompile Include="src\Render\Primitives\Mesh\FMeshData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Objects\Mesh\FVertex.cpp">
+    <ClCompile Include="src\Render\Primitives\Mesh\FVertex.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Objects\PointLight\FPointLight.cpp">
+    <ClCompile Include="src\Render\Primitives\PointLight\FPointLight.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Objects\Skybox\FSkybox.cpp">
+    <ClCompile Include="src\Render\Primitives\Skybox\FSkybox.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -262,20 +262,20 @@
     <ClInclude Include="src\Render\Core\FSwapchainSupportDetails.h" />
     <ClInclude Include="src\Render\Core\FTexture.h" />
     <ClInclude Include="src\Render\Core\FUniformBufferData.h" />
-    <ClInclude Include="src\Render\Objects\Billboard\FBillboard.h" />
-    <ClInclude Include="src\Render\Objects\Billboard\FBillboardPushConstant.h" />
-    <ClInclude Include="src\Render\Objects\Billboard\FBillboardUniform.h" />
-    <ClInclude Include="src\Render\Objects\Mesh\FMesh.h" />
-    <ClInclude Include="src\Render\Objects\Mesh\FMeshData.h" />
-    <ClInclude Include="src\Render\Objects\Mesh\FMeshPushConstant.h" />
-    <ClInclude Include="src\Render\Objects\Mesh\FMeshUniform.h" />
-    <ClInclude Include="src\Render\Objects\Mesh\FVertex.h" />
-    <ClInclude Include="src\Render\Objects\PointLight\FPointLight.h" />
-    <ClInclude Include="src\Render\Objects\PointLight\FPointLightPushConstant.h" />
-    <ClInclude Include="src\Render\Objects\PointLight\FPointLightUniform.h" />
-    <ClInclude Include="src\Render\Objects\Skybox\FSkybox.h" />
-    <ClInclude Include="src\Render\Objects\Skybox\FSkyboxPushConstant.h" />
-    <ClInclude Include="src\Render\Objects\Skybox\FSkyboxUniform.h" />
+    <ClInclude Include="src\Render\Primitives\Billboard\FBillboard.h" />
+    <ClInclude Include="src\Render\Primitives\Billboard\FBillboardPushConstant.h" />
+    <ClInclude Include="src\Render\Primitives\Billboard\FBillboardUniform.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FMesh.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FMeshData.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FMeshPushConstant.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FMeshUniform.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FVertex.h" />
+    <ClInclude Include="src\Render\Primitives\PointLight\FPointLight.h" />
+    <ClInclude Include="src\Render\Primitives\PointLight\FPointLightPushConstant.h" />
+    <ClInclude Include="src\Render\Primitives\PointLight\FPointLightUniform.h" />
+    <ClInclude Include="src\Render\Primitives\Skybox\FSkybox.h" />
+    <ClInclude Include="src\Render\Primitives\Skybox\FSkyboxPushConstant.h" />
+    <ClInclude Include="src\Render\Primitives\Skybox\FSkyboxUniform.h" />
     <ClInclude Include="src\Render\Pipeline\FDescriptorPool.h" />
     <ClInclude Include="src\Render\Pipeline\FDescriptorSetLayout.h" />
     <ClInclude Include="src\Render\Pipeline\FDescriptorWriter.h" />

@@ -2,7 +2,7 @@
 
 #include "IObject.h"
 
-#include "../Render/Objects/Mesh/FMesh.h"
+#include "../Render/Primitives/Mesh/FMesh.h"
 
 #include "../Components/CTransform3DComponent.h"
 

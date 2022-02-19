@@ -21,7 +21,6 @@ namespace t3d
 	//	if (FMouse::GetY() <=   0.0f                ) { Rotation.x += 1.0f; }
 
 		if (Rotation != glm::vec3(0.0f))
-	//	if (glm::dot(Rotation, Rotation) > std::numeric_limits<float32>::epsilon())
 		{
 			GameObject.GetTransform().Rotate( TurnSpeed * DeltaTime * glm::normalize(Rotation) ); //+= TurnSpeed * DeltaTime * glm::normalize(Rotation);
 		}
@@ -30,7 +29,8 @@ namespace t3d
 	//	GameObject.Transform.Rotation.x = glm::clamp(GameObject.Transform.Rotation.x, -1.5f, 1.5f);
 	//	GameObject.Transform.Rotation.y = glm::mod(GameObject.Transform.Rotation.y, glm::two_pi<float32>());
 
-		GameObject.GetTransform().SetRotation({ glm::clamp(GameObject.GetTransform().GetRotation().x, -1.5f, 1.5f), glm::mod(GameObject.GetTransform().GetRotation().y, glm::two_pi<float32>()), 0.0f });
+		GameObject.GetTransform().SetRotation({ glm::clamp(GameObject.GetTransform().GetRotation().x, -1.5f, 1.5f),
+			                                    glm::mod(GameObject.GetTransform().GetRotation().y, glm::two_pi<float32>()), 0.0f });
 
 		float32 Yaw = GameObject.GetTransform().GetRotation().y;
 
@@ -48,7 +48,6 @@ namespace t3d
 		if (FKeyboard::IsKeyPressed(FKey::Q)) { MoveDirection -= UpDirection;      }
 
 		if (MoveDirection != glm::vec3(0.0f))
-	//	if (glm::dot(MoveDirection, MoveDirection) > std::numeric_limits<float32>::epsilon())
 		{
 			GameObject.GetTransform().Translate( MoveSpeed * DeltaTime * glm::normalize(MoveDirection) ); //+= MoveSpeed * DeltaTime * glm::normalize(MoveDirection);
 		}
