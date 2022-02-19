@@ -365,13 +365,19 @@
     <ClInclude Include="src\Window\FWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Templates\TPointer.h">
+    <ClInclude Include="src\Templates\poormemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Components\CComponentSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Components\CPointLightComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Templates\TSharedPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Templates\TUniquePointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

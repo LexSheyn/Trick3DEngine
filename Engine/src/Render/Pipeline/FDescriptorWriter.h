@@ -13,6 +13,8 @@ namespace t3d
 
 		FDescriptorWriter(FDescriptorSetLayout& SetLayout, FDescriptorPool& Pool);
 
+		~FDescriptorWriter();
+
 	// Functions:
 
 		FDescriptorWriter& WriteBuffer(uint32 Binding, VkDescriptorBufferInfo* BufferInfo);

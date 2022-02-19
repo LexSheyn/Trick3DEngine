@@ -1,29 +1,5 @@
 #pragma once
 
-namespace t3d
-{
-	template<typename T, typename... ArgT>
-	class stupid_ptr
-	{
-	public:
-
-	//	T* make_stupid(T Argument)
-	//	{
-	//		Pointer = new T(Argument);
-	//
-	//		return Pointer;
-	//	}
-
-			  T* get()       { return Pointer; }
-
-		const T* get() const { return Pointer; }
-
-	private:
-
-		T* Pointer;
-	};
-}
-
 /*
 template < typename T > class SP
 {
@@ -34,7 +10,7 @@ private:
 public:
 	SP() : pData(0), reference(0)
 	{
-		// Create a new reference 
+		// Create a new reference
 		reference = new RC();
 		// Increment the reference count
 		reference->AddRef();
@@ -42,7 +18,7 @@ public:
 
 	SP(T* pValue) : pData(pValue), reference(0)
 	{
-		// Create a new reference 
+		// Create a new reference
 		reference = new RC();
 		// Increment the reference count
 		reference->AddRef();

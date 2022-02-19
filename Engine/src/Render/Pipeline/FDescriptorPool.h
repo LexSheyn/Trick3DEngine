@@ -59,7 +59,7 @@ namespace t3d
 				return *this;
 			}
 
-			T3D_INLINE std::unique_ptr<FDescriptorPool> Create() const { return std::make_unique<FDescriptorPool>(Device, MaxSets, PoolFlags, PoolSizes); }
+			T3D_INLINE FDescriptorPool* Create() const { return new FDescriptorPool(Device, MaxSets, PoolFlags, PoolSizes); }
 
 		private:
 

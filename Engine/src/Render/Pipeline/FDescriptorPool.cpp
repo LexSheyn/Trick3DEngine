@@ -26,11 +26,15 @@ namespace t3d
 			LOG_ERROR("Failed to create descriptor pool!");
 			throw;
 		}
+
+		LOG_TRACE("Created.");
 	}
 
 	FDescriptorPool::~FDescriptorPool()
 	{
 		vkDestroyDescriptorPool(Device.Device(), Pool, nullptr);
+
+		LOG_TRACE("Deleted.");
 	}
 
 

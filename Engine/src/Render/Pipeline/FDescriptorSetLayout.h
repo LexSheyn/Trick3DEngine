@@ -52,7 +52,7 @@ namespace t3d
 				return *this;
 			}
 
-			T3D_INLINE std::unique_ptr<FDescriptorSetLayout> Create() const { return std::make_unique<FDescriptorSetLayout>(Device, Bindings); }
+			T3D_INLINE FDescriptorSetLayout* Create() const { return new FDescriptorSetLayout(Device, Bindings); }
 
 		private:
 

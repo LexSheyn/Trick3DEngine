@@ -9,6 +9,12 @@ namespace t3d
 		: SetLayout(SetLayout),
 		  Pool(Pool)
 	{
+		LOG_TRACE("Created.");
+	}
+
+	FDescriptorWriter::~FDescriptorWriter()
+	{
+		LOG_TRACE("Deleted.");
 	}
 
 	FDescriptorWriter& FDescriptorWriter::WriteBuffer(uint32 Binding, VkDescriptorBufferInfo* BufferInfo)

@@ -31,11 +31,15 @@ namespace t3d
 			LOG_ERROR("Failed to create descriptor set layout!");
 			throw;
 		}
+
+		LOG_TRACE("Created.");
 	}
 
 	FDescriptorSetLayout::~FDescriptorSetLayout()
 	{
 		vkDestroyDescriptorSetLayout(Device.Device(), DescriptorSetLayout, nullptr);
+
+		LOG_TRACE("Deleted.");
 	}
 
 }

@@ -371,17 +371,17 @@ namespace t3d
 			throw;
 		}
 
-		LOG_TRACE("LogicalDevice count: " + std::to_string(DeviceCount));
+		LOG_TRACE("Device count: " + std::to_string(DeviceCount));
 		
 		std::vector<VkPhysicalDevice> Devices(DeviceCount);
 
 		vkEnumeratePhysicalDevices(Instance, &DeviceCount, Devices.data());
 
-		for (const auto& LogicalDevice : Devices)
+		for (const auto& Device : Devices)
 		{
-			if (this->IsDeviceSuitable(LogicalDevice))
+			if (this->IsDeviceSuitable(Device))
 			{
-				PhysicalDevice = LogicalDevice;
+				PhysicalDevice = Device;
 
 				break;
 			}
@@ -395,7 +395,7 @@ namespace t3d
 
 		vkGetPhysicalDeviceProperties(PhysicalDevice, &Properties);
 
-		LOG_TRACE(std::string("Physical device: ") + Properties.deviceName);
+		LOG_TRACE(std::string("Device: ") + Properties.deviceName);
 	}
 
 	void FDevice::CreateLogicalDevice()

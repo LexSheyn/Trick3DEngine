@@ -290,7 +290,9 @@
     <ClInclude Include="src\Templates\TArray.h" />
     <ClInclude Include="src\Templates\THashFunctions.h" />
     <ClInclude Include="src\Templates\TImage.h" />
-    <ClInclude Include="src\Templates\TPointer.h" />
+    <ClInclude Include="src\Templates\poormemory.h" />
+    <ClInclude Include="src\Templates\TSharedPointer.h" />
+    <ClInclude Include="src\Templates\TUniquePointer.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Timer\FTimeStamp.h" />

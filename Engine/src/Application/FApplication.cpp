@@ -37,6 +37,8 @@ namespace test
 		{
 			delete Mesh.second;
 		}
+
+		delete DescriptorPool;
 	}
 
 
@@ -44,22 +46,22 @@ namespace test
 
 	void FApplication::Run()
 	{
-		std::vector<std::unique_ptr<t3d::FDeviceBuffer>> UniformDataBuffers(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT);
+		std::vector<t3d::FDeviceBuffer*> UniformDataBuffers(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT);
 
 		for (size_t i = 0u; i < UniformDataBuffers.size(); i++)
 		{
-			UniformDataBuffers[i] = std::make_unique<t3d::FDeviceBuffer>(Device,
-				                                                         sizeof(t3d::FUniformBufferData),
-				                                                         1,
-				                                                         VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-				                                                         VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT); //| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+			UniformDataBuffers[i] = new t3d::FDeviceBuffer(Device,
+				                                           sizeof(t3d::FUniformBufferData),
+				                                           1,
+				                                           VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+				                                           VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT); //| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
 			UniformDataBuffers[i]->Map();
 		}
 
-		std::unique_ptr<t3d::FDescriptorSetLayout> GlobalDescriptorSetLayout = t3d::FDescriptorSetLayout::Constructor(Device)
-			                                                                   .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
-			                                                                   .Create();
+		t3d::FDescriptorSetLayout* GlobalDescriptorSetLayout = t3d::FDescriptorSetLayout::Constructor(Device)
+			                                                   .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
+			                                                   .Create();
 
 		std::vector<VkDescriptorSet> GlobalDescriptorSets(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
 
@@ -140,6 +142,13 @@ namespace test
 		}
 
 		vkDeviceWaitIdle(Device.Device());
+
+		for (auto& UniformBuffer : UniformDataBuffers)
+		{
+			delete UniformBuffer;
+		}
+
+		delete GlobalDescriptorSetLayout;
 	}
 
 

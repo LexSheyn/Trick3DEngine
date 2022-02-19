@@ -12,7 +12,7 @@ namespace test
 	{
 	public:
 
-		Test() {}
+		 Test() {}
 		~Test() {}
 
 		void OnEvent(const t3d::FEvent* const Event) override
@@ -64,7 +64,7 @@ namespace test
 		t3d::FRenderer Renderer;
 
 		// Note: Order of declaration matters!
-		std::unique_ptr<t3d::FDescriptorPool> DescriptorPool;
+		t3d::FDescriptorPool* DescriptorPool;
 
 		std::unordered_map<uint32, t3d::OGameObject> GameObjects;
 

@@ -41,7 +41,9 @@ namespace t3d
 	{
 		delete IndexBuffer;
 
-		delete VertexBuffer;		
+		delete VertexBuffer;
+
+		LOG_TRACE("Deleted.");
 	}
 
 
