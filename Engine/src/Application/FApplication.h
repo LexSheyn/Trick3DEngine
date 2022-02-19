@@ -17,14 +17,14 @@ namespace test
 
 		void OnEvent(const t3d::FEvent* const Event) override
 		{
-			if (Event->GetType() == t3d::EEventType::KeyPressed)
-			{
-				t3d::LOG_TRACE("[" + std::to_string(this->GetID()) + "]: " + std::to_string(Event->KeyData.Key) + " Pressed");
-			}
-			else if (Event->GetType() == t3d::EEventType::KeyReleased)
-			{
-				t3d::LOG_TRACE("[" + std::to_string(this->GetID()) + "]: " + std::to_string(Event->KeyData.Key) + " Released");
-			}
+		//	if (Event->GetType() == t3d::EEventType::KeyPressed)
+		//	{
+		//		t3d::LOG_TRACE("[" + std::to_string(this->GetID()) + "]: " + std::to_string(Event->KeyData.Key) + " Pressed");
+		//	}
+		//	else if (Event->GetType() == t3d::EEventType::KeyReleased)
+		//	{
+		//		t3d::LOG_TRACE("[" + std::to_string(this->GetID()) + "]: " + std::to_string(Event->KeyData.Key) + " Released");
+		//	}
 		}
 	};
 
@@ -67,6 +67,8 @@ namespace test
 		std::unique_ptr<t3d::FDescriptorPool> DescriptorPool;
 
 		std::unordered_map<uint32, t3d::OGameObject> GameObjects;
+
+		std::map<std::string, t3d::FMesh*> Meshes;
 
 		Test A;
 		Test B;

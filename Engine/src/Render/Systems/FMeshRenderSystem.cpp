@@ -21,6 +21,8 @@ namespace t3d
 
 	FMeshRenderSystem::~FMeshRenderSystem()
 	{
+		delete Pipeline;
+
 		vkDestroyPipelineLayout(Device.Device(), PipelineLayout, nullptr);
 	}
 
@@ -91,10 +93,10 @@ namespace t3d
 		PipelineConfig.RenderPass     = RenderPass;
 		PipelineConfig.PipelineLayout = PipelineLayout;
 		
-		Pipeline = std::make_unique<FPipeline>(Device,
-			                                   PipelineConfig,
-			                                   "D:/VULKAN_TUTORIAL_SHADERS/SPV/vert.spv",
-			                                   "D:/VULKAN_TUTORIAL_SHADERS/SPV/frag.spv");
+		Pipeline = new FPipeline(Device,
+			                     PipelineConfig,
+			                     "D:/VULKAN_TUTORIAL_SHADERS/SPV/vert.spv",
+			                     "D:/VULKAN_TUTORIAL_SHADERS/SPV/frag.spv");
 	}
 
 }

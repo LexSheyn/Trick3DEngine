@@ -12,6 +12,23 @@
 
 namespace t3d
 {
+// Constructors and Destructor:
+
+	FMeshData::FMeshData()
+	{
+	}
+
+	FMeshData::FMeshData(const std::vector<FVertex>& Vertices, const std::vector<uint32>& Indices)
+		: Vertices(Vertices),
+		  Indices(Indices)
+	{
+	}
+
+	FMeshData::~FMeshData()
+	{
+	}
+
+
 // Functions:
 
 	void FMeshData::LoadOBJ(const std::string& FilePath)

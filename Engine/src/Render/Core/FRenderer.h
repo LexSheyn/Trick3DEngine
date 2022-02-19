@@ -48,6 +48,8 @@ namespace t3d
 
 		void CreateSwapchain();
 
+		void RecreateSwapchain();
+
 		void CreateCommandBuffers();
 
 		void FreeCommandBuffers();
@@ -58,7 +60,7 @@ namespace t3d
 
 		FDevice& Device;
 
-		std::unique_ptr<FSwapchain> Swapchain;
+		FSwapchain* Swapchain;
 
 		std::vector<VkCommandBuffer> CommandBuffers;
 

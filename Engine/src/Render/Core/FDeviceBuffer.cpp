@@ -12,8 +12,9 @@ namespace t3d
 	FDeviceBuffer::FDeviceBuffer(FDevice& Device, VkDeviceSize InstanceSize, uint32 InstanceCount, VkBufferUsageFlags UsageFlags, VkMemoryPropertyFlags MemoryPropertyFlags, VkDeviceSize MinOffsetAlignment)
 		: Device(Device),
 		  MappedMemory(nullptr),
-		  Buffer(VK_NULL_HANDLE),
 		  Memory(VK_NULL_HANDLE),
+		  Buffer(VK_NULL_HANDLE),
+		  
 		  InstanceSize(InstanceSize),
 		  InstanceCount(InstanceCount),
 		  UsageFlags(UsageFlags),
@@ -29,13 +30,15 @@ namespace t3d
 		{
 			LOG_TRACE("Created.");
 		}
+
 	#if _DEBUG
-		else if (!Buffer)
+		if (!Buffer)
 		{
 			LOG_ERROR("Failed to create buffer!");
 			throw;
 		}
-		else if (!Memory)
+
+		if (!Memory)
 		{
 			LOG_ERROR("Failed to allocate memory for buffer!");
 			throw;
@@ -48,6 +51,7 @@ namespace t3d
 		this->Unmap();
 
 		vkDestroyBuffer(Device.Device(), Buffer, nullptr);
+
 		vkFreeMemory(Device.Device(), Memory, nullptr);
 	}
 

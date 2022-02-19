@@ -26,6 +26,11 @@ namespace t3d
 	FRenderer::~FRenderer()
 	{
 		this->FreeCommandBuffers();
+
+		if (Swapchain)
+		{
+			delete Swapchain;
+		}
 	}
 
 
@@ -43,7 +48,7 @@ namespace t3d
 
 		if (Result == VK_ERROR_OUT_OF_DATE_KHR)
 		{
-			this->CreateSwapchain();
+			this->RecreateSwapchain();
 
 			return nullptr;
 		}
@@ -93,7 +98,7 @@ namespace t3d
 		{
 			Window.ResetResizedFlag();
 
-			this->CreateSwapchain();
+			this->RecreateSwapchain();
 		}
 
 		IsFrameStarted = false;
@@ -186,22 +191,39 @@ namespace t3d
 
 		vkDeviceWaitIdle(Device.Device());
 
-		if (Swapchain == nullptr)
-		{
-			Swapchain = std::make_unique<FSwapchain>(Device, Extent);
-		}
-		else
-		{
-			std::shared_ptr<FSwapchain> OldSwapchain = std::move(Swapchain);
+		LOG_TRACE("Creating swapchain.");
 
-			Swapchain = std::make_unique<FSwapchain>(Device, Extent, OldSwapchain);
+		Swapchain = new FSwapchain(Device, Extent);
+	}
 
-			if (!OldSwapchain->CompareSwapFormats(*Swapchain.get()))
-			{
-				LOG_ERROR("Swapchain image or depth format has changed!");
-				throw;
-			}
+	void FRenderer::RecreateSwapchain()
+	{
+		VkExtent2D Extent = Window.GetExtent();
+
+		while (Extent.width == 0 || Extent.height == 0)
+		{
+			Extent = Window.GetExtent();
+
+			glfwWaitEvents();
 		}
+
+		vkDeviceWaitIdle(Device.Device());
+
+		FSwapchain* OldSwapchain = Swapchain;
+
+		LOG_TRACE("Recreation swapchain.");
+
+		Swapchain = new FSwapchain(Device, Extent, OldSwapchain);
+
+		if (!OldSwapchain->HasEqualSwapFormats(*Swapchain))
+		{
+			LOG_ERROR("Swapchain image or depth format has changed!");
+			throw;
+		}
+
+		LOG_TRACE("Deleting old swapchain.");
+
+		delete OldSwapchain;
 	}
 
 	void FRenderer::CreateCommandBuffers()

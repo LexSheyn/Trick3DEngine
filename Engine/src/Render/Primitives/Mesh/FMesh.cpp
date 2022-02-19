@@ -11,8 +11,25 @@ namespace t3d
 
 	FMesh::FMesh(FDevice& Device, const FMesh::Data& MeshData)
 		: Device(Device),
-		  HasIndexBuffer(false)
+		  VertexCount(),
+		  IndexCount()
 	{
+		this->CreateVertexBuffer(MeshData.Vertices);
+
+		this->CreateIndexBuffer(MeshData.Indices);
+
+		LOG_TRACE("Created.");
+	}
+
+	FMesh::FMesh(FDevice& Device, const std::string& FilePath)
+		: Device(Device),
+		  VertexCount(),
+		  IndexCount()
+	{
+		FMesh::Data MeshData;
+
+		MeshData.LoadOBJ(FilePath);
+
 		this->CreateVertexBuffer(MeshData.Vertices);
 
 		this->CreateIndexBuffer(MeshData.Indices);
@@ -22,19 +39,13 @@ namespace t3d
 
 	FMesh::~FMesh()
 	{
+		delete IndexBuffer;
+
+		delete VertexBuffer;		
 	}
 
 
 // Functions:
-
-	std::unique_ptr<FMesh> FMesh::CreateFromFile(FDevice& Device, const std::string& FilePath)
-	{
-		FMesh::Data MeshData;
-
-		MeshData.LoadOBJ(FilePath);
-
-		return std::make_unique<FMesh>(Device, MeshData);
-	}
 
 	void FMesh::Bind(VkCommandBuffer CommandBuffer)
 	{
@@ -44,22 +55,12 @@ namespace t3d
 
 		vkCmdBindVertexBuffers(CommandBuffer, 0, 1, Buffers, Offsets);
 
-		if (HasIndexBuffer)
-		{
-			vkCmdBindIndexBuffer(CommandBuffer, IndexBuffer->GetBuffer(), 0, VK_INDEX_TYPE_UINT32);
-		}
+		vkCmdBindIndexBuffer(CommandBuffer, IndexBuffer->GetBuffer(), 0, VK_INDEX_TYPE_UINT32);
 	}
 
 	void FMesh::Draw(VkCommandBuffer CommandBuffer)
 	{
-		if (HasIndexBuffer)
-		{
-			vkCmdDrawIndexed(CommandBuffer, IndexCount, 1, 0, 0, 0);
-		}
-		else
-		{
-			vkCmdDraw(CommandBuffer, VertexCount, 1, 0, 0);
-		}
+		vkCmdDrawIndexed(CommandBuffer, IndexCount, 1, 0, 0, 0);
 	}
 
 
@@ -71,11 +72,13 @@ namespace t3d
 
 		LOG_TRACE("Vertex count: " + std::to_string(VertexCount));
 
+	#if _DEBUG
 		if (VertexCount < 3u)
 		{
 			LOG_ERROR("Vertex count must be at least 3!");
 			throw;
 		}
+	#endif
 
 		VkDeviceSize BufferSize = sizeof(Vertices[0]) * VertexCount;
 
@@ -87,7 +90,7 @@ namespace t3d
 		StagingBuffer.WriteToBuffer(reinterpret_cast<void*>(const_cast<FVertex*>(Vertices.data())));
 		StagingBuffer.Unmap();
 
-		VertexBuffer = std::make_unique<FDeviceBuffer>(Device, VertexSize, VertexCount, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+		VertexBuffer = new FDeviceBuffer(Device, VertexSize, VertexCount, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
 		Device.CopyBuffer(StagingBuffer.GetBuffer(), VertexBuffer->GetBuffer(), BufferSize);
 	}
@@ -96,14 +99,15 @@ namespace t3d
 	{
 		IndexCount = static_cast<uint32>(Indices.size());
 
-		HasIndexBuffer = IndexCount > 0u;
-
-		if (!HasIndexBuffer)
-		{
-			return;
-		}
-
 		LOG_TRACE("Index count: " + std::to_string(IndexCount));
+
+	#if _DEBUG
+		if (IndexCount == 0u)
+		{
+			LOG_ERROR("Non indexed mesh is not supported!");
+			throw;
+		}
+	#endif
 
 		VkDeviceSize BufferSize = sizeof(Indices[0]) * IndexCount;
 
@@ -115,7 +119,7 @@ namespace t3d
 		StagingBuffer.WriteToBuffer(reinterpret_cast<void*>(const_cast<uint32*>(Indices.data())));
 		StagingBuffer.Unmap();
 
-		IndexBuffer = std::make_unique<FDeviceBuffer>(Device, IndexSize, IndexCount, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+		IndexBuffer = new FDeviceBuffer(Device, IndexSize, IndexCount, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
 		Device.CopyBuffer(StagingBuffer.GetBuffer(), IndexBuffer->GetBuffer(), BufferSize);
 	}

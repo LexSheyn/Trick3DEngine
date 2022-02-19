@@ -16,7 +16,7 @@ namespace t3d
 
 		FSwapchain(FDevice& Device, VkExtent2D WindowExtent);
 
-		FSwapchain(FDevice& Device, VkExtent2D WindowExtent, std::shared_ptr<FSwapchain> PreviousSwapchain);
+		FSwapchain(FDevice& Device, VkExtent2D WindowExtent, FSwapchain* PreviousSwapchain);
 
 		FSwapchain(const FSwapchain&) = delete;
 
@@ -34,7 +34,7 @@ namespace t3d
 
 		VkResult SubmitCommandBuffers(const VkCommandBuffer* CommandBuffers, uint32* ImageIndex);
 
-		T3D_INLINE bool8 CompareSwapFormats(const FSwapchain& Swapchain) const { return Swapchain.SwapchainImageFormat == SwapchainImageFormat && Swapchain.SwapchainDepthFormat == SwapchainDepthFormat; }
+		T3D_INLINE bool8 HasEqualSwapFormats(const FSwapchain& Swapchain) const { return Swapchain.SwapchainImageFormat == SwapchainImageFormat && Swapchain.SwapchainDepthFormat == SwapchainDepthFormat; }
 
 	// Accessors:
 
@@ -104,7 +104,7 @@ namespace t3d
 		VkExtent2D WindowExtent;
 
 		VkSwapchainKHR Swapchain;
-		std::shared_ptr<FSwapchain> OldSwapchain;
+		FSwapchain* OldSwapchain;
 
 		std::vector<VkSemaphore> ImageAvailableSemaphores;
 		std::vector<VkSemaphore> RenderFinishedSemaphores;

@@ -51,7 +51,7 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE VkDevice      Device() { return LogicalDevice; }
+		T3D_INLINE VkDevice      Device()           { return LogicalDevice; }
 
 		T3D_INLINE VkCommandPool GetCommandPool()   { return CommandPool; }
 
@@ -115,14 +115,20 @@ namespace t3d
 
 	// Variables:
 
-		VkInstance Instance;
-		VkDebugUtilsMessengerEXT DebugMessenger;
-		VkPhysicalDevice PhysicalDevice;
 		FWindow& Window;
-		VkCommandPool CommandPool;
+
+		VkInstance Instance;
 
 		VkDevice LogicalDevice;
+
 		VkSurfaceKHR Surface;
+
+		VkPhysicalDevice PhysicalDevice;
+		
+		VkDebugUtilsMessengerEXT DebugMessenger;
+
+		VkCommandPool CommandPool;
+		
 		VkQueue GraphicsQueue;
 		VkQueue PresentQueue;
 

@@ -21,6 +21,8 @@ namespace t3d
 
 	FPointLightRenderSystem::~FPointLightRenderSystem()
 	{
+		delete Pipeline;
+
 		vkDestroyPipelineLayout(Device.Device(), PipelineLayout, nullptr);
 	}
 
@@ -37,7 +39,7 @@ namespace t3d
 		{
 			OGameObject& Object = Entry.second;
 
-			if (Object.PointLight == nullptr)
+			if (Object.Light == 0)
 			{
 				continue;
 			}
@@ -54,7 +56,7 @@ namespace t3d
 		// Copy light to UniformBufferData:
 
 			UniformBufferData.PointLights[LightIndex].Position = glm::vec4(Object.GetTransform().GetTranslation(), 1.0f);
-			UniformBufferData.PointLights[LightIndex].Color    = glm::vec4(Object.Color, Object.PointLight->LightIntensity);
+			UniformBufferData.PointLights[LightIndex].Color    = glm::vec4(Object.Color, Object.LightIntensity);
 
 			LightIndex++;
 		}
@@ -72,7 +74,7 @@ namespace t3d
 		{
 			OGameObject& Object = Entry.second;
 
-			if (Object.PointLight == nullptr)
+			if (Object.Light == 0)
 			{
 				continue;
 			}
@@ -80,7 +82,7 @@ namespace t3d
 			FPointLightPushConstant PushConstant{};
 
 			PushConstant.Position = glm::vec4(Object.GetTransform().GetTranslation(), 1.0f);
-			PushConstant.Color    = glm::vec4(Object.Color, Object.PointLight->LightIntensity);
+			PushConstant.Color    = glm::vec4(Object.Color, Object.LightIntensity);
 			PushConstant.Radius   = Object.GetTransform().GetScale().x;
 
 			vkCmdPushConstants(FrameInfo.CommandBuffer, PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FPointLightPushConstant), &PushConstant);
@@ -128,10 +130,10 @@ namespace t3d
 		PipelineConfig.RenderPass     = RenderPass;
 		PipelineConfig.PipelineLayout = PipelineLayout;
 		
-		Pipeline = std::make_unique<FPipeline>(Device,
-			                                   PipelineConfig,
-			                                   "D:/VULKAN_TUTORIAL_SHADERS/SPV/point_light.vert.spv",
-			                                   "D:/VULKAN_TUTORIAL_SHADERS/SPV/point_light.frag.spv");
+		Pipeline = new FPipeline(Device,
+			                     PipelineConfig,
+			                     "D:/VULKAN_TUTORIAL_SHADERS/SPV/point_light.vert.spv",
+			                     "D:/VULKAN_TUTORIAL_SHADERS/SPV/point_light.frag.spv");
 	}
 
 }

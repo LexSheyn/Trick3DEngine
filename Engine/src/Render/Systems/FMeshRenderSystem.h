@@ -43,6 +43,6 @@ namespace t3d
 
 		VkPipelineLayout PipelineLayout;
 
-		std::unique_ptr<FPipeline>  Pipeline;
+		FPipeline* Pipeline;
 	};
 }

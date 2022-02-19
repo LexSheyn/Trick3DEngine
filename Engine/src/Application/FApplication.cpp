@@ -33,6 +33,10 @@ namespace test
 
 	FApplication::~FApplication()
 	{
+		for (auto& Mesh : Meshes)
+		{
+			delete Mesh.second;
+		}
 	}
 
 
@@ -74,7 +78,7 @@ namespace test
 
 	//	Camera.SetViewTarget({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f });
 
-		t3d::OGameObject ViewerObject = t3d::OGameObject::Create();
+		t3d::OGameObject ViewerObject;
 
 		ViewerObject.GetTransform().SetTranslation({ 0.0f, 0.0f, -3.5f });
 
@@ -106,7 +110,7 @@ namespace test
 			{
 				uint32 FrameIndex = static_cast<uint32>(Renderer.GetFrameIndex());
 
-				t3d::FFrameInfo FrameInfo(FrameIndex, FrameTime, CommandBuffer, Camera, GlobalDescriptorSets[FrameIndex], GameObjects);
+				t3d::FFrameInfo FrameInfo{ FrameIndex, FrameTime, CommandBuffer, Camera, GlobalDescriptorSets[FrameIndex], GameObjects };
 
 			// Update:
 
@@ -143,13 +147,17 @@ namespace test
 
 	void FApplication::LoadGameObjects()
 	{
+	// TEST
+
+		Meshes.emplace("FlatVase"  , new t3d::FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/flat_vase.obj"));
+		Meshes.emplace("SmoothVase", new t3d::FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/smooth_vase.obj"));
+		Meshes.emplace("Floor"     , new t3d::FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/quad.obj"));
+
 	// Flat vase:
 
-		std::shared_ptr<t3d::FMesh> FlatVaseMesh = t3d::FMesh::CreateFromFile(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/flat_vase.obj");
+		t3d::OGameObject FlatVase;
 
-		t3d::OGameObject FlatVase = t3d::OGameObject::Create();
-
-		FlatVase.Mesh = FlatVaseMesh;
+		FlatVase.Mesh = Meshes.at("FlatVase");
 		FlatVase.GetTransform().SetTranslation({ -0.5f, 0.5f, 0.0f });
 		FlatVase.GetTransform().SetScale({ 3.0f, 1.5f, 3.0f });
 
@@ -157,11 +165,9 @@ namespace test
 
 	// Smooth vase:
 
-		std::shared_ptr<t3d::FMesh> SmoothVaseMesh = t3d::FMesh::CreateFromFile(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/smooth_vase.obj");
+		t3d::OGameObject SmoothVase;
 
-		t3d::OGameObject SmoothVase = t3d::OGameObject::Create();
-
-		SmoothVase.Mesh = SmoothVaseMesh;
+		SmoothVase.Mesh = Meshes.at("SmoothVase");
 		SmoothVase.GetTransform().SetTranslation({ 0.5f, 0.5f, 0.0f });
 		SmoothVase.GetTransform().SetScale({ 3.0f, 1.5f, 3.0f });
 
@@ -169,14 +175,12 @@ namespace test
 
 	// Quad:
 
-		std::shared_ptr<t3d::FMesh> FloorMesh = t3d::FMesh::CreateFromFile(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/quad.obj");
-
-		t3d::OGameObject Floor = t3d::OGameObject::Create();
-
-		Floor.Mesh = FloorMesh;
+		t3d::OGameObject Floor;
+	
+		Floor.Mesh = Meshes.at("Floor");
 		Floor.GetTransform().SetTranslation({ 0.0f, 0.5f, 0.0f });
 		Floor.GetTransform().SetScale({ 3.0f, 1.0f, 3.0f });
-
+	
 		GameObjects.emplace(Floor.GetID(), std::move(Floor));
 
 	// Point light:
@@ -193,7 +197,13 @@ namespace test
 		
 		for (size_t i = 0u; i < LightColors.size(); i++)
 		{
-			t3d::OGameObject PointLight = t3d::OGameObject::MakePointLight(0.2f);
+			t3d::OGameObject PointLight;
+			
+			PointLight.GetTransform().SetScale({ 0.05f, 0.0f, 0.0f });
+
+			PointLight.LightIntensity = 0.5f;
+
+			PointLight.Light = 1;
 
 			PointLight.Color = LightColors[i];
 

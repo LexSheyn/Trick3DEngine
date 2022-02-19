@@ -18,11 +18,15 @@ namespace t3d
 
 		FDeviceBuffer(const FDeviceBuffer&) = delete;
 
+		FDeviceBuffer(FDeviceBuffer&&) = delete;
+
 		~FDeviceBuffer();
 
 	// Operators:
 
 		FDeviceBuffer& operator=(const FDeviceBuffer&) = delete;
+
+		FDeviceBuffer& operator=(FDeviceBuffer&&) = delete;
 
 	// Functions:
 
@@ -140,9 +144,9 @@ namespace t3d
 
 		void*          MappedMemory;
 
-		VkBuffer       Buffer;
-
 		VkDeviceMemory Memory;
+
+		VkBuffer       Buffer;
 
 		VkDeviceSize   BufferSize;
 

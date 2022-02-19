@@ -17,9 +17,9 @@ namespace t3d
 	{
 	public:
 
-	// Constructors:
+	// Constructors and Destructor:
 
-		OGameObject() {};
+		OGameObject();
 
 		OGameObject(const OGameObject&) = delete;
 
@@ -37,9 +37,7 @@ namespace t3d
 
 	// Functions:
 
-		static OGameObject Create();
-
-		static OGameObject MakePointLight(float32 Intensity = 10.0f, float32 Radius = 0.05f, glm::vec3 Color = glm::vec3(1.0f));
+		//
 
 	// Accessors:
 
@@ -55,10 +53,6 @@ namespace t3d
 
 	private:
 
-	// Private Constructor:
-
-		OGameObject(uint32 ObjectID);
-
 	// Variables:
 
 		uint32 ID{};
@@ -71,18 +65,20 @@ namespace t3d
 		glm::vec3 Color{};
 
 	// TEST
-	private:
+//	private:
 
 		CTransform3DComponent Transform;
 
 	// TEST
 	public:
 
-		std::shared_ptr<FMesh> Mesh;
+		FMesh* Mesh;
 
 	// TEST
 	public:
 
-		std::unique_ptr<FPointLightComponent> PointLight;		
+		float32 LightIntensity = 0.0f;
+
+		int Light = 0;
 	};
 }

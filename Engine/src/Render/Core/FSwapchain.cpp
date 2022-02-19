@@ -17,14 +17,17 @@ namespace t3d
 		LOG_TRACE("Created.");
 	}
 
-	FSwapchain::FSwapchain(FDevice& Device, VkExtent2D WindowExtent, std::shared_ptr<FSwapchain> PreviousSwapchain)
+	FSwapchain::FSwapchain(FDevice& Device, VkExtent2D WindowExtent, FSwapchain* PreviousSwapchain)
 		: Device(Device), WindowExtent(WindowExtent), OldSwapchain(PreviousSwapchain)
 	{
 		this->Init();
 
 	// Clean up old swapchain since it is no longer needed.
 
-		OldSwapchain.reset();
+	//	if (OldSwapchain)
+	//	{
+	//		delete OldSwapchain;
+	//	}
 
 		LOG_TRACE("Created.");
 	}
@@ -70,6 +73,8 @@ namespace t3d
 
 			vkDestroyFence(Device.Device(), InFlightFences[i], nullptr);
 		}
+
+		LOG_TRACE("Deleted.");
 	}
 
 

@@ -16,7 +16,11 @@ namespace t3d
 
 		FMesh(FDevice& Device, const FMesh::Data& MeshData);
 
+		FMesh(FDevice& Device, const std::string& FilePath);
+
 		FMesh(const FMesh&) = delete;
+
+		FMesh(FMesh&&) = delete;
 
 		~FMesh();
 
@@ -24,9 +28,9 @@ namespace t3d
 
 		FMesh& operator=(const FMesh&) = delete;
 
-	// Functions:
+		FMesh& operator=(FMesh&&) = delete;
 
-		static std::unique_ptr<FMesh> CreateFromFile(FDevice& Device, const std::string& FilePath);
+	// Functions:
 
 		void Bind(VkCommandBuffer CommandBuffer);
 
@@ -44,11 +48,10 @@ namespace t3d
 
 		FDevice& Device;
 
-		std::unique_ptr<FDeviceBuffer> VertexBuffer;
+		FDeviceBuffer* VertexBuffer;
 		uint32 VertexCount;
 
-		bool8 HasIndexBuffer;
-		std::unique_ptr<FDeviceBuffer> IndexBuffer;
+		FDeviceBuffer* IndexBuffer;
 		uint32 IndexCount;
 	};
 }

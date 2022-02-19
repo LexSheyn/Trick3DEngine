@@ -4,10 +4,8 @@
 
 namespace t3d
 {
-	class FFrameInfo
+	struct FFrameInfo
 	{
-	public:
-
 		uint32  FrameIndex;
 		float32 FrameTime;
 
