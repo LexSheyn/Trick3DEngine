@@ -377,7 +377,10 @@
     <ClInclude Include="src\Templates\TSharedPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Templates\TUniquePointer.h">
+    <ClInclude Include="src\Templates\TScopedPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Templates\Macros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

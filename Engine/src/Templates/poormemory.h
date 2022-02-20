@@ -24,8 +24,6 @@ namespace std
 		T* Pointer;
 	};
 
-#include <memory>
-
 	template<class T, typename... Types>
 	[[nodiscard]] stupid_ptr<T> make_stupid(Types&&... Args)
 	{

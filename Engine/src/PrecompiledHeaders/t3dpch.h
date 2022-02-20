@@ -84,13 +84,7 @@
 #include "../Templates/TArray.h"
 
 // Custom defines:
-#if _DEBUG
-// In Debug mode does nothing.
-#define T3D_INLINE
-#else
-// In Release mode inlines the function call.
-#define T3D_INLINE inline
-#endif
+#include "../Templates/Macros.h"
 
 //#ifndef DISABLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN

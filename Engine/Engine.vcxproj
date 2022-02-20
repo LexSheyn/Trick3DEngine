@@ -287,12 +287,13 @@
     <ClInclude Include="src\ResourceManagers\EColorFormat.h" />
     <ClInclude Include="src\ResourceManagers\FImageLoader.h" />
     <ClInclude Include="src\ResourceManagers\FImagePNG.h" />
+    <ClInclude Include="src\Templates\Macros.h" />
     <ClInclude Include="src\Templates\TArray.h" />
     <ClInclude Include="src\Templates\THashFunctions.h" />
     <ClInclude Include="src\Templates\TImage.h" />
     <ClInclude Include="src\Templates\poormemory.h" />
     <ClInclude Include="src\Templates\TSharedPointer.h" />
-    <ClInclude Include="src\Templates\TUniquePointer.h" />
+    <ClInclude Include="src\Templates\TScopedPointer.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Timer\FTimeStamp.h" />
