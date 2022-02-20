@@ -7,6 +7,8 @@
 
 #include "../Components/CMovementComponent.h"
 
+#include "../Templates/TScopedPointer.h"
+
 namespace test
 {
 // Constructors and Destructor:
@@ -29,6 +31,10 @@ namespace test
 
 		t3d::FEventSystem::Subscribe(t3d::EEventType::KeyPressed , &B);
 		t3d::FEventSystem::Subscribe(t3d::EEventType::KeyReleased, &B);
+
+		t3d::TScopedPointer<Test> P;
+
+		P = t3d::MakeScoped<Test>();
 	}
 
 	FApplication::~FApplication()

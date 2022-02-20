@@ -12,8 +12,8 @@ namespace test
 	{
 	public:
 
-		 Test() {}
-		~Test() {}
+		 Test() { t3d::LOG_TRACE("CREATED " + std::to_string(this->GetID())); }
+		~Test() { t3d::LOG_TRACE("DELETED " + std::to_string(this->GetID())); }
 
 		void OnEvent(const t3d::FEvent* const Event) override
 		{
