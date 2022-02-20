@@ -24,8 +24,10 @@ namespace std
 		T* Pointer;
 	};
 
+#include <memory>
+
 	template<class T, typename... Types>
-	stupid_ptr<T> make_stupid(Types&&... Args)
+	[[nodiscard]] stupid_ptr<T> make_stupid(Types&&... Args)
 	{
 		return stupid_ptr<T>(new T(static_cast<Types&&>(Args)...));
 	//	return stupid_ptr<T>(new T(Args...));
