@@ -1,10 +1,10 @@
 #pragma once
 
-#include "IComponent.h"
+#include "DComponent.h"
 
 namespace t3d
 {
-	class CPointLightComponent : public IComponent
+	class CPointLightComponent : public DComponent
 	{
 	public:
 

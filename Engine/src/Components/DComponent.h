@@ -4,12 +4,12 @@
 
 namespace t3d
 {
-	class IComponent
+	class DComponent
 	{
 	public:
 
-		IComponent() {};
+		DComponent() {};
 
-		virtual ~IComponent() {};
+		virtual ~DComponent() {};
 	};
 }

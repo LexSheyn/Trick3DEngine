@@ -1,12 +1,12 @@
 #pragma once
 
-#include "IComponent.h"
+#include "DComponent.h"
 #include "../Window/FWindow.h"
 #include "../GameObjects/OGameObject.h"
 
 namespace t3d
 {
-	class CMovementComponent : IComponent
+	class CMovementComponent : DComponent
 	{
 	public:
 

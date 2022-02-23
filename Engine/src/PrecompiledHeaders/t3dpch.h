@@ -46,6 +46,8 @@
 #include <deque>
 #include <random>
 #include <numeric>
+#include <new>
+//#include <utility>
 
 // STB Image:
 #include <stdarg.h>

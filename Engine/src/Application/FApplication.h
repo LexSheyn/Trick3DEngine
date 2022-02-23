@@ -46,7 +46,13 @@ namespace test
 
 	// Functions:
 
+		void InitRenderer();
+
 		void Run();
+
+		void Update();
+
+		void Render();
 
 	private:
 
