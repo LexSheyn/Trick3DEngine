@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IComponent.h"
+#include "../../Templates/TAutoID.h"
 
 namespace t3d
 {
@@ -10,19 +11,11 @@ namespace t3d
 
 	// Constructor:
 
-		CTransformComponent()
-			: Translation({ 0.0f }),
-			  Rotation   ({ 0.0f }),
-			  Scale      ({ 1.0f })
-		{}
-
-	// IComponent Interface:
-
-		virtual bool8 Initialize(void* Data) override final
-		{
-			// To do: Implement FMemoryPool class that allows to allocate cpmtiguous memory arrays.
-			// Also override 'new' operator to allocate memory from that arrays.
-		}
+	//	CTransformComponent()
+	//		: Translation({ 0.0f }),
+	//		  Rotation   ({ 0.0f }),
+	//		  Scale      ({ 1.0f })
+	//	{}
 
 	// Public ID:
 

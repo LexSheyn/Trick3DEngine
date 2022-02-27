@@ -12,13 +12,13 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FEntityManager();
+		FEntityManager() {}
 
 		FEntityManager(const FEntityManager&) = delete;
 
 		FEntityManager(FEntityManager&&) = delete;
 
-		~FEntityManager();
+		~FEntityManager() {}
 
 	// Operators:
 
@@ -28,22 +28,17 @@ namespace t3d
 
 	// Functions:
 
-		void CreateSystems();
+		void AddComponent()
+		{
 
-		void Update(); // Requires global DeltaTime.
-
-		[[nodiscard]] T3D_EntityID CreateEntity();
-
-		void DestroyEntity(const T3D_EntityID& EntityID);
+		}
 
 	private:
 
 	// Variables:
 
-		std::unordered_map<T3D_EntityID, FEntity> Entities;
-		
-		std::vector<std::vector<IComponent*>>     Components;
+		static std::unordered_map<EComponentType, std::unordered_map<T3D_EntityID, IComponent>> Components;
 
-		std::vector<IComponentSystem>             Systems;
+		static std::unordered_map<EComponentType, IComponentSystem> Systems;
 	};
 }
