@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IComponent.h"
-#include "../../Templates/TAutoID.h"
 
 namespace t3d
 {
@@ -11,17 +10,17 @@ namespace t3d
 
 	// Constructor:
 
-	//	CTransformComponent()
-	//		: Translation({ 0.0f }),
-	//		  Rotation   ({ 0.0f }),
-	//		  Scale      ({ 1.0f })
-	//	{}
-
-	// Public ID:
-
-		static constexpr T3D_ComponentID ID = TAutoID<CTransformComponent>::GetNew();
+		CTransformComponent()
+			: Translation({ 0.0f }),
+			  Rotation   ({ 0.0f }),
+			  Scale      ({ 1.0f })
+		{}
 
 	private:
+
+	// Type:
+
+		static constexpr EComponentType Type = EComponentType::Transform;
 
 	// Variables:
 

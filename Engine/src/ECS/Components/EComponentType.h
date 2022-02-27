@@ -2,7 +2,7 @@
 
 namespace t3d
 {
-	enum class EComponentType
+	enum class EComponentType : uint32
 	{
 		None = 0,
 

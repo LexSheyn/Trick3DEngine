@@ -11,16 +11,8 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		IComponent(EComponentType Type) :Type(Type) {}
+		IComponent() {}
 
 		virtual ~IComponent() {}
-
-	// Accessors
-
-		T3D_INLINE const EComponentType& GetType() const { return Type; }
-
-	private:
-
-		EComponentType Type;
 	};
 }
