@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Macros.h"
-#include "../Types/Types.h"
+#include "../Macros/T3DMacros.h"
+#include "../Types/T3DTypes.h"
 
 namespace t3d
 {
@@ -147,7 +147,7 @@ namespace t3d
 //#include <memory>
 //
 //	template <class _Ty, enable_if_t<is_array_v<_Ty>&& extent_v<_Ty> == 0, int> = 0>
-//	_NODISCARD unique_ptr<_Ty> make_unique(const size_t _Size) { // make a unique_ptr
+//	_NODISCARD unique_ptr<_Ty> make_unique(const uint64 _Size) { // make a unique_ptr
 //		using _Elem = remove_extent_t<_Ty>;
 //		return unique_ptr<_Ty>(new _Elem[_Size]());
 //

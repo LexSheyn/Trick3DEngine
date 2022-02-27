@@ -436,7 +436,7 @@ extern "C" {
 #endif
 
 #ifdef STBI_WINDOWS_UTF8
-    STBIDEF int stbi_convert_wchar_to_utf8(char* buffer, size_t bufferlen, const wchar_t* input);
+    STBIDEF int stbi_convert_wchar_to_utf8(char* buffer, uint64 bufferlen, const wchar_t* input);
 #endif
 
     ////////////////////////////////////

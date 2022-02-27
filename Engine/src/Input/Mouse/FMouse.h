@@ -73,7 +73,7 @@ namespace t3d
 
 		static constexpr uint32 NumButtons = 6;
 
-		static constexpr size_t BufferSize = 16;
+		static constexpr uint64 BufferSize = 16;
 
 	//	std::deque<FMouseEvent> ButtonBuffer;
 

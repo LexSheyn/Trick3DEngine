@@ -34,9 +34,9 @@ namespace std
 	{
 	public:
 
-		size_t operator()(t3d::FVertex const& Vertex) const
+		uint64 operator()(t3d::FVertex const& Vertex) const
 		{
-			size_t Seed = 0u;
+			uint64 Seed = 0u;
 
 			t3d::HashCombine(Seed, Vertex.Position, Vertex.Color, Vertex.Normal, Vertex.TexCoord);
 

@@ -48,6 +48,8 @@
 #include <numeric>
 #include <new>
 //#include <utility>
+#include <typeinfo>
+#include <type_traits>
 
 // STB Image:
 #include <stdarg.h>
@@ -76,17 +78,17 @@
 #include <utility>
 
 // Custom types:
-#include "../Types/Types.h"
+#include "../Types/T3DTypes.h"
+
+// Custom defines:
+#include "../Macros/T3DMacros.h"
 
 // Engine:
-#include "../Timer/FTimeStamp.h"
+#include "../Time/FTimeStamp.h"
 #include "../Logger/FLogger.h"
 #include "../ResourceManagers/FImageLoader.h"
 //#include "../Events/FEventSystem.h"
 #include "../Templates/TArray.h"
-
-// Custom defines:
-#include "../Templates/Macros.h"
 
 //#ifndef DISABLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN

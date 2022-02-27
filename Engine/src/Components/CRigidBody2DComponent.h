@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Types/Types.h"
+#include "../Types/T3DTypes.h"
 
 namespace t3d
 {

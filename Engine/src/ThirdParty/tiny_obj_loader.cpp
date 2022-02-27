@@ -180,7 +180,7 @@ static inline bool fixIndex(int idx, int n, int *ret) {
 static inline std::string parseString(const char **token) {
   std::string s;
   (*token) += strspn((*token), " \t");
-  size_t e = strcspn((*token), " \t\r");
+  uint64 e = strcspn((*token), " \t\r");
   s = std::string((*token), &(*token)[e]);
   (*token) += e;
   return s;
@@ -638,7 +638,7 @@ bool ParseTextureNameAndOption(std::string *texname, texture_option_t *texopt,
     } else {
 // Assume texture filename
 #if 0
-      size_t len = strcspn(token, " \t\r");  // untile next space
+      uint64 len = strcspn(token, " \t\r");  // untile next space
       texture_name = std::string(token, token + len);
       token += len;
 
@@ -769,10 +769,10 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
   // polygon
   if (!prim_group.faceGroup.empty()) {
     // Flatten vertices and indices
-    for (size_t i = 0; i < prim_group.faceGroup.size(); i++) {
+    for (uint64 i = 0; i < prim_group.faceGroup.size(); i++) {
       const face_t &face = prim_group.faceGroup[i];
 
-      size_t npolys = face.vertex_indices.size();
+      uint64 npolys = face.vertex_indices.size();
 
       if (npolys < 3) {
         // Face must have 3+ vertices.
@@ -789,10 +789,10 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
           vertex_index_t i2 = face.vertex_indices[2];
           vertex_index_t i3 = face.vertex_indices[3];
 
-          size_t vi0 = size_t(i0.v_idx);
-          size_t vi1 = size_t(i1.v_idx);
-          size_t vi2 = size_t(i2.v_idx);
-          size_t vi3 = size_t(i3.v_idx);
+          uint64 vi0 = uint64(i0.v_idx);
+          uint64 vi1 = uint64(i1.v_idx);
+          uint64 vi2 = uint64(i2.v_idx);
+          uint64 vi3 = uint64(i3.v_idx);
 
           if (((3 * vi0 + 2) >= v.size()) || ((3 * vi1 + 2) >= v.size()) ||
               ((3 * vi2 + 2) >= v.size()) || ((3 * vi3 + 2) >= v.size())) {
@@ -896,14 +896,14 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
           vertex_index_t i2 = face.vertex_indices[1];
 
           // find the two axes to work in
-          size_t axes[2] = {1, 2};
-          for (size_t k = 0; k < npolys; ++k) {
+          uint64 axes[2] = {1, 2};
+          for (uint64 k = 0; k < npolys; ++k) {
             i0 = face.vertex_indices[(k + 0) % npolys];
             i1 = face.vertex_indices[(k + 1) % npolys];
             i2 = face.vertex_indices[(k + 2) % npolys];
-            size_t vi0 = size_t(i0.v_idx);
-            size_t vi1 = size_t(i1.v_idx);
-            size_t vi2 = size_t(i2.v_idx);
+            uint64 vi0 = uint64(i0.v_idx);
+            uint64 vi1 = uint64(i1.v_idx);
+            uint64 vi2 = uint64(i2.v_idx);
 
             if (((3 * vi0 + 2) >= v.size()) || ((3 * vi1 + 2) >= v.size()) ||
                 ((3 * vi2 + 2) >= v.size())) {
@@ -959,9 +959,9 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
           std::vector<Point> polyline;
 
           // Fill polygon data(facevarying vertices).
-          for (size_t k = 0; k < npolys; k++) {
+          for (uint64 k = 0; k < npolys; k++) {
             i0 = face.vertex_indices[k];
-            size_t vi0 = size_t(i0.v_idx);
+            uint64 vi0 = uint64(i0.v_idx);
 
             assert(((3 * vi0 + 2) < v.size()));
 
@@ -978,7 +978,7 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
           assert(indices.size() % 3 == 0);
 
           // Reconstruct vertex_index_t
-          for (size_t k = 0; k < indices.size() / 3; k++) {
+          for (uint64 k = 0; k < indices.size() / 3; k++) {
             {
               index_t idx0, idx1, idx2;
               idx0.vertex_index = face.vertex_indices[indices[3 * k + 0]].v_idx;
@@ -1012,15 +1012,15 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
 
 
           face_t remainingFace = face;  // copy
-          size_t guess_vert = 0;
+          uint64 guess_vert = 0;
           vertex_index_t ind[3];
           real_t vx[3];
           real_t vy[3];
 
           // How many iterations can we do without decreasing the remaining
           // vertices.
-          size_t remainingIterations = face.vertex_indices.size();
-          size_t previousRemainingVertices =
+          uint64 remainingIterations = face.vertex_indices.size();
+          uint64 previousRemainingVertices =
               remainingFace.vertex_indices.size();
 
           while (remainingFace.vertex_indices.size() > 3 &&
@@ -1043,9 +1043,9 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
               remainingIterations--;
             }
 
-            for (size_t k = 0; k < 3; k++) {
+            for (uint64 k = 0; k < 3; k++) {
               ind[k] = remainingFace.vertex_indices[(guess_vert + k) % npolys];
-              size_t vi = size_t(ind[k].v_idx);
+              uint64 vi = uint64(ind[k].v_idx);
               if (((vi * 3 + axes[0]) >= v.size()) ||
                   ((vi * 3 + axes[1]) >= v.size())) {
                 // ???
@@ -1081,8 +1081,8 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
 
             // check all other verts in case they are inside this triangle
             bool overlap = false;
-            for (size_t otherVert = 3; otherVert < npolys; ++otherVert) {
-              size_t idx = (guess_vert + otherVert) % npolys;
+            for (uint64 otherVert = 3; otherVert < npolys; ++otherVert) {
+              uint64 idx = (guess_vert + otherVert) % npolys;
 
               if (idx >= remainingFace.vertex_indices.size()) {
                 // std::cout << "???0\n";
@@ -1090,7 +1090,7 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
                 continue;
               }
 
-              size_t ovi = size_t(remainingFace.vertex_indices[idx].v_idx);
+              uint64 ovi = uint64(remainingFace.vertex_indices[idx].v_idx);
 
               if (((ovi * 3 + axes[0]) >= v.size()) ||
                   ((ovi * 3 + axes[1]) >= v.size())) {
@@ -1137,7 +1137,7 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
             }
 
             // remove v1 from the list
-            size_t removed_vert_index = (guess_vert + 1) % npolys;
+            uint64 removed_vert_index = (guess_vert + 1) % npolys;
             while (removed_vert_index + 1 < npolys) {
               remainingFace.vertex_indices[removed_vert_index] =
                   remainingFace.vertex_indices[removed_vert_index + 1];
@@ -1177,7 +1177,7 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
 #endif
         }  // npolys
       } else {
-        for (size_t k = 0; k < npolys; k++) {
+        for (uint64 k = 0; k < npolys; k++) {
           index_t idx;
           idx.vertex_index = face.vertex_indices[k].v_idx;
           idx.normal_index = face.vertex_indices[k].vn_idx;
@@ -1199,8 +1199,8 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
   // line
   if (!prim_group.lineGroup.empty()) {
     // Flatten indices
-    for (size_t i = 0; i < prim_group.lineGroup.size(); i++) {
-      for (size_t j = 0; j < prim_group.lineGroup[i].vertex_indices.size();
+    for (uint64 i = 0; i < prim_group.lineGroup.size(); i++) {
+      for (uint64 j = 0; j < prim_group.lineGroup[i].vertex_indices.size();
            j++) {
         const vertex_index_t &vi = prim_group.lineGroup[i].vertex_indices[j];
 
@@ -1220,8 +1220,8 @@ static bool exportGroupsToShape(shape_t *shape, const PrimGroup &prim_group,
   // points
   if (!prim_group.pointsGroup.empty()) {
     // Flatten & convert indices
-    for (size_t i = 0; i < prim_group.pointsGroup.size(); i++) {
-      for (size_t j = 0; j < prim_group.pointsGroup[i].vertex_indices.size();
+    for (uint64 i = 0; i < prim_group.pointsGroup.size(); i++) {
+      for (uint64 j = 0; j < prim_group.pointsGroup[i].vertex_indices.size();
            j++) {
         const vertex_index_t &vi = prim_group.pointsGroup[i].vertex_indices[j];
 
@@ -1245,7 +1245,7 @@ static void SplitString(const std::string &s, char delim, char escape,
   std::string token;
 
   bool escaping = false;
-  for (size_t i = 0; i < s.size(); ++i) {
+  for (uint64 i = 0; i < s.size(); ++i) {
     char ch = s[i];
     if (escaping) {
       escaping = false;
@@ -1299,7 +1299,7 @@ void LoadMtl(std::map<std::string, int> *material_map,
 
   std::stringstream warn_ss;
 
-  size_t line_no = 0;
+  uint64 line_no = 0;
   std::string linebuf;
   while (inStream->peek() != -1) {
     safeGetline(*inStream, linebuf);
@@ -1655,7 +1655,7 @@ void LoadMtl(std::map<std::string, int> *material_map,
     }
     if (_space) {
       std::ptrdiff_t len = _space - token;
-      std::string key(token, static_cast<size_t>(len));
+      std::string key(token, static_cast<uint64>(len));
       std::string value = _space + 1;
       material.unknown_parameter.insert(
           std::pair<std::string, std::string>(key, value));
@@ -1691,7 +1691,7 @@ bool MaterialFileReader::operator()(const std::string &matId,
       paths.push_back(s);
     }
 
-    for (size_t i = 0; i < paths.size(); i++) {
+    for (uint64 i = 0; i < paths.size(); i++) {
       std::string filepath = JoinPath(paths[i], matId);
 
       std::ifstream matIStream(filepath.c_str());
@@ -1819,7 +1819,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
 
   bool found_all_colors = true;
 
-  size_t line_num = 0;
+  uint64 line_num = 0;
   std::string linebuf;
   while (inStream->peek() != -1) {
     safeGetline(*inStream, linebuf);
@@ -1932,7 +1932,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
 
         sw.weightValues.push_back(jw);
 
-        size_t n = strspn(token, " \t\r");
+        uint64 n = strspn(token, " \t\r");
         token += n;
       }
 
@@ -1962,7 +1962,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
 
         line.vertex_indices.push_back(vi);
 
-        size_t n = strspn(token, " \t\r");
+        uint64 n = strspn(token, " \t\r");
         token += n;
       }
 
@@ -1994,7 +1994,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
 
         pts.vertex_indices.push_back(vi);
 
-        size_t n = strspn(token, " \t\r");
+        uint64 n = strspn(token, " \t\r");
         token += n;
       }
 
@@ -2034,7 +2034,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
             greatest_vt_idx > vi.vt_idx ? greatest_vt_idx : vi.vt_idx;
 
         face.vertex_indices.push_back(vi);
-        size_t n = strspn(token, " \t\r");
+        uint64 n = strspn(token, " \t\r");
         token += n;
       }
 
@@ -2093,7 +2093,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
           }
         } else {
           bool found = false;
-          for (size_t s = 0; s < filenames.size(); s++) {
+          for (uint64 s = 0; s < filenames.size(); s++) {
             if (material_filenames.count(filenames[s]) > 0) {
               found = true;
               continue;
@@ -2173,7 +2173,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
         // Currently we concatinate multiple group names with a space to get
         // single group name.
 
-        for (size_t i = 2; i < names.size(); i++) {
+        for (uint64 i = 2; i < names.size(); i++) {
           ss << " " << names[i];
         }
 
@@ -2239,19 +2239,19 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
         ts.num_strings = max_tag_nums;
       }
 
-      tag.intValues.resize(static_cast<size_t>(ts.num_ints));
+      tag.intValues.resize(static_cast<uint64>(ts.num_ints));
 
-      for (size_t i = 0; i < static_cast<size_t>(ts.num_ints); ++i) {
+      for (uint64 i = 0; i < static_cast<uint64>(ts.num_ints); ++i) {
         tag.intValues[i] = parseInt(&token);
       }
 
-      tag.floatValues.resize(static_cast<size_t>(ts.num_reals));
-      for (size_t i = 0; i < static_cast<size_t>(ts.num_reals); ++i) {
+      tag.floatValues.resize(static_cast<uint64>(ts.num_reals));
+      for (uint64 i = 0; i < static_cast<uint64>(ts.num_reals); ++i) {
         tag.floatValues[i] = parseReal(&token);
       }
 
-      tag.stringValues.resize(static_cast<size_t>(ts.num_strings));
-      for (size_t i = 0; i < static_cast<size_t>(ts.num_strings); ++i) {
+      tag.stringValues.resize(static_cast<uint64>(ts.num_strings));
+      for (uint64 i = 0; i < static_cast<uint64>(ts.num_strings); ++i) {
         tag.stringValues[i] = parseString(&token);
       }
 
@@ -2445,7 +2445,7 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
         idx.texcoord_index = vi.vt_idx;
 
         indices.push_back(idx);
-        size_t n = strspn(token, " \t\r");
+        uint64 n = strspn(token, " \t\r");
         token += n;
       }
 
@@ -2503,7 +2503,7 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
           }
         } else {
           bool found = false;
-          for (size_t s = 0; s < filenames.size(); s++) {
+          for (uint64 s = 0; s < filenames.size(); s++) {
             if (material_filenames.count(filenames[s]) > 0) {
               found = true;
               continue;
@@ -2563,7 +2563,7 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
         if (names.size() > 1) {
           // create const char* array.
           names_out.resize(names.size() - 1);
-          for (size_t j = 0; j < names_out.size(); j++) {
+          for (uint64 j = 0; j < names_out.size(); j++) {
             names_out[j] = names[j + 1].c_str();
           }
           callback.group_cb(user_data, &names_out.at(0),
@@ -2606,21 +2606,21 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
 
       tag_sizes ts = parseTagTriple(&token);
 
-      tag.intValues.resize(static_cast<size_t>(ts.num_ints));
+      tag.intValues.resize(static_cast<uint64>(ts.num_ints));
 
-      for (size_t i = 0; i < static_cast<size_t>(ts.num_ints); ++i) {
+      for (uint64 i = 0; i < static_cast<uint64>(ts.num_ints); ++i) {
         tag.intValues[i] = atoi(token);
         token += strcspn(token, "/ \t\r") + 1;
       }
 
-      tag.floatValues.resize(static_cast<size_t>(ts.num_reals));
-      for (size_t i = 0; i < static_cast<size_t>(ts.num_reals); ++i) {
+      tag.floatValues.resize(static_cast<uint64>(ts.num_reals));
+      for (uint64 i = 0; i < static_cast<uint64>(ts.num_reals); ++i) {
         tag.floatValues[i] = parseReal(&token);
         token += strcspn(token, "/ \t\r") + 1;
       }
 
-      tag.stringValues.resize(static_cast<size_t>(ts.num_strings));
-      for (size_t i = 0; i < static_cast<size_t>(ts.num_strings); ++i) {
+      tag.stringValues.resize(static_cast<uint64>(ts.num_strings));
+      for (uint64 i = 0; i < static_cast<uint64>(ts.num_strings); ++i) {
         std::stringstream ss;
         ss << token;
         tag.stringValues[i] = ss.str();
@@ -2650,7 +2650,7 @@ bool ObjReader::ParseFromFile(const std::string &filename,
     // split at last '/'(for unixish system) or '\\'(for windows) to get
     // the base directory of .obj file
     //
-    size_t pos = filename.find_last_of("/\\");
+    uint64 pos = filename.find_last_of("/\\");
     if (pos != std::string::npos) {
       mtl_search_path = filename.substr(0, pos);
     }

@@ -44,7 +44,7 @@ namespace t3d
 
 		T3D_INLINE VkImageView   GetImageView(uint32 Index)   { return SwapchainImageViews[Index]; }
 
-		T3D_INLINE size_t        GetImageCount()              { return SwapchainImages.size(); }
+		T3D_INLINE uint64        GetImageCount()              { return SwapchainImages.size(); }
 
 		T3D_INLINE VkFormat      GetSwapchainImageFormat()    { return SwapchainImageFormat; }
 
@@ -58,7 +58,7 @@ namespace t3d
 
 	// Public Constants:
 
-		static constexpr size_t MAX_FRAMES_IN_FLIGHT = 2;
+		static constexpr uint64 MAX_FRAMES_IN_FLIGHT = 2;
 
 	private:
 
@@ -110,7 +110,7 @@ namespace t3d
 		std::vector<VkSemaphore> RenderFinishedSemaphores;
 		std::vector<VkFence> InFlightFences;
 		std::vector<VkFence> ImagesInFlight;
-		size_t CurrentFrame;
+		uint64 CurrentFrame;
 	};
 }
 

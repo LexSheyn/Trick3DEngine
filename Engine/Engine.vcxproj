@@ -106,12 +106,22 @@
     <ClCompile Include="src\Components\CTransform2DComponent.cpp" />
     <ClCompile Include="src\Components\CTransform3DComponent.cpp" />
     <ClCompile Include="src\Components\DComponent.cpp" />
-    <ClCompile Include="src\ECS\FArchetype.cpp" />
-    <ClCompile Include="src\ECS\FEntity.cpp" />
-    <ClCompile Include="src\ECS\FEntityComponentSystem.cpp" />
-    <ClCompile Include="src\ECS\IComponent.cpp" />
-    <ClCompile Include="src\ECS\TComponent.cpp" />
-    <ClCompile Include="src\ECS\TTypeIDGenerator.cpp" />
+    <ClCompile Include="src\ECS\Components\CTransformComponent.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Entity\FEntity.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Entity\FEntityManager.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Systems\IComponentSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\EntryPoint\Main.cpp" />
     <ClCompile Include="src\Events\FEventSystem.cpp" />
     <ClCompile Include="src\Exception\FException.cpp" />
@@ -214,6 +224,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\FImageLoader.cpp" />
+    <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
@@ -222,7 +233,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Timer\FTimeStamp.cpp" />
+    <ClCompile Include="src\Time\FDeltaTime.cpp" />
+    <ClCompile Include="src\Time\FTime.cpp" />
+    <ClCompile Include="src\Time\FClock.cpp" />
+    <ClCompile Include="src\Time\FTimeStamp.cpp" />
     <ClCompile Include="src\Window\FWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -234,13 +248,12 @@
     <ClInclude Include="src\Components\CTransform2DComponent.h" />
     <ClInclude Include="src\Components\CTransform3DComponent.h" />
     <ClInclude Include="src\Components\DComponent.h" />
-    <ClInclude Include="src\ECS\FArchetype.h" />
-    <ClInclude Include="src\ECS\FEntity.h" />
-    <ClInclude Include="src\ECS\FEntityComponentSystem.h" />
-    <ClInclude Include="src\ECS\FRecord.h" />
-    <ClInclude Include="src\ECS\IComponent.h" />
-    <ClInclude Include="src\ECS\TComponent.h" />
-    <ClInclude Include="src\ECS\TTypeIDGenerator.h" />
+    <ClInclude Include="src\ECS\Components\CTransformComponent.h" />
+    <ClInclude Include="src\ECS\Components\IComponent.h" />
+    <ClInclude Include="src\ECS\Entity\FEntity.h" />
+    <ClInclude Include="src\ECS\Entity\FEntityManager.h" />
+    <ClInclude Include="src\ECS\Entity\ECSTypes.h" />
+    <ClInclude Include="src\ECS\Systems\IComponentSystem.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />
     <ClInclude Include="src\Events\EEventType.h" />
     <ClInclude Include="src\Events\EventData.h" />
@@ -249,6 +262,7 @@
     <ClInclude Include="src\Events\IEventListener.h" />
     <ClInclude Include="src\Exception\FException.h" />
     <ClInclude Include="src\Exception\FVulkanException.h" />
+    <ClInclude Include="src\Templates\TAutoID.h" />
     <ClInclude Include="src\GameObjects\IObject.h" />
     <ClInclude Include="src\GameObjects\OGameObject.h" />
     <ClInclude Include="src\Input\Gamepad\FGamepad.h" />
@@ -300,7 +314,7 @@
     <ClInclude Include="src\ResourceManagers\EColorFormat.h" />
     <ClInclude Include="src\ResourceManagers\FImageLoader.h" />
     <ClInclude Include="src\ResourceManagers\FImagePNG.h" />
-    <ClInclude Include="src\Templates\Macros.h" />
+    <ClInclude Include="src\Macros\T3DMacros.h" />
     <ClInclude Include="src\Templates\TArray.h" />
     <ClInclude Include="src\Templates\THashFunctions.h" />
     <ClInclude Include="src\Templates\TImage.h" />
@@ -309,9 +323,15 @@
     <ClInclude Include="src\Templates\TScopedPointer.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
-    <ClInclude Include="src\Timer\FTimeStamp.h" />
-    <ClInclude Include="src\Types\Types.h" />
+    <ClInclude Include="src\Time\FDeltaTime.h" />
+    <ClInclude Include="src\Time\FTime.h" />
+    <ClInclude Include="src\Time\FClock.h" />
+    <ClInclude Include="src\Time\FTimeStamp.h" />
+    <ClInclude Include="src\Types\T3DTypes.h" />
     <ClInclude Include="src\Window\FWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

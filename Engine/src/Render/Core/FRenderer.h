@@ -40,7 +40,7 @@ namespace t3d
 
 		T3D_INLINE       float32         GetAspectRation()         const { return Swapchain->GetExtentAspectRatio(); }
 
-		T3D_INLINE const size_t&         GetFrameIndex()           const { if (!IsFrameStarted) { LOG_ERROR("Cannot get frame index when frame not in progress!"); throw; } return CurrentFrameIndex; }
+		T3D_INLINE const uint64&         GetFrameIndex()           const { if (!IsFrameStarted) { LOG_ERROR("Cannot get frame index when frame not in progress!"); throw; } return CurrentFrameIndex; }
 
 	private:
 
@@ -66,7 +66,7 @@ namespace t3d
 
 		uint32 CurrentImageIndex;
 
-		size_t CurrentFrameIndex;
+		uint64 CurrentFrameIndex;
 
 		bool8 IsFrameStarted;
 	};

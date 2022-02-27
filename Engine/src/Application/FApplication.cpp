@@ -54,7 +54,7 @@ namespace test
 	{
 		std::vector<t3d::FDeviceBuffer*> UniformDataBuffers(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT);
 
-		for (size_t i = 0u; i < UniformDataBuffers.size(); i++)
+		for (uint64 i = 0u; i < UniformDataBuffers.size(); i++)
 		{
 			UniformDataBuffers[i] = new t3d::FDeviceBuffer(Device,
 				                                           sizeof(t3d::FUniformBufferData),
@@ -71,7 +71,7 @@ namespace test
 
 		std::vector<VkDescriptorSet> GlobalDescriptorSets(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
 
-		for (size_t i = 0u; i < GlobalDescriptorSets.size(); i++)
+		for (uint64 i = 0u; i < GlobalDescriptorSets.size(); i++)
 		{
 			VkDescriptorBufferInfo BufferInfo = UniformDataBuffers[i]->DescriptorInfo();
 
@@ -83,7 +83,7 @@ namespace test
 	{
 		std::vector<t3d::FDeviceBuffer*> UniformDataBuffers(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT);
 
-		for (size_t i = 0u; i < UniformDataBuffers.size(); i++)
+		for (uint64 i = 0u; i < UniformDataBuffers.size(); i++)
 		{
 			UniformDataBuffers[i] = new t3d::FDeviceBuffer(Device,
 				                                           sizeof(t3d::FUniformBufferData),
@@ -100,7 +100,7 @@ namespace test
 
 		std::vector<VkDescriptorSet> GlobalDescriptorSets(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
 
-		for (size_t i = 0u; i < GlobalDescriptorSets.size(); i++)
+		for (uint64 i = 0u; i < GlobalDescriptorSets.size(); i++)
 		{
 			VkDescriptorBufferInfo BufferInfo = UniformDataBuffers[i]->DescriptorInfo();
 
@@ -245,7 +245,7 @@ namespace test
 			{ 1.0f, 1.0f, 1.0f }
 		};
 		
-		for (size_t i = 0u; i < LightColors.size(); i++)
+		for (uint64 i = 0u; i < LightColors.size(); i++)
 		{
 			t3d::OGameObject PointLight;
 			

@@ -47,7 +47,7 @@ namespace t3d
 			Swapchain = nullptr;
 		}
 
-		for (size_t i = 0u; i < DepthImages.size(); i++)
+		for (uint64 i = 0u; i < DepthImages.size(); i++)
 		{
 			vkDestroyImageView(Device.Device(), DepthImageViews[i], nullptr);
 
@@ -65,7 +65,7 @@ namespace t3d
 
 	// Cleanup synctonisation objects:
 
-		for (size_t i = 0u; i < MAX_FRAMES_IN_FLIGHT; i++)
+		for (uint64 i = 0u; i < MAX_FRAMES_IN_FLIGHT; i++)
 		{
 			vkDestroySemaphore(Device.Device(), RenderFinishedSemaphores[i], nullptr);
 			
@@ -241,7 +241,7 @@ namespace t3d
 	{
 		SwapchainImageViews.resize(SwapchainImages.size());
 
-		for (size_t i = 0u; i < SwapchainImages.size(); i++)
+		for (uint64 i = 0u; i < SwapchainImages.size(); i++)
 		{
 			VkImageViewCreateInfo ImageViewInfo{};
 
@@ -276,7 +276,7 @@ namespace t3d
 
 		DepthImageViews.resize(this->GetImageCount());
 
-		for (size_t i = 0u; i < DepthImages.size(); i++)
+		for (uint64 i = 0u; i < DepthImages.size(); i++)
 		{
 			VkImageCreateInfo ImageInfo{};
 
@@ -394,7 +394,7 @@ namespace t3d
 	{
 		SwapchainFramebuffers.resize(this->GetImageCount());
 
-		for (size_t i = 0u; i < this->GetImageCount(); i++)
+		for (uint64 i = 0u; i < this->GetImageCount(); i++)
 		{
 		//	std::array<VkImageView, 2> Attachments = { SwapchainImageViews[i], DepthImageViews[i] };
 			TArray<VkImageView, 2> Attachments{};
@@ -438,7 +438,7 @@ namespace t3d
 		FenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
 		FenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
-		for (size_t i = 0u; i < MAX_FRAMES_IN_FLIGHT; i++)
+		for (uint64 i = 0u; i < MAX_FRAMES_IN_FLIGHT; i++)
 		{
 			if (vkCreateSemaphore(Device.Device(), &SemaphoreInfo, nullptr, &ImageAvailableSemaphores[i]) != VK_SUCCESS)
 			{

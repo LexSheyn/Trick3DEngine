@@ -123,7 +123,7 @@ namespace t3d
 			throw;
 		}
 
-		size_t FileSize = static_cast<size_t>(InFile.tellg());
+		uint64 FileSize = static_cast<uint64>(InFile.tellg());
 
 		std::vector<char8> Buffer(FileSize);
 

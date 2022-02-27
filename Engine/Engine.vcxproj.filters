@@ -132,7 +132,7 @@
     <ClCompile Include="src\ThirdParty\tiny_obj_loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Timer\FTimeStamp.cpp">
+    <ClCompile Include="src\Time\FTimeStamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Window\FWindow.cpp">
@@ -144,22 +144,28 @@
     <ClCompile Include="src\Components\CPointLightComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\TTypeIDGenerator.cpp">
+    <ClCompile Include="src\ECS\Entity\FEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\IComponent.cpp">
+    <ClCompile Include="src\ECS\Entity\FEntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\TComponent.cpp">
+    <ClCompile Include="src\ECS\Systems\IComponentSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\FEntity.cpp">
+    <ClCompile Include="src\Time\FClock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\FEntityComponentSystem.cpp">
+    <ClCompile Include="src\Time\FDeltaTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\FArchetype.cpp">
+    <ClCompile Include="src\Templates\TAutoID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Components\CTransformComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time\FTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -374,10 +380,10 @@
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Timer\FTimeStamp.h">
+    <ClInclude Include="src\Time\FTimeStamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Types\Types.h">
+    <ClInclude Include="src\Types\T3DTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Window\FWindow.h">
@@ -398,29 +404,41 @@
     <ClInclude Include="src\Templates\TScopedPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Templates\Macros.h">
+    <ClInclude Include="src\Macros\T3DMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\TTypeIDGenerator.h">
+    <ClInclude Include="src\ECS\Entity\FEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\IComponent.h">
+    <ClInclude Include="src\ECS\Components\IComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\TComponent.h">
+    <ClInclude Include="src\ECS\Entity\FEntityManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\FEntity.h">
+    <ClInclude Include="src\ECS\Entity\ECSTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\FEntityComponentSystem.h">
+    <ClInclude Include="src\ECS\Systems\IComponentSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\FArchetype.h">
+    <ClInclude Include="src\Time\FClock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\FRecord.h">
+    <ClInclude Include="src\Time\FDeltaTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ECS\Components\CTransformComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Templates\TAutoID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Time\FTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

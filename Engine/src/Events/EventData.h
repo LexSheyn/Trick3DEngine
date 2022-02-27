@@ -3,7 +3,7 @@
 #pragma warning( push )
 #pragma warning( disable : 26495 ) // Uninitialized variables.
 
-#include "../Types/Types.h"
+#include "../Types/T3DTypes.h"
 
 namespace t3d
 {
