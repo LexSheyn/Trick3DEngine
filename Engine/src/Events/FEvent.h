@@ -37,15 +37,15 @@ namespace t3d
 
 		union
 		{
-			struct { FFrameBufferSizeData FrameBufferSizeData; };
-			struct { FKeyData             KeyData;             };
-			struct { FCharData            CharData;            };
-			struct { FCharModsData        CharModsData;        };
-			struct { FMouseButtonData     MouseButtonData;     };
-			struct { FCursorPositionData  CursorPositionData;  };
-			struct { FCursorEnterData     CursorEnterData;     };
-			struct { FScrollData          ScrollData;          };
-			struct { FDropData            DropData;            };
+			FFrameBufferSizeData FrameBufferSizeData;
+			FKeyData             KeyData;            
+			FCharData            CharData;           
+			FCharModsData        CharModsData;       
+			FMouseButtonData     MouseButtonData;    
+			FCursorPositionData  CursorPositionData; 
+			FCursorEnterData     CursorEnterData;    
+			FScrollData          ScrollData;         
+			FDropData            DropData;           
 		};
 
 	private:
