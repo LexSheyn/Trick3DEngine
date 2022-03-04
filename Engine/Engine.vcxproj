@@ -229,6 +229,11 @@
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\FImageLoader.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
+    <ClCompile Include="src\Templates\TTypeID.cpp" />
+    <ClCompile Include="src\Test\BaseECSComponent.cpp" />
+    <ClCompile Include="src\Test\ECS.cpp" />
+    <ClCompile Include="src\Test\ECSComponent.cpp" />
+    <ClCompile Include="src\Test\ECSSystem.cpp" />
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
@@ -255,6 +260,7 @@
     <ClInclude Include="src\ECS\Components\CTransformComponent.h" />
     <ClInclude Include="src\ECS\Components\EComponentType.h" />
     <ClInclude Include="src\ECS\Components\IComponent.h" />
+    <ClInclude Include="src\ECS\Components\TComponent.h" />
     <ClInclude Include="src\ECS\Entity\FEntity.h" />
     <ClInclude Include="src\ECS\Entity\FEntityManager.h" />
     <ClInclude Include="src\ECS\Entity\ECSTypes.h" />
@@ -326,6 +332,12 @@
     <ClInclude Include="src\Templates\poormemory.h" />
     <ClInclude Include="src\Templates\TSharedPointer.h" />
     <ClInclude Include="src\Templates\TScopedPointer.h" />
+    <ClInclude Include="src\Templates\TTypeID.h" />
+    <ClInclude Include="src\Test\BaseECSComponent.h" />
+    <ClInclude Include="src\Test\ECS.h" />
+    <ClInclude Include="src\Test\ECSComponent.h" />
+    <ClInclude Include="src\Test\ECSSystem.h" />
+    <ClInclude Include="src\Test\TestComponent.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Time\FDeltaTime.h" />

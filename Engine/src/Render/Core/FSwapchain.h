@@ -18,13 +18,10 @@ namespace t3d
 
 		FSwapchain(FDevice& Device, VkExtent2D WindowExtent, FSwapchain* PreviousSwapchain);
 
-		FSwapchain(const FSwapchain&) = delete;
-
 		~FSwapchain();
 
-	// Operators:
-
-		FSwapchain& operator=(const FSwapchain&) = delete;
+		T3D_NO_COPY(FSwapchain);
+		T3D_NO_MOVE(FSwapchain);
 
 	// Functions:
 

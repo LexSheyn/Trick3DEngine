@@ -19,17 +19,10 @@ namespace t3d
 
 		FDevice(FWindow& Window);
 
-		FDevice(const FDevice&)  = delete;
-
-		FDevice(const FDevice&&) = delete;
-
 		~FDevice();
 
-	// Operators:
-
-		FDevice& operator=(FDevice&&)      = delete;
-
-		FDevice& operator=(const FDevice&) = delete;
+		T3D_NO_COPY(FDevice);
+		T3D_NO_MOVE(FDevice);
 
 	// Functions:
 

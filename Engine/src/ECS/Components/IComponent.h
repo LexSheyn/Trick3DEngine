@@ -5,14 +5,8 @@
 
 namespace t3d
 {
-	class IComponent
+	struct IComponent
 	{
-	public:
-
-	// Constructors and Destructor:
-
-		IComponent() {}
-
-		virtual ~IComponent() {}
+		T3D_EntityID EntityID;
 	};
 }

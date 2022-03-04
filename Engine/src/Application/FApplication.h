@@ -36,13 +36,10 @@ namespace test
 
 		FApplication();
 
-		FApplication(const FApplication&) = delete;
-
 		~FApplication();
 
-	// Operators:
-
-		FApplication& operator=(const FApplication&) = delete;
+		T3D_NO_COPY(FApplication);
+		T3D_NO_MOVE(FApplication);
 
 	// Functions:
 

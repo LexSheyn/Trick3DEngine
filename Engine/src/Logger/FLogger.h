@@ -15,12 +15,6 @@ namespace t3d
 			Error
 		};
 
-	// Constructors and Destructor:
-
-		FLogger();
-
-		~FLogger();
-
 	// Functions:
 
 		/// <summary>
@@ -59,6 +53,15 @@ namespace t3d
 
 	private:
 
+	// Private Constructors and Destructor:
+
+		FLogger();
+
+		~FLogger();
+
+		T3D_NO_COPY(FLogger);
+		T3D_NO_MOVE(FLogger);
+
 	// Variables:
 
 		static Level LogLevel;
@@ -66,18 +69,24 @@ namespace t3d
 
 #if _MSC_VER && !__INTEL_COMPILER
 
+	// Show trace Message in console.
 	#define LOG_TRACE( Message ) FLogger::Trace( __FUNCTION__, Message )
 
+	// Show warning Message in console.
 	#define LOG_WARNING( Message ) FLogger::Warning( __FUNCTION__, Message )
 
+	// Show error Message in console.
 	#define LOG_ERROR( Message ) FLogger::Error( __FUNCTION__, Message )
 
 #else
 
+	// Show trace Message in console.
 	#define LOG_TRACE( Message ) FLogger::Trace( __func__, Message )
 
+	// Show warning Message in console.
 	#define LOG_WARNING( Message ) FLogger::Warning( __func__, Message )
 
+	// Show error Message in console.
 	#define LOG_ERROR( Message ) FLogger::Error( __func__, Message )
 
 #endif

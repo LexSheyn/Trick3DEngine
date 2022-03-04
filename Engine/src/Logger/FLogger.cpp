@@ -3,10 +3,6 @@
 
 namespace t3d
 {
-// Static Variables:
-
-	FLogger::Level FLogger::LogLevel = Level::Trace;
-
 // Constructors and Destructor:
 
 	FLogger::FLogger()
@@ -51,5 +47,10 @@ namespace t3d
 	{
 		FLogger::LogLevel = LogLevel;
 	}
+
+
+// Static Variables:
+
+	FLogger::Level FLogger::LogLevel = Level::Trace;
 
 }

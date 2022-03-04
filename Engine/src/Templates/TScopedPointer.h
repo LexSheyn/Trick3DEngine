@@ -38,7 +38,7 @@ namespace t3d
 
 	// Operators:
 
-		void operator=(TScopedPointer&& DyingObject)
+		void operator=(TScopedPointer&& DyingObject) noexcept
 		{
 			this->ClearMemory();
 
@@ -110,7 +110,7 @@ namespace t3d
 
 	// Operators:
 
-		void operator=(TScopedPointer&& DyingObject)
+		void operator=(TScopedPointer&& DyingObject) noexcept
 		{
 			this->ClearMemory();
 

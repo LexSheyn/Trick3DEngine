@@ -17,13 +17,10 @@ namespace t3d
 
 		FPointLightRenderSystem(FDevice& Device, VkRenderPass RenderPass, VkDescriptorSetLayout GlobalDescriptorSetLayout);
 
-		FPointLightRenderSystem(const FPointLightRenderSystem&) = delete;
-
 		~FPointLightRenderSystem();
 
-	// Operators:
-
-		FPointLightRenderSystem& operator=(const FPointLightRenderSystem&) = delete;
+		T3D_NO_COPY(FPointLightRenderSystem);
+		T3D_NO_MOVE(FPointLightRenderSystem);
 
 	// Functions:
 

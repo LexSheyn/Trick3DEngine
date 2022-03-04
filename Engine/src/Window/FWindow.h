@@ -15,13 +15,10 @@ namespace t3d
 
 		FWindow(int32 Width, int32 Height, const std::string& Title);
 
-		FWindow(const FWindow&) = delete;
-
 		~FWindow();
 
-	// Operators:
-
-		FWindow& operator=(const FWindow&) = delete;
+		T3D_NO_COPY(FWindow);
+		T3D_NO_MOVE(FWindow);
 
 	// Functions:
 

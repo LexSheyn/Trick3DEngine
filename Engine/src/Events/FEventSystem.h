@@ -37,13 +37,10 @@ namespace t3d
 
 		FEventSystem() {};
 
-		FEventSystem(const FEventSystem&) = delete;
-
 		~FEventSystem() {};
 
-	// Operators:
-
-		FEventSystem& operator=(const FEventSystem&) = delete;
+		T3D_NO_COPY(FEventSystem);
+		T3D_NO_MOVE(FEventSystem);
 
 	// Variables:
 

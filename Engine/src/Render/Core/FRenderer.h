@@ -12,13 +12,10 @@ namespace t3d
 
 		FRenderer(FWindow& Window, FDevice& Device);
 
-		FRenderer(const FRenderer&) = delete;
-
 		~FRenderer();
 
-	// Operators:
-
-		FRenderer& operator=(const FRenderer&) = delete;
+		T3D_NO_COPY(FRenderer);
+		T3D_NO_MOVE(FRenderer);
 
 	// Functions:
 

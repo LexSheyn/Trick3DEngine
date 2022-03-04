@@ -39,6 +39,6 @@ namespace t3d
 
 		T3D_EntityID ID;
 		
-		std::unordered_map<T3D_ComponentID, class IComponent*> Components;
+		std::unordered_map<T3D_ComponentID, struct IComponent*> Components;
 	};
 }

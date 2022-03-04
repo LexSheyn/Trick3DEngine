@@ -1,8 +1,20 @@
 // Hint files help the Visual Studio IDE interpret Visual C++ identifiers
 // such as names of functions and macros.
 // For more information see https://go.microsoft.com/fwlink/?linkid=865984
+
+// Core
 #define T3D_INLINE
+#define T3D_DEFINE_TYPES
+#define T3D_NO_COPY
+#define T3D_NO_MOVE
+#define T3D_DEFAULT_COPY
+#define T3D_DEFAULT_MOVE
 
+// ECS
 #define T3D_INVALID_ENTITY_ID
-
 #define T3D_INVALID_POOL_INDEX
+
+// Logger
+#define LOG_TRACE
+#define LOG_WARNING
+#define LOG_ERROR

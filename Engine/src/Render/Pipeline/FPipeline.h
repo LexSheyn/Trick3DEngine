@@ -14,13 +14,10 @@ namespace t3d
 
 		FPipeline(FDevice& Device, const FPipelineConfigInfo& ConfigInfo, const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
 
-		FPipeline(const FPipeline&) = delete;
-
 		~FPipeline();
 
-	// Operators:
-
-		FPipeline& operator=(const FPipeline&) = delete;
+		T3D_NO_COPY(FPipeline);
+		T3D_NO_MOVE(FPipeline);
 
 	// Functions:
 

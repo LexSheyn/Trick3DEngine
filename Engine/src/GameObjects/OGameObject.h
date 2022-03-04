@@ -21,19 +21,10 @@ namespace t3d
 
 		OGameObject();
 
-		OGameObject(const OGameObject&) = delete;
-
-		// Move constructor.
-		OGameObject(OGameObject&&) = default;
-
 		~OGameObject();
 
-	// Operators:
-
-		OGameObject& operator=(const OGameObject&) = delete;
-
-		// Move operator.
-		OGameObject& operator=(OGameObject&&) = default;
+		T3D_NO_COPY(OGameObject);
+		T3D_DEFAULT_MOVE(OGameObject);
 
 	// Functions:
 

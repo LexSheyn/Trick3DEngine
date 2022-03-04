@@ -16,13 +16,10 @@ namespace t3d
 
 		FDescriptorSetLayout(FDevice& Device, const std::unordered_map<uint32, VkDescriptorSetLayoutBinding>& Bindings);
 
-		FDescriptorSetLayout(const FDescriptorSetLayout&) = delete;
-
 		~FDescriptorSetLayout();
 
-	// Operators:
-
-		FDescriptorSetLayout& operator=(const FDescriptorSetLayout&) = delete;
+		T3D_NO_COPY(FDescriptorSetLayout);
+		T3D_NO_MOVE(FDescriptorSetLayout);
 
 	// Functions:
 

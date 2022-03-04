@@ -10,11 +10,8 @@ namespace t3d
 
 		FPipelineConfigInfo() {};
 
-		FPipelineConfigInfo(const FPipelineConfigInfo&) = delete;
-
-	// Operators:
-
-		FPipelineConfigInfo& operator=(const FPipelineConfigInfo&) = delete;
+		T3D_NO_COPY(FPipelineConfigInfo);
+		T3D_NO_MOVE(FPipelineConfigInfo);
 
 	// Variables:
 

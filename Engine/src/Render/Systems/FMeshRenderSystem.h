@@ -17,13 +17,10 @@ namespace t3d
 
 		FMeshRenderSystem(FDevice& Device, VkRenderPass RenderPass, VkDescriptorSetLayout GlobalDescriptorSetLayout);
 
-		FMeshRenderSystem(const FMeshRenderSystem&) = delete;
-
 		~FMeshRenderSystem();
 
-	// Operators:
-
-		FMeshRenderSystem& operator=(const FMeshRenderSystem&) = delete;
+		T3D_NO_COPY(FMeshRenderSystem);
+		T3D_NO_MOVE(FMeshRenderSystem);
 
 	// Functions:
 

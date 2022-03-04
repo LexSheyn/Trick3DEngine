@@ -9,6 +9,8 @@
 
 #include "../Templates/TScopedPointer.h"
 
+#include "../Test/TestComponent.h"
+
 namespace test
 {
 // Constructors and Destructor:
@@ -182,6 +184,41 @@ namespace test
 		}
 
 		delete GlobalDescriptorSetLayout;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		// ID generation depends on the first instance creation order,
+		// but belongs to the type itself, not to instance.
+		t3d::TestComponent qwe;
+		t3d::TestComponent*  KLI = &qwe;
+		t3d::TestComponent1* KLA = nullptr;
+		t3d::TestComponent2* KLU = nullptr;
+
+		t3d::LOG_TRACE("ID: " + std::to_string(t3d::TestComponent::ID));
+		t3d::LOG_TRACE("ID_1: " + std::to_string(t3d::TestComponent1::ID));
+		t3d::LOG_TRACE("ID_2: " + std::to_string(t3d::TestComponent2::ID));
+
+		void* q = nullptr;
+
+		std::vector<uint8> ComponentStorage;
+
+		t3d::LOG_TRACE("Component storage size first: " + std::to_string(ComponentStorage.size()));
+
+		ComponentStorage.reserve(48'000);
+
+		t3d::LOG_TRACE("Component storage size after reserve: " + std::to_string(ComponentStorage.size()));
+
+	//	t3d::ECSComponentCreate<t3d::TestComponent>(ComponentStorage, ENTITY_NULL_HANDLE, KLI);
+		t3d::TestComponent::CreateFunction(ComponentStorage, ENTITY_NULL_HANDLE, KLI);
+
+		t3d::LOG_TRACE("Component storage size after adding component: " + std::to_string(ComponentStorage.size()));
+
+	//	t3d::ECSComponentFree<t3d::TestComponent>(KLI); // DOES NOT WORK???
+		t3d::TestComponent::FreeFunction(KLI); // DOES NOT WORK???
+
+		t3d::LOG_TRACE("Component storage size after destructing component: " + std::to_string(ComponentStorage.size()));
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
 	void FApplication::Update()

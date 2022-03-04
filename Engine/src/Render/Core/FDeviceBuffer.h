@@ -16,17 +16,10 @@ namespace t3d
 
 		FDeviceBuffer(FDevice& Device, VkDeviceSize InstanceSize, uint32 InstanceCount, VkBufferUsageFlags UsageFlags, VkMemoryPropertyFlags MemoryPropertyFlags, VkDeviceSize MinOffsetAlignment = 1u);
 
-		FDeviceBuffer(const FDeviceBuffer&) = delete;
-
-		FDeviceBuffer(FDeviceBuffer&&) = delete;
-
 		~FDeviceBuffer();
 
-	// Operators:
-
-		FDeviceBuffer& operator=(const FDeviceBuffer&) = delete;
-
-		FDeviceBuffer& operator=(FDeviceBuffer&&) = delete;
+		T3D_NO_COPY(FDeviceBuffer);
+		T3D_NO_MOVE(FDeviceBuffer);
 
 	// Functions:
 

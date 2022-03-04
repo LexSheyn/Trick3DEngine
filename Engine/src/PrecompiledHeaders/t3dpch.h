@@ -40,7 +40,6 @@
 //#include <set>
 #include <unordered_set>
 #include <algorithm>
-#include <functional>
 //#include <vector>
 #include <list>
 #include <deque>
@@ -48,8 +47,8 @@
 #include <numeric>
 #include <new>
 //#include <utility>
+#include <tuple>
 #include <typeinfo>
-#include <type_traits>
 
 // STB Image:
 #include <stdarg.h>

@@ -2,20 +2,18 @@
 
 namespace t3d
 {
-	template<class C>
+	template<typename T>
 	class TAutoID
 	{
 	public:
 
-		static constexpr uint64 GetNew()
-		{
-			uint64* CounterPtr = const_cast<uint64*>(&Counter);
-
-			return *CounterPtr++;
-		}
+		T3D_INLINE static const T NewID() { return Counter++; }
 
 	private:
 
-		static constexpr uint64 Counter = 0;
+		static T Counter;
 	};
+
+	template<typename T>
+	T TAutoID<T>::Counter = 0;
 }

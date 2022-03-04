@@ -16,13 +16,10 @@ namespace t3d
 
 		FDescriptorPool(FDevice& Device, uint32 MaxSets, VkDescriptorPoolCreateFlags PoolFlags, const std::vector<VkDescriptorPoolSize>& PoolSizes);
 
-		FDescriptorPool(const FDescriptorPool&) = delete;
-
 		~FDescriptorPool();
 
-	// Operators:
-
-		FDescriptorPool& operator=(const FDescriptorPool&) = delete;
+		T3D_NO_COPY(FDescriptorPool);
+		T3D_NO_MOVE(FDescriptorPool);
 
 	// Functions:
 

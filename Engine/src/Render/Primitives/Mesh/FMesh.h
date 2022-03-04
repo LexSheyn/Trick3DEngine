@@ -18,17 +18,10 @@ namespace t3d
 
 		FMesh(FDevice& Device, const std::string& FilePath);
 
-		FMesh(const FMesh&) = delete;
-
-		FMesh(FMesh&&) = delete;
-
 		~FMesh();
 
-	// Operators:
-
-		FMesh& operator=(const FMesh&) = delete;
-
-		FMesh& operator=(FMesh&&) = delete;
+		T3D_NO_COPY(FMesh);
+		T3D_NO_MOVE(FMesh);
 
 	// Functions:
 
