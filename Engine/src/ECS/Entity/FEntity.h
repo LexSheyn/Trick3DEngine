@@ -1,6 +1,7 @@
 #pragma once
 
-#include "ECSTypes.h"
+#include "../Components/FComponentDescription.h"
+#include "../../Templates/TAutoID.h"
 
 namespace t3d
 {
@@ -10,35 +11,28 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		explicit FEntity(T3D_EntityID ID) : ID(ID) {}
-		
+		FEntity()
+		{
+			ComponentDescriptions.reserve(5);
+		}
+
 		~FEntity() {}
+
+		T3D_NO_COPY(FEntity);
+		T3D_DEFAULT_MOVE(FEntity);
 
 	// Accessors:
 
 		T3D_INLINE const T3D_EntityID& GetID() const { return ID; }
 
-		template<class C>
-		C* GetComponent() const
-		{
-			auto ComponentIterator = Components.find(C::ID);
-
-			if (ComponentIterator != Components.end())
-			{
-				return ComponentIterator->second;
-			}
-
-			LOG_WARNING("Componen not found!");
-
-			return nullptr;
-		}
+		T3D_INLINE std::vector<FComponentDescription>& GetComponentDescriptions() { return ComponentDescriptions; }
 
 	private:
 
-	// Variables:
+	// Public Variables:
 
-		T3D_EntityID ID;
-		
-		std::unordered_map<T3D_ComponentID, struct IComponent*> Components;
+		const T3D_EntityID ID = TAutoID<T3D_EntityID>::NewID();
+
+		std::vector<FComponentDescription> ComponentDescriptions;
 	};
 }

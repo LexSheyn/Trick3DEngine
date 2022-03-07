@@ -19,7 +19,7 @@ namespace t3d
 
 	// Entity Functions:
 
-		EntityHandle MakeEntity(BaseECSComponent* EntityComponents, const uint64* ComponentIDs, uint64 NumComponents);
+		EntityHandle MakeEntity(BaseECSComponent** EntityComponents, const uint64* ComponentIDs, uint64 NumComponents);
 
 		void RemoveEntity(EntityHandle Handle);
 
@@ -40,19 +40,12 @@ namespace t3d
 		template<typename ComponentType>
 		ComponentType* GetComponent(EntityHandle Entity)
 		{
-			return this->GetComponentInternal(this->HandleToEntity(Entity), ComponentType::ID);
+			return static_cast<ComponentType*>(this->GetComponentInternal(this->HandleToEntity(Entity), Components[ComponentType::ID], ComponentType::ID));
 		}
 
 	// System Functions:
 
-		void AddSystem(BaseECSSystem& System)
-		{
-			Systems.push_back(&System);
-		}
-
-		bool8 RemoveSystem(BaseECSSystem& System);
-
-		void UpdateSystems(const float32& DeltaTime);
+		void UpdateSystems(const float32& DeltaTime, ECSSystemList& Systems);
 
 	private:
 
@@ -79,13 +72,15 @@ namespace t3d
 
 		bool8 RemoveComponentInternal(EntityHandle Handle, uint64 ComponentID);
 
-		BaseECSComponent* GetComponentInternal(std::vector<std::pair<uint64, uint64>>& EntityComponents, uint64 ComponentID);
+		BaseECSComponent* GetComponentInternal(std::vector<std::pair<uint64, uint64>>& EntityComponents, std::vector<uint8>& ComponentArray, uint64 ComponentID);
 
-		void UpdateSystemWithMultipleComponents(uint64 Index, const float32& DeltaTime, const std::vector<uint64>& ComponentTypes, std::vector<BaseECSComponent*>& ComponentParameters);
+		void UpdateSystemWithMultipleComponents(uint64 Index, ECSSystemList& Systems, const float32& DeltaTime, const std::vector<uint64>& ComponentTypes, std::vector<BaseECSComponent*>& ComponentParameters, std::vector<std::vector<uint8>*>& ComponentArrays);
+
+		uint64 FindLeastCommonComponent(const std::vector<uint64>& ComponentTypes, const std::vector<BaseECSSystem::Flags>& ComponentFlags);
 
 	// Variables:
 
-		std::vector<BaseECSSystem*> Systems;
+	//	std::vector<BaseECSSystem*> Systems;
 
 		std::map<uint64, std::vector<uint8>> Components;
 

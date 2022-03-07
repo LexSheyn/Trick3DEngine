@@ -36,3 +36,5 @@
 // Defines default move constructor and move assignment operator.
 #define T3D_DEFAULT_MOVE(Class) Class(Class&&) = default; \
 						   Class& operator = (Class&&) = default
+
+#define T3D_ENTITY_NULL_HANDLE nullptr;

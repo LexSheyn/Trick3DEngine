@@ -32,7 +32,7 @@ namespace t3d
 
 // Entity Functions:
 
-	EntityHandle ECS::MakeEntity(BaseECSComponent* EntityComponents, const uint64* ComponentIDs, uint64 NumComponents)
+	EntityHandle ECS::MakeEntity(BaseECSComponent** EntityComponents, const uint64* ComponentIDs, uint64 NumComponents)
 	{
 	// Creating Entity:
 
@@ -53,7 +53,7 @@ namespace t3d
 				return ENTITY_NULL_HANDLE;
 			}
 
-			this->AddComponentInternal(Handle, NewEntity->second, ComponentIDs[i], &EntityComponents[i]);
+			this->AddComponentInternal(Handle, NewEntity->second, ComponentIDs[i], EntityComponents[i]);
 		}
 
 	// Putting Entity into storage:
@@ -82,29 +82,17 @@ namespace t3d
 
 		Entities[DestinationIndex] = Entities[SourceIndex];
 
+		Entities[DestinationIndex]->first = DestinationIndex;
+
 		Entities.pop_back();
 	}
 
-	bool8 ECS::RemoveSystem(BaseECSSystem& System)
-	{
-		for (uint64 i = 0u; i < Systems.size(); i++)
-		{
-			if (&System == Systems[i])
-			{
-				Systems.erase(Systems.begin() + i);
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	void ECS::UpdateSystems(const float32& DeltaTime)
+	void ECS::UpdateSystems(const float32& DeltaTime, ECSSystemList& Systems)
 	{
 		std::vector<BaseECSComponent*> ComponentParameters;
+		std::vector<std::vector<uint8>*> ComponentArrays;
 
-		for (uint64 i = 0u; i < Systems.size(); i++)
+		for (uint64 i = 0u; i < Systems.Size(); i++)
 		{
 			const std::vector<uint64>& ComponentTypes = Systems[i]->GetComponentTypes();
 
@@ -123,7 +111,7 @@ namespace t3d
 			}
 			else
 			{
-				this->UpdateSystemWithMultipleComponents(i, DeltaTime, ComponentTypes, ComponentParameters);
+				this->UpdateSystemWithMultipleComponents(i, Systems, DeltaTime, ComponentTypes, ComponentParameters, ComponentArrays);
 			}
 		}
 	}
@@ -146,23 +134,23 @@ namespace t3d
 
 	void ECS::DeleteComponent(uint64 ComponentID, uint64 Index)
 	{
-		std::vector<uint8>& Array = Components[ComponentID];
+		std::vector<uint8>& ComponentArray = Components[ComponentID];
 
 		BaseECSComponent::ECSComponentFreeFunction FreeFunction = BaseECSComponent::GetTypeFreeFunction(ComponentID);
 
 		uint64 TypeSize = BaseECSComponent::GetTypeSize(ComponentID);
 
-		uint64 SourceIndex = Array.size() - TypeSize;
+		uint64 SourceIndex = ComponentArray.size() - TypeSize;
 
-		BaseECSComponent* DestinationComponent = reinterpret_cast<BaseECSComponent*>(&Array[Index]);
+		BaseECSComponent* DestinationComponent = reinterpret_cast<BaseECSComponent*>(&ComponentArray[Index]);
 
-		BaseECSComponent* SourceComponent = reinterpret_cast<BaseECSComponent*>(&Array[SourceIndex]);
+		BaseECSComponent* SourceComponent = reinterpret_cast<BaseECSComponent*>(&ComponentArray[SourceIndex]);
 
 		FreeFunction(DestinationComponent); // Pointless, does not work.
 
 		if (Index == SourceIndex)
 		{
-			Array.resize(SourceIndex);
+			ComponentArray.resize(SourceIndex);
 
 			return;
 		}
@@ -181,7 +169,7 @@ namespace t3d
 			}
 		}
 
-		Array.resize(SourceIndex);
+		ComponentArray.resize(SourceIndex);
 	}
 
 	bool8 ECS::RemoveComponentInternal(EntityHandle Handle, uint64 ComponentID)
@@ -209,45 +197,55 @@ namespace t3d
 		return false;
 	}
 
-	BaseECSComponent* ECS::GetComponentInternal(std::vector<std::pair<uint64, uint64>>& EntityComponents, uint64 ComponentID)
+	BaseECSComponent* ECS::GetComponentInternal(std::vector<std::pair<uint64, uint64>>& EntityComponents, std::vector<uint8>& ComponentArray, uint64 ComponentID)
 	{
 		for (uint64 i = 0u; i < EntityComponents.size(); i++)
 		{
 			if (ComponentID == EntityComponents[i].first)
 			{
-				return reinterpret_cast<BaseECSComponent*>(&Components[ComponentID][EntityComponents[i].second]);
+				return reinterpret_cast<BaseECSComponent*>(&ComponentArray[EntityComponents[i].second]);
 			}
 		}
 
 		return nullptr;
 	}
 
-	void ECS::UpdateSystemWithMultipleComponents(uint64 Index, const float32& DeltaTime, const std::vector<uint64>& ComponentTypes, std::vector<BaseECSComponent*>& ComponentParameters)
+	void ECS::UpdateSystemWithMultipleComponents(uint64 Index, ECSSystemList& Systems, const float32& DeltaTime, const std::vector<uint64>& ComponentTypes, std::vector<BaseECSComponent*>& ComponentParameters, std::vector<std::vector<uint8>*>& ComponentArrays)
 	{
+		const std::vector<BaseECSSystem::Flags>& ComponentFlags = Systems[Index]->GetComponentFlags();
+
 		ComponentParameters.resize(std::max(ComponentParameters.size(), ComponentTypes.size()));
+		ComponentArrays.resize(std::max(ComponentArrays.size(), ComponentTypes.size()));
 
-		uint64 TypeSize = BaseECSComponent::GetTypeSize(ComponentTypes[0]);
+		for (uint64 i = 0u; i < ComponentTypes.size(); i++)
+		{
+			ComponentArrays[i] = &Components[ComponentTypes[i]];
+		}
 
-		std::vector<uint8>& ComponentArray = Components[ComponentTypes[0]];
+		uint64 MinSizeIndex = this->FindLeastCommonComponent(ComponentTypes, ComponentFlags);
+
+		uint64 TypeSize = BaseECSComponent::GetTypeSize(ComponentTypes[MinSizeIndex]);
+
+		std::vector<uint8>& ComponentArray = *ComponentArrays[MinSizeIndex];
 
 		for (uint64 i = 0u; i < ComponentArray.size(); i += TypeSize)
 		{
-			ComponentParameters[0] = reinterpret_cast<BaseECSComponent*>(&ComponentArray[i]);
+			ComponentParameters[MinSizeIndex] = reinterpret_cast<BaseECSComponent*>(&ComponentArray[i]);
 
-			std::vector<std::pair<uint64, uint64>>& EntityComponents = this->HandleToEntity(ComponentParameters[0]->Entity);
+			std::vector<std::pair<uint64, uint64>>& EntityComponents = this->HandleToEntity(ComponentParameters[MinSizeIndex]->Entity);
 
 			bool8 IsValid = true;
 
 			for (uint64 j = 0u; j < ComponentTypes.size(); j ++)
 			{
-				if (j == 0u)
+				if (j == MinSizeIndex)
 				{
 					continue;
 				}
 
-				ComponentParameters[j] = this->GetComponentInternal(EntityComponents, ComponentTypes[j]);
+				ComponentParameters[j] = this->GetComponentInternal(EntityComponents, *ComponentArrays[j], ComponentTypes[j]);
 
-				if (!ComponentParameters[j])
+				if ( (ComponentParameters[j] == nullptr) && ((ComponentFlags[j] & BaseECSSystem::Flags::Optional) == 0) )
 				{
 					IsValid = false;
 
@@ -261,6 +259,34 @@ namespace t3d
 			}
 			
 		}
+	}
+
+	uint64 ECS::FindLeastCommonComponent(const std::vector<uint64>& ComponentTypes, const std::vector<BaseECSSystem::Flags>& ComponentFlags)
+	{
+		uint64 MinSize  = UINT64_MAX;
+
+		uint64 MinIndex = UINT64_MAX;
+
+		for (uint64 i = 0u; i < ComponentTypes.size(); i++)
+		{
+			if ( (ComponentFlags[i] & BaseECSSystem::Flags::Optional) != 0 )
+			{
+				continue;
+			}
+
+			uint64 TypeSize = BaseECSComponent::GetTypeSize(ComponentTypes[i]);
+
+			uint64 Size = Components[ComponentTypes[i]].size() / TypeSize;
+
+			if (Size <= MinSize)
+			{
+				MinSize  = Size;
+
+				MinIndex = i;
+			}
+		}
+
+		return MinIndex;
 	}
 
 }

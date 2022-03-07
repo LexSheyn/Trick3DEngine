@@ -1,15 +1,30 @@
 #pragma once
 
 #include "IComponent.h"
-#include "../../Templates/TAutoID.h"
+#include "../../Templates/TTypeID.h"
 
 namespace t3d
 {
-//	template<typename T>
-//	struct TComponent : public IComponent
-//	{
-//		static constexpr T3D_ComponentID ComponentID = TAutoID<T>::NewID();
-//
-//		static constexpr uint64 Size = sizeof(T);
-//	};
+	template<typename ComponentType>
+	struct TComponent : public IComponent
+	{
+		static const T3D_ComponentID ID;
+
+		static const uint64 Size;
+	};
+
+	template<typename ComponentType>
+	const T3D_ComponentID TComponent<ComponentType>::ID = TTypeID<ComponentType>::GetID();
+
+	template<typename ComponentType>
+	const uint64 TComponent<ComponentType>::Size = sizeof(ComponentType);
+
+
+
+
+
+	struct CTestComponent : public TComponent<struct CTestComponent>
+	{
+		//
+	};
 }

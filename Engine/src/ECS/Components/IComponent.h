@@ -1,12 +1,11 @@
 #pragma once
 
-#include "EComponentType.h"
-#include "../Entity/ECSTypes.h"
+#include "../../Types/ECSTypes.h"
 
 namespace t3d
 {
 	struct IComponent
 	{
-		T3D_EntityID EntityID;
+		class FEntity* Entity = T3D_ENTITY_NULL_HANDLE;
 	};
 }

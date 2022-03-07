@@ -11,6 +11,9 @@
 
 #include "../Test/TestComponent.h"
 
+#include "../ECS/Entity/MEntityManager.h"
+#include "../ECS/Components/MComponentManager.h"
+
 namespace test
 {
 // Constructors and Destructor:
@@ -129,6 +132,24 @@ namespace test
 
 			t3d::FEventSystem::ProcessEvents();
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 			   ECS
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			t3d::FEntity* TestEntity1 = t3d::MEntityManager::CreateEntity();
+			t3d::FEntity* TestEntity2 = t3d::MEntityManager::CreateEntity();
+
+			t3d::MComponentManager::AddComponent<t3d::CTestComponent>(TestEntity1);
+			t3d::MComponentManager::RemoveComponent<t3d::CTestComponent>(TestEntity1);
+
+			t3d::MComponentManager::AddComponent<t3d::CTestComponent>(TestEntity2);
+			t3d::MComponentManager::RemoveComponent<t3d::CTestComponent>(TestEntity2);
+
+			t3d::MEntityManager::RemoveEntity(TestEntity1);
+			t3d::MEntityManager::RemoveEntity(TestEntity2);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 			std::chrono::high_resolution_clock::time_point NewTime = std::chrono::high_resolution_clock::now();
 
 			float32 FrameTime = std::chrono::duration<float32, std::chrono::seconds::period>(NewTime - CurrentTime).count();
@@ -184,41 +205,6 @@ namespace test
 		}
 
 		delete GlobalDescriptorSetLayout;
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		// ID generation depends on the first instance creation order,
-		// but belongs to the type itself, not to instance.
-		t3d::TestComponent qwe;
-		t3d::TestComponent*  KLI = &qwe;
-		t3d::TestComponent1* KLA = nullptr;
-		t3d::TestComponent2* KLU = nullptr;
-
-		t3d::LOG_TRACE("ID: " + std::to_string(t3d::TestComponent::ID));
-		t3d::LOG_TRACE("ID_1: " + std::to_string(t3d::TestComponent1::ID));
-		t3d::LOG_TRACE("ID_2: " + std::to_string(t3d::TestComponent2::ID));
-
-		void* q = nullptr;
-
-		std::vector<uint8> ComponentStorage;
-
-		t3d::LOG_TRACE("Component storage size first: " + std::to_string(ComponentStorage.size()));
-
-		ComponentStorage.reserve(48'000);
-
-		t3d::LOG_TRACE("Component storage size after reserve: " + std::to_string(ComponentStorage.size()));
-
-	//	t3d::ECSComponentCreate<t3d::TestComponent>(ComponentStorage, ENTITY_NULL_HANDLE, KLI);
-		t3d::TestComponent::CreateFunction(ComponentStorage, ENTITY_NULL_HANDLE, KLI);
-
-		t3d::LOG_TRACE("Component storage size after adding component: " + std::to_string(ComponentStorage.size()));
-
-	//	t3d::ECSComponentFree<t3d::TestComponent>(KLI); // DOES NOT WORK???
-		t3d::TestComponent::FreeFunction(KLI); // DOES NOT WORK???
-
-		t3d::LOG_TRACE("Component storage size after destructing component: " + std::to_string(ComponentStorage.size()));
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
 	void FApplication::Update()

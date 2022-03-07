@@ -13,6 +13,7 @@
 // ECS
 #define T3D_INVALID_ENTITY_ID
 #define T3D_INVALID_POOL_INDEX
+#define T3D_ENTITY_NULL_HANDLE
 
 // Logger
 #define LOG_TRACE

@@ -1,2 +1,2 @@
 #include "../../PrecompiledHeaders/t3dpch.h"
-#include "CTransformComponent.h"
+#include "FComponentDescription.h"

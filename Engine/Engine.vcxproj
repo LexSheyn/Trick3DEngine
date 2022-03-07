@@ -106,11 +106,11 @@
     <ClCompile Include="src\Components\CTransform2DComponent.cpp" />
     <ClCompile Include="src\Components\CTransform3DComponent.cpp" />
     <ClCompile Include="src\Components\DComponent.cpp" />
-    <ClCompile Include="src\ECS\Components\CTransformComponent.cpp">
+    <ClCompile Include="src\ECS\Components\FComponentDescription.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\ECS\Components\IComponent.cpp">
+    <ClCompile Include="src\ECS\Components\MComponentManager.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -118,11 +118,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\ECS\Entity\FEntityManager.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\IComponentSystem.cpp">
+    <ClCompile Include="src\ECS\Entity\MEntityManager.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -257,14 +253,13 @@
     <ClInclude Include="src\Components\CTransform2DComponent.h" />
     <ClInclude Include="src\Components\CTransform3DComponent.h" />
     <ClInclude Include="src\Components\DComponent.h" />
-    <ClInclude Include="src\ECS\Components\CTransformComponent.h" />
-    <ClInclude Include="src\ECS\Components\EComponentType.h" />
+    <ClInclude Include="src\ECS\Components\FComponentDescription.h" />
     <ClInclude Include="src\ECS\Components\IComponent.h" />
+    <ClInclude Include="src\ECS\Components\MComponentManager.h" />
     <ClInclude Include="src\ECS\Components\TComponent.h" />
+    <ClInclude Include="src\Types\ECSTypes.h" />
     <ClInclude Include="src\ECS\Entity\FEntity.h" />
-    <ClInclude Include="src\ECS\Entity\FEntityManager.h" />
-    <ClInclude Include="src\ECS\Entity\ECSTypes.h" />
-    <ClInclude Include="src\ECS\Systems\IComponentSystem.h" />
+    <ClInclude Include="src\ECS\Entity\MEntityManager.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />
     <ClInclude Include="src\Events\EEventType.h" />
     <ClInclude Include="src\Events\EventData.h" />
