@@ -3,6 +3,19 @@
 
 namespace t3d
 {
+// Functions:
+
+	void MComponentManager::RemoveAllComponents(FEntity* Entity)
+	{
+		std::vector<FComponentDescription>& ComponentDescriptions = Entity->GetComponentDescriptions();
+
+		for (uint64 i = 0u; i < ComponentDescriptions.size(); i++)
+		{
+			DeleteComponent(ComponentDescriptions[i].ID, ComponentDescriptions[i].Size, ComponentDescriptions[i].Index);
+		}
+	}
+
+
 // Private Functions:
 
 	void MComponentManager::DeleteComponent(T3D_ComponentID ID, uint64 Size, uint64 Index)

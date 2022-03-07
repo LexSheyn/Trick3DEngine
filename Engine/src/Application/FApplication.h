@@ -6,24 +6,24 @@
 
 //#include "../Events/FEventSystem.h"
 
-namespace test
+namespace t3d
 {
-	class Test : public t3d::IEventListener
+	class Test : public IEventListener
 	{
 	public:
 
-		 Test() { t3d::LOG_TRACE("CREATED " + std::to_string(this->GetID())); }
-		~Test() { t3d::LOG_TRACE("DELETED " + std::to_string(this->GetID())); }
+		 Test() { LOG_TRACE("CREATED " + std::to_string(this->GetID())); }
+		~Test() { LOG_TRACE("DELETED " + std::to_string(this->GetID())); }
 
-		void OnEvent(const t3d::FEvent* const Event) override
+		void OnEvent(const FEvent* const Event) override
 		{
-		//	if (Event->GetType() == t3d::EEventType::KeyPressed)
+		//	if (Event->GetType() == EEventType::KeyPressed)
 		//	{
-		//		t3d::LOG_TRACE("[" + std::to_string(this->GetID()) + "]: " + std::to_string(Event->KeyData.Key) + " Pressed");
+		//		LOG_TRACE("[" + std::to_string(this->GetID()) + "]: " + std::to_string(Event->KeyData.Key) + " Pressed");
 		//	}
-		//	else if (Event->GetType() == t3d::EEventType::KeyReleased)
+		//	else if (Event->GetType() == EEventType::KeyReleased)
 		//	{
-		//		t3d::LOG_TRACE("[" + std::to_string(this->GetID()) + "]: " + std::to_string(Event->KeyData.Key) + " Released");
+		//		LOG_TRACE("[" + std::to_string(this->GetID()) + "]: " + std::to_string(Event->KeyData.Key) + " Released");
 		//	}
 		}
 	};
@@ -62,16 +62,16 @@ namespace test
 		int32 Width;
 		int32 Height;
 
-		t3d::FWindow   Window;
-		t3d::FDevice   Device;
-		t3d::FRenderer Renderer;
+		FWindow   Window;
+		FDevice   Device;
+		FRenderer Renderer;
 
 		// Note: Order of declaration matters!
-		t3d::FDescriptorPool* DescriptorPool;
+		FDescriptorPool* DescriptorPool;
 
-		std::unordered_map<uint32, t3d::OGameObject> GameObjects;
+		std::unordered_map<uint32, OGameObject> GameObjects;
 
-		std::map<std::string, t3d::FMesh*> Meshes;
+		std::map<std::string, FMesh*> Meshes;
 
 		Test A;
 		Test B;

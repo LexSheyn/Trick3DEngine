@@ -9,6 +9,8 @@ namespace t3d
 	{
 		T3D_ComponentID ID;
 
+		uint64 Size;
+
 		uint64 Index;
 	};
 }

@@ -4,7 +4,7 @@
 
 int32 main()
 {
-	test::FApplication Application;
+	t3d::FApplication Application;
 
 	try
 	{

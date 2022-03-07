@@ -32,6 +32,8 @@ namespace t3d
 			return static_cast<ComponentType*>(GetComponentInternal(Entity, ComponentType::ID));
 		}
 
+		static void RemoveAllComponents(FEntity* Entity);
+
 	private:
 
 	// Private Functions:
@@ -47,7 +49,7 @@ namespace t3d
 
 			Component->Entity = Entity;
 
-			return FComponentDescription{ ComponentType::ID, Index };
+			return FComponentDescription{ ComponentType::ID, ComponentType::Size, Index };
 		}
 		
 		static void DeleteComponent(T3D_ComponentID ID, uint64 Size, uint64 Index);

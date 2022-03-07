@@ -18,13 +18,4 @@ namespace t3d
 
 	template<typename ComponentType>
 	const uint64 TComponent<ComponentType>::Size = sizeof(ComponentType);
-
-
-
-
-
-	struct CTestComponent : public TComponent<struct CTestComponent>
-	{
-		//
-	};
 }

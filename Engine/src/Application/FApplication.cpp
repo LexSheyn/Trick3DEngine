@@ -13,8 +13,9 @@
 
 #include "../ECS/Entity/MEntityManager.h"
 #include "../ECS/Components/MComponentManager.h"
+#include "../ECS/Components/CName.h"
 
-namespace test
+namespace t3d
 {
 // Constructors and Destructor:
 
@@ -25,21 +26,21 @@ namespace test
 		  Device(Window),
 		  Renderer(Window, Device)
 	{
-		DescriptorPool = t3d::FDescriptorPool::Constructor(Device)
-			             .SetMaxSets(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT)
-			             .AddPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT)
+		DescriptorPool = FDescriptorPool::Constructor(Device)
+			             .SetMaxSets(FSwapchain::MAX_FRAMES_IN_FLIGHT)
+			             .AddPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, FSwapchain::MAX_FRAMES_IN_FLIGHT)
 			             .Create();
 
 		this->LoadGameObjects();
 
-		t3d::FEventSystem::Subscribe(t3d::EEventType::KeyPressed, &A);
+		FEventSystem::Subscribe(EEventType::KeyPressed, &A);
 
-		t3d::FEventSystem::Subscribe(t3d::EEventType::KeyPressed , &B);
-		t3d::FEventSystem::Subscribe(t3d::EEventType::KeyReleased, &B);
+		FEventSystem::Subscribe(EEventType::KeyPressed , &B);
+		FEventSystem::Subscribe(EEventType::KeyReleased, &B);
 
-		t3d::TScopedPointer<Test> P;
+		TScopedPointer<Test> P;
 
-		P = t3d::MakeScoped<Test>();
+		P = MakeScoped<Test>();
 	}
 
 	FApplication::~FApplication()
@@ -57,12 +58,12 @@ namespace test
 
 	void FApplication::InitRenderer()
 	{
-		std::vector<t3d::FDeviceBuffer*> UniformDataBuffers(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT);
+		std::vector<FDeviceBuffer*> UniformDataBuffers(FSwapchain::MAX_FRAMES_IN_FLIGHT);
 
 		for (uint64 i = 0u; i < UniformDataBuffers.size(); i++)
 		{
-			UniformDataBuffers[i] = new t3d::FDeviceBuffer(Device,
-				                                           sizeof(t3d::FUniformBufferData),
+			UniformDataBuffers[i] = new FDeviceBuffer(Device,
+				                                           sizeof(FUniformBufferData),
 				                                           1,
 				                                           VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
 				                                           VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT); //| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
@@ -70,28 +71,49 @@ namespace test
 			UniformDataBuffers[i]->Map();
 		}
 
-		t3d::FDescriptorSetLayout* GlobalDescriptorSetLayout = t3d::FDescriptorSetLayout::Constructor(Device)
+		FDescriptorSetLayout* GlobalDescriptorSetLayout = FDescriptorSetLayout::Constructor(Device)
 			                                                   .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
 			                                                   .Create();
 
-		std::vector<VkDescriptorSet> GlobalDescriptorSets(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
+		std::vector<VkDescriptorSet> GlobalDescriptorSets(FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
 
 		for (uint64 i = 0u; i < GlobalDescriptorSets.size(); i++)
 		{
 			VkDescriptorBufferInfo BufferInfo = UniformDataBuffers[i]->DescriptorInfo();
 
-			t3d::FDescriptorWriter(*GlobalDescriptorSetLayout, *DescriptorPool).WriteBuffer(0, &BufferInfo).Build(GlobalDescriptorSets[i]);
+			FDescriptorWriter(*GlobalDescriptorSetLayout, *DescriptorPool).WriteBuffer(0, &BufferInfo).Build(GlobalDescriptorSets[i]);
 		}
 	}
 
 	void FApplication::Run()
 	{
-		std::vector<t3d::FDeviceBuffer*> UniformDataBuffers(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 			   ECS
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		FEntity* Entity_1 = MEntityManager::CreateEntity();
+
+		MComponentManager::AddComponent<CName>(Entity_1);
+		MComponentManager::AddComponent<CTransform>(Entity_1);
+		MComponentManager::AddComponent<CHealth>(Entity_1);
+		MComponentManager::AddComponent<CEnergy>(Entity_1);
+
+		LOG_TRACE(MComponentManager::GetComponent<CName>(Entity_1)->Name);
+		MComponentManager::GetComponent<CName>(Entity_1)->Name = "Changed Name";
+		LOG_TRACE(MComponentManager::GetComponent<CName>(Entity_1)->Name);
+
+		MComponentManager::RemoveAllComponents(Entity_1);
+
+		MEntityManager::RemoveEntity(Entity_1);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		std::vector<FDeviceBuffer*> UniformDataBuffers(FSwapchain::MAX_FRAMES_IN_FLIGHT);
 
 		for (uint64 i = 0u; i < UniformDataBuffers.size(); i++)
 		{
-			UniformDataBuffers[i] = new t3d::FDeviceBuffer(Device,
-				                                           sizeof(t3d::FUniformBufferData),
+			UniformDataBuffers[i] = new FDeviceBuffer(Device,
+				                                           sizeof(FUniformBufferData),
 				                                           1,
 				                                           VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
 				                                           VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT); //| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
@@ -99,58 +121,40 @@ namespace test
 			UniformDataBuffers[i]->Map();
 		}
 
-		t3d::FDescriptorSetLayout* GlobalDescriptorSetLayout = t3d::FDescriptorSetLayout::Constructor(Device)
+		FDescriptorSetLayout* GlobalDescriptorSetLayout = FDescriptorSetLayout::Constructor(Device)
 			                                                   .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
 			                                                   .Create();
 
-		std::vector<VkDescriptorSet> GlobalDescriptorSets(t3d::FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
+		std::vector<VkDescriptorSet> GlobalDescriptorSets(FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
 
 		for (uint64 i = 0u; i < GlobalDescriptorSets.size(); i++)
 		{
 			VkDescriptorBufferInfo BufferInfo = UniformDataBuffers[i]->DescriptorInfo();
 
-			t3d::FDescriptorWriter(*GlobalDescriptorSetLayout, *DescriptorPool).WriteBuffer(0, &BufferInfo).Build(GlobalDescriptorSets[i]);
+			FDescriptorWriter(*GlobalDescriptorSetLayout, *DescriptorPool).WriteBuffer(0, &BufferInfo).Build(GlobalDescriptorSets[i]);
 		}
 
-		t3d::FMeshRenderSystem MeshRenderSystem(Device, Renderer.GetSwapchainRenderPass(), GlobalDescriptorSetLayout->GetDescriptorSetLayout());
+		FMeshRenderSystem MeshRenderSystem(Device, Renderer.GetSwapchainRenderPass(), GlobalDescriptorSetLayout->GetDescriptorSetLayout());
 
-		t3d::FPointLightRenderSystem PointLightRenderSystem(Device, Renderer.GetSwapchainRenderPass(), GlobalDescriptorSetLayout->GetDescriptorSetLayout());
+		FPointLightRenderSystem PointLightRenderSystem(Device, Renderer.GetSwapchainRenderPass(), GlobalDescriptorSetLayout->GetDescriptorSetLayout());
 
-		t3d::FCamera Camera;
+		FCamera Camera;
 
-		t3d::OGameObject ViewerObject;
+		OGameObject ViewerObject;
 
 		ViewerObject.GetTransform().SetTranslation({ 0.0f, 0.0f, -3.5f });
 
-		t3d::CMovementComponent CameraController;
+		CMovementComponent CameraController;
 
-		std::chrono::high_resolution_clock::time_point CurrentTime = std::chrono::high_resolution_clock::now();
+		std::chrono::steady_clock::time_point CurrentTime = std::chrono::steady_clock::now();
 
 		while (!Window.ShouldClose())
 		{
 			Window.Update();
 
-			t3d::FEventSystem::ProcessEvents();
+			FEventSystem::ProcessEvents();
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 			   ECS
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-			t3d::FEntity* TestEntity1 = t3d::MEntityManager::CreateEntity();
-			t3d::FEntity* TestEntity2 = t3d::MEntityManager::CreateEntity();
-
-			t3d::MComponentManager::AddComponent<t3d::CTestComponent>(TestEntity1);
-			t3d::MComponentManager::RemoveComponent<t3d::CTestComponent>(TestEntity1);
-
-			t3d::MComponentManager::AddComponent<t3d::CTestComponent>(TestEntity2);
-			t3d::MComponentManager::RemoveComponent<t3d::CTestComponent>(TestEntity2);
-
-			t3d::MEntityManager::RemoveEntity(TestEntity1);
-			t3d::MEntityManager::RemoveEntity(TestEntity2);
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-			std::chrono::high_resolution_clock::time_point NewTime = std::chrono::high_resolution_clock::now();
+			std::chrono::steady_clock::time_point NewTime = std::chrono::steady_clock::now();
 
 			float32 FrameTime = std::chrono::duration<float32, std::chrono::seconds::period>(NewTime - CurrentTime).count();
 
@@ -168,11 +172,11 @@ namespace test
 			{
 				uint32 FrameIndex = static_cast<uint32>(Renderer.GetFrameIndex());
 
-				t3d::FFrameInfo FrameInfo{ FrameIndex, FrameTime, CommandBuffer, Camera, GlobalDescriptorSets[FrameIndex], GameObjects };
+				FFrameInfo FrameInfo{ FrameIndex, FrameTime, CommandBuffer, Camera, GlobalDescriptorSets[FrameIndex], GameObjects };
 
 			// Update:
 
-				t3d::FUniformBufferData UniformBufferData{};
+				FUniformBufferData UniformBufferData{};
 
 				UniformBufferData.ProjectionMatrix = Camera.GetProjection();
 				UniformBufferData.ViewMatrix       = Camera.GetView();
@@ -222,13 +226,13 @@ namespace test
 	{
 	// TEST
 
-		Meshes.emplace("FlatVase"  , new t3d::FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/flat_vase.obj"));
-		Meshes.emplace("SmoothVase", new t3d::FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/smooth_vase.obj"));
-		Meshes.emplace("Floor"     , new t3d::FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/quad.obj"));
+		Meshes.emplace("FlatVase"  , new FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/flat_vase.obj"));
+		Meshes.emplace("SmoothVase", new FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/smooth_vase.obj"));
+		Meshes.emplace("Floor"     , new FMesh(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/quad.obj"));
 
 	// Flat vase:
 
-		t3d::OGameObject FlatVase;
+		OGameObject FlatVase;
 
 		FlatVase.Mesh = Meshes.at("FlatVase");
 		FlatVase.GetTransform().SetTranslation({ -0.5f, 0.5f, 0.0f });
@@ -238,7 +242,7 @@ namespace test
 
 	// Smooth vase:
 
-		t3d::OGameObject SmoothVase;
+		OGameObject SmoothVase;
 
 		SmoothVase.Mesh = Meshes.at("SmoothVase");
 		SmoothVase.GetTransform().SetTranslation({ 0.5f, 0.5f, 0.0f });
@@ -248,7 +252,7 @@ namespace test
 
 	// Quad:
 
-		t3d::OGameObject Floor;
+		OGameObject Floor;
 	
 		Floor.Mesh = Meshes.at("Floor");
 		Floor.GetTransform().SetTranslation({ 0.0f, 0.5f, 0.0f });
@@ -270,7 +274,7 @@ namespace test
 		
 		for (uint64 i = 0u; i < LightColors.size(); i++)
 		{
-			t3d::OGameObject PointLight;
+			OGameObject PointLight;
 			
 			PointLight.GetTransform().SetScale({ 0.05f, 0.0f, 0.0f });
 
@@ -291,9 +295,9 @@ namespace test
 
 //	// Paimon:
 //
-//		std::shared_ptr<t3d::FMesh> PaimonMesh = t3d::FMesh::CreateFromFile(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/paimon_ex.obj");
+//		std::shared_ptr<FMesh> PaimonMesh = FMesh::CreateFromFile(Device, "D:/VULKAN_TUTORIAL_SHADERS/Models/paimon_ex.obj");
 //
-//		t3d::OGameObject Paimon = t3d::OGameObject::Create();
+//		OGameObject Paimon = OGameObject::Create();
 //
 //		Paimon.Mesh = PaimonMesh;
 //		Paimon.Transform.Translation = { 0.0f, -0.54f, 0.5f };
