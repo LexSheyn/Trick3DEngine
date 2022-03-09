@@ -76,6 +76,9 @@
 #include <sstream>
 #include <utility>
 
+// Assimp
+#include <assimp/Importer.hpp>
+
 // Custom types:
 #include "../Types/T3DTypes.h"
 
@@ -86,7 +89,7 @@
 #include "../Time/FTimeStamp.h"
 #include "../Logger/FLogger.h"
 #include "../ResourceManagers/FImageLoader.h"
-//#include "../Events/FEventSystem.h"
+//#include "../Events/SEventSystem.h"
 #include "../Templates/TArray.h"
 
 //#ifndef DISABLE_WINDOWS

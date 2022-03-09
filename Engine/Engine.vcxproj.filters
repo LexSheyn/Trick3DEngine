@@ -36,7 +36,7 @@
     <ClCompile Include="src\EntryPoint\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Events\FEventSystem.cpp">
+    <ClCompile Include="src\Events\SEventSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Exception\FException.cpp">
@@ -156,34 +156,31 @@
     <ClCompile Include="src\Time\FTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Test\ECSComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Test\BaseECSComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Test\ECSSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Test\ECS.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Templates\TTypeID.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Entity\MEntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ECS\Entity\FEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\Components\MComponentManager.cpp">
+    <ClCompile Include="src\ECS\Core\SEntityComponentSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ECS\Components\FComponentDescription.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\Components\CName.cpp">
+    <ClCompile Include="src\ECS\Components\Components.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\FScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Test\SkeletalAnimation\FBone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Test\SkeletalAnimation\FAnimatedModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Test\SkeletalAnimation\FSkeletalMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -218,7 +215,7 @@
     <ClInclude Include="src\Events\FEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Events\FEventSystem.h">
+    <ClInclude Include="src\Events\SEventSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Events\IEventListener.h">
@@ -437,21 +434,6 @@
     <ClInclude Include="src\Time\FTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Test\ECSComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Test\BaseECSComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Test\TestComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Test\ECSSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Test\ECS.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Templates\TTypeID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -459,9 +441,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ECS\Components\TComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\Entity\MEntityManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Types\ECSTypes.h">
@@ -473,10 +452,37 @@
     <ClInclude Include="src\ECS\Components\FComponentDescription.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\Components\MComponentManager.h">
+    <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\Components\CName.h">
+    <ClInclude Include="src\ECS\Components\Components.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\FScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test\SkeletalAnimation\FBone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test\SkeletalAnimation\FAnimatedModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test\SkeletalAnimation\FBoneInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test\SkeletalAnimation\FKeyPosition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test\SkeletalAnimation\FKeyRotation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test\SkeletalAnimation\FKeyScale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

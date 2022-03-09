@@ -23,22 +23,22 @@ namespace t3d
 
 		FKeyboard::Initialize(Window);
 
-		FEventSystem::Subscribe(EEventType::KeyPressed , &Keyboard);
-		FEventSystem::Subscribe(EEventType::KeyReleased, &Keyboard);
-		FEventSystem::Subscribe(EEventType::KeyRepeated, &Keyboard);
-		FEventSystem::Subscribe(EEventType::CharPressed, &Keyboard);
+		SEventSystem::Subscribe(EEventType::KeyPressed , &Keyboard);
+		SEventSystem::Subscribe(EEventType::KeyReleased, &Keyboard);
+		SEventSystem::Subscribe(EEventType::KeyRepeated, &Keyboard);
+		SEventSystem::Subscribe(EEventType::CharPressed, &Keyboard);
 
 	// Mouse:
 
 		FMouse::Initialize(Window);
 
-		FEventSystem::Subscribe(EEventType::MouseButtonPressed , &Mouse);
-		FEventSystem::Subscribe(EEventType::MouseButtonReleased, &Mouse);
-		FEventSystem::Subscribe(EEventType::MouseMoved         , &Mouse);
-		FEventSystem::Subscribe(EEventType::MouseScrolled      , &Mouse);
-		FEventSystem::Subscribe(EEventType::MouseEnteredWindow , &Mouse);
-		FEventSystem::Subscribe(EEventType::MouseLeftWindow    , &Mouse);
-		FEventSystem::Subscribe(EEventType::MousePathDropped   , &Mouse);
+		SEventSystem::Subscribe(EEventType::MouseButtonPressed , &Mouse);
+		SEventSystem::Subscribe(EEventType::MouseButtonReleased, &Mouse);
+		SEventSystem::Subscribe(EEventType::MouseMoved         , &Mouse);
+		SEventSystem::Subscribe(EEventType::MouseScrolled      , &Mouse);
+		SEventSystem::Subscribe(EEventType::MouseEnteredWindow , &Mouse);
+		SEventSystem::Subscribe(EEventType::MouseLeftWindow    , &Mouse);
+		SEventSystem::Subscribe(EEventType::MousePathDropped   , &Mouse);
 	}
 
 	FWindow::~FWindow()
@@ -169,7 +169,7 @@ namespace t3d
 		{
 		//	Keyboard.OnKeyPress(Key);
 
-			FEventSystem::PushEvent(FEvent(EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods }));
+			SEventSystem::PushEvent(FEvent(EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods }));
 
 		//	std::cout << __FUNCTION__ << ": Key: " << Key << " :: " << ScanCode << " Press " << ":: " << Mods << std::endl;
 		}
@@ -183,7 +183,7 @@ namespace t3d
 		{
 		//	Keyboard.OnKeyRelease(Key);
 
-			FEventSystem::PushEvent(FEvent(EEventType::KeyReleased, FKeyData{ Key, ScanCode, Action, Mods }));
+			SEventSystem::PushEvent(FEvent(EEventType::KeyReleased, FKeyData{ Key, ScanCode, Action, Mods }));
 
 		//	std::cout << __FUNCTION__ << ": Key: " << Key << " :: " << ScanCode << " Release " << ":: " << Mods << std::endl;
 		}

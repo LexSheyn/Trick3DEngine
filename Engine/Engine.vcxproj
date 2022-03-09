@@ -62,15 +62,15 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;$(SolutionDir)Linking\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;shadercd.lib;shaderc_combinedd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;$(SolutionDir)Linking\Assimp\Lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;shadercd.lib;shaderc_combinedd.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -84,7 +84,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;$(SolutionDir)Linking\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -93,8 +93,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;shaderc.lib;shaderc_combined.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;$(SolutionDir)Linking\Assimp\Lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;shaderc.lib;shaderc_combined.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -106,7 +106,7 @@
     <ClCompile Include="src\Components\CTransform2DComponent.cpp" />
     <ClCompile Include="src\Components\CTransform3DComponent.cpp" />
     <ClCompile Include="src\Components\DComponent.cpp" />
-    <ClCompile Include="src\ECS\Components\CName.cpp">
+    <ClCompile Include="src\ECS\Components\Components.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -114,7 +114,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\ECS\Components\MComponentManager.cpp">
+    <ClCompile Include="src\ECS\Core\SEntityComponentSystem.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -122,12 +122,8 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\ECS\Entity\MEntityManager.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="src\EntryPoint\Main.cpp" />
-    <ClCompile Include="src\Events\FEventSystem.cpp" />
+    <ClCompile Include="src\Events\SEventSystem.cpp" />
     <ClCompile Include="src\Exception\FException.cpp" />
     <ClCompile Include="src\Exception\FVulkanException.cpp" />
     <ClCompile Include="src\GameObjects\IObject.cpp" />
@@ -228,12 +224,21 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\FImageLoader.cpp" />
+    <ClCompile Include="src\Scene\FScene.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\Templates\TTypeID.cpp" />
-    <ClCompile Include="src\Test\BaseECSComponent.cpp" />
-    <ClCompile Include="src\Test\ECS.cpp" />
-    <ClCompile Include="src\Test\ECSComponent.cpp" />
-    <ClCompile Include="src\Test\ECSSystem.cpp" />
+    <ClCompile Include="src\Test\SkeletalAnimation\FAnimatedModel.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Test\SkeletalAnimation\FBone.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Test\SkeletalAnimation\FSkeletalMesh.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
@@ -257,19 +262,27 @@
     <ClInclude Include="src\Components\CTransform2DComponent.h" />
     <ClInclude Include="src\Components\CTransform3DComponent.h" />
     <ClInclude Include="src\Components\DComponent.h" />
-    <ClInclude Include="src\ECS\Components\CName.h" />
+    <ClInclude Include="src\ECS\Components\Components.h" />
     <ClInclude Include="src\ECS\Components\FComponentDescription.h" />
     <ClInclude Include="src\ECS\Components\IComponent.h" />
-    <ClInclude Include="src\ECS\Components\MComponentManager.h" />
+    <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Components\TComponent.h" />
+    <ClInclude Include="src\Scene\FScene.h" />
+    <ClInclude Include="src\Test\SkeletalAnimation\FAnimatedModel.h" />
+    <ClInclude Include="src\Test\SkeletalAnimation\FBone.h" />
+    <ClInclude Include="src\Test\SkeletalAnimation\FBoneInfo.h" />
+    <ClInclude Include="src\Test\SkeletalAnimation\FKeyPosition.h" />
+    <ClInclude Include="src\Test\SkeletalAnimation\FKeyRotation.h" />
+    <ClInclude Include="src\Test\SkeletalAnimation\FKeyScale.h" />
+    <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalMesh.h" />
+    <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalVertex.h" />
     <ClInclude Include="src\Types\ECSTypes.h" />
     <ClInclude Include="src\ECS\Entity\FEntity.h" />
-    <ClInclude Include="src\ECS\Entity\MEntityManager.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />
     <ClInclude Include="src\Events\EEventType.h" />
     <ClInclude Include="src\Events\EventData.h" />
     <ClInclude Include="src\Events\FEvent.h" />
-    <ClInclude Include="src\Events\FEventSystem.h" />
+    <ClInclude Include="src\Events\SEventSystem.h" />
     <ClInclude Include="src\Events\IEventListener.h" />
     <ClInclude Include="src\Exception\FException.h" />
     <ClInclude Include="src\Exception\FVulkanException.h" />
@@ -333,11 +346,6 @@
     <ClInclude Include="src\Templates\TSharedPointer.h" />
     <ClInclude Include="src\Templates\TScopedPointer.h" />
     <ClInclude Include="src\Templates\TTypeID.h" />
-    <ClInclude Include="src\Test\BaseECSComponent.h" />
-    <ClInclude Include="src\Test\ECS.h" />
-    <ClInclude Include="src\Test\ECSComponent.h" />
-    <ClInclude Include="src\Test\ECSSystem.h" />
-    <ClInclude Include="src\Test\TestComponent.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Time\FDeltaTime.h" />

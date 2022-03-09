@@ -15,6 +15,9 @@
 #define T3D_INVALID_POOL_INDEX
 #define T3D_ENTITY_NULL_HANDLE
 
+// Skeletal Mesh
+#define T3D_MAX_BONE_INFLUENCE
+
 // Logger
 #define LOG_TRACE
 #define LOG_WARNING

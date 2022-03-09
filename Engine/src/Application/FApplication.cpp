@@ -7,13 +7,7 @@
 
 #include "../Components/CMovementComponent.h"
 
-#include "../Templates/TScopedPointer.h"
-
-#include "../Test/TestComponent.h"
-
-#include "../ECS/Entity/MEntityManager.h"
-#include "../ECS/Components/MComponentManager.h"
-#include "../ECS/Components/CName.h"
+#include "../ECS/Core/SEntityComponentSystem.h"
 
 namespace t3d
 {
@@ -32,15 +26,6 @@ namespace t3d
 			             .Create();
 
 		this->LoadGameObjects();
-
-		FEventSystem::Subscribe(EEventType::KeyPressed, &A);
-
-		FEventSystem::Subscribe(EEventType::KeyPressed , &B);
-		FEventSystem::Subscribe(EEventType::KeyReleased, &B);
-
-		TScopedPointer<Test> P;
-
-		P = MakeScoped<Test>();
 	}
 
 	FApplication::~FApplication()
@@ -91,20 +76,20 @@ namespace t3d
 // 			   ECS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		FEntity* Entity_1 = MEntityManager::CreateEntity();
+		FEntity* Entity_1 = SEntityComponentSystem::CreateEntity();
 
-		MComponentManager::AddComponent<CName>(Entity_1);
-		MComponentManager::AddComponent<CTransform>(Entity_1);
-		MComponentManager::AddComponent<CHealth>(Entity_1);
-		MComponentManager::AddComponent<CEnergy>(Entity_1);
+		SEntityComponentSystem::AddComponent<CName>(Entity_1);
+		SEntityComponentSystem::AddComponent<CTransform>(Entity_1);
+		SEntityComponentSystem::AddComponent<CHealth>(Entity_1);
+		SEntityComponentSystem::AddComponent<CEnergy>(Entity_1);
 
-		LOG_TRACE(MComponentManager::GetComponent<CName>(Entity_1)->Name);
-		MComponentManager::GetComponent<CName>(Entity_1)->Name = "Changed Name";
-		LOG_TRACE(MComponentManager::GetComponent<CName>(Entity_1)->Name);
+		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity_1)->Name);
 
-		MComponentManager::RemoveAllComponents(Entity_1);
+		SEntityComponentSystem::GetComponent<CName>(Entity_1)->Name = "Changed Name";
 
-		MEntityManager::RemoveEntity(Entity_1);
+		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity_1)->Name);
+
+		SEntityComponentSystem::RemoveEntity(Entity_1);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -152,7 +137,7 @@ namespace t3d
 		{
 			Window.Update();
 
-			FEventSystem::ProcessEvents();
+			SEventSystem::ProcessEvents();
 
 			std::chrono::steady_clock::time_point NewTime = std::chrono::steady_clock::now();
 

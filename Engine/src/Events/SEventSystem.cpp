@@ -1,16 +1,16 @@
 #include "../PrecompiledHeaders/t3dpch.h"
-#include "FEventSystem.h"
+#include "SEventSystem.h"
 
 namespace t3d
 {
 // Functions:
 
-	void FEventSystem::PushEvent(const FEvent& Event)
+	void SEventSystem::PushEvent(const FEvent& Event)
 	{
 		EventQueue.push_back(Event);
 	}
 
-	void FEventSystem::ProcessEvents()
+	void SEventSystem::ProcessEvents()
 	{
 		while (EventQueue.size() > 0u)
 		{
@@ -20,7 +20,7 @@ namespace t3d
 		}
 	}
 
-	void FEventSystem::Dispatch(FEvent* Event)
+	void SEventSystem::Dispatch(FEvent* Event)
 	{
 		std::pair Range = ListenerRegistry.equal_range(Event->GetType());
 
@@ -32,7 +32,7 @@ namespace t3d
 		}
 	}
 
-	void FEventSystem::Subscribe(EEventType Type, IEventListener* Listener)
+	void SEventSystem::Subscribe(EEventType Type, IEventListener* Listener)
 	{		
 		#if _DEBUG
 		if (!Listener)
@@ -54,7 +54,7 @@ namespace t3d
 	//	LOG_TRACE("Listener[" + std::to_string(Listener->GetID()) + "] subscribed for event of type: " + std::to_string(EventType));
 	}
 
-	void FEventSystem::Unsubscribe(EEventType Type, IEventListener* Listener)
+	void SEventSystem::Unsubscribe(EEventType Type, IEventListener* Listener)
 	{
 		#if _DEBUG
 		if (!Listener)
@@ -88,7 +88,7 @@ namespace t3d
 		}
 	}
 
-	void FEventSystem::UnsubscribeAll(IEventListener* Listener)
+	void SEventSystem::UnsubscribeAll(IEventListener* Listener)
 	{
 		std::multimap<EEventType, IEventListener*>::iterator Entry = ListenerRegistry.begin();
 
@@ -105,7 +105,7 @@ namespace t3d
 		}
 	}
 
-	bool8 FEventSystem::IsSubscribed(EEventType Type, IEventListener* Listener)
+	bool8 SEventSystem::IsSubscribed(EEventType Type, IEventListener* Listener)
 	{
 		std::pair Range = ListenerRegistry.equal_range(Type);
 
@@ -120,12 +120,12 @@ namespace t3d
 		return false;
 	}
 
-	void FEventSystem::ClearEventQueue()
+	void SEventSystem::ClearEventQueue()
 	{
 		EventQueue.clear();
 	}
 
-	void FEventSystem::ClearListenerRegistry()
+	void SEventSystem::ClearListenerRegistry()
 	{
 		ListenerRegistry.clear();
 	}
@@ -133,8 +133,8 @@ namespace t3d
 
 // Static Variables:
 
-	std::list<FEvent> FEventSystem::EventQueue;
+	std::list<FEvent> SEventSystem::EventQueue;
 
-	std::multimap<EEventType, IEventListener*> FEventSystem::ListenerRegistry;
+	std::multimap<EEventType, IEventListener*> SEventSystem::ListenerRegistry;
 
 }

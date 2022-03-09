@@ -1,11 +1,36 @@
 #include "../../PrecompiledHeaders/t3dpch.h"
-#include "MComponentManager.h"
+#include "SEntityComponentSystem.h"
 
 namespace t3d
 {
-// Functions:
+// Entity Functions:
 
-	void MComponentManager::RemoveAllComponents(FEntity* Entity)
+	FEntity* SEntityComponentSystem::CreateEntity()
+	{
+		FEntity NewEntity;
+
+		T3D_EntityID ID = NewEntity.GetID();
+
+		Entities.emplace(NewEntity.GetID(), std::move(NewEntity));
+
+		return &Entities.at(ID);
+	}
+
+	void SEntityComponentSystem::RemoveEntity(FEntity* Entity)
+	{
+		RemoveAllComponents(Entity);
+
+		Entities.erase(Entity->GetID());
+	}
+
+	void SEntityComponentSystem::ReserveMemory(uint64 NumEntities)
+	{
+		Entities.reserve(NumEntities);
+	}
+
+// Component Functions:
+
+	void SEntityComponentSystem::RemoveAllComponents(FEntity* Entity)
 	{
 		std::vector<FComponentDescription>& ComponentDescriptions = Entity->GetComponentDescriptions();
 
@@ -16,9 +41,9 @@ namespace t3d
 	}
 
 
-// Private Functions:
+// Private Component Functions:
 
-	void MComponentManager::DeleteComponent(T3D_ComponentID ID, uint64 Size, uint64 Index)
+	void SEntityComponentSystem::DeleteComponent(T3D_ComponentID ID, uint64 Size, uint64 Index)
 	{
 		std::vector<uint8>& ComponentArray = Components[ID];
 
@@ -52,12 +77,12 @@ namespace t3d
 		ComponentArray.resize(SourceIndex);
 	}
 
-	void MComponentManager::AddComponentInternal(FEntity* Entity, FComponentDescription& ComponentDescription)
+	void SEntityComponentSystem::AddComponentInternal(FEntity* Entity, FComponentDescription& ComponentDescription)
 	{
 		Entity->GetComponentDescriptions().push_back( ComponentDescription );
 	}
 
-	void MComponentManager::RemoveComponentInternal(FEntity* Entity, T3D_ComponentID ID, uint64 Size)
+	void SEntityComponentSystem::RemoveComponentInternal(FEntity* Entity, T3D_ComponentID ID, uint64 Size)
 	{
 		std::vector<FComponentDescription>& ComponentDescriptions = Entity->GetComponentDescriptions();
 
@@ -74,7 +99,7 @@ namespace t3d
 		}
 	}
 
-	IComponent* MComponentManager::GetComponentInternal(FEntity* Entity, T3D_ComponentID ID)
+	IComponent* SEntityComponentSystem::GetComponentInternal(FEntity* Entity, T3D_ComponentID ID)
 	{
 		std::vector<FComponentDescription>& ComponentDescriptions = Entity->GetComponentDescriptions();
 
@@ -92,6 +117,8 @@ namespace t3d
 
 // Static Variables:
 
-	std::unordered_map<T3D_ComponentID, std::vector<uint8>> MComponentManager::Components;
+	std::unordered_map<T3D_EntityID, FEntity> SEntityComponentSystem::Entities;
+
+	std::unordered_map<T3D_ComponentID, std::vector<uint8>> SEntityComponentSystem::Components;
 
 }

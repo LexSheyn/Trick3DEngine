@@ -5,7 +5,7 @@
 
 namespace t3d
 {
-	class FEventSystem
+	class SEventSystem
 	{
 	public:
 
@@ -35,12 +35,12 @@ namespace t3d
 
 	// Private Constructors and Destructor:
 
-		FEventSystem() {};
+		SEventSystem() {};
 
-		~FEventSystem() {};
+		~SEventSystem() {};
 
-		T3D_NO_COPY(FEventSystem);
-		T3D_NO_MOVE(FEventSystem);
+		T3D_NO_COPY(SEventSystem);
+		T3D_NO_MOVE(SEventSystem);
 
 	// Variables:
 

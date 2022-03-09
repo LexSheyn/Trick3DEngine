@@ -1,16 +1,24 @@
 #pragma once
 
-#include "TComponent.h"
-#include "FComponentDescription.h"
-#include "../Entity/Fentity.h"
+#include "../Components/Components.h"
+#include "../Components/FComponentDescription.h"
+#include "../Entity/FEntity.h"
 
 namespace t3d
 {
-	class MComponentManager
+	class SEntityComponentSystem
 	{
 	public:
 
-	// Functions:
+	// Entity Functions:
+
+		[[nodiscard]] static FEntity* CreateEntity();
+
+		static void RemoveEntity(FEntity* Entity);
+
+		static void ReserveMemory(uint64 NumEntities);
+
+	// Component Functions:
 
 		template<typename ComponentType>
 		static void AddComponent(FEntity* Entity)
@@ -36,7 +44,7 @@ namespace t3d
 
 	private:
 
-	// Private Functions:
+	// Private Component Functions:
 
 		template<typename ComponentType>
 		static FComponentDescription CreateComponent(std::vector<uint8>& Memory, FEntity* Entity)
@@ -62,14 +70,16 @@ namespace t3d
 
 	// Private Constructors and Destructor:
 
-		MComponentManager() {}
+		SEntityComponentSystem() {}
 
-		~MComponentManager() {}
+		~SEntityComponentSystem() {}
 
-		T3D_NO_COPY(MComponentManager);
-		T3D_NO_MOVE(MComponentManager);
+		T3D_NO_COPY(SEntityComponentSystem);
+		T3D_NO_MOVE(SEntityComponentSystem);
 
 	// Variables:
+
+		static std::unordered_map<T3D_EntityID, FEntity> Entities;
 
 		static std::unordered_map<T3D_ComponentID, std::vector<uint8>> Components;
 	};

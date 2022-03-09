@@ -38,3 +38,5 @@
 						   Class& operator = (Class&&) = default
 
 #define T3D_ENTITY_NULL_HANDLE nullptr;
+
+#define T3D_MAX_BONE_INFLUENCE 4
