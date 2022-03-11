@@ -1,42 +1,42 @@
 #include "../../PrecompiledHeaders/t3dpch.h"
 #include "SEntityComponentSystem.h"
 
+#include "../Entity/FEntity.h"
+
 namespace t3d
 {
 // Entity Functions:
 
-	FEntity* SEntityComponentSystem::CreateEntity()
+	T3D_EntityID SEntityComponentSystem::CreateEntity()
 	{
-		FEntity* NewEntity = nullptr;
+		T3D_EntityID NewEntity = 0;
 
-		if (!EntityReuseList.empty())
+		if (EntityReuseList.empty())
 		{
-			NewEntity = &Entities.at(EntityReuseList.at(0));
+			Entities.push_back(FEntity(Entities.size()));
 
-			EntityReuseList.at(0) = EntityReuseList.back();
-			EntityReuseList.pop_back();
+			NewEntity = Entities.back().GetID();
 		}
 		else
 		{
-			Entities.push_back(FEntity());
+			NewEntity = EntityReuseList.front();
 
-			NewEntity = &Entities.back();
-
-			NewEntity->SetIndex(Entities.size() - 1u);
+			EntityReuseList.front() = EntityReuseList.back();
+			EntityReuseList.pop_back();
 		}
 
 		return NewEntity;
 	}
 
-	void SEntityComponentSystem::RemoveEntity(FEntity* Entity)
+	void SEntityComponentSystem::RemoveEntity(T3D_EntityID& EntityID)
 	{
-		RemoveAllComponents(Entity);
+		RemoveAllComponents(EntityID);
 
 		// Mark Entity as 'Removed' so it is no longer gets updated.
 
-		EntityReuseList.push_back(Entity->GetIndex());
+		EntityReuseList.push_back(EntityID);
 
-		Entity = nullptr;
+		EntityID = T3D_ENTITY_INVALID_ID;
 	}
 
 	void SEntityComponentSystem::ReserveEntities(uint64 NumEntities)
@@ -51,9 +51,9 @@ namespace t3d
 
 // Component Functions:
 
-	void SEntityComponentSystem::RemoveAllComponents(FEntity* Entity)
+	void SEntityComponentSystem::RemoveAllComponents(T3D_EntityID EntityID)
 	{
-		std::vector<FComponentDescription>& ComponentDescriptions = Entity->GetComponentDescriptions();
+		std::vector<FComponentDescription>& ComponentDescriptions = Entities.at(EntityID).GetComponentDescriptions();
 
 		for (uint64 i = 0u; i < ComponentDescriptions.size(); i++)
 		{
@@ -85,7 +85,7 @@ namespace t3d
 
 		memcpy_s(DestinationComponent, Size, SourceComponent, Size);
 
-		std::vector<FComponentDescription>& ComponentDescriptions = SourceComponent->Entity->GetComponentDescriptions();
+		std::vector<FComponentDescription>& ComponentDescriptions = Entities.at(SourceComponent->GetEntityID()).GetComponentDescriptions();
 
 		for (uint64 i = 0u; i < ComponentDescriptions.size(); i++)
 		{
@@ -100,14 +100,14 @@ namespace t3d
 		ComponentArray.resize(SourceIndex);
 	}
 
-	void SEntityComponentSystem::AddComponentInternal(FEntity* Entity, FComponentDescription& ComponentDescription)
+	void SEntityComponentSystem::AddComponentInternal(T3D_EntityID EntityID, FComponentDescription ComponentDescription)
 	{
-		Entity->GetComponentDescriptions().push_back( ComponentDescription );
+		Entities.at(EntityID).GetComponentDescriptions().push_back( ComponentDescription );
 	}
 
-	void SEntityComponentSystem::RemoveComponentInternal(FEntity* Entity, T3D_ComponentID ID, uint64 Size)
+	void SEntityComponentSystem::RemoveComponentInternal(T3D_EntityID EntityID, T3D_ComponentID ID, uint64 Size)
 	{
-		std::vector<FComponentDescription>& ComponentDescriptions = Entity->GetComponentDescriptions();
+		std::vector<FComponentDescription>& ComponentDescriptions = Entities.at(EntityID).GetComponentDescriptions();
 
 		for (uint64 i = 0u; i < ComponentDescriptions.size(); i++)
 		{
@@ -115,16 +115,16 @@ namespace t3d
 			{
 				DeleteComponent(ComponentDescriptions[i].ID, Size, ComponentDescriptions[i].Index);
 
-				ComponentDescriptions[i] = ComponentDescriptions.back();
+				ComponentDescriptions[i] = ComponentDescriptions[ComponentDescriptions.size() - 1u];
 
 				ComponentDescriptions.pop_back();
 			}
 		}
 	}
 
-	IComponent* SEntityComponentSystem::GetComponentInternal(FEntity* Entity, T3D_ComponentID ID)
+	IComponent* SEntityComponentSystem::GetComponentInternal(T3D_EntityID EntityID, T3D_ComponentID ID)
 	{
-		std::vector<FComponentDescription>& ComponentDescriptions = Entity->GetComponentDescriptions();
+		std::vector<FComponentDescription>& ComponentDescriptions = Entities.at(EntityID).GetComponentDescriptions();
 
 		for (uint64 i = 0u; i < ComponentDescriptions.size(); i++)
 		{

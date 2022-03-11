@@ -76,22 +76,32 @@ namespace t3d
 // 			   ECS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		FEntity* Entity_1 = SEntityComponentSystem::CreateEntity();
+	//	SEntityComponentSystem::ReserveEntities(10000);
+	//	SEntityComponentSystem::ReserveEntityReuseList(10000);
 
-		SEntityComponentSystem::AddComponent<CName>(Entity_1);
-		SEntityComponentSystem::AddComponent<CTransform>(Entity_1);
-		SEntityComponentSystem::AddComponent<CHealth>(Entity_1);
-		SEntityComponentSystem::AddComponent<CEnergy>(Entity_1);
+		T3D_EntityID Entity1 = SEntityComponentSystem::CreateEntity();
+		LOG_TRACE(std::to_string(Entity1));
 
-		SEntityComponentSystem::RemoveComponent<CEnergy>(Entity_1);
+		SEntityComponentSystem::AddComponent<CName>(Entity1);
+		SEntityComponentSystem::AddComponent<CTransform>(Entity1);
+		SEntityComponentSystem::AddComponent<CHealth>(Entity1);
+		SEntityComponentSystem::AddComponent<CEnergy>(Entity1);
 
-		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity_1)->Name);
+		SEntityComponentSystem::RemoveComponent<CEnergy>(Entity1);
 
-		SEntityComponentSystem::GetComponent<CName>(Entity_1)->Name = "Changed Name";
+		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity1)->Name);
 
-		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity_1)->Name);
+		SEntityComponentSystem::GetComponent<CName>(Entity1)->Name = "Changed Name";
 
-		SEntityComponentSystem::RemoveEntity(Entity_1);
+		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity1)->Name);
+
+		T3D_EntityID Entity2 = SEntityComponentSystem::CreateEntity();
+		LOG_TRACE(std::to_string(Entity2));
+
+		SEntityComponentSystem::RemoveEntity(Entity1);
+
+		T3D_EntityID Entity3 = SEntityComponentSystem::CreateEntity();
+		LOG_TRACE(std::to_string(Entity3));
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

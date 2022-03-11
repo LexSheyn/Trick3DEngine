@@ -183,6 +183,9 @@
     <ClCompile Include="src\Test\SkeletalAnimation\FSkeletalMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ECS\Components\IComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h">

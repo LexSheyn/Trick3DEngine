@@ -5,8 +5,8 @@ namespace t3d
 {
 // Constructors and Destructor:
 
-	FEntity::FEntity()
-		: Index(0)
+	FEntity::FEntity(T3D_EntityID Value)
+		: ID(Value)
 	{
 		ComponentDescriptions.reserve(5);
 	}
@@ -23,22 +23,17 @@ namespace t3d
 		return ID;
 	}
 
-	const uint64& FEntity::GetIndex() const
-	{
-		return Index;
-	}
-
 	std::vector<FComponentDescription>& FEntity::GetComponentDescriptions()
 	{
 		return ComponentDescriptions;
 	}
 
 
-// Modifiers:
+// Private Modifiers:
 
-	void FEntity::SetIndex(uint64 Value)
+	void FEntity::SetID(T3D_EntityID Value)
 	{
-		Index = Value;
+		ID = Value;
 	}
 
 }

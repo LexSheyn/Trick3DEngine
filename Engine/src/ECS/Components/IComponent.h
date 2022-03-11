@@ -4,8 +4,16 @@
 
 namespace t3d
 {
-	struct IComponent
+	class IComponent
 	{
-		class FEntity* Entity = T3D_ENTITY_NULL_HANDLE;
+	public:
+
+		const T3D_EntityID& GetEntityID() const;
+
+		void SetEntityID(T3D_EntityID ID);
+
+	private:
+
+		T3D_EntityID EntityID = T3D_ENTITY_INVALID_ID;
 	};
 }

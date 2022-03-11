@@ -1,6 +1,7 @@
 #pragma once
 
-// Custom defines:
+// Performance:
+
 #if _DEBUG
 // In Debug mode does nothing.
 #define T3D_INLINE
@@ -8,6 +9,9 @@
 // In Release mode inlines the function call.
 #define T3D_INLINE inline
 #endif
+
+
+// Types:
 
 #define T3D_DEFINE_TYPES typedef bool bool8;\
 						 typedef          char      char8;\
@@ -20,6 +24,9 @@
 						 typedef unsigned short     uint16;\
 						 typedef unsigned int       uint32;\
 						 typedef unsigned long long uint64;
+
+
+// Constructors:
 
 // Removes copy constructor and copy assignment operator.
 #define T3D_NO_COPY(Class) Class(const Class&) = delete; \
@@ -37,6 +44,13 @@
 #define T3D_DEFAULT_MOVE(Class) Class(Class&&) = default; \
 						   Class& operator = (Class&&) = default
 
-#define T3D_ENTITY_NULL_HANDLE nullptr;
+
+// ECS:
+
+// UINT64_MAX
+#define T3D_ENTITY_INVALID_ID 0xffffffffffffffffui64
+
+
+// Skeletal animation:
 
 #define T3D_MAX_BONE_INFLUENCE 4
