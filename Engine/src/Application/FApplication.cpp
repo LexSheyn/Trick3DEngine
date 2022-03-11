@@ -48,17 +48,17 @@ namespace t3d
 		for (uint64 i = 0u; i < UniformDataBuffers.size(); i++)
 		{
 			UniformDataBuffers[i] = new FDeviceBuffer(Device,
-				                                           sizeof(FUniformBufferData),
-				                                           1,
-				                                           VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-				                                           VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT); //| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+				                                      sizeof(FUniformBufferData),
+				                                      1,
+				                                      VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+				                                      VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT); //| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
 			UniformDataBuffers[i]->Map();
 		}
 
 		FDescriptorSetLayout* GlobalDescriptorSetLayout = FDescriptorSetLayout::Constructor(Device)
-			                                                   .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
-			                                                   .Create();
+			                                              .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
+			                                              .Create();
 
 		std::vector<VkDescriptorSet> GlobalDescriptorSets(FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
 
@@ -83,6 +83,8 @@ namespace t3d
 		SEntityComponentSystem::AddComponent<CHealth>(Entity_1);
 		SEntityComponentSystem::AddComponent<CEnergy>(Entity_1);
 
+		SEntityComponentSystem::RemoveComponent<CEnergy>(Entity_1);
+
 		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity_1)->Name);
 
 		SEntityComponentSystem::GetComponent<CName>(Entity_1)->Name = "Changed Name";
@@ -98,17 +100,17 @@ namespace t3d
 		for (uint64 i = 0u; i < UniformDataBuffers.size(); i++)
 		{
 			UniformDataBuffers[i] = new FDeviceBuffer(Device,
-				                                           sizeof(FUniformBufferData),
-				                                           1,
-				                                           VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-				                                           VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT); //| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+				                                      sizeof(FUniformBufferData),
+				                                      1,
+				                                      VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+				                                      VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT); //| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
 			UniformDataBuffers[i]->Map();
 		}
 
 		FDescriptorSetLayout* GlobalDescriptorSetLayout = FDescriptorSetLayout::Constructor(Device)
-			                                                   .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
-			                                                   .Create();
+			                                              .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
+			                                              .Create();
 
 		std::vector<VkDescriptorSet> GlobalDescriptorSets(FSwapchain::MAX_FRAMES_IN_FLIGHT); // Cleaned up automatically, but it is not be the case in the future!
 

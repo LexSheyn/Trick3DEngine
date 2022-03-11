@@ -16,7 +16,9 @@ namespace t3d
 
 		static void RemoveEntity(FEntity* Entity);
 
-		static void ReserveMemory(uint64 NumEntities);
+		static void ReserveEntities(uint64 NumEntities);
+
+		static void ReserveEntityReuseList(uint64 NumEntities);
 
 	// Component Functions:
 
@@ -79,7 +81,8 @@ namespace t3d
 
 	// Variables:
 
-		static std::unordered_map<T3D_EntityID, FEntity> Entities;
+		static std::vector<FEntity> Entities;
+		static std::vector<uint64>  EntityReuseList;
 
 		static std::unordered_map<T3D_ComponentID, std::vector<uint8>> Components;
 	};

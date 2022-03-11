@@ -6,7 +6,7 @@ namespace t3d
 {
 	struct CName : public TComponent<struct CName>
 	{
-		std::string Name;
+		std::string Name = "<None>";
 	};
 
 	// Matrix multiplication order: Translation * Rotation * Scale.

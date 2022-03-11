@@ -11,27 +11,33 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FEntity()
-		{
-			ComponentDescriptions.reserve(5);
-		}
+		FEntity();
 
-		~FEntity() {}
+		~FEntity();
 
 		T3D_NO_COPY(FEntity);
 		T3D_DEFAULT_MOVE(FEntity);
 
 	// Accessors:
 
-		T3D_INLINE const T3D_EntityID& GetID() const { return ID; }
+		const T3D_EntityID& GetID()    const;
 
-		T3D_INLINE std::vector<FComponentDescription>& GetComponentDescriptions() { return ComponentDescriptions; }
+		const uint64&       GetIndex() const;
+
+		std::vector<FComponentDescription>& GetComponentDescriptions();
+
+	// Modifiers:
+
+		void SetIndex(uint64 Value);
 
 	private:
 
-	// Public Variables:
+	// Variables:
 
 		const T3D_EntityID ID = TAutoID<T3D_EntityID>::NewID();
+
+		// Index in the Entities vector.
+		uint64 Index;
 
 		std::vector<FComponentDescription> ComponentDescriptions;
 	};

@@ -7,25 +7,46 @@ namespace t3d
 
 	FEntity* SEntityComponentSystem::CreateEntity()
 	{
-		FEntity NewEntity;
+		FEntity* NewEntity = nullptr;
 
-		T3D_EntityID ID = NewEntity.GetID();
+		if (!EntityReuseList.empty())
+		{
+			NewEntity = &Entities.at(EntityReuseList.at(0));
 
-		Entities.emplace(NewEntity.GetID(), std::move(NewEntity));
+			EntityReuseList.at(0) = EntityReuseList.back();
+			EntityReuseList.pop_back();
+		}
+		else
+		{
+			Entities.push_back(FEntity());
 
-		return &Entities.at(ID);
+			NewEntity = &Entities.back();
+
+			NewEntity->SetIndex(Entities.size() - 1u);
+		}
+
+		return NewEntity;
 	}
 
 	void SEntityComponentSystem::RemoveEntity(FEntity* Entity)
 	{
 		RemoveAllComponents(Entity);
 
-		Entities.erase(Entity->GetID());
+		// Mark Entity as 'Removed' so it is no longer gets updated.
+
+		EntityReuseList.push_back(Entity->GetIndex());
+
+		Entity = nullptr;
 	}
 
-	void SEntityComponentSystem::ReserveMemory(uint64 NumEntities)
+	void SEntityComponentSystem::ReserveEntities(uint64 NumEntities)
 	{
 		Entities.reserve(NumEntities);
+	}
+
+	void SEntityComponentSystem::ReserveEntityReuseList(uint64 NumEntities)
+	{
+		EntityReuseList.reserve(NumEntities);
 	}
 
 // Component Functions:
@@ -38,6 +59,8 @@ namespace t3d
 		{
 			DeleteComponent(ComponentDescriptions[i].ID, ComponentDescriptions[i].Size, ComponentDescriptions[i].Index);
 		}
+
+		ComponentDescriptions.clear();
 	}
 
 
@@ -92,7 +115,7 @@ namespace t3d
 			{
 				DeleteComponent(ComponentDescriptions[i].ID, Size, ComponentDescriptions[i].Index);
 
-				ComponentDescriptions[i] = ComponentDescriptions[ComponentDescriptions.size() - 1u];
+				ComponentDescriptions[i] = ComponentDescriptions.back();
 
 				ComponentDescriptions.pop_back();
 			}
@@ -117,7 +140,8 @@ namespace t3d
 
 // Static Variables:
 
-	std::unordered_map<T3D_EntityID, FEntity> SEntityComponentSystem::Entities;
+	std::vector<FEntity> SEntityComponentSystem::Entities;
+	std::vector<uint64>  SEntityComponentSystem::EntityReuseList;
 
 	std::unordered_map<T3D_ComponentID, std::vector<uint8>> SEntityComponentSystem::Components;
 
