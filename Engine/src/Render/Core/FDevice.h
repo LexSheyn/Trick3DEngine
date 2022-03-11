@@ -44,15 +44,15 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE VkDevice      Device()           { return LogicalDevice; }
+		VkDevice      Device();
 
-		T3D_INLINE VkCommandPool GetCommandPool()   { return CommandPool; }
+		VkCommandPool GetCommandPool();
 
-		T3D_INLINE VkSurfaceKHR  GetSurface()       { return Surface; }
+		VkSurfaceKHR  GetSurface();
 
-		T3D_INLINE VkQueue       GetGraphicsQueue() { return GraphicsQueue; }
+		VkQueue       GetGraphicsQueue();
 
-		T3D_INLINE VkQueue       GetPresentQueue()  { return PresentQueue; }
+		VkQueue       GetPresentQueue();
 
 		FSwapchainSupportDetails GetSwapchainSupportDetails();
 

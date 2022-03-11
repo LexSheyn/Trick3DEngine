@@ -151,6 +151,49 @@ namespace t3d
 	}
 
 
+// Accessors:
+
+	VkBuffer FDeviceBuffer::GetBuffer() const
+	{
+		return Buffer;
+	}
+
+	void* FDeviceBuffer::GetMappedMemory() const
+	{
+		return MappedMemory;
+	}
+
+	const VkDeviceSize& FDeviceBuffer::GetBufferSize() const
+	{
+		return BufferSize;
+	}
+
+	const uint32& FDeviceBuffer::GetInstanceCount() const
+	{
+		return InstanceCount;
+	}
+
+	const VkDeviceSize& FDeviceBuffer::GetInstanceSize() const
+	{
+		return InstanceSize;
+	}
+
+	const VkDeviceSize& FDeviceBuffer::GetAlignmentSize() const
+	{
+		return AlignmentSize;
+	}
+
+	const VkBufferUsageFlags& FDeviceBuffer::GetUsageFlags() const
+	{
+		return UsageFlags;
+	}
+
+	const VkMemoryPropertyFlags& FDeviceBuffer::GetMemoryPropertyFlags() const
+	{
+		return MemoryPropertyFlags;
+	}
+
+
 // Private Accessors:
 
 	VkDeviceSize FDeviceBuffer::GetAlignment(VkDeviceSize InstanceSize, VkDeviceSize MinOffsetAlignment)

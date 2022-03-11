@@ -28,19 +28,19 @@ namespace t3d
 
 		void CreateSurface(VkInstance Instance, VkSurfaceKHR* Surface);
 
-		T3D_INLINE void ResetResizedFlag() { FramebufferResized = false; }
+		void ResetResizedFlag();
 
 	// Accessors:
 
-		T3D_INLINE const GLFWwindow* GetGLFWwindow() const { return Window; }
+		const GLFWwindow* GetGLFWwindow() const;
 
-		T3D_INLINE       VkExtent2D  GetExtent()           { return { static_cast<uint32>(Width), static_cast<uint32>(Height) }; }
+		const bool8&      WasResized()    const;
 
-		T3D_INLINE const bool8&      WasResized()    const { return FramebufferResized; }
+		const int32&      GetWidth()      const;
 
-		T3D_INLINE const int32&      GetWidth()      const { return Width; }
+		const int32&      GetHeight()     const;
 
-		T3D_INLINE const int32&      GetHeight()     const { return Height; }
+		VkExtent2D  GetExtent();
 
 	// Modifiers:
 
@@ -94,7 +94,5 @@ namespace t3d
 		FKeyboard Keyboard;
 		FMouse    Mouse;
 		FGamepad  Gamepad;
-
-	//	std::function<void(Event&)> FunctionCallback;
 	};
 }

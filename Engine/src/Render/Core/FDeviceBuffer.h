@@ -101,22 +101,22 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE VkBuffer GetBuffer()       const { return Buffer; }
+		VkBuffer GetBuffer()    const;
 
-		T3D_INLINE void*    GetMappedMemory() const { return MappedMemory; }
+		void* GetMappedMemory() const;
 
 
-		T3D_INLINE const VkDeviceSize&          GetBufferSize()          const { return BufferSize; }
+		const VkDeviceSize&          GetBufferSize()          const;
 
-		T3D_INLINE const uint32&                GetInstanceCount()       const { return InstanceCount; }
+		const uint32&                GetInstanceCount()       const;
 
-		T3D_INLINE const VkDeviceSize&          GetInstanceSize()        const { return InstanceSize; }
+		const VkDeviceSize&          GetInstanceSize()        const;
 
-		T3D_INLINE const VkDeviceSize&          GetAlignmentSize()       const { return AlignmentSize; }
+		const VkDeviceSize&          GetAlignmentSize()       const;
 
-		T3D_INLINE const VkBufferUsageFlags&    GetUsageFlags()          const { return UsageFlags; }
+		const VkBufferUsageFlags&    GetUsageFlags()          const;
 
-		T3D_INLINE const VkMemoryPropertyFlags& GetMemoryPropertyFlags() const { return MemoryPropertyFlags; }
+		const VkMemoryPropertyFlags& GetMemoryPropertyFlags() const;
 
 	private:
 

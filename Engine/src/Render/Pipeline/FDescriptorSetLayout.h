@@ -60,7 +60,7 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE VkDescriptorSetLayout GetDescriptorSetLayout() const { return DescriptorSetLayout; }
+		VkDescriptorSetLayout GetDescriptorSetLayout() const;
 
 	private:
 

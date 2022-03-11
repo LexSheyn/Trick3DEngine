@@ -8,14 +8,9 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		IEventListener()
-		{
-			static int32 ID = 0u;
+		IEventListener();
 
-			this->ID = ID++;
-		}
-
-		virtual ~IEventListener() {};
+		virtual ~IEventListener();
 
 	// Functions:
 
@@ -23,7 +18,7 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE const uint32& GetID() const { return ID; }
+		const uint32& GetID() const;
 
 	private:
 

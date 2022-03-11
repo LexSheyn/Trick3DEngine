@@ -10,10 +10,10 @@ namespace t3d
 // Constructors and Destructor:
 
 	FWindow::FWindow(int32 Width, int32 Height, const std::string& Title)
-		: Width(Width),
-		  Height(Height),
-		  Title(Title),
-		  Window(nullptr)
+		: Width  (Width),
+		  Height (Height),
+		  Title  (Title),
+		  Window (nullptr)
 	{
 		this->InitWindow();
 
@@ -70,6 +70,39 @@ namespace t3d
 		}
 	}
 
+	void FWindow::ResetResizedFlag()
+	{
+		FramebufferResized = false;
+	}
+
+
+// Accessors:
+
+	const GLFWwindow* FWindow::GetGLFWwindow() const
+	{
+		return Window;
+	}
+
+	const bool8& FWindow::WasResized() const
+	{
+		return FramebufferResized;
+	}
+
+	const int32& FWindow::GetWidth() const
+	{
+		return Width;
+	}
+
+	const int32& FWindow::GetHeight() const
+	{
+		return Height;
+	}
+
+	VkExtent2D FWindow::GetExtent()
+	{
+		return { static_cast<uint32>(Width), static_cast<uint32>(Height) };
+	}
+
 
 // Modifiers:
 
@@ -91,10 +124,6 @@ namespace t3d
 		glfwSetWindowIcon(Window, static_cast<int32>(Images.Size()), Images.Data());
 	}
 
-//	void FWindow::SetFunctionCallback(const std::function<void(Event&)>& Function)
-//	{
-//		FunctionCallback = Function;
-//	}
 
 // Private Functions:
 
@@ -138,11 +167,6 @@ namespace t3d
 		glfwSetScrollCallback(Window, ScrollCallback);
 	
 		glfwSetDropCallback(Window, DropCallback);
-
-	//	this->SetFunctionCallback([](Event& E)
-	//	{
-	//		std::cout << E.Format();
-	//	});
 	}
 
 
@@ -167,40 +191,26 @@ namespace t3d
 
 		if (Action == GLFW_PRESS)
 		{
-		//	Keyboard.OnKeyPress(Key);
-
 			SEventSystem::PushEvent(FEvent(EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods }));
-
-		//	std::cout << __FUNCTION__ << ": Key: " << Key << " :: " << ScanCode << " Press " << ":: " << Mods << std::endl;
 		}
 		else if (Action == GLFW_REPEAT)
 		{
-		//	Keyboard.OnKeyRepeat(Key);
-
-		//	std::cout << __FUNCTION__ << ": Key: " << Key << " :: " << ScanCode << " Repeat " << ":: " << Mods << std::endl;
+			//
 		}
 		else if (Action == GLFW_RELEASE)
 		{
-		//	Keyboard.OnKeyRelease(Key);
-
 			SEventSystem::PushEvent(FEvent(EEventType::KeyReleased, FKeyData{ Key, ScanCode, Action, Mods }));
-
-		//	std::cout << __FUNCTION__ << ": Key: " << Key << " :: " << ScanCode << " Release " << ":: " << Mods << std::endl;
 		}
 	}
 
 	void FWindow::CharCallback(GLFWwindow* Window, uint32 Codepoint)
 	{
 		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
-
-	//	std::cout << __FUNCTION__ << ": Char: " << static_cast<char8>(Codepoint) << std::endl;
 	}
 
 	void FWindow::CharModsCallback(GLFWwindow* Window, uint32 Codepoint, int32 Mods)
 	{
 		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
-
-	//	std::cout << __FUNCTION__ << ": Char: " << static_cast<char8>(Codepoint) << " Mods: " << Mods << std::endl;
 	}
 
 
@@ -218,36 +228,26 @@ namespace t3d
 		{
 
 		}
-
-	//	std::cout << __FUNCTION__ << ": Mouse Button: " << Button << " :: " << Action << " :: " << Mods << std::endl;
 	}
 
 	void FWindow::CursorPosCallback(GLFWwindow* Window, float64 X, float64 Y)
 	{
 		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
-
-	//	std::cout << __FUNCTION__ << ": Mouse Position: " << "x: " << X << " / " << "y: " << Y << std::endl;
 	}
 
 	void FWindow::CursorEnterCallback(GLFWwindow* Window, int32 Entered)
 	{
 		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
-
-	//	std::cout << __FUNCTION__ << ": Mouse Entered: " << Entered << std::endl;
 	}
 
 	void FWindow::ScrollCallback(GLFWwindow* Window, float64 OffsetX, float64 OffsetY)
 	{
 		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
-
-	//	std::cout << __FUNCTION__ << ": Mouse Scroll: " << OffsetX << " / " << OffsetY << std::endl;
 	}
 
 	void FWindow::DropCallback(GLFWwindow* Window, int32 PathCount, const char8* Paths[])
 	{
 		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
-
-	//	std::cout << __FUNCTION__ << ": Drop: " << PathCount << " :: " << Paths;
 	}
 
 }

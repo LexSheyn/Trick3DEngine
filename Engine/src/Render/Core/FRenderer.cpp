@@ -176,6 +176,46 @@ namespace t3d
 	}
 
 
+// Accessprs:
+
+	const bool8& FRenderer::IsFrameInProgress() const
+	{
+		return IsFrameStarted;
+	}
+
+	VkCommandBuffer FRenderer::GetCurrentCommandBuffer() const
+	{
+		if (!IsFrameStarted)
+		{
+			LOG_ERROR("Cannot get command buffer when frame not in progress!");
+			throw;
+		}
+
+		return CommandBuffers[CurrentFrameIndex];
+	}
+
+	VkRenderPass FRenderer::GetSwapchainRenderPass() const
+	{
+		return Swapchain->GetRenderPass();
+	}
+
+	float32 FRenderer::GetAspectRation() const
+	{
+		return Swapchain->GetExtentAspectRatio();
+	}
+
+	const uint64& FRenderer::GetFrameIndex() const
+	{
+		if (!IsFrameStarted)
+		{
+			LOG_ERROR("Cannot get frame index when frame not in progress!");
+			throw;
+		}
+
+		return CurrentFrameIndex;
+	}
+
+
 // Private Functions:
 
 	void FRenderer::CreateSwapchain()

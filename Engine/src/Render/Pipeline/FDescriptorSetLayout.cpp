@@ -42,6 +42,14 @@ namespace t3d
 		LOG_TRACE("Deleted.");
 	}
 
+
+// Accessors:
+
+	VkDescriptorSetLayout FDescriptorSetLayout::GetDescriptorSetLayout() const
+	{
+		return DescriptorSetLayout;
+	}
+
 }
 
 #pragma warning( pop ) // Vulkan SDK - End

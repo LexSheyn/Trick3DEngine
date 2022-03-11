@@ -232,6 +232,31 @@ namespace t3d
 
 // Accessors:
 
+	VkDevice FDevice::Device()
+	{
+		return LogicalDevice;
+	}
+
+	VkCommandPool FDevice::GetCommandPool()
+	{
+		return CommandPool;
+	}
+
+	VkSurfaceKHR FDevice::GetSurface()
+	{
+		return Surface;
+	}
+
+	VkQueue FDevice::GetGraphicsQueue()
+	{
+		return GraphicsQueue;
+	}
+
+	VkQueue FDevice::GetPresentQueue()
+	{
+		return PresentQueue;
+	}
+
 	FSwapchainSupportDetails FDevice::GetSwapchainSupportDetails()
 	{
 		return this->QuerySwapchainSupport(PhysicalDevice);

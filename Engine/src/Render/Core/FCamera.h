@@ -8,7 +8,9 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-	//	FCamera();
+		FCamera();
+
+		~FCamera();
 
 	// Functions:
 
@@ -24,16 +26,16 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE const glm::mat4& GetProjection() const { return ProjectionMatrix; }
+		const glm::mat4& GetProjection() const;
 
-		T3D_INLINE const glm::mat4& GetView()       const { return ViewMatrix; }
+		const glm::mat4& GetView()       const;
 
 	private:
 
 	// Variables:
 
-		glm::mat4 ProjectionMatrix{ 1.0f };
+		glm::mat4 ProjectionMatrix;
 
-		glm::mat4 ViewMatrix{ 1.0f };
+		glm::mat4 ViewMatrix;
 	};
 }

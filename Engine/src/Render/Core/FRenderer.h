@@ -29,15 +29,15 @@ namespace t3d
 
 	// Accessors:
 		
-		T3D_INLINE const bool8&          IsFrameInProgress()       const { return IsFrameStarted; }
+		const bool8&          IsFrameInProgress()       const;
 
-		T3D_INLINE       VkCommandBuffer GetCurrentCommandBuffer() const { if (!IsFrameStarted) { LOG_ERROR("Cannot get command buffer when frame not in progress!"); throw; } return CommandBuffers[CurrentFrameIndex]; }
+		      VkCommandBuffer GetCurrentCommandBuffer() const;
 
-		T3D_INLINE       VkRenderPass    GetSwapchainRenderPass()  const { return Swapchain->GetRenderPass(); }
+			  VkRenderPass    GetSwapchainRenderPass()  const;
 
-		T3D_INLINE       float32         GetAspectRation()         const { return Swapchain->GetExtentAspectRatio(); }
+			  float32         GetAspectRation()         const;
 
-		T3D_INLINE const uint64&         GetFrameIndex()           const { if (!IsFrameStarted) { LOG_ERROR("Cannot get frame index when frame not in progress!"); throw; } return CurrentFrameIndex; }
+		const uint64&         GetFrameIndex()           const;
 
 	private:
 
@@ -53,9 +53,9 @@ namespace t3d
 
 	// Variables:
 
-		FWindow& Window;
+		FWindow&    Window;
 
-		FDevice& Device;
+		FDevice&    Device;
 
 		FSwapchain* Swapchain;
 
@@ -65,6 +65,6 @@ namespace t3d
 
 		uint64 CurrentFrameIndex;
 
-		bool8 IsFrameStarted;
+		bool8  IsFrameStarted;
 	};
 }

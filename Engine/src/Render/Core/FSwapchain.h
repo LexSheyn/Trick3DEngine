@@ -31,27 +31,27 @@ namespace t3d
 
 		VkResult SubmitCommandBuffers(const VkCommandBuffer* CommandBuffers, uint32* ImageIndex);
 
-		T3D_INLINE bool8 HasEqualSwapFormats(const FSwapchain& Swapchain) const { return Swapchain.SwapchainImageFormat == SwapchainImageFormat && Swapchain.SwapchainDepthFormat == SwapchainDepthFormat; }
+		bool8 HasEqualSwapFormats(const FSwapchain& Swapchain) const;
 
 	// Accessors:
 
-		T3D_INLINE VkFramebuffer GetFramebuffer(uint32 Index) { return SwapchainFramebuffers[Index]; }
+		VkFramebuffer GetFramebuffer(uint32 Index);
 
-		T3D_INLINE VkRenderPass  GetRenderPass()              { return RenderPass; }
+		VkRenderPass  GetRenderPass();
 
-		T3D_INLINE VkImageView   GetImageView(uint32 Index)   { return SwapchainImageViews[Index]; }
+		VkImageView   GetImageView(uint32 Index);
 
-		T3D_INLINE uint64        GetImageCount()              { return SwapchainImages.size(); }
+		uint64        GetImageCount();
 
-		T3D_INLINE VkFormat      GetSwapchainImageFormat()    { return SwapchainImageFormat; }
+		VkFormat      GetSwapchainImageFormat();
 
-		T3D_INLINE VkExtent2D    GetSwapchainExtent()         { return SwapchainExtent; }
+		VkExtent2D    GetSwapchainExtent();
 
-		T3D_INLINE uint32        GetWidth()                   { return SwapchainExtent.width; }
+		uint32        GetWidth();
 
-		T3D_INLINE uint32        GetHeight()                  { return SwapchainExtent.height; }
+		uint32        GetHeight();
 
-		T3D_INLINE float32       GetExtentAspectRatio()       { return static_cast<float32>(SwapchainExtent.width) / static_cast<float32>(SwapchainExtent.height); }
+		float32       GetExtentAspectRatio();
 
 	// Public Constants:
 

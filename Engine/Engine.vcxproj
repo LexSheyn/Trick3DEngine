@@ -127,6 +127,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\EntryPoint\Main.cpp" />
+    <ClCompile Include="src\Events\IEventListener.cpp" />
     <ClCompile Include="src\Events\SEventSystem.cpp" />
     <ClCompile Include="src\Exception\FException.cpp" />
     <ClCompile Include="src\Exception\FVulkanException.cpp" />

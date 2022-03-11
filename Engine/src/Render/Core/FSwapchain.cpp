@@ -132,18 +132,68 @@ namespace t3d
 
 		VkPresentInfoKHR PresentInfo{};
 
-		PresentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+		PresentInfo.sType              = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
 		PresentInfo.waitSemaphoreCount = 1;
-		PresentInfo.pWaitSemaphores = SignalSemaphores;
-		PresentInfo.swapchainCount = 1;
-		PresentInfo.pSwapchains = Swapchains;
-		PresentInfo.pImageIndices = ImageIndex;
+		PresentInfo.pWaitSemaphores    = SignalSemaphores;
+		PresentInfo.swapchainCount     = 1;
+		PresentInfo.pSwapchains        = Swapchains;
+		PresentInfo.pImageIndices      = ImageIndex;
 
 		VkResult Result = vkQueuePresentKHR(Device.GetPresentQueue(), &PresentInfo);
 
 		CurrentFrame = (CurrentFrame + 1u) % MAX_FRAMES_IN_FLIGHT;
 
 		return Result;
+	}
+
+	bool8 FSwapchain::HasEqualSwapFormats(const FSwapchain& Swapchain) const
+	{
+		return (Swapchain.SwapchainImageFormat == SwapchainImageFormat) && (Swapchain.SwapchainDepthFormat == SwapchainDepthFormat);
+	}
+
+	VkFramebuffer FSwapchain::GetFramebuffer(uint32 Index)
+	{
+		return SwapchainFramebuffers[Index];
+	}
+
+	VkRenderPass FSwapchain::GetRenderPass()
+	{
+		return RenderPass;
+	}
+
+	VkImageView FSwapchain::GetImageView(uint32 Index)
+	{
+		return SwapchainImageViews[Index];;
+	}
+
+	uint64 FSwapchain::GetImageCount()
+	{
+		return SwapchainImages.size();
+	}
+
+	VkFormat FSwapchain::GetSwapchainImageFormat()
+	{
+		return SwapchainImageFormat;
+	}
+
+	VkExtent2D FSwapchain::GetSwapchainExtent()
+	{
+		return SwapchainExtent;
+	}
+
+	uint32 FSwapchain::GetWidth()
+	{
+		return SwapchainExtent.width;
+	}
+
+	uint32 FSwapchain::GetHeight()
+	{
+		return SwapchainExtent.height;
+	}
+
+	float32 FSwapchain::GetExtentAspectRatio()
+	{
+		return static_cast<float32>(SwapchainExtent.width) / static_cast<float32>(SwapchainExtent.height);;
 	}
 
 

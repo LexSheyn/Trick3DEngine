@@ -5,9 +5,15 @@ namespace t3d
 {
 // Constructors and Destructor:
 
-//	FCamera::FCamera()
-//	{
-//	}
+	FCamera::FCamera()
+		: ProjectionMatrix (1.0f),
+		  ViewMatrix       (1.0f)
+	{
+	}
+
+	FCamera::~FCamera()
+	{
+	}
 
 
 // Functions:
@@ -105,6 +111,19 @@ namespace t3d
 		ViewMatrix[3][0] = -glm::dot(U, Position);
 		ViewMatrix[3][1] = -glm::dot(V, Position);
 		ViewMatrix[3][2] = -glm::dot(W, Position);
+	}
+
+
+// Accessors:
+
+	const glm::mat4& FCamera::GetProjection() const
+	{
+		return ProjectionMatrix;
+	}
+
+	const glm::mat4& FCamera::GetView() const
+	{
+		return ViewMatrix;
 	}
 
 }
