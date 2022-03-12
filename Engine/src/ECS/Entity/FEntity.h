@@ -19,25 +19,18 @@ namespace t3d
 
 	// Accessors:
 
+		/// <returns> Index in the vector of Entities </returns>
 		const T3D_EntityID& GetID() const;
 
 		std::vector<FComponentDescription>& GetComponentDescriptions();
 
 	private:
 
-	// Private Modifiers:
-
-		void SetID(T3D_EntityID Value);
-
 	// Variables:
 
-		// It is actually index in the vector of Entities.
+		// It is actually an index in the vector of Entities.
 		T3D_EntityID ID;
 
 		std::vector<FComponentDescription> ComponentDescriptions;
-
-	// Friends:
-
-		friend class SEntityComponentSystem;
 	};
 }

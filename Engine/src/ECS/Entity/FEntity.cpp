@@ -28,12 +28,4 @@ namespace t3d
 		return ComponentDescriptions;
 	}
 
-
-// Private Modifiers:
-
-	void FEntity::SetID(T3D_EntityID Value)
-	{
-		ID = Value;
-	}
-
 }
