@@ -4,6 +4,7 @@
 
 // Core
 #define T3D_INLINE
+#define T3D_NO_DISCARD
 #define T3D_DEFINE_TYPES
 #define T3D_NO_COPY
 #define T3D_NO_MOVE

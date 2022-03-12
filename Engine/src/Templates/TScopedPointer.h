@@ -71,7 +71,7 @@ namespace t3d
 	};
 
 	template<class T, typename... Types>
-	[[nodiscard]] TScopedPointer<T> MakeScoped(Types&&... Args)
+	T3D_NO_DISCARD TScopedPointer<T> MakeScoped(Types&&... Args)
 	{
 		return TScopedPointer<T>(new T(static_cast<Types&&>(Args)...));
 	}
@@ -152,7 +152,7 @@ namespace t3d
 //		return unique_ptr<_Ty>(new _Elem[_Size]());
 //
 //	template<class T, typename... Types>
-//	[[nodiscard]] TScopedPointer<T> MakeScoped(Types&&... Args)
+//	T3D_NO_DISCARD TScopedPointer<T> MakeScoped(Types&&... Args)
 //	{
 //		return TScopedPointer<T>(new T(static_cast<Types&&>(Args)...));
 //	}

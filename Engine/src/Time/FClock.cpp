@@ -17,7 +17,7 @@ namespace t3d
 	{
 		const std::chrono::steady_clock::time_point Now = std::chrono::steady_clock::now();
 
-		FTime ElapsedTime = Microseconds(std::chrono::duration_cast<std::chrono::microseconds>(Now - StartTime).count());
+		FTime ElapsedTime = FTime::Microseconds(std::chrono::duration_cast<std::chrono::microseconds>(Now - StartTime).count());
 
 		StartTime = Now;
 
@@ -29,7 +29,7 @@ namespace t3d
 
 	FTime FClock::GetElapsedTime() const
 	{
-		return FTime(Microseconds(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - StartTime).count()));
+		return FTime::Microseconds(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - StartTime).count());
 	}
 
 }

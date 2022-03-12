@@ -14,8 +14,8 @@ namespace t3d
 
 		~FEntity();
 
-	//	T3D_NO_COPY(FEntity);
-	//	T3D_DEFAULT_MOVE(FEntity);
+		T3D_NO_COPY(FEntity);
+		T3D_DEFAULT_MOVE(FEntity);
 
 	// Accessors:
 

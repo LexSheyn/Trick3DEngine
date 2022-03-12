@@ -11,7 +11,7 @@ namespace t3d
 
 	// Entity Functions:
 
-		[[nodiscard]] static T3D_EntityID CreateEntity();
+		T3D_NO_DISCARD static T3D_EntityID CreateEntity();
 
 		static void RemoveEntity(T3D_EntityID& EntityID);
 

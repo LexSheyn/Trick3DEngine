@@ -13,7 +13,7 @@ namespace t3d
 
 		if (EntityReuseList.empty())
 		{
-			Entities.push_back(FEntity(Entities.size()));
+			Entities.push_back(std::move(FEntity(Entities.size())));
 
 			NewEntity = Entities.back().GetID();
 		}

@@ -1,6 +1,6 @@
 #pragma once
 
-// Performance:
+// Core:
 
 #if _DEBUG
 // In Debug mode does nothing.
@@ -9,6 +9,8 @@
 // In Release mode inlines the function call.
 #define T3D_INLINE inline
 #endif
+
+#define T3D_NO_DISCARD [[nodiscard]]
 
 
 // Types:

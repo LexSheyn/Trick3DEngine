@@ -49,7 +49,7 @@ namespace t3d
 				return *this;
 			}
 
-			[[nodiscard]] T3D_INLINE FDescriptorSetLayout* Create() const { return new FDescriptorSetLayout(Device, Bindings); }
+			T3D_NO_DISCARD T3D_INLINE FDescriptorSetLayout* Create() const { return new FDescriptorSetLayout(Device, Bindings); }
 
 		private:
 

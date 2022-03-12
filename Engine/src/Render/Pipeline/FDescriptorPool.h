@@ -56,7 +56,7 @@ namespace t3d
 				return *this;
 			}
 
-			[[nodiscard]] T3D_INLINE FDescriptorPool* Create() const { return new FDescriptorPool(Device, MaxSets, PoolFlags, PoolSizes); }
+			T3D_NO_DISCARD T3D_INLINE FDescriptorPool* Create() const { return new FDescriptorPool(Device, MaxSets, PoolFlags, PoolSizes); }
 
 		private:
 
