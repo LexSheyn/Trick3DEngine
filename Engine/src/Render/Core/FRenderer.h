@@ -27,8 +27,8 @@ namespace t3d
 		
 		const bool8&          IsFrameInProgress          () const;
 		      VkCommandBuffer GetCurrentCommandBuffer    () const;
-			  VkRenderPass    GetSwapchainRenderPass     () const;
-			  float32         GetAspectRation            () const;
+		      VkRenderPass    GetSwapchainRenderPass     () const;
+		      float32         GetAspectRation            () const;
 		const uint64&         GetFrameIndex              () const;
 
 	private:
