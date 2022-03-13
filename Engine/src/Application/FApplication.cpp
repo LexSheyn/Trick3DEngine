@@ -9,6 +9,8 @@
 
 #include "../ECS/Core/SEntityComponentSystem.h"
 
+#include "../SFX/FSound.h"
+
 namespace t3d
 {
 // Constructors and Destructor:
@@ -72,6 +74,11 @@ namespace t3d
 
 	void FApplication::Run()
 	{
+	// SOUND TEST
+		FSound::InitSystem(0.5f);
+		FSound::Load(ESound::Click, "D:/Documents and files/Music/BUCK-TICK - RAZZLE DAZZLE [FLAC]/02. RAZZLE DAZZLE.flac");
+		FSound::Play(ESound::Click, ESoundGroup::UI);
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 			   ECS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,10 +200,16 @@ namespace t3d
 				Renderer.EndSwapchainRenderPass(CommandBuffer);
 
 				Renderer.EndFrame();
+
+				// SOUND TEST
+				FSound::Update();
 			}
 
 			std::this_thread::sleep_for(std::chrono::microseconds(16600)); // ~60 FPS
 		}
+
+		// SOUND TEST
+		FSound::Shutdown();
 
 		vkDeviceWaitIdle(Device.Device());
 

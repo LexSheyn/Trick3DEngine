@@ -15,10 +15,13 @@
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define GLM_ENABLE_EXPERIMENTAL
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/constants.hpp>
-#include <glm/gtx/hash.hpp>
+#include <GLM/glm.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/gtc/constants.hpp>
+#include <GLM/gtx/hash.hpp>
+
+// FMOD
+#include <FMOD/fmod.hpp>
 
 // ShaderC:
 #pragma warning( disable : 26439 ) // Warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
@@ -26,6 +29,11 @@
 #include <shaderc/shaderc.hpp>
 
 #pragma warning( pop ) // Vulkan SDK - End
+
+// Assimp
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 // C++ core:
 #include <iostream>
@@ -75,11 +83,6 @@
 #include <set>
 #include <sstream>
 #include <utility>
-
-// Assimp
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 // Custom types:
 #include "../Types/T3DTypes.h"

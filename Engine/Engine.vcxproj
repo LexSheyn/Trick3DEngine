@@ -62,15 +62,15 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;$(SolutionDir)Linking\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;$(SolutionDir)Linking\FMOD\Include;$(SolutionDir)Linking\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;$(SolutionDir)Linking\Assimp\Lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;shadercd.lib;shaderc_combinedd.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;$(SolutionDir)Linking\FMOD\Lib;$(SolutionDir)Linking\Assimp\Lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;fmodL_vc.lib;shadercd.lib;shaderc_combinedd.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -84,7 +84,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;$(SolutionDir)Linking\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;$(SolutionDir)Linking\FMOD\Include;$(SolutionDir)Linking\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -93,8 +93,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;$(SolutionDir)Linking\Assimp\Lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;shaderc.lib;shaderc_combined.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;$(SolutionDir)Linking\FMOD\Lib;$(SolutionDir)Linking\Assimp\Lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;fmod_vc.lib;shaderc.lib;shaderc_combined.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -230,6 +230,7 @@
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\FImageLoader.cpp" />
     <ClCompile Include="src\Scene\FScene.cpp" />
+    <ClCompile Include="src\SFX\FSound.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\Templates\TTypeID.cpp" />
     <ClCompile Include="src\Test\SkeletalAnimation\FAnimatedModel.cpp">
@@ -256,6 +257,7 @@
     <ClCompile Include="src\Time\FTime.cpp" />
     <ClCompile Include="src\Time\FClock.cpp" />
     <ClCompile Include="src\Time\FTimeStamp.cpp" />
+    <ClCompile Include="src\Types\T3DStaticConversion.cpp" />
     <ClCompile Include="src\Window\FWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +275,9 @@
     <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Components\TComponent.h" />
     <ClInclude Include="src\Scene\FScene.h" />
+    <ClInclude Include="src\SFX\ESound.h" />
+    <ClInclude Include="src\SFX\ESoundGroup.h" />
+    <ClInclude Include="src\SFX\FSound.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FAnimatedModel.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FBone.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FBoneInfo.h" />
@@ -281,6 +286,7 @@
     <ClInclude Include="src\Test\SkeletalAnimation\FKeyScale.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalMesh.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalVertex.h" />
+    <ClInclude Include="src\Types\T3DStaticConversion.h" />
     <ClInclude Include="src\Types\ECSTypes.h" />
     <ClInclude Include="src\ECS\Entity\FEntity.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />

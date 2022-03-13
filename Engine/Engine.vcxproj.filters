@@ -189,6 +189,12 @@
     <ClCompile Include="src\Events\IEventListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SFX\FSound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\T3DStaticConversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h">
@@ -489,6 +495,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SFX\FSound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SFX\ESound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SFX\ESoundGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Types\T3DStaticConversion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

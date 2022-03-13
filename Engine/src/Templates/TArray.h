@@ -1,27 +1,38 @@
 #pragma once
 
-template<typename T, uint64 S>
-class TArray
+namespace t3d
 {
-public:
+	template<typename T, uint64 S>
+	class TArray
+	{
+	public:
+	
+	// Accessors:
+	
+		constexpr uint64 Size() const { return S; }
+	
+		      T* Data()       { return Array; }
+	
+		const T* Data() const { return Array; }
+	
+	// Operators:
+	
+		      T& operator [] (uint64 Index)       { return Array[Index]; }
+	
+		const T& operator [] (uint64 Index) const { return Array[Index]; }
+	
+		      T& operator [] (enum class ESound Index)       { return Array[static_cast<uint64>(Index)]; }
 
-// Accessors:
+		const T& operator [] (enum class ESound Index) const { return Array[static_cast<uint64>(Index)]; }
 
-	constexpr uint64 Size() const { return S; }
+		      T& operator [] (enum class ESoundGroup Index)       { return Array[static_cast<uint64>(Index)]; }
 
-	      T* Data()       { return Array; }
-
-	const T* Data() const { return Array; }
-
-// Operators:
-
-	      T& operator[] (uint64 Index)       { return Array[Index]; }
-
-	const T& operator[] (uint64 Index) const { return Array[Index]; }
-
-private:
-
-// Variables:
-
-	T Array[S];
-};
+		const T& operator [] (enum class ESoundGroup Index) const { return Array[static_cast<uint64>(Index)]; }
+	
+	private:
+	
+	// Variables:
+	
+		T Array[S];
+	};
+}
