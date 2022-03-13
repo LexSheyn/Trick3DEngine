@@ -75,42 +75,13 @@ namespace t3d
 	void FApplication::Run()
 	{
 	// SOUND TEST
-		FSound::InitSystem(0.5f);
-		FSound::Load(ESound::Click, "D:/Documents and files/Music/BUCK-TICK - RAZZLE DAZZLE [FLAC]/02. RAZZLE DAZZLE.flac");
-		FSound::Play(ESound::Click, ESoundGroup::UI);
+		FSound::Initialize(0.5f);
+		FSound::LoadFile(ESound::KeyPress  , "D:/Royalty FREE Music/ZapSplat/SFX/zapsplat_multimedia_button_click_001_78078.mp3");
+		FSound::LoadFile(ESound::KeyRelease, "D:/Royalty FREE Music/ZapSplat/SFX/zapsplat_multimedia_button_click_002_78079.mp3");
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 			   ECS
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	//	SEntityComponentSystem::ReserveEntities(10000);
-	//	SEntityComponentSystem::ReserveEntityReuseList(10000);
-
-		T3D_EntityID Entity1 = SEntityComponentSystem::CreateEntity();
-		LOG_TRACE(std::to_string(Entity1));
-
-		SEntityComponentSystem::AddComponent<CName>(Entity1);
-		SEntityComponentSystem::AddComponent<CTransform>(Entity1);
-		SEntityComponentSystem::AddComponent<CHealth>(Entity1);
-		SEntityComponentSystem::AddComponent<CEnergy>(Entity1);
-
-		SEntityComponentSystem::RemoveComponent<CEnergy>(Entity1);
-
-		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity1)->Name);
-
-		SEntityComponentSystem::GetComponent<CName>(Entity1)->Name = "Changed Name";
-
-		LOG_TRACE(SEntityComponentSystem::GetComponent<CName>(Entity1)->Name);
-
-		T3D_EntityID Entity2 = SEntityComponentSystem::CreateEntity();
-		LOG_TRACE(std::to_string(Entity2));
-
-		SEntityComponentSystem::RemoveEntity(Entity1);
-
-		T3D_EntityID Entity3 = SEntityComponentSystem::CreateEntity();
-		LOG_TRACE(std::to_string(Entity3));
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		SEventSystem::Subscribe(EEventType::KeyPressed , FSound::GetInstance());
+		SEventSystem::Subscribe(EEventType::KeyReleased, FSound::GetInstance());
+	//
 
 		std::vector<FDeviceBuffer*> UniformDataBuffers(FSwapchain::MAX_FRAMES_IN_FLIGHT);
 
@@ -203,6 +174,7 @@ namespace t3d
 
 				// SOUND TEST
 				FSound::Update();
+				//
 			}
 
 			std::this_thread::sleep_for(std::chrono::microseconds(16600)); // ~60 FPS
@@ -210,6 +182,7 @@ namespace t3d
 
 		// SOUND TEST
 		FSound::Shutdown();
+		//
 
 		vkDeviceWaitIdle(Device.Device());
 

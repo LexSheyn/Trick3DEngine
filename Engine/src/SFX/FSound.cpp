@@ -5,70 +5,75 @@ namespace t3d
 {
 // Functions:
 
-	void FSound::InitSystem(float32 InitialVolume)
+	void FSound::Initialize(float32 InitialVolume)
 	{
 	// Volume:
 
-		Volume = InitialVolume;
+		Instance.Volume = InitialVolume;
 
 	// System:
 
-		FMOD::System_Create(&System);
+		FMOD::System_Create(&Instance.System);
 
-		System->init(static_cast<int>(Channels.Size()), FMOD_DEFAULT, nullptr);
+		Instance.System->init(static_cast<int>(Instance.Channels.Size()), FMOD_DEFAULT, nullptr);
 
 	// Channel groupds:
 
-		System->createChannelGroup("UI", &Groups[ESoundGroup::UI]);
+		Instance.System->createChannelGroup("UI", &Instance.Groups[ESoundGroup::UI]);
 
-		System->getMasterChannelGroup(&Groups[ESoundGroup::Master]);
+		Instance.System->getMasterChannelGroup(&Instance.MasterGroup);
 
-		Groups[ESoundGroup::Master]->addGroup(Groups[ESoundGroup::UI]);
+		Instance.MasterGroup->addGroup(Instance.Groups[ESoundGroup::UI]);
 
-		for (uint64 i = 0u; i < Channels.Size(); i++)
+		for (uint64 i = 0u; i < Instance.Channels.Size(); i++)
 		{
-			Channels[i]->setChannelGroup(Groups[ESoundGroup::UI]);
+			Instance.Channels[i]->setChannelGroup(Instance.Groups[ESoundGroup::UI]);
 		}
 
-		Groups[ESoundGroup::Master]->setVolume(Volume);
+		Instance.MasterGroup->setVolume(Instance.Volume);
 	}
 
-	void FSound::Load(ESound Name, const std::string& FilePath)
+	void FSound::LoadFile(ESound Name, const std::string& FilePath)
 	{
-		System->createSound(FilePath.c_str(), FMOD_DEFAULT, nullptr, &Sounds[Name]);
+		Instance.System->createSound(FilePath.c_str(), FMOD_DEFAULT, nullptr, &Instance.Sounds[Name]);
 	}
 
-	void FSound::Play(ESound Name, ESoundGroup Group)
+	FSound* FSound::GetInstance()
 	{
-		System->playSound(Sounds[Name], Groups[Group], false, &Channels[Name]);
-	}
-
-	void FSound::Pause(ESoundGroup Group)
-	{
-		Groups[Group]->setPaused(true);
-	}
-
-	void FSound::Unpause(ESoundGroup Group)
-	{
-		Groups[Group]->setPaused(false);
+		return &Instance;
 	}
 
 	void FSound::Update()
 	{
-		System->update();
+		Instance.System->update();
 	}
 
 	void FSound::Shutdown()
 	{
-		Groups[ESoundGroup::Master]->stop();
+		Instance.MasterGroup->stop();
 
-		for (uint64 i = 0u; i < Channels.Size(); i++)
+		for (uint64 i = 0u; i < Instance.Channels.Size(); i++)
 		{
-			Sounds[i]->release();
+			Instance.Sounds[i]->release();
 		}
 
-		System->close();
-		System->release();
+		Instance.System->close();
+		Instance.System->release();
+	}
+
+
+// IEventListener Interface:
+
+	void FSound::OnEvent(const FEvent* const Event)
+	{
+		if (Event->GetType() == EEventType::KeyPressed)
+		{
+			Instance.Play(ESound::KeyPress, ESoundGroup::UI);
+		}
+		else if (Event->GetType() == EEventType::KeyReleased)
+		{
+			Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
+		}
 	}
 
 
@@ -82,46 +87,93 @@ namespace t3d
 
 // Modifiers:
 
-	void FSound::SetVolume(float32 Value)
+	void FSound::SetVolume(float32 Volume)
 	{
-		if (Value < VolumeMin)
+		if (Volume < VolumeMin)
 		{
-			Volume = VolumeMin;
+			this->Volume = VolumeMin;
 		}
-		else if (Value > VolumeMax)
+		else if (Volume > VolumeMax)
 		{
-			Volume = VolumeMax;
+			this->Volume = VolumeMax;
 		}
 		else
 		{
-			Volume = Value;
+			this->Volume = Volume;
 		}
+	}
+
+
+// Private Functions:
+
+	void FSound::Play(ESound Name, ESoundGroup Group)
+	{
+		System->playSound(Sounds[Name], Groups[Group], false, &Channels[Name]);
+	}
+
+	void FSound::Pause()
+	{
+		MasterGroup->setPaused(true);
+	}
+
+	void FSound::Pause(ESoundGroup Group)
+	{
+		Groups[Group]->setPaused(true);
+	}
+
+	void FSound::Unpause()
+	{
+		MasterGroup->setPaused(false);
+	}
+
+	void FSound::Unpause(ESoundGroup Group)
+	{
+		Groups[Group]->setPaused(false);
+	}
+
+
+// Private Constructors and Destructor:
+
+	FSound::FSound()
+	{
+	// System:
+
+		System = nullptr;
+
+	// Sounds:
+
+		for (uint64 i = 0u; i < Sounds.Size(); i++)
+		{
+			Sounds[i] = nullptr;
+		}
+
+	// Channels:
+
+		for (uint64 i = 0u; i < Channels.Size(); i++)
+		{
+			Channels[i] = nullptr;
+		}
+
+	// Groups
+		
+		for (uint64 i = 0u; i < Groups.Size(); i++)
+		{
+			Groups[i] = nullptr;
+		}
+
+		MasterGroup = nullptr;
+
+	// Volume:
+
+		Volume = 0.0f;
+	}
+
+	FSound::~FSound()
+	{
 	}
 
 
 // Static Variables:
 
-	// System:
-
-	FMOD::System* FSound::System;
-
-	// Sounds and Channels:
-
-//	constexpr uint64 FSound::ChannelsMax = 32;
-
-	TArray<FMOD::Sound*, FSound::ChannelsMax> FSound::Sounds;
-
-	TArray<FMOD::Channel*, FSound::ChannelsMax> FSound::Channels;
-
-	// Channel groups:
-
-//	constexpr uint64 FSound::GroupsMax = static_cast<uint64>(ESoundGroup::MAX);
-
-	TArray<FMOD::ChannelGroup*, FSound::GroupsMax> FSound::Groups;
-
-	// Variables:
-
-//	constexpr float32 FSound::VolumeMin = 0.0f;
-//	constexpr float32 FSound::VolumeMax = 1.0f;
-	float32 FSound::Volume;
+	FSound FSound::Instance;
 }

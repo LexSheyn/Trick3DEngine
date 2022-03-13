@@ -274,6 +274,7 @@
     <ClInclude Include="src\ECS\Components\IComponent.h" />
     <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Components\TComponent.h" />
+    <ClInclude Include="src\Logger\ELogLevel.h" />
     <ClInclude Include="src\Scene\FScene.h" />
     <ClInclude Include="src\SFX\ESound.h" />
     <ClInclude Include="src\SFX\ESoundGroup.h" />

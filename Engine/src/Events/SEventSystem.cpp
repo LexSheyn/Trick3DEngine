@@ -88,7 +88,7 @@ namespace t3d
 		}
 	}
 
-	void SEventSystem::UnsubscribeAll(IEventListener* Listener)
+	void SEventSystem::UnsubscribeFromAll(IEventListener* Listener)
 	{
 		std::multimap<EEventType, IEventListener*>::iterator Entry = ListenerRegistry.begin();
 

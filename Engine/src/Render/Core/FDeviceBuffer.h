@@ -14,9 +14,8 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FDeviceBuffer(FDevice& Device, VkDeviceSize InstanceSize, uint32 InstanceCount, VkBufferUsageFlags UsageFlags, VkMemoryPropertyFlags MemoryPropertyFlags, VkDeviceSize MinOffsetAlignment = 1u);
-
-		~FDeviceBuffer();
+		FDeviceBuffer  (FDevice& Device, VkDeviceSize InstanceSize, uint32 InstanceCount, VkBufferUsageFlags UsageFlags, VkMemoryPropertyFlags MemoryPropertyFlags, VkDeviceSize MinOffsetAlignment = 1u);
+		~FDeviceBuffer ();
 
 		T3D_NO_COPY(FDeviceBuffer);
 		T3D_NO_MOVE(FDeviceBuffer);
@@ -101,22 +100,16 @@ namespace t3d
 
 	// Accessors:
 
-		VkBuffer GetBuffer()    const;
+		VkBuffer GetBuffer          () const;
+		void*    GetMappedMemory    () const;
 
-		void* GetMappedMemory() const;
 
-
-		const VkDeviceSize&          GetBufferSize()          const;
-
-		const uint32&                GetInstanceCount()       const;
-
-		const VkDeviceSize&          GetInstanceSize()        const;
-
-		const VkDeviceSize&          GetAlignmentSize()       const;
-
-		const VkBufferUsageFlags&    GetUsageFlags()          const;
-
-		const VkMemoryPropertyFlags& GetMemoryPropertyFlags() const;
+		const VkDeviceSize&          GetBufferSize             () const;
+		const uint32&                GetInstanceCount          () const;
+		const VkDeviceSize&          GetInstanceSize           () const;
+		const VkDeviceSize&          GetAlignmentSize          () const;
+		const VkBufferUsageFlags&    GetUsageFlags             () const;
+		const VkMemoryPropertyFlags& GetMemoryPropertyFlags    () const;
 
 	private:
 

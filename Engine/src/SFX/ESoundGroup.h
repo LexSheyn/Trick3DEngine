@@ -4,8 +4,7 @@ namespace t3d
 {
 	enum class ESoundGroup
 	{
-		Master = 0,
-		UI,
+		UI = 0,
 		GUI,
 		MAX
 	};

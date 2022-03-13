@@ -11,23 +11,15 @@ namespace t3d
 
 	// Functions:
 
-		static void PushEvent(const FEvent& Event);
-
-		static void ProcessEvents();
-
-		static void Dispatch(FEvent* Event);
-
-		static void Subscribe(EEventType Type, IEventListener* Listener);
-
-		static void Unsubscribe(EEventType Type, IEventListener* Listener);
-
-		static void UnsubscribeAll(IEventListener* Listener);
-
-		static bool8 IsSubscribed(EEventType Type, IEventListener* Listener);
-
-		static void ClearEventQueue();
-
-		static void ClearListenerRegistry();
+		static void  PushEvent                (const FEvent& Event);
+		static void  ProcessEvents            ();
+		static void  Dispatch                 (FEvent* Event);
+		static void  Subscribe                (EEventType Type, IEventListener* Listener);
+		static void  Unsubscribe              (EEventType Type, IEventListener* Listener);
+		static void  UnsubscribeFromAll       (IEventListener* Listener);
+		static bool8 IsSubscribed             (EEventType Type, IEventListener* Listener);
+		static void  ClearEventQueue          ();
+		static void  ClearListenerRegistry    ();
 
 		// Clear all data function here!
 
@@ -35,9 +27,8 @@ namespace t3d
 
 	// Private Constructors and Destructor:
 
-		SEventSystem() {};
-
-		~SEventSystem() {};
+		SEventSystem  () {}
+		~SEventSystem () {}
 
 		T3D_NO_COPY(SEventSystem);
 		T3D_NO_MOVE(SEventSystem);

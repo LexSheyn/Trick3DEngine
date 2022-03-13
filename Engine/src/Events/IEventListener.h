@@ -1,5 +1,7 @@
 #pragma once
 
+#include "FEvent.h"
+
 namespace t3d
 {
 	class IEventListener
@@ -14,7 +16,7 @@ namespace t3d
 
 	// Functions:
 
-		virtual void OnEvent(const class FEvent* const Event) = 0;
+		virtual void OnEvent(const FEvent* const Event) = 0;
 
 	// Accessors:
 

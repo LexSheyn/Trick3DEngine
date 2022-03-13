@@ -3,22 +3,11 @@
 
 namespace t3d
 {
-// Constructors and Destructor:
-
-	FLogger::FLogger()
-	{
-	}
-
-	FLogger::~FLogger()
-	{
-	}
-
-
 // Functions:
 
 	void FLogger::Trace(const std::string& FunctionName, const std::string& Message)
 	{
-		if ( LogLevel == Level::Trace )
+		if ( LogLevel == ELogLevel::Trace )
 		{
 			std::cout << "[ " << FTimeStamp::GetAsString() << " ]" << "[  Trace  ]::" << FunctionName << ": " << Message << std::endl;
 		}
@@ -26,7 +15,7 @@ namespace t3d
 
 	void FLogger::Warning(const std::string& FunctionName, const std::string& Message)
 	{
-		if ( LogLevel <= Level::Warning )
+		if ( LogLevel <= ELogLevel::Warning )
 		{
 			std::cout << "[ " << FTimeStamp::GetAsString() << " ]" << "[ Warning ]::" << FunctionName << ": " << Message << std::endl;
 		}
@@ -34,7 +23,7 @@ namespace t3d
 
 	void FLogger::Error(const std::string& FunctionName, const std::string& Message)
 	{
-		if ( LogLevel <= Level::Error )
+		if ( LogLevel <= ELogLevel::Error )
 		{
 			std::cout << "[ " << FTimeStamp::GetAsString() << " ]" << "[  Error  ]::" << FunctionName << ": " << Message << std::endl;
 		}
@@ -43,14 +32,14 @@ namespace t3d
 
 // Modifiers:
 
-	void FLogger::SetLevel(const Level LogLevel)
+	void FLogger::SetLevel(ELogLevel Level)
 	{
-		FLogger::LogLevel = LogLevel;
+		LogLevel = Level;
 	}
 
 
 // Static Variables:
 
-	FLogger::Level FLogger::LogLevel = Level::Trace;
+	ELogLevel FLogger::LogLevel = ELogLevel::Trace;
 
 }

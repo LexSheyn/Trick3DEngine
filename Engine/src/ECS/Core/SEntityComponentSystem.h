@@ -13,11 +13,9 @@ namespace t3d
 
 		T3D_NO_DISCARD static T3D_EntityID CreateEntity();
 
-		static void RemoveEntity(T3D_EntityID& EntityID);
-
-		static void ReserveEntities(uint64 NumEntities);
-
-		static void ReserveEntityReuseList(uint64 NumEntities);
+		static void RemoveEntity              (T3D_EntityID& EntityID);
+		static void ReserveEntities           (uint64 NumEntities);
+		static void ReserveEntityReuseList    (uint64 NumEntities);
 
 	// Component Functions:
 
@@ -59,19 +57,16 @@ namespace t3d
 			return FComponentDescription{ ComponentType::ID, ComponentType::Size, Index };
 		}
 		
-		static void DeleteComponent(T3D_ComponentID ID, uint64 Size, uint64 Index);
-		
-		static void AddComponentInternal(T3D_EntityID EntityID, FComponentDescription ComponentDescription);
-		
-		static void RemoveComponentInternal(T3D_EntityID EntityID, T3D_ComponentID ID, uint64 Size);
-		
+		static void DeleteComponent            (T3D_ComponentID ID, uint64 Size, uint64 Index);		
+		static void AddComponentInternal       (T3D_EntityID EntityID, FComponentDescription ComponentDescription);	
+		static void RemoveComponentInternal    (T3D_EntityID EntityID, T3D_ComponentID ID, uint64 Size);
+
 		static IComponent* GetComponentInternal(T3D_EntityID EntityID, T3D_ComponentID ID);
 
 	// Private Constructors and Destructor:
 
-		SEntityComponentSystem() {}
-
-		~SEntityComponentSystem() {}
+		SEntityComponentSystem  () {}
+		~SEntityComponentSystem () {}
 
 		T3D_NO_COPY(SEntityComponentSystem);
 		T3D_NO_MOVE(SEntityComponentSystem);

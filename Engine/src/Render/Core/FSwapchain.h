@@ -14,44 +14,31 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FSwapchain(FDevice& Device, VkExtent2D WindowExtent);
-
-		FSwapchain(FDevice& Device, VkExtent2D WindowExtent, FSwapchain* PreviousSwapchain);
-
-		~FSwapchain();
+		FSwapchain  (FDevice& Device, VkExtent2D WindowExtent);
+		FSwapchain  (FDevice& Device, VkExtent2D WindowExtent, FSwapchain* PreviousSwapchain);
+		~FSwapchain ();
 
 		T3D_NO_COPY(FSwapchain);
 		T3D_NO_MOVE(FSwapchain);
 
 	// Functions:
 
-		VkFormat FindDepthFormat();
-
-		VkResult AcquireNextImage(uint32* ImageIndex);
-
-		VkResult SubmitCommandBuffers(const VkCommandBuffer* CommandBuffers, uint32* ImageIndex);
-
-		bool8 HasEqualSwapFormats(const FSwapchain& Swapchain) const;
+		VkFormat FindDepthFormat         ();
+		VkResult AcquireNextImage        (uint32* ImageIndex);
+		VkResult SubmitCommandBuffers    (const VkCommandBuffer* CommandBuffers, uint32* ImageIndex);
+		bool8    HasEqualSwapFormats     (const FSwapchain& Swapchain) const;
 
 	// Accessors:
 
-		VkFramebuffer GetFramebuffer(uint32 Index);
-
-		VkRenderPass  GetRenderPass();
-
-		VkImageView   GetImageView(uint32 Index);
-
-		uint64        GetImageCount();
-
-		VkFormat      GetSwapchainImageFormat();
-
-		VkExtent2D    GetSwapchainExtent();
-
-		uint32        GetWidth();
-
-		uint32        GetHeight();
-
-		float32       GetExtentAspectRatio();
+		VkFramebuffer GetFramebuffer             (uint32 Index);
+		VkRenderPass  GetRenderPass              ();
+		VkImageView   GetImageView               (uint32 Index);
+		uint64        GetImageCount              ();
+		VkFormat      GetSwapchainImageFormat    ();
+		VkExtent2D    GetSwapchainExtent         ();
+		uint32        GetWidth                   ();
+		uint32        GetHeight                  ();
+		float32       GetExtentAspectRatio       ();
 
 	// Public Constants:
 
@@ -61,25 +48,17 @@ namespace t3d
 
 	// Private Functions:
 
-		void Init();
+		void Init                    ();
+		void CreateSwapchain         ();
+		void CreateImageViews        ();
+		void CreateDepthResources    ();
+		void CreateRenderPass        ();
+		void CreateFramebuffers      ();
+		void CreateSyncObjects       ();
 
-		void CreateSwapchain();
-
-		void CreateImageViews();
-
-		void CreateDepthResources();
-
-		void CreateRenderPass();
-
-		void CreateFramebuffers();
-
-		void CreateSyncObjects();
-
-		VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& AvailableFormats);
-
-		VkPresentModeKHR   ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& AvailablePresentModes);
-
-		VkExtent2D         ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& Capabilities);
+		VkSurfaceFormatKHR ChooseSwapSurfaceFormat    (const std::vector<VkSurfaceFormatKHR>& AvailableFormats);
+		VkPresentModeKHR   ChooseSwapPresentMode      (const std::vector<VkPresentModeKHR>& AvailablePresentModes);
+		VkExtent2D         ChooseSwapExtent           (const VkSurfaceCapabilitiesKHR& Capabilities);
 
 	// Variables:
 
