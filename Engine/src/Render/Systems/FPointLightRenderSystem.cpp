@@ -51,7 +51,7 @@ namespace t3d
 
 		// Update light positions:
 
-			Object.GetTransform().SetTranslation( glm::vec3(RotationMatrix * glm::vec4(Object.GetTransform().GetTranslation(), 1.0f)) );
+		//	Object.GetTransform().SetTranslation( glm::vec3(RotationMatrix * glm::vec4(Object.GetTransform().GetTranslation(), 1.0f)) );
 
 		// Copy light to UniformBufferData:
 

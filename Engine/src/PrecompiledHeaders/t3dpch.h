@@ -94,7 +94,6 @@
 #include "../Time/FTimeStamp.h"
 #include "../Logger/FLogger.h"
 #include "../ResourceManagers/FImageLoader.h"
-//#include "../Events/SEventSystem.h"
 #include "../Templates/TArray.h"
 
 //#ifndef DISABLE_WINDOWS

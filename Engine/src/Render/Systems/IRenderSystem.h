@@ -4,7 +4,6 @@
 #include "../Pipeline/FPipeline.h"
 #include "../Primitives/Mesh/FMesh.h"
 #include "../../Scene/FScene.h"
-#include "../../Templates/TArray.h"
 
 namespace t3d
 {

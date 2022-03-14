@@ -2,7 +2,6 @@
 
 #include "ESound.h"
 #include "ESoundGroup.h"
-#include "../Templates/TArray.h"
 #include "../Events/IEventListener.h"
 
 namespace t3d

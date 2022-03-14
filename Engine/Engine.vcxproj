@@ -99,13 +99,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application\FApplication.cpp" />
-    <ClCompile Include="src\Components\CComponentSystem.cpp" />
-    <ClCompile Include="src\Components\CMovementComponent.cpp" />
-    <ClCompile Include="src\Components\CPointLightComponent.cpp" />
-    <ClCompile Include="src\Components\CRigidBody2DComponent.cpp" />
-    <ClCompile Include="src\Components\CTransform2DComponent.cpp" />
-    <ClCompile Include="src\Components\CTransform3DComponent.cpp" />
-    <ClCompile Include="src\Components\DComponent.cpp" />
     <ClCompile Include="src\ECS\Components\Components.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
@@ -267,13 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h" />
-    <ClInclude Include="src\Components\CComponentSystem.h" />
-    <ClInclude Include="src\Components\CMovementComponent.h" />
-    <ClInclude Include="src\Components\CPointLightComponent.h" />
-    <ClInclude Include="src\Components\CRigidBody2DComponent.h" />
-    <ClInclude Include="src\Components\CTransform2DComponent.h" />
-    <ClInclude Include="src\Components\CTransform3DComponent.h" />
-    <ClInclude Include="src\Components\DComponent.h" />
     <ClInclude Include="src\ECS\Components\CModel.h" />
     <ClInclude Include="src\ECS\Components\Components.h" />
     <ClInclude Include="src\ECS\Components\FComponentDescription.h" />
@@ -288,7 +274,15 @@
     <ClInclude Include="src\SFX\ESound.h" />
     <ClInclude Include="src\SFX\ESoundGroup.h" />
     <ClInclude Include="src\SFX\FSound.h" />
+    <ClInclude Include="src\Templates\poormemory.h" />
+    <ClInclude Include="src\Templates\TArray.h" />
+    <ClInclude Include="src\Templates\TAutoID.h" />
+    <ClInclude Include="src\Templates\THashFunctions.h" />
+    <ClInclude Include="src\Templates\TImage.h" />
     <ClInclude Include="src\Templates\TNode.h" />
+    <ClInclude Include="src\Templates\TScopedPointer.h" />
+    <ClInclude Include="src\Templates\TSharedPointer.h" />
+    <ClInclude Include="src\Templates\TTypeID.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FAnimatedModel.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FBone.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FBoneInfo.h" />
@@ -308,7 +302,6 @@
     <ClInclude Include="src\Events\IEventListener.h" />
     <ClInclude Include="src\Exception\FException.h" />
     <ClInclude Include="src\Exception\FVulkanException.h" />
-    <ClInclude Include="src\Templates\TAutoID.h" />
     <ClInclude Include="src\GameObjects\IObject.h" />
     <ClInclude Include="src\GameObjects\OGameObject.h" />
     <ClInclude Include="src\Input\Gamepad\FGamepad.h" />
@@ -361,13 +354,6 @@
     <ClInclude Include="src\ResourceManagers\FImageLoader.h" />
     <ClInclude Include="src\ResourceManagers\FImagePNG.h" />
     <ClInclude Include="src\Macros\T3DMacros.h" />
-    <ClInclude Include="src\Templates\TArray.h" />
-    <ClInclude Include="src\Templates\THashFunctions.h" />
-    <ClInclude Include="src\Templates\TImage.h" />
-    <ClInclude Include="src\Templates\poormemory.h" />
-    <ClInclude Include="src\Templates\TSharedPointer.h" />
-    <ClInclude Include="src\Templates\TScopedPointer.h" />
-    <ClInclude Include="src\Templates\TTypeID.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Time\FDeltaTime.h" />

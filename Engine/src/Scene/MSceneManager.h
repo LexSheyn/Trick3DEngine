@@ -2,7 +2,6 @@
 
 #include "FScene.h"
 #include "EScene.h"
-#include "../Templates/TArray.h"
 
 namespace t3d
 {
