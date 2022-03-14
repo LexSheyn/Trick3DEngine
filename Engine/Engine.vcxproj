@@ -122,8 +122,6 @@
     <ClCompile Include="src\EntryPoint\Main.cpp" />
     <ClCompile Include="src\Events\IEventListener.cpp" />
     <ClCompile Include="src\Events\SEventSystem.cpp" />
-    <ClCompile Include="src\Exception\FException.cpp" />
-    <ClCompile Include="src\Exception\FVulkanException.cpp" />
     <ClCompile Include="src\Input\Gamepad\FGamepad.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>

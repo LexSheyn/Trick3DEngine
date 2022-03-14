@@ -24,12 +24,6 @@
     <ClCompile Include="src\Events\SEventSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Exception\FException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Exception\FVulkanException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Input\Gamepad\FGamepad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
