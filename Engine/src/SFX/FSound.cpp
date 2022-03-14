@@ -62,21 +62,6 @@ namespace t3d
 	}
 
 
-// IEventListener Interface:
-
-	void FSound::OnEvent(const FEvent* const Event)
-	{
-		if (Event->GetType() == EEventType::KeyPressed)
-		{
-			Instance.Play(ESound::KeyPress, ESoundGroup::UI);
-		}
-		else if (Event->GetType() == EEventType::KeyReleased)
-		{
-			Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
-		}
-	}
-
-
 // Accessors:
 
 	const float32& FSound::GetVolume()
@@ -176,4 +161,20 @@ namespace t3d
 // Static Variables:
 
 	FSound FSound::Instance;
+
+
+// IEventListener Interface:
+
+	void FSound::OnEvent(const FEvent* const Event)
+	{
+		if (Event->GetType() == EEventType::KeyPressed)
+		{
+			Instance.Play(ESound::KeyPress, ESoundGroup::UI);
+		}
+		else if (Event->GetType() == EEventType::KeyReleased)
+		{
+			Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
+		}
+	}
+
 }

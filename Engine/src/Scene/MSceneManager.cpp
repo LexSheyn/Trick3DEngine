@@ -58,4 +58,11 @@ namespace t3d
 		// To do...
 	}
 
+
+// IEventListener Interface:
+
+	void MSceneManager::OnEvent(const FEvent* const Event)
+	{
+	}
+
 }

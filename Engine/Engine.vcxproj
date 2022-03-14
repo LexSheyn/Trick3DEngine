@@ -274,6 +274,7 @@
     <ClInclude Include="src\Components\CTransform2DComponent.h" />
     <ClInclude Include="src\Components\CTransform3DComponent.h" />
     <ClInclude Include="src\Components\DComponent.h" />
+    <ClInclude Include="src\ECS\Components\CModel.h" />
     <ClInclude Include="src\ECS\Components\Components.h" />
     <ClInclude Include="src\ECS\Components\FComponentDescription.h" />
     <ClInclude Include="src\ECS\Components\IComponent.h" />
@@ -287,6 +288,7 @@
     <ClInclude Include="src\SFX\ESound.h" />
     <ClInclude Include="src\SFX\ESoundGroup.h" />
     <ClInclude Include="src\SFX\FSound.h" />
+    <ClInclude Include="src\Templates\TNode.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FAnimatedModel.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FBone.h" />
     <ClInclude Include="src\Test\SkeletalAnimation\FBoneInfo.h" />

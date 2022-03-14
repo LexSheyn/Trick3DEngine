@@ -1,8 +1,6 @@
 #include "../../PrecompiledHeaders/t3dpch.h"
 #include "SEntityComponentSystem.h"
 
-#include "../Entity/FEntity.h"
-
 namespace t3d
 {
 // Entity Functions:
@@ -26,6 +24,28 @@ namespace t3d
 		}
 
 		return NewEntity;
+	}
+
+	void SEntityComponentSystem::AddChild(T3D_EntityID Parent, T3D_EntityID Child)
+	{
+		Entities[Parent].GetChildren().emplace_back(Child);
+		Entities[Child].SetParent(Parent);
+	}
+
+	void SEntityComponentSystem::RemoveChild(T3D_EntityID Parent, T3D_EntityID Child)
+	{
+		std::vector<T3D_EntityID>& Children = Entities[Parent].GetChildren();
+
+		for (uint64 i = 0u; i < Children.size(); i++)
+		{
+			if (Children[i] == Child)
+			{
+				Children[i] = Children.back();
+				Children.pop_back();
+
+				return;
+			}
+		}
 	}
 
 	void SEntityComponentSystem::RemoveEntity(T3D_EntityID& EntityID)
@@ -138,11 +158,10 @@ namespace t3d
 	}
 
 
-// Static Variables:
+// IEventListener Interface:
 
-	std::vector<FEntity> SEntityComponentSystem::Entities;
-	std::vector<uint64>  SEntityComponentSystem::EntityReuseList;
-
-	std::unordered_map<T3D_ComponentID, std::vector<uint8>> SEntityComponentSystem::Components;
+	void SEntityComponentSystem::OnEvent(const FEvent* const Event)
+	{
+	}
 
 }
