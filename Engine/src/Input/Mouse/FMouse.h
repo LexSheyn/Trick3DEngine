@@ -14,7 +14,7 @@ namespace t3d
 
 	// IEventListener interface:
 		
-		void OnEvent(const class FEvent* const) override;
+		void OnEvent(const FEvent* const) override;
 
 	// Functions:
 
