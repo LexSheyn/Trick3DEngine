@@ -18,17 +18,17 @@ namespace t3d
 
 	// Functions:
 
-		VkCommandBuffer BeginFrame                  ();
-		void            EndFrame                    ();
-		void            BeginSwapchainRenderPass    (VkCommandBuffer CommandBuffer);
-		void            EndSwapchainRenderPass      (VkCommandBuffer CommandBuffer);
+		void BeginFrame                  ();
+		void EndFrame                    ();
+		void BeginSwapchainRenderPass    ();
+		void EndSwapchainRenderPass      ();
 
 	// Accessors:
 		
 		const bool8&          IsFrameInProgress          () const;
 		      VkCommandBuffer GetCurrentCommandBuffer    () const;
 		      VkRenderPass    GetSwapchainRenderPass     () const;
-		      float32         GetAspectRation            () const;
+		      float32         GetAspectRatio             () const;
 		const uint64&         GetFrameIndex              () const;
 
 	private:

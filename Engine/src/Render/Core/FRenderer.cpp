@@ -25,6 +25,8 @@ namespace t3d
 
 	FRenderer::~FRenderer()
 	{
+		vkDeviceWaitIdle(Device.Device());
+
 		this->FreeCommandBuffers();
 
 		if (Swapchain)
@@ -36,7 +38,7 @@ namespace t3d
 
 // Functions:
 
-	VkCommandBuffer FRenderer::BeginFrame()
+	void FRenderer::BeginFrame()
 	{
 		if (IsFrameStarted)
 		{
@@ -49,8 +51,6 @@ namespace t3d
 		if (Result == VK_ERROR_OUT_OF_DATE_KHR)
 		{
 			this->RecreateSwapchain();
-
-			return nullptr;
 		}
 
 		if (Result != VK_SUCCESS && Result != VK_SUBOPTIMAL_KHR)
@@ -61,19 +61,15 @@ namespace t3d
 
 		IsFrameStarted = true;
 
-		VkCommandBuffer CommandBuffer = this->GetCurrentCommandBuffer();
-
 		VkCommandBufferBeginInfo BeginInfo{};
 
 		BeginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 
-		if (vkBeginCommandBuffer(CommandBuffer, &BeginInfo) != VK_SUCCESS)
+		if (vkBeginCommandBuffer(this->GetCurrentCommandBuffer(), &BeginInfo) != VK_SUCCESS)
 		{
 			LOG_ERROR("Failed to begin recording command buffer!");
 			throw;
 		}
-
-		return CommandBuffer;
 	}
 
 	void FRenderer::EndFrame()
@@ -106,7 +102,7 @@ namespace t3d
 		CurrentFrameIndex = (CurrentFrameIndex + 1u) % FSwapchain::MAX_FRAMES_IN_FLIGHT;
 	}
 
-	void FRenderer::BeginSwapchainRenderPass(VkCommandBuffer CommandBuffer)
+	void FRenderer::BeginSwapchainRenderPass()
 	{
 		if (!IsFrameStarted)
 		{
@@ -114,13 +110,8 @@ namespace t3d
 			throw;
 		}
 
-		if (CommandBuffer != this->GetCurrentCommandBuffer())
-		{
-			LOG_ERROR("Cannot begin render pass on command buffer from a different frame!");
-			throw;
-		}
+		VkCommandBuffer CommandBuffer = this->GetCurrentCommandBuffer();
 
-	//	std::array<VkClearValue, 2> ClearValues{};
 		TArray<VkClearValue, 2> ClearValues{};
 
 		ClearValues[0].color        = { 0.01f, 0.01f, 0.01f, 1.0f };
@@ -158,7 +149,7 @@ namespace t3d
 		vkCmdSetScissor(CommandBuffer, 0, 1, &Scissor);
 	}
 
-	void FRenderer::EndSwapchainRenderPass(VkCommandBuffer CommandBuffer)
+	void FRenderer::EndSwapchainRenderPass()
 	{
 		if (!IsFrameStarted)
 		{
@@ -166,13 +157,7 @@ namespace t3d
 			throw;
 		}
 
-		if (CommandBuffer != this->GetCurrentCommandBuffer())
-		{
-			LOG_ERROR("Cannot end render pass on command buffer from a different frame!");
-			throw;
-		}
-
-		vkCmdEndRenderPass(CommandBuffer);
+		vkCmdEndRenderPass(this->GetCurrentCommandBuffer());
 	}
 
 
@@ -199,7 +184,7 @@ namespace t3d
 		return Swapchain->GetRenderPass();
 	}
 
-	float32 FRenderer::GetAspectRation() const
+	float32 FRenderer::GetAspectRatio() const
 	{
 		return Swapchain->GetExtentAspectRatio();
 	}

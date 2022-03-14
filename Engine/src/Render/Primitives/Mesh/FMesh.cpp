@@ -43,7 +43,7 @@ namespace t3d
 
 		delete VertexBuffer;
 
-		LOG_TRACE("Deleted.");
+		LOG_TRACE("Destroyed.");
 	}
 
 

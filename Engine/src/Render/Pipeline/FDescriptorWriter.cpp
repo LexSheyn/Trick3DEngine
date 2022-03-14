@@ -14,7 +14,7 @@ namespace t3d
 
 	FDescriptorWriter::~FDescriptorWriter()
 	{
-		LOG_TRACE("Deleted.");
+		LOG_TRACE("Destroyed.");
 	}
 
 	FDescriptorWriter& FDescriptorWriter::WriteBuffer(uint32 Binding, VkDescriptorBufferInfo* BufferInfo)

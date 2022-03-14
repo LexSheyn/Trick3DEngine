@@ -39,7 +39,7 @@ namespace t3d
 	{
 		vkDestroyDescriptorSetLayout(Device.Device(), DescriptorSetLayout, nullptr);
 
-		LOG_TRACE("Deleted.");
+		LOG_TRACE("Destroyed.");
 	}
 
 

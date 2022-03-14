@@ -21,6 +21,8 @@ namespace t3d
 
 	FPipeline::~FPipeline()
 	{
+		vkDeviceWaitIdle(Device.Device());
+
 		vkDestroyShaderModule(Device.Device(), VertexShaderModule, nullptr);
 		vkDestroyShaderModule(Device.Device(), FragmentShaderModule, nullptr);
 

@@ -1,10 +1,8 @@
 #pragma once
 
-#include "../Render/Systems/FMeshRenderSystem.h"
+#include "../Render/Systems/RMeshRenderSystem.h"
 #include "../Render/Systems/FPointLightRenderSystem.h"
-#include "../Render/Core/FRenderer.h"
-
-//#include "../Events/SEventSystem.h"
+#include "../Scene/MSceneManager.h"
 
 namespace t3d
 {
@@ -22,16 +20,11 @@ namespace t3d
 
 	// Functions:
 
-		void InitRenderer    ();
-		void Run             ();
-		void Update          ();
-		void Render          ();
+		void Run       ();
+		void Update    ();
+		void Render    ();
 
 	private:
-
-	// Private Functions:
-
-		void LoadGameObjects ();
 
 	// Variables:
 
@@ -41,12 +34,8 @@ namespace t3d
 		FWindow   Window;
 		FDevice   Device;
 		FRenderer Renderer;
+		RMeshRenderSystem MeshRenderSystem;
 
-		// Note: Order of declaration matters!
-		FDescriptorPool* DescriptorPool;
-
-		std::unordered_map<uint32, OGameObject> GameObjects;
-
-		std::map<std::string, FMesh*> Meshes;
+		MSceneManager SceneManager;
 	};
 }

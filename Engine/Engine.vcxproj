@@ -220,7 +220,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\FMeshRenderSystem.cpp">
+    <ClCompile Include="src\Render\Systems\RMeshRenderSystem.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -228,8 +228,13 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\Render\Systems\IRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\ResourceManagers\FImageLoader.cpp" />
     <ClCompile Include="src\Scene\FScene.cpp" />
+    <ClCompile Include="src\Scene\MSceneManager.cpp" />
     <ClCompile Include="src\SFX\FSound.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\Templates\TTypeID.cpp" />
@@ -275,7 +280,10 @@
     <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Components\TComponent.h" />
     <ClInclude Include="src\Logger\ELogLevel.h" />
+    <ClInclude Include="src\Render\Systems\IRenderSystem.h" />
+    <ClInclude Include="src\Scene\EScene.h" />
     <ClInclude Include="src\Scene\FScene.h" />
+    <ClInclude Include="src\Scene\MSceneManager.h" />
     <ClInclude Include="src\SFX\ESound.h" />
     <ClInclude Include="src\SFX\ESoundGroup.h" />
     <ClInclude Include="src\SFX\FSound.h" />
@@ -345,7 +353,7 @@
     <ClInclude Include="src\Render\Pipeline\FPipeline.h" />
     <ClInclude Include="src\Render\Pipeline\FPipelineConfigInfo.h" />
     <ClInclude Include="src\Render\Systems\FBillboardRenderSystem.h" />
-    <ClInclude Include="src\Render\Systems\FMeshRenderSystem.h" />
+    <ClInclude Include="src\Render\Systems\RMeshRenderSystem.h" />
     <ClInclude Include="src\Render\Systems\FPointLightRenderSystem.h" />
     <ClInclude Include="src\ResourceManagers\EColorFormat.h" />
     <ClInclude Include="src\ResourceManagers\FImageLoader.h" />

@@ -6,6 +6,8 @@ namespace t3d
 	class TArray
 	{
 	public:
+
+		using SizeType = uint64;
 	
 	// Accessors:
 	
@@ -17,17 +19,21 @@ namespace t3d
 	
 	// Operators:
 	
-		      T& operator [] (uint64 Index)       { return Array[Index]; }
+		const T& operator [] (SizeType Index) const { return Array[Index]; }
+
+		      T& operator [] (SizeType Index)       { return Array[Index]; }
 	
-		const T& operator [] (uint64 Index) const { return Array[Index]; }
+		const T& operator [] (enum class ESound Index) const { return Array[static_cast<SizeType>(Index)]; }
 	
-		      T& operator [] (enum class ESound Index)       { return Array[static_cast<uint64>(Index)]; }
+		      T& operator [] (enum class ESound Index)       { return Array[static_cast<SizeType>(Index)]; }
 
-		const T& operator [] (enum class ESound Index) const { return Array[static_cast<uint64>(Index)]; }
+		const T& operator [] (enum class ESoundGroup Index) const { return Array[static_cast<SizeType>(Index)]; }
 
-		      T& operator [] (enum class ESoundGroup Index)       { return Array[static_cast<uint64>(Index)]; }
+		      T& operator [] (enum class ESoundGroup Index)       { return Array[static_cast<SizeType>(Index)]; }
 
-		const T& operator [] (enum class ESoundGroup Index) const { return Array[static_cast<uint64>(Index)]; }
+		const T& operator [] (enum class EScene Index) const { return Array[static_cast<SizeType>(Index)]; }
+
+		      T& operator [] (enum class EScene Index)       { return Array[static_cast<SizeType>(Index)]; }
 	
 	private:
 	

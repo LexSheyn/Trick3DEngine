@@ -117,7 +117,7 @@
     <ClCompile Include="src\Render\Systems\FBillboardRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\FMeshRenderSystem.cpp">
+    <ClCompile Include="src\Render\Systems\RMeshRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Systems\FPointLightRenderSystem.cpp">
@@ -193,6 +193,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Types\T3DStaticConversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\Systems\IRenderSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\MSceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -377,7 +383,7 @@
     <ClInclude Include="src\Render\Systems\FBillboardRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\Systems\FMeshRenderSystem.h">
+    <ClInclude Include="src\Render\Systems\RMeshRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\Systems\FPointLightRenderSystem.h">
@@ -510,6 +516,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Logger\ELogLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\Systems\IRenderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\MSceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\EScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

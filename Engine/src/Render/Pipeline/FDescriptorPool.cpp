@@ -34,7 +34,7 @@ namespace t3d
 	{
 		vkDestroyDescriptorPool(Device.Device(), Pool, nullptr);
 
-		LOG_TRACE("Deleted.");
+		LOG_TRACE("Destroyed.");
 	}
 
 

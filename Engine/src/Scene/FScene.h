@@ -8,18 +8,16 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FScene() {}
-
-		~FScene() {}
+		 FScene () {}
+		~FScene () {}
 
 		T3D_NO_COPY(FScene);
 		T3D_NO_MOVE(FScene);
 
 	// Functions:
 
-		void Update() {}
-
-		void Draw() {}
+		void Update    () {}
+		void Draw      () {}
 
 		//
 
