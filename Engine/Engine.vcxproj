@@ -124,8 +124,6 @@
     <ClCompile Include="src\Events\SEventSystem.cpp" />
     <ClCompile Include="src\Exception\FException.cpp" />
     <ClCompile Include="src\Exception\FVulkanException.cpp" />
-    <ClCompile Include="src\GameObjects\IObject.cpp" />
-    <ClCompile Include="src\GameObjects\OGameObject.cpp" />
     <ClCompile Include="src\Input\Gamepad\FGamepad.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
@@ -231,18 +229,6 @@
     <ClCompile Include="src\SFX\FSound.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\Templates\TTypeID.cpp" />
-    <ClCompile Include="src\Test\SkeletalAnimation\FAnimatedModel.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\Test\SkeletalAnimation\FBone.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\Test\SkeletalAnimation\FSkeletalMesh.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
@@ -319,7 +305,6 @@
     <ClInclude Include="src\Render\Core\FCamera.h" />
     <ClInclude Include="src\Render\Core\FDevice.h" />
     <ClInclude Include="src\Render\Core\FDeviceBuffer.h" />
-    <ClInclude Include="src\Render\Core\FFrameInfo.h" />
     <ClInclude Include="src\Render\Core\FMaterial.h" />
     <ClInclude Include="src\Render\Core\FPushConstantData.h" />
     <ClInclude Include="src\Render\Core\FQueueFamilyIndices.h" />

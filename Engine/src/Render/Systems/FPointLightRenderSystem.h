@@ -1,47 +1,36 @@
 #pragma once
 
+#include "IRenderSystem.h"
 #include "../Pipeline/FPipeline.h"
 #include "../Core/FPushConstantData.h"
 #include "../Core/FUniformBufferData.h"
-#include "../Core/FFrameInfo.h"
-
-#include "../../GameObjects/OGameObject.h"
 
 namespace t3d
 {
-	class FPointLightRenderSystem
+	class FPointLightRenderSystem : public IRenderSystem
 	{
 	public:
 
 	// Constructors and Destructor:
 
-		FPointLightRenderSystem(FDevice& Device, VkRenderPass RenderPass, VkDescriptorSetLayout GlobalDescriptorSetLayout);
-
-		~FPointLightRenderSystem();
+		 FPointLightRenderSystem (FDevice& Device, FRenderer& Renderer);
+		~FPointLightRenderSystem () override;
 
 		T3D_NO_COPY(FPointLightRenderSystem);
 		T3D_NO_MOVE(FPointLightRenderSystem);
 
 	// Functions:
 
-		void Update(FFrameInfo& FrameInfo, FUniformBufferData& UniformBufferData);
+		void Update();
 
-		void Render(FFrameInfo& FrameInfo);
+		void Render(FScene& Scene) override;
 
 	private:
 
 	// Private Functions:
 
-		void CreatePipelineLayout(VkDescriptorSetLayout GlobalDescriptorSetLayout);
-
-		void CreatePipeline(VkRenderPass RenderPass);
-
-	// Variables:
-
-		FDevice& Device;
-
-		VkPipelineLayout PipelineLayout;
-
-		FPipeline* Pipeline;
+		void CreateDescriptorPool    () override;
+		void CreatePipelineLayout    () override;
+		void CreatePipeline          () override;
 	};
 }
