@@ -12,28 +12,26 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FPipeline(FDevice& Device, const FPipelineConfigInfo& ConfigInfo, const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
-
-		~FPipeline();
+		 FPipeline (FDevice& Device, const FPipelineConfigInfo& ConfigInfo, const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
+		~FPipeline ();
 
 		T3D_NO_COPY(FPipeline);
 		T3D_NO_MOVE(FPipeline);
 
 	// Functions:
 
-		void Bind(VkCommandBuffer CommandBuffer);
+		void T3D_CALL Bind(VkCommandBuffer CommandBuffer);
 
-		static void CreateDefaultPipelineConfigInfo(FPipelineConfigInfo& ConfigInfo);
+		static void T3D_CALL CreateDefaultPipelineConfigInfo(FPipelineConfigInfo& ConfigInfo);
 
 	private:
 
 	// PrivateFunctions:
 
-		static std::vector<char8> ReadFile(const std::string& FilePath);
+		static std::vector<char8> T3D_CALL ReadFile(const std::string& FilePath);
 
-		void CreateGraphicsPipeline(const FPipelineConfigInfo& ConfigInfo, const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
-
-		void CreateShaderModule(const std::vector<char8>& ShaderCode, VkShaderModule* ShaderModule);
+		void T3D_CALL CreateGraphicsPipeline    (const FPipelineConfigInfo& ConfigInfo, const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
+		void T3D_CALL CreateShaderModule        (const std::vector<char8>& ShaderCode, VkShaderModule* ShaderModule);
 
 	// Variables:
 

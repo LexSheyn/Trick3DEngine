@@ -1,6 +1,5 @@
 #pragma once
 
-#include "FEvent.h"
 #include "IEventListener.h"
 
 namespace t3d
@@ -11,15 +10,15 @@ namespace t3d
 
 	// Functions:
 
-		static void  PushEvent                (const FEvent& Event);
-		static void  ProcessEvents            ();
-		static void  Dispatch                 (FEvent* Event);
-		static void  Subscribe                (EEventType Type, IEventListener* Listener);
-		static void  Unsubscribe              (EEventType Type, IEventListener* Listener);
-		static void  UnsubscribeFromAll       (IEventListener* Listener);
-		static bool8 IsSubscribed             (EEventType Type, IEventListener* Listener);
-		static void  ClearEventQueue          ();
-		static void  ClearListenerRegistry    ();
+		static void  T3D_CALL PushEvent                (const FEvent& Event);
+		static void  T3D_CALL ProcessEvents            ();
+		static void  T3D_CALL Dispatch                 (FEvent* Event);
+		static void  T3D_CALL Subscribe                (EEventType Type, IEventListener* Listener);
+		static void  T3D_CALL Unsubscribe              (EEventType Type, IEventListener* Listener);
+		static void  T3D_CALL UnsubscribeFromAll       (IEventListener* Listener);
+		static bool8 T3D_CALL IsSubscribed             (EEventType Type, IEventListener* Listener);
+		static void  T3D_CALL ClearEventQueue          ();
+		static void  T3D_CALL ClearListenerRegistry    ();
 
 		// Clear all data function here!
 
@@ -27,7 +26,7 @@ namespace t3d
 
 	// Private Constructors and Destructor:
 
-		SEventSystem  () {}
+		 SEventSystem () {}
 		~SEventSystem () {}
 
 		T3D_NO_COPY(SEventSystem);

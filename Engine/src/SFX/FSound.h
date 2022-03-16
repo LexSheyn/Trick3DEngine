@@ -2,7 +2,6 @@
 
 #include "ESound.h"
 #include "ESoundGroup.h"
-#include "../Events/IEventListener.h"
 
 namespace t3d
 {
@@ -12,30 +11,30 @@ namespace t3d
 
 	// Functions:
 
-		static void    Initialize     (float32 InitialVolume);
-		static void    LoadFile       (ESound Name, const std::string& FilePath);
-		static FSound* GetInstance    ();		
-		static void    Update         (); // Pass global DeltaTime here.
-		static void    Shutdown       ();
+		static void    T3D_CALL Initialize     (float32 InitialVolume);
+		static void    T3D_CALL LoadFile       (ESound Name, const std::string& FilePath);
+		static FSound* T3D_CALL GetInstance    ();		
+		static void    T3D_CALL Update         (); // Pass global DeltaTime here.
+		static void    T3D_CALL Shutdown       ();
 
 	// Accessors:
 
-		const float32& GetVolume();
+		const float32& T3D_CALL GetVolume();
 
 	// Modifiers:
 
 		/// <param name="Volume"> : Value in range between 0.0 and 1.0 </param>
-		void SetVolume(float32 Volume);
+		void T3D_CALL SetVolume(float32 Volume);
 
 	private:
 
 	// Private Functions:
 
-		void Play        (ESound Name, ESoundGroup Group);
-		void Pause       ();
-		void Pause       (ESoundGroup Group);
-		void Unpause     ();
-		void Unpause     (ESoundGroup Group);
+		void T3D_CALL Play        (ESound Name, ESoundGroup Group);
+		void T3D_CALL Pause       ();
+		void T3D_CALL Pause       (ESoundGroup Group);
+		void T3D_CALL Unpause     ();
+		void T3D_CALL Unpause     (ESoundGroup Group);
 
 	// Private Constructors and Destructor:
 
@@ -79,6 +78,6 @@ namespace t3d
 
 	// IEventListener Interface:
 
-		void OnEvent(const FEvent* const Event) override;
+		void T3D_CALL OnEvent(const FEvent* const Event) override;
 	};
 }

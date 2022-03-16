@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ECS/Core/SEntityComponentSystem.h"
+#include "../ECS/Systems/Systems.h"
 
 namespace t3d
 {
@@ -19,11 +20,22 @@ namespace t3d
 	// Functions:
 
 		void Update ();
+		void CreateTestEntity();
+		void DeleteTestEntity();
 
-	private:
+//	private:
 
 	// Variables:
 
-		SEntityComponentSystem EntityComponentSystem;
+		// TEST
+		SEntityComponentSystem ECS;
+
+		T3D_EntityID TestEntity;
+
+		FCamera TestCamera;
+
+	// Systems:
+
+		STransformSystem TransformSystem;
 	};
 }

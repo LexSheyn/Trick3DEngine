@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../../Core/FDevice.h"
 #include "../../Core/FDeviceBuffer.h"
 #include "FMeshData.h"
 #include "FMeshUniform.h"
@@ -14,39 +13,28 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		using Data = FMeshData;
-
-		FMesh(FDevice& Device, const FMesh::Data& MeshData);
-
-		FMesh(FDevice& Device, const std::string& FilePath);
-
-		~FMesh();
+		 FMesh ();
+		~FMesh ();
 
 		T3D_NO_COPY(FMesh);
 		T3D_NO_MOVE(FMesh);
 
 	// Functions:
 
-		void Bind(VkCommandBuffer CommandBuffer);
+		void T3D_CALL CreateVertexBuffer    (FDevice& Device, const std::vector<FVertex>& Vertices);
+		void T3D_CALL CreateIndexBuffer     (FDevice& Device, const std::vector<T3D_Index>& Indices);
 
-		void Draw(VkCommandBuffer CommandBuffer);
+		void T3D_CALL Bind    (VkCommandBuffer CommandBuffer);
+		void T3D_CALL Draw    (VkCommandBuffer CommandBuffer);
 
 	private:
 
-	// Private Functions:
-
-		void CreateVertexBuffer(const std::vector<FVertex>& Vertices);
-
-		void CreateIndexBuffer(const std::vector<uint32>& Indices);
-
 	// Variables:
 
-		FDevice& Device;
-
 		FDeviceBuffer* VertexBuffer;
-		uint32 VertexCount;
+		uint32         VertexCount;
 
 		FDeviceBuffer* IndexBuffer;
-		uint32 IndexCount;
+		uint32         IndexCount;
 	};
 }

@@ -2,6 +2,7 @@
 
 #include "IRenderSystem.h"
 #include "../Primitives/Mesh/FMesh.h"
+#include "../../ResourceManagers/Model/MModelManager.h"
 
 namespace t3d
 {
@@ -19,14 +20,22 @@ namespace t3d
 
 	// Functions:
 
-		void Render(FScene& Scene) override;
+		void T3D_CALL Render(FScene& Scene) override;
 
 	private:
 
 	// Private Functions:
 
-		void CreateDescriptorPool    () override;
-		void CreatePipelineLayout    () override;
-		void CreatePipeline          () override;
+		void T3D_CALL CreateDescriptorPool    () override;
+		void T3D_CALL CreatePipelineLayout    () override;
+		void T3D_CALL CreatePipeline          () override;
+
+	// TEST
+
+		FMeshData MeshData;
+
+		FMeshPushConstant MeshPushConstant;
+
+		FMesh* Mesh;
 	};
 }

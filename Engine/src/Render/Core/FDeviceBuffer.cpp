@@ -48,6 +48,8 @@ namespace t3d
 
 	FDeviceBuffer::~FDeviceBuffer()
 	{
+		vkDeviceWaitIdle(Device.Device());
+
 		this->Unmap();
 
 		vkDestroyBuffer(Device.Device(), Buffer, nullptr);

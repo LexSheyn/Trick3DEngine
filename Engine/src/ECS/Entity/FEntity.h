@@ -19,15 +19,15 @@ namespace t3d
 	// Accessors:
 
 		/// <returns> Index in the vector of Entities </returns>
-		const T3D_EntityID&                 GetID                       () const;
-		std::vector<FComponentDescription>& GetComponentDescriptions    ();
+		const T3D_EntityID&                 T3D_CALL GetID                       () const;
+		std::vector<FComponentDescription>& T3D_CALL GetComponentDescriptions    ();
 
-		const T3D_EntityID&        GetParent      () const;
-		std::vector<T3D_EntityID>& GetChildren    ();
+		const T3D_EntityID&        T3D_CALL GetParent      () const;
+		std::vector<T3D_EntityID>& T3D_CALL GetChildren    ();
 
 	// Modifiers:
 
-		void SetParent(T3D_EntityID EntityID);
+		void T3D_CALL SetParent(T3D_EntityID EntityID);
 
 	private:
 

@@ -74,7 +74,7 @@ namespace t3d
 			vkDestroyFence(Device.Device(), InFlightFences[i], nullptr);
 		}
 
-		LOG_TRACE("Destroyed.");
+		LOG_TRACE("Deleted.");
 	}
 
 

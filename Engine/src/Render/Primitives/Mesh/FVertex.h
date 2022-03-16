@@ -2,10 +2,8 @@
 
 namespace t3d
 {
-	class FVertex
+	struct FVertex
 	{
-	public:
-
 	// Accessors:
 
 		static std::vector<VkVertexInputBindingDescription>   GetBindingDescriptions();
@@ -14,14 +12,14 @@ namespace t3d
 
 	// Operators:
 
-		bool8 operator==(const FVertex& Other) const;
+		bool8 operator == (const FVertex& Other) const;
 
 	// Public Variables:
 
-		glm::vec3 Position {};
-		glm::vec3 Color    {};
-		glm::vec3 Normal   {};
-		glm::vec2 TexCoord {};
+		FVec3 Position {};
+		FVec3 Color    {};
+		FVec3 Normal   {};
+		FVec2 TexCoord {};
 	};
 }
 

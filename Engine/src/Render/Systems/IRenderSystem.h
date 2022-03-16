@@ -22,13 +22,13 @@ namespace t3d
 
 	// Functions:
 
-		virtual void Render(FScene& Scene) = 0;
+		virtual void T3D_CALL Render(FScene& Scene) = 0;
 
 	// Functions:
 
-		virtual void CreateDescriptorPool    () = 0;
-		virtual void CreatePipelineLayout    () = 0;
-		virtual void CreatePipeline          () = 0;
+		virtual void T3D_CALL CreateDescriptorPool    () = 0;
+		virtual void T3D_CALL CreatePipelineLayout    () = 0;
+		virtual void T3D_CALL CreatePipeline          () = 0;
 
 	// Variables:
 

@@ -20,7 +20,7 @@ namespace t3d
 
 	void FCamera::SetOrthographicProjection(float32 Left, float32 Right, float32 Top, float32 Bottom, float32 NearClippingPlane, float32 FarClippingPlane)
 	{
-		ProjectionMatrix = glm::mat4{ 1.0f };
+		ProjectionMatrix = FMat4{ 1.0f };
 
 		ProjectionMatrix[0][0] = 2.0f / (Right - Left);
 		ProjectionMatrix[1][1] = 2.0f / (Bottom - Top);
@@ -40,7 +40,7 @@ namespace t3d
 
 		const float32 TanHalfFovy = glm::tan(FieldOfViewY / 2.0f); // std::tan ???
 
-		ProjectionMatrix = glm::mat4{ 0.0f };
+		ProjectionMatrix = FMat4{ 0.0f };
 		
 		ProjectionMatrix[0][0] = 1.0f / (AspectRatio * TanHalfFovy);
 		ProjectionMatrix[1][1] = 1.0f / (TanHalfFovy);
@@ -49,13 +49,13 @@ namespace t3d
 		ProjectionMatrix[3][2] = -(FarClippingPlane * NearClippingPlane) / (FarClippingPlane - NearClippingPlane);
 	}
 
-	void FCamera::SetViewDirection(glm::vec3 Position, glm::vec3 Direction, glm::vec3 Up)
+	void FCamera::SetViewDirection(FVec3 Position, FVec3 Direction, FVec3 Up)
 	{
-		const glm::vec3 W{ glm::normalize(Direction) };
-		const glm::vec3 U{ glm::normalize(glm::cross(W, Up)) };
-		const glm::vec3 V{ glm::cross(W, U) };
+		const FVec3 W{ glm::normalize(Direction) };
+		const FVec3 U{ glm::normalize(glm::cross(W, Up)) };
+		const FVec3 V{ glm::cross(W, U) };
 
-		ViewMatrix = glm::mat4{ 1.f };
+		ViewMatrix = FMat4{ 1.f };
 
 		ViewMatrix[0][0] = U.x;
 		ViewMatrix[1][0] = U.y;
@@ -74,12 +74,12 @@ namespace t3d
 		ViewMatrix[3][2] = -glm::dot(W, Position);
 	}
 
-	void FCamera::SetViewTarget(glm::vec3 Position, glm::vec3 Target, glm::vec3 Up)
+	void FCamera::SetViewTarget(FVec3 Position, FVec3 Target, FVec3 Up)
 	{
 		this->SetViewDirection(Position, Target - Position, Up);
 	}
 
-	void FCamera::SetViewYXZ(glm::vec3 Position, glm::vec3 Rotation)
+	void FCamera::SetViewYXZ(FVec3 Position, FVec3 Rotation)
 	{
 		const float32 CosY = glm::cos(Rotation.y);
 		const float32 SinY = glm::sin(Rotation.y);
@@ -90,11 +90,11 @@ namespace t3d
 		const float32 CosZ = glm::cos(Rotation.z);
 		const float32 SinZ = glm::sin(Rotation.z);
 		
-		const glm::vec3 U{ (CosY * CosZ + SinY * SinX * SinZ), (CosX * SinZ), (CosY * SinX * SinZ - CosZ * SinY) };
-		const glm::vec3 V{ (CosZ * SinY * SinX - CosY * SinZ), (CosX * CosZ), (CosY * CosZ * SinX + SinY * SinZ) };
-		const glm::vec3 W{ (CosX * SinY), (-SinX), (CosY * CosX) };
+		const FVec3 U{ (CosY * CosZ + SinY * SinX * SinZ), (CosX * SinZ), (CosY * SinX * SinZ - CosZ * SinY) };
+		const FVec3 V{ (CosZ * SinY * SinX - CosY * SinZ), (CosX * CosZ), (CosY * CosZ * SinX + SinY * SinZ) };
+		const FVec3 W{ (CosX * SinY), (-SinX), (CosY * CosX) };
 		
-		ViewMatrix = glm::mat4{ 1.f };
+		ViewMatrix = FMat4{ 1.f };
 
 		ViewMatrix[0][0] = U.x;
 		ViewMatrix[1][0] = U.y;
@@ -116,12 +116,12 @@ namespace t3d
 
 // Accessors:
 
-	const glm::mat4& FCamera::GetProjection() const
+	const FMat4& FCamera::GetProjection() const
 	{
 		return ProjectionMatrix;
 	}
 
-	const glm::mat4& FCamera::GetView() const
+	const FMat4& FCamera::GetView() const
 	{
 		return ViewMatrix;
 	}

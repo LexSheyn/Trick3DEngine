@@ -17,7 +17,7 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FDevice  (FWindow& Window);
+		 FDevice (FWindow& Window);
 		~FDevice ();
 
 		T3D_NO_COPY(FDevice);
@@ -25,25 +25,25 @@ namespace t3d
 
 	// Functions:
 
-		uint32          FindMemoryType             (uint32 TypeFilter, VkMemoryPropertyFlags Properties);
-		VkFormat        FindSupportedFormat        (const std::vector<VkFormat>& Candidates, VkImageTiling Tiling, VkFormatFeatureFlags Features);
-		void            CreateBuffer               (VkDeviceSize Size, VkBufferUsageFlags Usage, VkMemoryPropertyFlags Properties, VkBuffer& Buffer, VkDeviceMemory& BufferMemory);
-		VkCommandBuffer BeginSingleTimeCommands    ();
-		void            EndSingleTimeCommands      (VkCommandBuffer CommandBuffer);
-		void            CopyBuffer                 (VkBuffer SourceBuffer, VkBuffer DestinationBuffer, VkDeviceSize Size);
-		void            CopyBufferToImage          (VkBuffer Buffer, VkImage Image, uint32 Width, uint32 Height, uint32 LayerCount);
-		void            CreateImageWithInfo        (const VkImageCreateInfo& ImageInfo, VkMemoryPropertyFlags Properties, VkImage& Image, VkDeviceMemory& ImageMemory);
+		uint32          T3D_CALL FindMemoryType             (uint32 TypeFilter, VkMemoryPropertyFlags Properties);
+		VkFormat        T3D_CALL FindSupportedFormat        (const std::vector<VkFormat>& Candidates, VkImageTiling Tiling, VkFormatFeatureFlags Features);
+		void            T3D_CALL CreateBuffer               (VkDeviceSize Size, VkBufferUsageFlags Usage, VkMemoryPropertyFlags Properties, VkBuffer& Buffer, VkDeviceMemory& BufferMemory);
+		VkCommandBuffer T3D_CALL BeginSingleTimeCommands    ();
+		void            T3D_CALL EndSingleTimeCommands      (VkCommandBuffer CommandBuffer);
+		void            T3D_CALL CopyBuffer                 (VkBuffer SourceBuffer, VkBuffer DestinationBuffer, VkDeviceSize Size);
+		void            T3D_CALL CopyBufferToImage          (VkBuffer Buffer, VkImage Image, uint32 Width, uint32 Height, uint32 LayerCount);
+		void            T3D_CALL CreateImageWithInfo        (const VkImageCreateInfo& ImageInfo, VkMemoryPropertyFlags Properties, VkImage& Image, VkDeviceMemory& ImageMemory);
 
 	// Accessors:
 
-		VkDevice      Device              ();
-		VkCommandPool GetCommandPool      ();
-		VkSurfaceKHR  GetSurface          ();
-		VkQueue       GetGraphicsQueue    ();
-		VkQueue       GetPresentQueue     ();
+		VkDevice      T3D_CALL Device              ();
+		VkCommandPool T3D_CALL GetCommandPool      ();
+		VkSurfaceKHR  T3D_CALL GetSurface          ();
+		VkQueue       T3D_CALL GetGraphicsQueue    ();
+		VkQueue       T3D_CALL GetPresentQueue     ();
 
-		FSwapchainSupportDetails GetSwapchainSupportDetails    ();
-		FQueueFamilyIndices      FindPhysicalQueueFamilies     ();
+		FSwapchainSupportDetails T3D_CALL GetSwapchainSupportDetails    ();
+		FQueueFamilyIndices      T3D_CALL FindPhysicalQueueFamilies     ();
 
 	// Public Variables:
 
@@ -59,8 +59,8 @@ namespace t3d
 
 	// Private Functions:
 
-		void CreateInstance         ();
-		void SetupDebugMessenger    ();
+		void T3D_CALL CreateInstance         ();
+		void T3D_CALL SetupDebugMessenger    ();
 
 		static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT MessageSeverity, VkDebugUtilsMessageTypeFlagsEXT MessageType, const VkDebugUtilsMessengerCallbackDataEXT* PtrCallbackData, void* PtrUserData);
 
@@ -68,10 +68,10 @@ namespace t3d
 
 		static void DestroyDebugUtilsMessengerEXT(VkInstance Instance, VkDebugUtilsMessengerEXT DebugMessenger, const VkAllocationCallbacks* PtrAllocator);
 
-		void CreateSurface          ();
-		void PickPhysicalDevice     ();
-		void CreateLogicalDevice    ();
-		void CreateCommandPool      ();
+		void T3D_CALL CreateSurface          ();
+		void T3D_CALL PickPhysicalDevice     ();
+		void T3D_CALL CreateLogicalDevice    ();
+		void T3D_CALL CreateCommandPool      ();
 
 		bool8 IsDeviceSuitable(VkPhysicalDevice Device);
 

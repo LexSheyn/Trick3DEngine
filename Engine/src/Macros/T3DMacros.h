@@ -10,6 +10,14 @@
 #define T3D_INLINE inline
 #endif
 
+#if _MSC_VER
+#define T3D_CALL __fastcall
+#else
+// Does nothing if not MSC
+#define T3D_CALL
+#endif
+
+
 #define T3D_NO_DISCARD [[nodiscard]]
 
 

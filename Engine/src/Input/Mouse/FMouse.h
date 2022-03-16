@@ -4,7 +4,6 @@
 #include "FMouseButton.h"
 //#include "FMouseEvent.h"
 #include "FMouseButtonState.h"
-#include "../../Events/IEventListener.h"
 
 namespace t3d
 {
@@ -14,7 +13,7 @@ namespace t3d
 
 	// IEventListener interface:
 		
-		void OnEvent(const FEvent* const) override;
+		void T3D_CALL OnEvent(const FEvent* const) override;
 
 	// Functions:
 

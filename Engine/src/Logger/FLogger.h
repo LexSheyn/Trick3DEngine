@@ -14,9 +14,9 @@ namespace t3d
 
 	// Functions:
 
-		static void Trace      (const std::string& FunctionName, const std::string& Message );
-		static void Warning    (const std::string& FunctionName, const std::string& Message );
-		static void Error      (const std::string& FunctionName, const std::string& Message );
+		static void T3D_CALL Trace      (const std::string& FunctionName, const std::string& Message );
+		static void T3D_CALL Warning    (const std::string& FunctionName, const std::string& Message );
+		static void T3D_CALL Error      (const std::string& FunctionName, const std::string& Message );
 
 	// Modifiers:
 
@@ -26,7 +26,7 @@ namespace t3d
 
 	// Private Constructors and Destructor:
 
-		FLogger  () {}
+		 FLogger () {}
 		~FLogger () {}
 
 		T3D_NO_COPY(FLogger);

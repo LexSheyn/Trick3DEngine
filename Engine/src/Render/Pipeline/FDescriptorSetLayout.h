@@ -14,9 +14,8 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FDescriptorSetLayout(FDevice& Device, const std::unordered_map<uint32, VkDescriptorSetLayoutBinding>& Bindings);
-
-		~FDescriptorSetLayout();
+		 FDescriptorSetLayout (FDevice& Device, const std::unordered_map<uint32, VkDescriptorSetLayoutBinding>& Bindings);
+		~FDescriptorSetLayout ();
 
 		T3D_NO_COPY(FDescriptorSetLayout);
 		T3D_NO_MOVE(FDescriptorSetLayout);
@@ -27,9 +26,9 @@ namespace t3d
 		{
 		public:
 
-			Constructor(FDevice& Device) : Device(Device) {}
+			Constructor (FDevice& Device) : Device(Device) {}
 
-			Constructor& AddBinding(uint32 Binding, VkDescriptorType Type, VkShaderStageFlags ShaderStageFlags, uint32 Count = 1u)
+			Constructor& T3D_CALL AddBinding(uint32 Binding, VkDescriptorType Type, VkShaderStageFlags ShaderStageFlags, uint32 Count = 1u)
 			{
 				if (Bindings.count(Binding) != 0u)
 				{
@@ -49,7 +48,7 @@ namespace t3d
 				return *this;
 			}
 
-			T3D_NO_DISCARD T3D_INLINE FDescriptorSetLayout* Create() const { return new FDescriptorSetLayout(Device, Bindings); }
+			T3D_NO_DISCARD T3D_INLINE FDescriptorSetLayout* T3D_CALL Create() const { return new FDescriptorSetLayout(Device, Bindings); }
 
 		private:
 
@@ -60,7 +59,7 @@ namespace t3d
 
 	// Accessors:
 
-		VkDescriptorSetLayout GetDescriptorSetLayout() const;
+		VkDescriptorSetLayout T3D_CALL GetDescriptorSetLayout() const;
 
 	private:
 

@@ -157,11 +157,4 @@ namespace t3d
 		return nullptr;
 	}
 
-
-// IEventListener Interface:
-
-	void SEntityComponentSystem::OnEvent(const FEvent* const Event)
-	{
-	}
-
 }

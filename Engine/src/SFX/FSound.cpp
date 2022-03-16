@@ -151,6 +151,13 @@ namespace t3d
 	// Volume:
 
 		Volume = 0.0f;
+
+		FSound::Initialize(0.4f);
+		FSound::LoadFile(ESound::KeyPress  , "D:/Royalty FREE Music/ZapSplat/SFX/zapsplat_multimedia_button_click_001_78078.mp3");
+		FSound::LoadFile(ESound::KeyRelease, "D:/Royalty FREE Music/ZapSplat/SFX/zapsplat_multimedia_button_click_002_78079.mp3");
+
+		SEventSystem::Subscribe(EEventType::KeyPressed , this);
+		SEventSystem::Subscribe(EEventType::KeyReleased, this);
 	}
 
 	FSound::~FSound()

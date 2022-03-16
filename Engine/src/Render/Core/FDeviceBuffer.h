@@ -14,7 +14,7 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FDeviceBuffer  (FDevice& Device, VkDeviceSize InstanceSize, uint32 InstanceCount, VkBufferUsageFlags UsageFlags, VkMemoryPropertyFlags MemoryPropertyFlags, VkDeviceSize MinOffsetAlignment = 1u);
+		 FDeviceBuffer (FDevice& Device, VkDeviceSize InstanceSize, uint32 InstanceCount, VkBufferUsageFlags UsageFlags, VkMemoryPropertyFlags MemoryPropertyFlags, VkDeviceSize MinOffsetAlignment = 1u);
 		~FDeviceBuffer ();
 
 		T3D_NO_COPY(FDeviceBuffer);
@@ -28,12 +28,12 @@ namespace t3d
 		/// <param name="Size">: (Optional) Size of the memory range to map. Pass VK_WHOLE_SIZE to map the complete buffer range. </param>
 		/// <param name="Offset">: (Optional) Byte offset from beginning. </param>
 		/// <returns> VkResult of the buffer mapping call. </returns>
-		VkResult Map(VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
+		VkResult T3D_CALL Map(VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
 
 		/// <summary>
 		/// Unmap a mapped memory range.
 		/// </summary>
-		void     Unmap();
+		void     T3D_CALL Unmap();
 
 		/// <summary>
 		/// Copies the specified data to the mapped buffer. Default value writes whole buffer range.
@@ -41,7 +41,7 @@ namespace t3d
 		/// <param name="Data">: Pointer to the data to copy. </param>
 		/// <param name="Size">: (Optional) Size of the data to copy. Pass VK_WHOLE_SIZE to flush the complete buffer. </param>
 		/// <param name="Offset">: (Optional) Byte offset from beginning of mapped region. </param>
-		void     WriteToBuffer(void* Data, VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
+		void     T3D_CALL WriteToBuffer(void* Data, VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
 
 		/// <summary>
 		/// Flush a memory range of the buffer to make it visible to the device.
@@ -50,7 +50,7 @@ namespace t3d
 		/// <param name="Size">: (Optional) Size of the memory range to flush. Pass VK_WHOLE_SIZE to flush the complete buffer range. </param>
 		/// <param name="Offset">: (Optional) Byte offset from beginning. </param>
 		/// <returns> VkResult of the flush call. </returns>
-		VkResult Flush(VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
+		VkResult T3D_CALL Flush(VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
 
 		/// <summary>
 		/// Invalidate a memory range of the buffer to make it visible to the host.
@@ -59,7 +59,7 @@ namespace t3d
 		/// <param name="Size">: (Optional) Size of the memory range to invalidate. Pass VK_WHOLE_SIZE to invalidate the complete buffer range. </param>
 		/// <param name="Offset">: (Optional) Byte offset from beginning. </param>
 		/// <returns> VkResult of the invalidate call. </returns>
-		VkResult Invalidate(VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
+		VkResult T3D_CALL Invalidate(VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
 
 		/// <summary>
 		/// Create a buffer info descriptor.
@@ -67,21 +67,21 @@ namespace t3d
 		/// <param name="">: (Optional) Size of the memory range of the descriptor. </param>
 		/// <param name="Offset">: (Optional) Byte offset from beginning. </param>
 		/// <returns> VkDescriptorBufferInfo of specified offset and range. </returns>
-		VkDescriptorBufferInfo DescriptorInfo(VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
+		VkDescriptorBufferInfo T3D_CALL DescriptorInfo(VkDeviceSize Size = VK_WHOLE_SIZE, VkDeviceSize Offset = 0u);
 
 		/// <summary>
 		/// Copies "InstanceSize" bytes of data to the mapped buffer at an offset of Index * AlignmentSize.
 		/// </summary>
 		/// <param name="Data">: Pointer to the data to copy. </param>
 		/// <param name="Index">: Used in offset calculation. </param>
-		void     WriteToIndex(void* Data, uint32 Index);
+		void     T3D_CALL WriteToIndex(void* Data, uint32 Index);
 
 		/// <summary>
 		/// Flush the memory range at index * alignmentSize of the buffer to make it visible to the device.
 		/// </summary>
 		/// <param name="Index">: Used in offset calculation. </param>
 		/// <returns> VkResult of the flush call. </returns>
-		VkResult FlushIndex(uint32 Index);
+		VkResult T3D_CALL FlushIndex(uint32 Index);
 
 		/// <summary>
 		/// Invalidate a memory range of the buffer to make it visible to the host.
@@ -89,27 +89,27 @@ namespace t3d
 		/// </summary>
 		/// <param name="Index">: Specifies the region to invalidate: Index * AlignmentSize. </param>
 		/// <returns> VkResult of the invalidate call. </returns>
-		VkResult InvalidateIndex(uint32 Index);
+		VkResult T3D_CALL InvalidateIndex(uint32 Index);
 
 		/// <summary>
 		/// Create a buffer info descriptor.
 		/// </summary>
 		/// <param name="Index">: Specifies the region given by Index * AlignmentSize. </param>
 		/// <returns> VkDescriptorBufferInfo for instance at index. </returns>
-		VkDescriptorBufferInfo DescriptorInfoForIndex(uint32 Index);
+		VkDescriptorBufferInfo T3D_CALL DescriptorInfoForIndex(uint32 Index);
 
 	// Accessors:
 
-		VkBuffer GetBuffer          () const;
-		void*    GetMappedMemory    () const;
+		VkBuffer T3D_CALL GetBuffer          () const;
+		void*    T3D_CALL GetMappedMemory    () const;
 
 
-		const VkDeviceSize&          GetBufferSize             () const;
-		const uint32&                GetInstanceCount          () const;
-		const VkDeviceSize&          GetInstanceSize           () const;
-		const VkDeviceSize&          GetAlignmentSize          () const;
-		const VkBufferUsageFlags&    GetUsageFlags             () const;
-		const VkMemoryPropertyFlags& GetMemoryPropertyFlags    () const;
+		const VkDeviceSize&          T3D_CALL GetBufferSize             () const;
+		const uint32&                T3D_CALL GetInstanceCount          () const;
+		const VkDeviceSize&          T3D_CALL GetInstanceSize           () const;
+		const VkDeviceSize&          T3D_CALL GetAlignmentSize          () const;
+		const VkBufferUsageFlags&    T3D_CALL GetUsageFlags             () const;
+		const VkMemoryPropertyFlags& T3D_CALL GetMemoryPropertyFlags    () const;
 
 	private:
 
@@ -121,28 +121,22 @@ namespace t3d
 		/// <param name="InstanceSize">: The size of an instance. </param>
 		/// <param name="MinOffsetAlignment">: The minimum required alignment in bytes for the offset member (for example MinUniformBufferOffsetAlignment). </param>
 		/// <returns> VkResult of the buffer mapping call. </returns>
-		static VkDeviceSize GetAlignment(VkDeviceSize InstanceSize, VkDeviceSize MinOffsetAlignment);
+		static VkDeviceSize T3D_CALL GetAlignment(VkDeviceSize InstanceSize, VkDeviceSize MinOffsetAlignment);
 
 	// Variables:
 
 		FDevice& Device;
 
-
 		void*          MappedMemory;
-
 		VkDeviceMemory Memory;
-
 		VkBuffer       Buffer;
-
 		VkDeviceSize   BufferSize;
 
 		
 		VkDeviceSize InstanceSize;
-
 		uint32       InstanceCount;
 
 		VkBufferUsageFlags    UsageFlags;
-
 		VkMemoryPropertyFlags MemoryPropertyFlags;
 
 		VkDeviceSize AlignmentSize;

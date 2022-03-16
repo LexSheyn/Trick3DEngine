@@ -113,7 +113,7 @@ namespace t3d
 
 	void FWindow::SetIcon(const std::string& FilePath)
 	{
-		FImagePNG Image = FImageLoader::LoadFromFile(FilePath);
+		FImagePNG Image = MImageManager::LoadImage(FilePath);
 
 		TArray<GLFWimage, 1> Images{};
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Render/Systems/RMeshRenderSystem.h"
-#include "../Render/Systems/FPointLightRenderSystem.h"
 #include "../Scene/MSceneManager.h"
 #include "../SFX/FSound.h"
 
@@ -21,9 +20,9 @@ namespace t3d
 
 	// Functions:
 
-		void Run       ();
-		void Update    ();
-		void Render    ();
+		void T3D_CALL Run       ();
+		void T3D_CALL Update    ();
+		void T3D_CALL Render    ();
 
 	private:
 

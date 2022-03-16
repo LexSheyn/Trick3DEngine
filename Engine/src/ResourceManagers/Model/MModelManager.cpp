@@ -1,57 +1,33 @@
-#include "../../../PrecompiledHeaders/t3dpch.h"
-#include "FMeshData.h"
+#include "../../PrecompiledHeaders/t3dpch.h"
+#include "MModelManager.h"
 
-// Tiny OBJ loader:
-#include "../../../ThirdParty/tiny_obj_loader.h"
-
-// Disable warnings from tiny_obj_loader:
-#pragma warning( push ) // tiny_obj_loader - Begin
-#pragma warning( disable : 26495 ) // Uninitialized variable.
-#pragma warning( disable : 26451 ) // Arithmetic overflow.
-#pragma warning( disable : 26498 ) // constexpr.
+#include "../../Render/Primitives/Mesh/FMesh.h"
+#include "../../ThirdParty/tiny_obj_loader.h"
 
 namespace t3d
 {
-// Constructors and Destructor:
-
-	FMeshData::FMeshData()
-	{
-	}
-
-	FMeshData::FMeshData(const std::vector<FVertex>& Vertices, const std::vector<uint32>& Indices)
-		: Vertices(Vertices),
-		  Indices(Indices)
-	{
-	}
-
-	FMeshData::~FMeshData()
-	{
-	}
-
-
 // Functions:
 
-	void FMeshData::LoadOBJ(const std::string& FilePath)
+	FMesh* MModelManager::LoadModel(const std::string& FilePath)
 	{
+		FMeshData MeshData;
+
 		tinyobj::attrib_t Attributes;
 
 		std::vector<tinyobj::shape_t> Shapes;
-
 		std::vector<tinyobj::material_t> Materials;
 
-		std::string Warning;
-		std::string Error;
+		std::string WarningMessage;
+		std::string ErrorMessage;
 
-		if (!tinyobj::LoadObj(&Attributes, &Shapes, &Materials, &Warning, &Error, FilePath.c_str()))
+		if (!tinyobj::LoadObj(&Attributes, &Shapes, &Materials, &WarningMessage, &ErrorMessage, FilePath.c_str()))
 		{
-			LOG_ERROR(Warning + Error);
+			LOG_WARNING(WarningMessage);
+			LOG_ERROR(ErrorMessage);
 			throw;
 		}
 
-		Vertices.clear();
-		Indices.clear();
-
-		std::unordered_map<FVertex, uint32> UniqueVertices;
+		std::unordered_map<FVertex, T3D_Index> UniqueVertices;
 
 		for (const auto& Shape : Shapes)
 		{
@@ -97,16 +73,34 @@ namespace t3d
 
 				if (UniqueVertices.count(Vertex) == 0u)
 				{
-					UniqueVertices[Vertex] = static_cast<uint32>(Vertices.size());
+					UniqueVertices[Vertex] = static_cast<uint32>(MeshData.Vertices.size());
 
-					Vertices.push_back(Vertex);
+					MeshData.Vertices.push_back(Vertex);
 				}
 
-				Indices.push_back(UniqueVertices[Vertex]);
+				MeshData.Indices.push_back(UniqueVertices[Vertex]);
 			}
 		}
+
+		FMesh* Mesh = new FMesh(); // Specify where in the future!
+
+		Mesh->CreateVertexBuffer(*Device, MeshData.Vertices);
+		Mesh->CreateIndexBuffer (*Device, MeshData.Indices);
+
+		return Mesh;
 	}
 
-}
 
-#pragma warning( pop ) // tiny_obj_loader - End
+// Modifiers:
+
+	void MModelManager::SetDevice(FDevice& Device)
+	{
+		MModelManager::Device = &Device;
+	}
+
+
+// Static Variables:
+
+	FDevice* MModelManager::Device;
+
+}

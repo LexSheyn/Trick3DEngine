@@ -9,30 +9,10 @@ namespace t3d
 {
 // Constructors and Destructor:
 
-	FMesh::FMesh(FDevice& Device, const FMesh::Data& MeshData)
-		: Device(Device),
-		  VertexCount(),
+	FMesh::FMesh()
+		: VertexCount(),
 		  IndexCount()
 	{
-		this->CreateVertexBuffer(MeshData.Vertices);
-
-		this->CreateIndexBuffer(MeshData.Indices);
-
-		LOG_TRACE("Created.");
-	}
-
-	FMesh::FMesh(FDevice& Device, const std::string& FilePath)
-		: Device(Device),
-		  VertexCount(),
-		  IndexCount()
-	{
-		FMesh::Data MeshData;
-
-		MeshData.LoadOBJ(FilePath);
-
-		this->CreateVertexBuffer(MeshData.Vertices);
-
-		this->CreateIndexBuffer(MeshData.Indices);
 
 		LOG_TRACE("Created.");
 	}
@@ -43,32 +23,13 @@ namespace t3d
 
 		delete VertexBuffer;
 
-		LOG_TRACE("Destroyed.");
+		LOG_TRACE("Deleted.");
 	}
 
 
 // Functions:
 
-	void FMesh::Bind(VkCommandBuffer CommandBuffer)
-	{
-		VkBuffer Buffers[] = { VertexBuffer->GetBuffer() };
-
-		VkDeviceSize Offsets[] = { 0 };
-
-		vkCmdBindVertexBuffers(CommandBuffer, 0, 1, Buffers, Offsets);
-
-		vkCmdBindIndexBuffer(CommandBuffer, IndexBuffer->GetBuffer(), 0, VK_INDEX_TYPE_UINT32);
-	}
-
-	void FMesh::Draw(VkCommandBuffer CommandBuffer)
-	{
-		vkCmdDrawIndexed(CommandBuffer, IndexCount, 1, 0, 0, 0);
-	}
-
-
-// Private Functions:
-
-	void FMesh::CreateVertexBuffer(const std::vector<FVertex>& Vertices)
+	void FMesh::CreateVertexBuffer(FDevice& Device, const std::vector<FVertex>& Vertices)
 	{
 		VertexCount = static_cast<uint32>(Vertices.size());
 
@@ -97,7 +58,7 @@ namespace t3d
 		Device.CopyBuffer(StagingBuffer.GetBuffer(), VertexBuffer->GetBuffer(), BufferSize);
 	}
 
-	void FMesh::CreateIndexBuffer(const std::vector<uint32>& Indices)
+	void FMesh::CreateIndexBuffer(FDevice& Device, const std::vector<T3D_Index>& Indices)
 	{
 		IndexCount = static_cast<uint32>(Indices.size());
 
@@ -118,12 +79,27 @@ namespace t3d
 		FDeviceBuffer StagingBuffer(Device, IndexSize, IndexCount, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
 		StagingBuffer.Map();
-		StagingBuffer.WriteToBuffer(reinterpret_cast<void*>(const_cast<uint32*>(Indices.data())));
+		StagingBuffer.WriteToBuffer(reinterpret_cast<void*>(const_cast<T3D_Index*>(Indices.data())));
 		StagingBuffer.Unmap();
 
 		IndexBuffer = new FDeviceBuffer(Device, IndexSize, IndexCount, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
 		Device.CopyBuffer(StagingBuffer.GetBuffer(), IndexBuffer->GetBuffer(), BufferSize);
+	}
+
+	void FMesh::Bind(VkCommandBuffer CommandBuffer)
+	{
+		VkBuffer     Buffers[] = { VertexBuffer->GetBuffer() };
+		VkDeviceSize Offsets[] = { 0 };
+
+		vkCmdBindVertexBuffers(CommandBuffer, 0, 1, Buffers, Offsets);
+
+		vkCmdBindIndexBuffer(CommandBuffer, IndexBuffer->GetBuffer(), 0, VK_INDEX_TYPE_UINT32);
+	}
+
+	void FMesh::Draw(VkCommandBuffer CommandBuffer)
+	{
+		vkCmdDrawIndexed(CommandBuffer, IndexCount, 1, 0, 0, 0);
 	}
 
 }

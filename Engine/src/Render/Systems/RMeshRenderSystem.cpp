@@ -16,12 +16,19 @@ namespace t3d
 		this->CreatePipelineLayout();
 		this->CreatePipeline();
 
+		// TEST
+		MModelManager::SetDevice(Device);
+		Mesh = MModelManager::LoadModel("D:/VULKAN_TUTORIAL_SHADERS/Models/paimon_ex.obj");
+
 		LOG_TRACE("Created.");
 	}
 
 	RMeshRenderSystem::~RMeshRenderSystem()
 	{
-		LOG_TRACE("Destroyed.");
+		// TEST
+		delete Mesh;
+
+		LOG_TRACE("Deleted.");
 	}
 
 
@@ -29,29 +36,26 @@ namespace t3d
 
 	void RMeshRenderSystem::Render(FScene& Scene)
 	{
+		// TEST
+		static bool8 HasMesh = false;
+
+		if (!HasMesh)
+		{
+			Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh = Mesh;
+
+			HasMesh = true;
+		}
+
 		Pipeline->Bind(Renderer.GetCurrentCommandBuffer());
 
 		vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
 
-	//	for (auto& Entry : FrameInfo.GameObjects)
-	//	{
-	//		OGameObject& Object = Entry.second;
-	//
-	//		if (Object.Mesh == nullptr)
-	//		{
-	//			continue;
-	//		}
-	//
-	//		FMeshPushConstant MeshPushConstant{};
-	//
-	//		MeshPushConstant.MeshMatrix   = Object.GetTransform().Mat4();
-	//		MeshPushConstant.NormalMatrix = Object.GetTransform().NormalMatrix();
-	//
-	//		vkCmdPushConstants(FrameInfo.CommandBuffer, PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &MeshPushConstant);
-	//	
-	//		Object.Mesh->Bind(FrameInfo.CommandBuffer);
-	//		Object.Mesh->Draw(FrameInfo.CommandBuffer);
-	//	}
+		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant.MeshMatrix = Scene.TransformSystem.Matrix4x4(Scene.ECS.GetComponent<CTransform>(Scene.TestEntity)); //* Scene.TestCamera.GetProjection() * Scene.TestCamera.GetView();
+
+		vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant);
+
+		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh->Bind(Renderer.GetCurrentCommandBuffer());
+		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh->Draw(Renderer.GetCurrentCommandBuffer());
 	}
 
 
@@ -129,8 +133,8 @@ namespace t3d
 		
 		Pipeline = new FPipeline(Device,
 			                     PipelineConfig,
-			                     "D:/VULKAN_TUTORIAL_SHADERS/SPV/vert.spv",
-			                     "D:/VULKAN_TUTORIAL_SHADERS/SPV/frag.spv");
+			                     "D:/T3D_Shaders/SPIR-V/MeshShader_vert.spv",
+			                     "D:/T3D_Shaders/SPIR-V/MeshShader_frag.spv");
 	}
 
 }

@@ -86,15 +86,17 @@
 
 // Custom types:
 #include "../Types/T3DTypes.h"
+#include "../Types/ECSTypes.h"
 
 // Custom defines:
 #include "../Macros/T3DMacros.h"
 
+
 // Engine:
 #include "../Time/FTimeStamp.h"
 #include "../Logger/FLogger.h"
-#include "../ResourceManagers/FImageLoader.h"
 #include "../Templates/TArray.h"
+#include "../Events/SEventSystem.h"
 
 //#ifndef DISABLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN
@@ -132,4 +134,5 @@
 #define NOTAPE
 
 #undef CreateEvent
+#undef LoadImage
 //#endif // DISABLE_WINDOWS

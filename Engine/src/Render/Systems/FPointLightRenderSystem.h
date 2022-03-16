@@ -21,16 +21,15 @@ namespace t3d
 
 	// Functions:
 
-		void Update();
-
-		void Render(FScene& Scene) override;
+		void T3D_CALL Update();
+		void T3D_CALL Render(FScene& Scene) override;
 
 	private:
 
 	// Private Functions:
 
-		void CreateDescriptorPool    () override;
-		void CreatePipelineLayout    () override;
-		void CreatePipeline          () override;
+		void T3D_CALL CreateDescriptorPool    () override;
+		void T3D_CALL CreatePipelineLayout    () override;
+		void T3D_CALL CreatePipeline          () override;
 	};
 }

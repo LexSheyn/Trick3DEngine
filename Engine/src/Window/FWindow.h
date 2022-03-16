@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Events/SEventSystem.h"
 #include "../Input/Keyboard/FKeyboard.h"
 #include "../Input/Mouse/FMouse.h"
 #include "../Input/Gamepad/FGamepad.h"
+#include "../ResourceManagers/Image/MImageManager.h"
 
 namespace t3d
 {
@@ -13,71 +13,56 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FWindow(int32 Width, int32 Height, const std::string& Title);
-
-		~FWindow();
+		 FWindow (int32 Width, int32 Height, const std::string& Title);
+		~FWindow ();
 
 		T3D_NO_COPY(FWindow);
 		T3D_NO_MOVE(FWindow);
 
 	// Functions:
 
-		void Update();
-
-		bool8 ShouldClose();
-
-		void CreateSurface(VkInstance Instance, VkSurfaceKHR* Surface);
-
-		void ResetResizedFlag();
+		void  T3D_CALL Update              ();
+		bool8 T3D_CALL ShouldClose         ();
+		void  T3D_CALL CreateSurface       (VkInstance Instance, VkSurfaceKHR* Surface);
+		void  T3D_CALL ResetResizedFlag    ();
 
 	// Accessors:
 
-		const GLFWwindow* GetGLFWwindow() const;
+		const GLFWwindow* T3D_CALL GetGLFWwindow    () const;
+		const bool8&      T3D_CALL WasResized       () const;
+		const int32&      T3D_CALL GetWidth         () const;
+		const int32&      T3D_CALL GetHeight        () const;
 
-		const bool8&      WasResized()    const;
-
-		const int32&      GetWidth()      const;
-
-		const int32&      GetHeight()     const;
-
-		VkExtent2D  GetExtent();
+		VkExtent2D T3D_CALL GetExtent();
 
 	// Modifiers:
 
-		void SetTitle(const std::string& Title);
-
-		void SetIcon(const std::string& FilePath);
+		void T3D_CALL SetTitle    (const std::string& Title);
+		void T3D_CALL SetIcon     (const std::string& FilePath);
 
 	private:
 
 	// Private Functions:
 
-		void InitWindow();
+		void T3D_CALL InitWindow();
 
 	// Window Callbacks:
 
-		static void FramebufferSizeCallback(GLFWwindow* Window, int32 Width, int32 Height);
+		static void T3D_CALL FramebufferSizeCallback(GLFWwindow* Window, int32 Width, int32 Height);
 
 	// Keyboard Callbacks:
 
-		static void KeyCallback(GLFWwindow* Window, int32 Key, int32 ScanCode, int32 Action, int32 Mods);
-
-		static void CharCallback(GLFWwindow* Window, uint32 Codepoint);
-
-		// Deprecated, scheduled for removal in GLFW version 4.0.
-		static void CharModsCallback(GLFWwindow* Window, uint32 Codepoint, int32 Mods);
+		static void T3D_CALL KeyCallback         (GLFWwindow* Window, int32 Key, int32 ScanCode, int32 Action, int32 Mods);
+		static void T3D_CALL CharCallback        (GLFWwindow* Window, uint32 Codepoint);		
+		static void T3D_CALL CharModsCallback    (GLFWwindow* Window, uint32 Codepoint, int32 Mods); // Deprecated, scheduled for removal in GLFW version 4.0.
 
 	// Mouse Callbacks:
 
-		static void MouseButtonCallback(GLFWwindow* Window, int32 Button, int32 Action, int32 Mods);
-
-		static void CursorPosCallback(GLFWwindow* Window, float64 X, float64 Y);
-
-		static void CursorEnterCallback(GLFWwindow* Window, int32 Entered);
-
-		static void ScrollCallback(GLFWwindow* Window, float64 OffsetX, float64 OffsetY);
-
-		static void DropCallback(GLFWwindow* Window, int32 PathCount, const char8* Paths[]);
+		static void T3D_CALL MouseButtonCallback    (GLFWwindow* Window, int32 Button, int32 Action, int32 Mods);
+		static void T3D_CALL CursorPosCallback      (GLFWwindow* Window, float64 X, float64 Y);
+		static void T3D_CALL CursorEnterCallback    (GLFWwindow* Window, int32 Entered);
+		static void T3D_CALL ScrollCallback         (GLFWwindow* Window, float64 OffsetX, float64 OffsetY);
+		static void T3D_CALL DropCallback           (GLFWwindow* Window, int32 PathCount, const char8* Paths[]);
 
 	// Variables:
 

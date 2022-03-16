@@ -1,13 +1,13 @@
-#include "../PrecompiledHeaders/t3dpch.h"
-#include "FImageLoader.h"
+#include "../../PrecompiledHeaders/t3dpch.h"
+#include "MImageManager.h"
 
-#include "../ThirdParty/stb_image.h"
+#include "../../ThirdParty/stb_image.h"
 
 namespace t3d
 {
 // Functions:
 
-	FImagePNG FImageLoader::LoadFromFile(const std::string& FilePath)
+	FImagePNG MImageManager::LoadImage(const std::string& FilePath)
 	{
 		FImagePNG Image{};
 
@@ -22,4 +22,5 @@ namespace t3d
 
 		return Image;
 	}
+
 }

@@ -51,8 +51,8 @@ namespace t3d
 	//
 	//		FPointLightPushConstant PushConstant{};
 	//
-	//		PushConstant.Position = glm::vec4(Object.GetTransform().GetTranslation(), 1.0f);
-	//		PushConstant.Color    = glm::vec4(Object.Color, Object.LightIntensity);
+	//		PushConstant.Position = FVec4(Object.GetTransform().GetTranslation(), 1.0f);
+	//		PushConstant.Color    = FVec4(Object.Color, Object.LightIntensity);
 	//		PushConstant.Radius   = Object.GetTransform().GetScale().x;
 	//
 	//		vkCmdPushConstants(FrameInfo.CommandBuffer, PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FPointLightPushConstant), &PushConstant);

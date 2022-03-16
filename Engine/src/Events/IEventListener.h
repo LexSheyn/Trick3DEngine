@@ -16,11 +16,11 @@ namespace t3d
 
 	// Functions:
 
-		virtual void OnEvent(const FEvent* const Event) = 0;
+		virtual void T3D_CALL OnEvent(const FEvent* const Event) = 0;
 
 	// Accessors:
 
-		const uint32& GetID() const;
+		const uint32& T3D_CALL GetID() const;
 
 	private:
 

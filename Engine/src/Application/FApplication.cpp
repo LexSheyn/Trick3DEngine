@@ -13,12 +13,6 @@ namespace t3d
 		  Renderer(Window, Device),
 		  MeshRenderSystem(Device, Renderer)
 	{
-		FSound::Initialize(0.4f);
-		FSound::LoadFile(ESound::KeyPress  , "D:/Royalty FREE Music/ZapSplat/SFX/zapsplat_multimedia_button_click_001_78078.mp3");
-		FSound::LoadFile(ESound::KeyRelease, "D:/Royalty FREE Music/ZapSplat/SFX/zapsplat_multimedia_button_click_002_78079.mp3");
-
-		SEventSystem::Subscribe(EEventType::KeyPressed , FSound::GetInstance());
-		SEventSystem::Subscribe(EEventType::KeyReleased, FSound::GetInstance());
 	}
 
 	FApplication::~FApplication()

@@ -11,19 +11,16 @@ namespace t3d
 
 	// Constructor:
 
-		FDescriptorWriter(FDescriptorSetLayout& SetLayout, FDescriptorPool& Pool);
-
-		~FDescriptorWriter();
+		 FDescriptorWriter (FDescriptorSetLayout& SetLayout, FDescriptorPool& Pool);
+		~FDescriptorWriter ();
 
 	// Functions:
 
-		FDescriptorWriter& WriteBuffer(uint32 Binding, VkDescriptorBufferInfo* BufferInfo);
+		FDescriptorWriter& T3D_CALL WriteBuffer    (uint32 Binding, VkDescriptorBufferInfo* BufferInfo);
+		FDescriptorWriter& T3D_CALL WriteImage     (uint32 Binding, VkDescriptorImageInfo* ImageInfo);
 
-		FDescriptorWriter& WriteImage(uint32 Binding, VkDescriptorImageInfo* ImageInfo);
-
-		bool8 Build(VkDescriptorSet& Set);
-
-		void  Overwrite(VkDescriptorSet& Set);
+		bool8 T3D_CALL Build        (VkDescriptorSet& Set);
+		void  T3D_CALL Overwrite    (VkDescriptorSet& Set);
 
 	private:
 

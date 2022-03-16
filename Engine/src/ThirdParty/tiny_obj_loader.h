@@ -61,8 +61,9 @@ THE SOFTWARE.
 
 #pragma warning( push ) // Begin
 #pragma warning( disable : 26812 ) // Uncoped Enum
-#pragma warning( disable : 26495 ) // Uncoped Enum
-#pragma warning( disable : 26498 ) // Uncoped Enum
+#pragma warning( disable : 26495 ) // Uninitialized variable.
+#pragma warning( disable : 26498 ) // constexpr.
+#pragma warning( disable : 26451 ) // Arithmetic overflow.
 
 #ifndef TINY_OBJ_LOADER_H_
 #define TINY_OBJ_LOADER_H_

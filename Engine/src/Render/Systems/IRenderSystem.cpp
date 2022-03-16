@@ -29,7 +29,7 @@ namespace t3d
 
 		vkDestroyPipelineLayout(Device.Device(), PipelineLayout, nullptr);
 
-		LOG_TRACE("Destroyed.");
+		LOG_TRACE("Deleted.");
 	}
 
 
