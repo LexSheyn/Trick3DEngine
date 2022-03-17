@@ -50,7 +50,7 @@ namespace t3d
 
 		vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
 
-		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant.MeshMatrix = Scene.TransformSystem.Matrix4x4(Scene.ECS.GetComponent<CTransform>(Scene.TestEntity)); //* Scene.TestCamera.GetProjection() * Scene.TestCamera.GetView();
+		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant.MeshMatrix = Scene.TestCamera.GetProjection() * Scene.TransformSystem.Matrix4x4(Scene.ECS.GetComponent<CTransform>(Scene.TestEntity)); //* * Scene.TestCamera.GetView();
 
 		vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant);
 

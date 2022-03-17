@@ -180,6 +180,8 @@ namespace t3d
 
 		WindowPtr->Width  = Width;
 		WindowPtr->Height = Height;
+
+		SEventSystem::PushEvent(FEvent(EEventType::WindowResized, FFrameBufferSizeData(Width, Height)));
 	}
 
 

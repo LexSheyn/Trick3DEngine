@@ -32,11 +32,13 @@ namespace t3d
 
 	void FCamera::SetPerspectiveProjection(float32 FieldOfViewY, float32 AspectRatio, float32 NearClippingPlane, float32 FarClippingPlane)
 	{
+	#if _DEBUG
 		if (glm::abs(AspectRatio - std::numeric_limits<float32>::epsilon()) < 0.0f)
 		{
 			LOG_ERROR("Aspect ratio need to be more than epsilon");
 			throw;
 		}
+	#endif
 
 		const float32 TanHalfFovy = glm::tan(FieldOfViewY / 2.0f); // std::tan ???
 

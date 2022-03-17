@@ -8,6 +8,7 @@ namespace t3d
 	MSceneManager::MSceneManager()
 		: ActiveScene(EScene::MainMenu)
 	{
+		SEventSystem::Subscribe(EEventType::WindowResized, this);
 	}
 
 	MSceneManager::~MSceneManager()
@@ -63,6 +64,12 @@ namespace t3d
 
 	void MSceneManager::OnEvent(const FEvent* const Event)
 	{
+		if (Event->GetType() == EEventType::WindowResized)
+		{
+			float32 AspectRatio = static_cast<float32>(Event->FrameBufferSizeData.Width) / static_cast<float32>(Event->FrameBufferSizeData.Height);
+
+			Scenes[ActiveScene].TestCamera.SetPerspectiveProjection(glm::radians(50.0f), AspectRatio, 0.1f, 100.0f);
+		}
 	}
 
 }
