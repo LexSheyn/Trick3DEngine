@@ -3,6 +3,7 @@
 #include "FPipelineConfigInfo.h"
 #include "FDescriptorWriter.h"
 #include "../Core/FSwapchain.h"
+#include "../../ResourceManagers/Shaders/MShaderManager.h"
 
 namespace t3d
 {
@@ -27,8 +28,6 @@ namespace t3d
 	private:
 
 	// PrivateFunctions:
-
-		static std::vector<char8> T3D_CALL ReadFile(const std::string& FilePath);
 
 		void CreateGraphicsPipeline    (const FPipelineConfigInfo& ConfigInfo, const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
 		void CreateShaderModule        (const std::vector<char8>& ShaderCode, VkShaderModule* ShaderModule);

@@ -159,6 +159,9 @@
     <ClCompile Include="src\Updater\FUpdater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ResourceManagers\Shaders\MShaderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Events\EEventCategory.h">
@@ -480,6 +483,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ECS\Systems\Base\ISystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

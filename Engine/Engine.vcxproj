@@ -221,6 +221,10 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\ResourceManagers\Shaders\MShaderManager.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Scene\FScene.cpp" />
     <ClCompile Include="src\Scene\MSceneManager.cpp" />
     <ClCompile Include="src\SFX\FSound.cpp" />
@@ -257,6 +261,7 @@
     <ClInclude Include="src\ECS\Systems\Render\IRenderSystem.h" />
     <ClInclude Include="src\ResourceManagers\Model\MModelManager.h" />
     <ClInclude Include="src\ResourceManagers\Image\MImageManager.h" />
+    <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h" />
     <ClInclude Include="src\Scene\EScene.h" />
     <ClInclude Include="src\Scene\FScene.h" />
     <ClInclude Include="src\Scene\MSceneManager.h" />
