@@ -5,9 +5,9 @@ namespace t3d
 {
 // Functions:
 
-	void SEventSystem::PushEvent(const FEvent& Event)
+	void SEventSystem::PushEvent(FEvent&& Event)
 	{
-		EventQueue.push_back(Event);
+		EventQueue.push_back(std::move(Event));
 	}
 
 	void SEventSystem::ProcessEvents()

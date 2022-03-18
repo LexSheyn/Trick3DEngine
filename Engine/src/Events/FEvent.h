@@ -26,6 +26,9 @@ namespace t3d
 		FEvent    (EEventType Type, FScrollData          ScrollData)          : Type (Type), ScrollData          (ScrollData)          {}
 		FEvent    (EEventType Type, FDropData            DropData)            : Type (Type), DropData            (DropData)            {}
 
+		T3D_NO_COPY(FEvent);
+		T3D_DEFAULT_MOVE(FEvent);
+
 	// Accessors:
 
 		T3D_INLINE const EEventCategory& GetCategory    () const { return Category; }
