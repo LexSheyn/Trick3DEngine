@@ -11,7 +11,7 @@ namespace t3d
 		  Window(Width, Height, "Trick 3D Engine"),
 		  Device(Window),
 		  Renderer(Window, Device),
-		  MeshRenderSystem(Device, Renderer)
+		  MeshRenderSystem(Renderer)
 	{
 	}
 
@@ -27,23 +27,36 @@ namespace t3d
 	{
 		while (!Window.ShouldClose())
 		{
+			Clock.Restart();
+
 			this->Update();
 
 			this->Render();
 
 			std::this_thread::sleep_for(std::chrono::microseconds(16600)); // ~60 FPS // NEED TO BE MOVED SOMEWHERE ELSE!!!
+
+			FDeltaTime::Set( Clock.GetElapsedTime().AsSeconds() );
 		}
 	}
 
 	void FApplication::Update()
 	{
+	// Dedicated window update, window events coming from it:
+
 		Window.Update();
+
+	// Events:
 
 		SEventSystem::ProcessEvents();
 
-		FSound::Update();
+	// Update Systems:
 
-		// Other stuff here.
+		FUpdater::Update(0);
+		FUpdater::Update(1);
+
+	// Update SFX:
+
+		FSound::Update();
 	}
 
 	void FApplication::Render()

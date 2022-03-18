@@ -6,9 +6,8 @@ namespace t3d
 	{
 	// Accessors:
 
-		static std::vector<VkVertexInputBindingDescription>   GetBindingDescriptions();
-
-		static std::vector<VkVertexInputAttributeDescription> GetAttributeDescriptions();
+		static std::vector<VkVertexInputBindingDescription>   T3D_CALL GetBindingDescriptions();
+		static std::vector<VkVertexInputAttributeDescription> T3D_CALL GetAttributeDescriptions();
 
 	// Operators:
 

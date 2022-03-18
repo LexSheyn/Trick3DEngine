@@ -162,6 +162,7 @@ namespace t3d
 
 	FSound::~FSound()
 	{
+		SEventSystem::UnsubscribeFromAll(this);
 	}
 
 

@@ -20,7 +20,7 @@ namespace t3d
 
 	// Modifiers:
 
-		static void SetLevel(ELogLevel Level);
+		static void T3D_CALL SetLevel(ELogLevel Level);
 
 	private:
 

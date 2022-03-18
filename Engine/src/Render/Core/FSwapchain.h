@@ -23,22 +23,22 @@ namespace t3d
 
 	// Functions:
 
-		VkFormat T3D_CALL FindDepthFormat         ();
-		VkResult T3D_CALL AcquireNextImage        (uint32* ImageIndex);
-		VkResult T3D_CALL SubmitCommandBuffers    (const VkCommandBuffer* CommandBuffers, uint32* ImageIndex);
-		bool8    T3D_CALL HasEqualSwapFormats     (const FSwapchain& Swapchain) const;
+		VkFormat FindDepthFormat         ();
+		VkResult AcquireNextImage        (uint32* ImageIndex);
+		VkResult SubmitCommandBuffers    (const VkCommandBuffer* CommandBuffers, uint32* ImageIndex);
+		bool8    HasEqualSwapFormats     (const FSwapchain& Swapchain) const;
 
 	// Accessors:
 
-		VkFramebuffer T3D_CALL GetFramebuffer             (uint32 Index);
-		VkRenderPass  T3D_CALL GetRenderPass              ();
-		VkImageView   T3D_CALL GetImageView               (uint32 Index);
-		uint64        T3D_CALL GetImageCount              ();
-		VkFormat      T3D_CALL GetSwapchainImageFormat    ();
-		VkExtent2D    T3D_CALL GetSwapchainExtent         ();
-		uint32        T3D_CALL GetWidth                   ();
-		uint32        T3D_CALL GetHeight                  ();
-		float32       T3D_CALL GetExtentAspectRatio       ();
+		VkFramebuffer GetFramebuffer             (uint32 Index);
+		VkRenderPass  GetRenderPass              ();
+		VkImageView   GetImageView               (uint32 Index);
+		uint64        GetImageCount              ();
+		VkFormat      GetSwapchainImageFormat    ();
+		VkExtent2D    GetSwapchainExtent         ();
+		uint32        GetWidth                   ();
+		uint32        GetHeight                  ();
+		float32       GetExtentAspectRatio       ();
 
 	// Public Constants:
 
@@ -48,17 +48,17 @@ namespace t3d
 
 	// Private Functions:
 
-		void T3D_CALL Init                    ();
-		void T3D_CALL CreateSwapchain         ();
-		void T3D_CALL CreateImageViews        ();
-		void T3D_CALL CreateDepthResources    ();
-		void T3D_CALL CreateRenderPass        ();
-		void T3D_CALL CreateFramebuffers      ();
-		void T3D_CALL CreateSyncObjects       ();
+		void Init                    ();
+		void CreateSwapchain         ();
+		void CreateImageViews        ();
+		void CreateDepthResources    ();
+		void CreateRenderPass        ();
+		void CreateFramebuffers      ();
+		void CreateSyncObjects       ();
 
-		VkSurfaceFormatKHR T3D_CALL ChooseSwapSurfaceFormat    (const std::vector<VkSurfaceFormatKHR>& AvailableFormats);
-		VkPresentModeKHR   T3D_CALL ChooseSwapPresentMode      (const std::vector<VkPresentModeKHR>& AvailablePresentModes);
-		VkExtent2D         T3D_CALL ChooseSwapExtent           (const VkSurfaceCapabilitiesKHR& Capabilities);
+		VkSurfaceFormatKHR ChooseSwapSurfaceFormat    (const std::vector<VkSurfaceFormatKHR>& AvailableFormats);
+		VkPresentModeKHR   ChooseSwapPresentMode      (const std::vector<VkPresentModeKHR>& AvailablePresentModes);
+		VkExtent2D         ChooseSwapExtent           (const VkSurfaceCapabilitiesKHR& Capabilities);
 
 	// Variables:
 

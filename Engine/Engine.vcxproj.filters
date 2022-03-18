@@ -84,13 +84,13 @@
     <ClCompile Include="src\Render\Pipeline\FPipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\FBillboardRenderSystem.cpp">
+    <ClCompile Include="src\ECS\Systems\Render\FBillboardRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\RMeshRenderSystem.cpp">
+    <ClCompile Include="src\ECS\Systems\Render\RMeshRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\FPointLightRenderSystem.cpp">
+    <ClCompile Include="src\ECS\Systems\Render\FPointLightRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
@@ -138,7 +138,7 @@
     <ClCompile Include="src\Types\T3DStaticConversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\IRenderSystem.cpp">
+    <ClCompile Include="src\ECS\Systems\Render\IRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene\MSceneManager.cpp">
@@ -150,13 +150,13 @@
     <ClCompile Include="src\Templates\TTypeID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\Systems\STransformSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\ResourceManagers\Model\MModelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\Image\MImageManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Updater\FUpdater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -317,13 +317,13 @@
     <ClInclude Include="src\Render\Pipeline\FPipelineConfigInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\Systems\FBillboardRenderSystem.h">
+    <ClInclude Include="src\ECS\Systems\Render\FBillboardRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\Systems\RMeshRenderSystem.h">
+    <ClInclude Include="src\ECS\Systems\Render\RMeshRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\Systems\FPointLightRenderSystem.h">
+    <ClInclude Include="src\ECS\Systems\Render\FPointLightRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ResourceManagers\Image\EColorFormat.h">
@@ -422,7 +422,7 @@
     <ClInclude Include="src\Logger\ELogLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\Systems\IRenderSystem.h">
+    <ClInclude Include="src\ECS\Systems\Render\IRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Scene\MSceneManager.h">
@@ -470,16 +470,16 @@
     <ClInclude Include="src\ECS\Components\CCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\Systems\STransformSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\Systems\Systems.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\ResourceManagers\Model\MModelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ResourceManagers\Image\MImageManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Updater\FUpdater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ECS\Systems\Base\ISystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

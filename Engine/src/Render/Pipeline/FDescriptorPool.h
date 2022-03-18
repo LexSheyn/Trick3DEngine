@@ -22,9 +22,9 @@ namespace t3d
 
 	// Functions:
 
-		bool8 T3D_CALL AllocateDescriptorSet(const VkDescriptorSetLayout SetLayout, VkDescriptorSet& Set) const;
-		void  T3D_CALL FreeDescriptorSets(std::vector<VkDescriptorSet>& Sets) const;
-		void  T3D_CALL ResetPool                ();
+		bool8 AllocateDescriptorSet(const VkDescriptorSetLayout SetLayout, VkDescriptorSet& Set) const;
+		void  FreeDescriptorSets(std::vector<VkDescriptorSet>& Sets) const;
+		void  ResetPool                ();
 
 		class Constructor
 		{
@@ -32,28 +32,28 @@ namespace t3d
 
 			Constructor (FDevice& Device) : Device(Device) {}
 
-			Constructor& T3D_CALL AddPoolSize(VkDescriptorType Type, uint32 Count)
+			Constructor& AddPoolSize(VkDescriptorType Type, uint32 Count)
 			{
 				PoolSizes.push_back({ Type, Count });
 
 				return *this;
 			}
 
-			Constructor& T3D_CALL SetPoolFlags(VkDescriptorPoolCreateFlags Flags)
+			Constructor& SetPoolFlags(VkDescriptorPoolCreateFlags Flags)
 			{
 				PoolFlags = Flags;
 
 				return *this;
 			}
 
-			Constructor& T3D_CALL SetMaxSets(uint32 Count)
+			Constructor& SetMaxSets(uint32 Count)
 			{
 				MaxSets = Count;
 
 				return *this;
 			}
 
-			T3D_NO_DISCARD T3D_INLINE FDescriptorPool* T3D_CALL Create() const { return new FDescriptorPool(Device, MaxSets, PoolFlags, PoolSizes); }
+			T3D_NO_DISCARD T3D_INLINE FDescriptorPool* Create() const { return new FDescriptorPool(Device, MaxSets, PoolFlags, PoolSizes); }
 
 		private:
 

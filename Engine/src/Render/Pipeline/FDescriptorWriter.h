@@ -16,11 +16,11 @@ namespace t3d
 
 	// Functions:
 
-		FDescriptorWriter& T3D_CALL WriteBuffer    (uint32 Binding, VkDescriptorBufferInfo* BufferInfo);
-		FDescriptorWriter& T3D_CALL WriteImage     (uint32 Binding, VkDescriptorImageInfo* ImageInfo);
+		FDescriptorWriter& WriteBuffer    (uint32 Binding, VkDescriptorBufferInfo* BufferInfo);
+		FDescriptorWriter& WriteImage     (uint32 Binding, VkDescriptorImageInfo* ImageInfo);
 
-		bool8 T3D_CALL Build        (VkDescriptorSet& Set);
-		void  T3D_CALL Overwrite    (VkDescriptorSet& Set);
+		bool8 Build        (VkDescriptorSet& Set);
+		void  Overwrite    (VkDescriptorSet& Set);
 
 	private:
 

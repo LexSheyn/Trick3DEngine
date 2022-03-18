@@ -12,7 +12,7 @@ namespace t3d
 		this->CreateTestEntity();
 
 		TestCamera.SetPerspectiveProjection(glm::radians(50.0f), 800.0f/600.0f, 0.1f, 100.0f);
-		TestCamera.SetViewTarget(FVec3(0.0f, 0.0f, 5.0f), FVec3());
+		TestCamera.SetViewTarget(FVec3(0.0f, 0.0f, -5.0f), FVec3(0.0f));
 	}
 
 	FScene::~FScene()
@@ -36,7 +36,7 @@ namespace t3d
 		ECS.AddComponent<CModel>(TestEntity);
 
 		ECS.GetComponent<CTransform>(TestEntity)->Translation = FVec3(0.0f, 0.0f, 5.0f);
-		ECS.GetComponent<CTransform>(TestEntity)->Scale = FVec3(0.3f, 0.3f, 0.3f);
+		ECS.GetComponent<CTransform>(TestEntity)->Scale       = FVec3(0.3f, 0.3f, 0.3f);
 	}
 
 	void FScene::DeleteTestEntity()

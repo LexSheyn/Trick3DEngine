@@ -19,22 +19,22 @@ namespace t3d
 
 	// Accessors:
 
-		const float32& T3D_CALL GetVolume();
+		const float32& GetVolume();
 
 	// Modifiers:
 
 		/// <param name="Volume"> : Value in range between 0.0 and 1.0 </param>
-		void T3D_CALL SetVolume(float32 Volume);
+		void SetVolume(float32 Volume);
 
 	private:
 
 	// Private Functions:
 
-		void T3D_CALL Play        (ESound Name, ESoundGroup Group);
-		void T3D_CALL Pause       ();
-		void T3D_CALL Pause       (ESoundGroup Group);
-		void T3D_CALL Unpause     ();
-		void T3D_CALL Unpause     (ESoundGroup Group);
+		void Play        (ESound Name, ESoundGroup Group);
+		void Pause       ();
+		void Pause       (ESoundGroup Group);
+		void Unpause     ();
+		void Unpause     (ESoundGroup Group);
 
 	// Private Constructors and Destructor:
 
@@ -78,6 +78,6 @@ namespace t3d
 
 	// IEventListener Interface:
 
-		void T3D_CALL OnEvent(const FEvent* const Event) override;
+		void OnEvent(const FEvent* const Event) override;
 	};
 }

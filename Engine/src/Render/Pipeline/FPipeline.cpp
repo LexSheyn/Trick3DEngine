@@ -160,7 +160,7 @@ namespace t3d
 
 		this->CreateShaderModule(FragmentShaderCode, &FragmentShaderModule);
 
-		VkPipelineShaderStageCreateInfo ShaderStages[2];
+		VkPipelineShaderStageCreateInfo ShaderStages[2]{};
 
 		ShaderStages[0].sType               = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
 		ShaderStages[0].stage               = VK_SHADER_STAGE_VERTEX_BIT;

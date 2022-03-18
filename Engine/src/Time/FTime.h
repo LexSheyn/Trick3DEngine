@@ -12,19 +12,15 @@ namespace t3d
 
 	// Functions:
 
-		static const FTime Seconds(float32 Value);
-
-		static const FTime Milliseconds(int32 Value);
-		
-		static const FTime Microseconds(int64 Value);
+		static const FTime T3D_CALL Seconds         (float32 Value);
+		static const FTime T3D_CALL Milliseconds    (int32 Value);		
+		static const FTime T3D_CALL Microseconds    (int64 Value);
 
 	// Accessors:
 
-		const float32 AsSeconds()      const;
-
-		const int32   AsMilliseconds() const;
-		
-		const int64   AsMicroseconds() const;
+		const float32 T3D_CALL AsSeconds         () const;
+		const int32   T3D_CALL AsMilliseconds    () const;		
+		const int64   T3D_CALL AsMicroseconds    () const;
 
 	private:
 

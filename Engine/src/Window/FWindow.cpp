@@ -72,7 +72,7 @@ namespace t3d
 
 	void FWindow::ResetResizedFlag()
 	{
-		FramebufferResized = false;
+		IsFramebufferResized = false;
 	}
 
 
@@ -85,7 +85,7 @@ namespace t3d
 
 	const bool8& FWindow::WasResized() const
 	{
-		return FramebufferResized;
+		return IsFramebufferResized;
 	}
 
 	const int32& FWindow::GetWidth() const
@@ -176,12 +176,12 @@ namespace t3d
 	{
 		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
 
-		WindowPtr->FramebufferResized = true;
+		WindowPtr->IsFramebufferResized = true;
 
 		WindowPtr->Width  = Width;
 		WindowPtr->Height = Height;
 
-		SEventSystem::PushEvent(FEvent(EEventType::WindowResized, FFrameBufferSizeData(Width, Height)));
+		SEventSystem::PushEvent(FEvent(EEventType::WindowResized, FFramebufferSizeData(Width, Height)));
 	}
 
 

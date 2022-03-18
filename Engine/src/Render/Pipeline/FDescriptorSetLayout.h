@@ -28,7 +28,7 @@ namespace t3d
 
 			Constructor (FDevice& Device) : Device(Device) {}
 
-			Constructor& T3D_CALL AddBinding(uint32 Binding, VkDescriptorType Type, VkShaderStageFlags ShaderStageFlags, uint32 Count = 1u)
+			Constructor& AddBinding(uint32 Binding, VkDescriptorType Type, VkShaderStageFlags ShaderStageFlags, uint32 Count = 1u)
 			{
 				if (Bindings.count(Binding) != 0u)
 				{
@@ -48,7 +48,7 @@ namespace t3d
 				return *this;
 			}
 
-			T3D_NO_DISCARD T3D_INLINE FDescriptorSetLayout* T3D_CALL Create() const { return new FDescriptorSetLayout(Device, Bindings); }
+			T3D_NO_DISCARD T3D_INLINE FDescriptorSetLayout* Create() const { return new FDescriptorSetLayout(Device, Bindings); }
 
 		private:
 
@@ -59,7 +59,7 @@ namespace t3d
 
 	// Accessors:
 
-		VkDescriptorSetLayout T3D_CALL GetDescriptorSetLayout() const;
+		VkDescriptorSetLayout GetDescriptorSetLayout() const;
 
 	private:
 

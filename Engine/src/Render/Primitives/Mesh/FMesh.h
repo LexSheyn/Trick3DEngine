@@ -21,11 +21,11 @@ namespace t3d
 
 	// Functions:
 
-		void T3D_CALL CreateVertexBuffer    (FDevice& Device, const std::vector<FVertex>& Vertices);
-		void T3D_CALL CreateIndexBuffer     (FDevice& Device, const std::vector<T3D_Index>& Indices);
+		void CreateVertexBuffer    (FDevice& Device, const std::vector<FVertex>& Vertices);
+		void CreateIndexBuffer     (FDevice& Device, const std::vector<T3D_Index>& Indices);
 
-		void T3D_CALL Bind    (VkCommandBuffer CommandBuffer);
-		void T3D_CALL Draw    (VkCommandBuffer CommandBuffer);
+		void Bind    (VkCommandBuffer CommandBuffer);
+		void Draw    (VkCommandBuffer CommandBuffer);
 
 	private:
 

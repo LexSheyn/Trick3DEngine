@@ -1,5 +1,5 @@
-#include "../../PrecompiledHeaders/t3dpch.h"
-#include "FPointLightRenderSystem.h"
+#include "../../../PrecompiledHeaders/t3dpch.h"
+#include "RMeshRenderSystem.h"
 
 // Disable warnings from Vulkan SDK:
 #pragma warning( push ) // Vulkan SDK - Begin
@@ -9,70 +9,72 @@ namespace t3d
 {
 // Constructors and Destructor:
 
-	FPointLightRenderSystem::FPointLightRenderSystem(FDevice& Device, FRenderer& Renderer)
-		: IRenderSystem(Device, Renderer)
+	RMeshRenderSystem::RMeshRenderSystem(FRenderer& Renderer)
+		: IRenderSystem(Renderer)
 	{
 		this->CreateDescriptorPool();
 		this->CreatePipelineLayout();
 		this->CreatePipeline();
 
+		// TEST
+		MModelManager::SetDevice(Renderer.GetDevice());
+		Mesh = MModelManager::LoadModel("D:/VULKAN_TUTORIAL_SHADERS/Models/paimon_ex.obj");
+
 		LOG_TRACE("Created.");
 	}
 
-	FPointLightRenderSystem::~FPointLightRenderSystem()
+	RMeshRenderSystem::~RMeshRenderSystem()
 	{
-		delete Pipeline;
+		for (uint64 i = 0u; i < UniformBuffers.Size(); i++)
+		{
+			delete UniformBuffers[i];
+		}
 
-		vkDestroyPipelineLayout(Device.Device(), PipelineLayout, nullptr);
+		// TEST
+		delete Mesh;
+
+		LOG_TRACE("Deleted.");
 	}
 
 
 // Functions:
 
-	void FPointLightRenderSystem::Update()
+	void RMeshRenderSystem::Render(FScene& Scene)
 	{
-		
-	}
+		// TEST
+		static bool8 HasMesh = false;
 
-	void FPointLightRenderSystem::Render(FScene& Scene)
-	{
+		if (!HasMesh)
+		{
+			Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh = Mesh;
+
+			HasMesh = true;
+		}
+
 		Pipeline->Bind(Renderer.GetCurrentCommandBuffer());
 
 		vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
 
-	//	for (auto& Entry : FrameInfo.GameObjects)
-	//	{
-	//		OGameObject& Object = Entry.second;
-	//
-	//		if (Object.Light == 0)
-	//		{
-	//			continue;
-	//		}
-	//
-	//		FPointLightPushConstant PushConstant{};
-	//
-	//		PushConstant.Position = FVec4(Object.GetTransform().GetTranslation(), 1.0f);
-	//		PushConstant.Color    = FVec4(Object.Color, Object.LightIntensity);
-	//		PushConstant.Radius   = Object.GetTransform().GetScale().x;
-	//
-	//		vkCmdPushConstants(FrameInfo.CommandBuffer, PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FPointLightPushConstant), &PushConstant);
-	//
-	//		vkCmdDraw(FrameInfo.CommandBuffer, 6, 1, 0, 0);
-	//	}		
+		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant.MeshMatrix = Scene.TestCamera.GetProjection() * Scene.TestCamera.GetView() * this->ToMatrix4x4(Scene.ECS.GetComponent<CTransform>(Scene.TestEntity));
+
+		vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant);
+
+		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh->Bind(Renderer.GetCurrentCommandBuffer());
+		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh->Draw(Renderer.GetCurrentCommandBuffer());
 	}
 
 
 // Private Functions:
 
-	void FPointLightRenderSystem::CreateDescriptorPool()
+	void RMeshRenderSystem::CreateDescriptorPool()
 	{
-		DescriptorPool = FDescriptorPool::Constructor(Device)
+		DescriptorPool = FDescriptorPool::Constructor(Renderer.GetDevice())
 			             .SetMaxSets(FSwapchain::MAX_FRAMES_IN_FLIGHT)
 			             .AddPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, FSwapchain::MAX_FRAMES_IN_FLIGHT)
 			             .Create();
 	}
 
-	void FPointLightRenderSystem::CreatePipelineLayout()
+	void RMeshRenderSystem::CreatePipelineLayout()
 	{
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Creating DescriptorSetLayout
@@ -80,7 +82,7 @@ namespace t3d
 
 		for (uint64 i = 0u; i < UniformBuffers.Size(); i++)
 		{
-			UniformBuffers[i] = new FDeviceBuffer(Device,
+			UniformBuffers[i] = new FDeviceBuffer(Renderer.GetDevice(),
 				                                  sizeof(FMeshUniform),
 				                                  1,
 				                                  VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
@@ -89,7 +91,7 @@ namespace t3d
 			UniformBuffers[i]->Map();
 		}
 
-		DescriptorSetLayout = FDescriptorSetLayout::Constructor(Device)
+		DescriptorSetLayout = FDescriptorSetLayout::Constructor(Renderer.GetDevice())
 	                          .AddBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
 	                          .Create();
 
@@ -103,10 +105,10 @@ namespace t3d
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		VkPushConstantRange PushConstantRange{};
-	
+
 		PushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
 		PushConstantRange.offset     = 0;
-		PushConstantRange.size       = sizeof(FPointLightPushConstant);
+		PushConstantRange.size       = sizeof(FMeshPushConstant);
 
 		std::vector<VkDescriptorSetLayout> DescriptorSetLayouts{ DescriptorSetLayout->GetDescriptorSetLayout() };
 
@@ -118,28 +120,31 @@ namespace t3d
 		PipelineLayoutInfo.pushConstantRangeCount = 1;
 		PipelineLayoutInfo.pPushConstantRanges    = &PushConstantRange;
 
-		if (vkCreatePipelineLayout(Device.Device(), &PipelineLayoutInfo, nullptr, &PipelineLayout) != VK_SUCCESS)
+		if (vkCreatePipelineLayout(Renderer.GetDevice().Device(), &PipelineLayoutInfo, nullptr, &PipelineLayout) != VK_SUCCESS)
 		{
 			LOG_ERROR("Failed to create pipeline layout!");
 			throw;
 		}
 	}
 
-	void FPointLightRenderSystem::CreatePipeline()
+	void RMeshRenderSystem::CreatePipeline()
 	{
 		FPipelineConfigInfo PipelineConfig{};
 
 		FPipeline::CreateDefaultPipelineConfigInfo(PipelineConfig);
 		
-		PipelineConfig.BindingDescriptions.clear();
-		PipelineConfig.AttributeDescriptions.clear();
 		PipelineConfig.RenderPass     = Renderer.GetSwapchainRenderPass();
 		PipelineConfig.PipelineLayout = PipelineLayout;
 		
-		Pipeline = new FPipeline(Device,
+		Pipeline = new FPipeline(Renderer.GetDevice(),
 			                     PipelineConfig,
-			                     "D:/VULKAN_TUTORIAL_SHADERS/SPV/point_light.vert.spv",
-			                     "D:/VULKAN_TUTORIAL_SHADERS/SPV/point_light.frag.spv");
+			                     "D:/T3D_Shaders/SPIR-V/MeshShader_vert.spv",
+			                     "D:/T3D_Shaders/SPIR-V/MeshShader_frag.spv");
+	}
+
+	void RMeshRenderSystem::Update()
+	{
+		LOG_TRACE("UPDATED!");
 	}
 
 }

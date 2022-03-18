@@ -10,7 +10,7 @@
 #define T3D_INLINE inline
 #endif
 
-#if _MSC_VER
+#if _M_AMD64
 #define T3D_CALL __fastcall
 #else
 // Does nothing if not MSC

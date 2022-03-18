@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../ECS/Core/SEntityComponentSystem.h"
-#include "../ECS/Systems/Systems.h"
 
 namespace t3d
 {
@@ -36,6 +35,6 @@ namespace t3d
 
 	// Systems:
 
-		STransformSystem TransformSystem;
+		//
 	};
 }

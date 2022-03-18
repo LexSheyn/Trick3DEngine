@@ -20,7 +20,7 @@ namespace t3d
 
 	// Functions:
 
-		void T3D_CALL Bind(VkCommandBuffer CommandBuffer);
+		void Bind(VkCommandBuffer CommandBuffer);
 
 		static void T3D_CALL CreateDefaultPipelineConfigInfo(FPipelineConfigInfo& ConfigInfo);
 
@@ -30,8 +30,8 @@ namespace t3d
 
 		static std::vector<char8> T3D_CALL ReadFile(const std::string& FilePath);
 
-		void T3D_CALL CreateGraphicsPipeline    (const FPipelineConfigInfo& ConfigInfo, const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
-		void T3D_CALL CreateShaderModule        (const std::vector<char8>& ShaderCode, VkShaderModule* ShaderModule);
+		void CreateGraphicsPipeline    (const FPipelineConfigInfo& ConfigInfo, const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
+		void CreateShaderModule        (const std::vector<char8>& ShaderCode, VkShaderModule* ShaderModule);
 
 	// Variables:
 

@@ -200,6 +200,11 @@ namespace t3d
 		return CurrentFrameIndex;
 	}
 
+	FDevice& FRenderer::GetDevice() const
+	{
+		return Device;
+	}
+
 
 // Private Functions:
 

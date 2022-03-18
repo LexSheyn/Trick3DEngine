@@ -115,10 +115,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\ECS\Systems\STransformSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="src\EntryPoint\Main.cpp" />
     <ClCompile Include="src\Events\IEventListener.cpp" />
     <ClCompile Include="src\Events\SEventSystem.cpp" />
@@ -201,21 +197,21 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\FBillboardRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    <ClCompile Include="src\ECS\Systems\Render\FBillboardRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\RMeshRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    <ClCompile Include="src\ECS\Systems\Render\RMeshRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\FPointLightRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    <ClCompile Include="src\ECS\Systems\Render\FPointLightRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Systems\IRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    <ClCompile Include="src\ECS\Systems\Render\IRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\Model\MModelManager.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
@@ -243,6 +239,7 @@
     <ClCompile Include="src\Time\FClock.cpp" />
     <ClCompile Include="src\Time\FTimeStamp.cpp" />
     <ClCompile Include="src\Types\T3DStaticConversion.cpp" />
+    <ClCompile Include="src\Updater\FUpdater.cpp" />
     <ClCompile Include="src\Window\FWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -255,10 +252,9 @@
     <ClInclude Include="src\ECS\Components\IComponent.h" />
     <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Components\TComponent.h" />
-    <ClInclude Include="src\ECS\Systems\STransformSystem.h" />
-    <ClInclude Include="src\ECS\Systems\Systems.h" />
+    <ClInclude Include="src\ECS\Systems\Base\ISystem.h" />
     <ClInclude Include="src\Logger\ELogLevel.h" />
-    <ClInclude Include="src\Render\Systems\IRenderSystem.h" />
+    <ClInclude Include="src\ECS\Systems\Render\IRenderSystem.h" />
     <ClInclude Include="src\ResourceManagers\Model\MModelManager.h" />
     <ClInclude Include="src\ResourceManagers\Image\MImageManager.h" />
     <ClInclude Include="src\Scene\EScene.h" />
@@ -339,9 +335,9 @@
     <ClInclude Include="src\Render\Pipeline\FDescriptorWriter.h" />
     <ClInclude Include="src\Render\Pipeline\FPipeline.h" />
     <ClInclude Include="src\Render\Pipeline\FPipelineConfigInfo.h" />
-    <ClInclude Include="src\Render\Systems\FBillboardRenderSystem.h" />
-    <ClInclude Include="src\Render\Systems\RMeshRenderSystem.h" />
-    <ClInclude Include="src\Render\Systems\FPointLightRenderSystem.h" />
+    <ClInclude Include="src\ECS\Systems\Render\FBillboardRenderSystem.h" />
+    <ClInclude Include="src\ECS\Systems\Render\RMeshRenderSystem.h" />
+    <ClInclude Include="src\ECS\Systems\Render\FPointLightRenderSystem.h" />
     <ClInclude Include="src\ResourceManagers\Image\EColorFormat.h" />
     <ClInclude Include="src\ResourceManagers\Image\FImagePNG.h" />
     <ClInclude Include="src\Macros\T3DMacros.h" />
@@ -352,6 +348,7 @@
     <ClInclude Include="src\Time\FClock.h" />
     <ClInclude Include="src\Time\FTimeStamp.h" />
     <ClInclude Include="src\Types\T3DTypes.h" />
+    <ClInclude Include="src\Updater\FUpdater.h" />
     <ClInclude Include="src\Window\FWindow.h" />
   </ItemGroup>
   <ItemGroup>

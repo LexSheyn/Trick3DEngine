@@ -1,29 +1,35 @@
-#include "../../PrecompiledHeaders/t3dpch.h"
-#include "STransformSystem.h"
+#include "../../../PrecompiledHeaders/t3dpch.h"
+#include "IRenderSystem.h"
 
 namespace t3d
 {
 // Constructors and Destructor:
 
-	STransformSystem::STransformSystem()
-		: Sin1(0.0f),
-		  Cos1(0.0f),		
-		  Sin2(0.0f),
-		  Cos2(0.0f),		
-		  Sin3(0.0f),
-		  Cos3(0.0f),
-		  TransformationMatrix(1.0f)
+	IRenderSystem::IRenderSystem(FRenderer& Renderer)
+		: Renderer(Renderer)
 	{
+		this->Initialize();
+
+		LOG_TRACE("Created.");
 	}
 
-	STransformSystem::~STransformSystem()
+	IRenderSystem::~IRenderSystem()
 	{
+		delete DescriptorPool;
+
+		delete DescriptorSetLayout;
+
+		delete Pipeline;
+
+		vkDestroyPipelineLayout(Renderer.GetDevice().Device(), PipelineLayout, nullptr);
+
+		LOG_TRACE("Deleted.");
 	}
 
 
 // Functions:
 
-	const FMat4& STransformSystem::Matrix4x4(CTransform* Transform)
+	const FMat4& IRenderSystem::ToMatrix4x4(CTransform* Transform)
 	{
 		Sin1 = glm::sin(Transform->Rotation.z);
 		Cos1 = glm::cos(Transform->Rotation.z);
@@ -70,6 +76,25 @@ namespace t3d
 		};
 
 		return TransformationMatrix;
+	}
+
+
+// Private Functions:
+
+	void IRenderSystem::Initialize()
+	{
+		PipelineLayout = nullptr;
+
+		Pipeline = nullptr;
+
+		for (uint64 i = 0u; i < DescriptorSets.Size(); i++)
+		{
+			DescriptorSets[i] = nullptr;
+		}
+
+		DescriptorSetLayout = nullptr;
+
+		DescriptorPool = nullptr;
 	}
 
 }

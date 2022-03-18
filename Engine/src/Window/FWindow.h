@@ -21,30 +21,30 @@ namespace t3d
 
 	// Functions:
 
-		void  T3D_CALL Update              ();
-		bool8 T3D_CALL ShouldClose         ();
-		void  T3D_CALL CreateSurface       (VkInstance Instance, VkSurfaceKHR* Surface);
-		void  T3D_CALL ResetResizedFlag    ();
+		void  Update              ();
+		bool8 ShouldClose         ();
+		void  CreateSurface       (VkInstance Instance, VkSurfaceKHR* Surface);
+		void  ResetResizedFlag    ();
 
 	// Accessors:
 
-		const GLFWwindow* T3D_CALL GetGLFWwindow    () const;
-		const bool8&      T3D_CALL WasResized       () const;
-		const int32&      T3D_CALL GetWidth         () const;
-		const int32&      T3D_CALL GetHeight        () const;
+		const GLFWwindow* GetGLFWwindow    () const;
+		const bool8&      WasResized       () const;
+		const int32&      GetWidth         () const;
+		const int32&      GetHeight        () const;
 
-		VkExtent2D T3D_CALL GetExtent();
+		VkExtent2D GetExtent();
 
 	// Modifiers:
 
-		void T3D_CALL SetTitle    (const std::string& Title);
-		void T3D_CALL SetIcon     (const std::string& FilePath);
+		void SetTitle    (const std::string& Title);
+		void SetIcon     (const std::string& FilePath);
 
 	private:
 
 	// Private Functions:
 
-		void T3D_CALL InitWindow();
+		void InitWindow();
 
 	// Window Callbacks:
 
@@ -68,7 +68,7 @@ namespace t3d
 
 		int32 Width;
 		int32 Height;
-		bool8 FramebufferResized;
+		bool8 IsFramebufferResized;
 
 		std::string Title;
 

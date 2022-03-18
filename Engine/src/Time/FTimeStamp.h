@@ -9,6 +9,6 @@ namespace t3d
 	// Functions:
 
 		/// <returns> Current time as std::string in HH:MM:SS format. </returns>
-		static std::string GetAsString();
+		static std::string T3D_CALL GetAsString();
 	};
 }

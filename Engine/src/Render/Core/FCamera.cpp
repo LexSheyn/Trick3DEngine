@@ -7,7 +7,20 @@ namespace t3d
 
 	FCamera::FCamera()
 		: ProjectionMatrix (1.0f),
-		  ViewMatrix       (1.0f)
+		  ViewMatrix       (1.0f),
+
+		  Sin1 (0.0f),
+		  Cos1 (0.0f),
+
+		  Sin2 (0.0f),
+		  Cos2 (0.0f),
+
+		  Sin3 (0.0f),
+		  Cos3 (0.0f),
+
+		  BasisX (0.0f),
+		  BasisY (0.0f),
+		  BasisZ (0.0f)
 	{
 	}
 
@@ -32,20 +45,12 @@ namespace t3d
 
 	void FCamera::SetPerspectiveProjection(float32 FieldOfViewY, float32 AspectRatio, float32 NearClippingPlane, float32 FarClippingPlane)
 	{
-	#if _DEBUG
-		if (glm::abs(AspectRatio - std::numeric_limits<float32>::epsilon()) < 0.0f)
-		{
-			LOG_ERROR("Aspect ratio need to be more than epsilon");
-			throw;
-		}
-	#endif
-
-		const float32 TanHalfFovy = glm::tan(FieldOfViewY / 2.0f); // std::tan ???
+		const float32 TanHalfFovY = glm::tan(FieldOfViewY / 2.0f);
 
 		ProjectionMatrix = FMat4{ 0.0f };
 		
-		ProjectionMatrix[0][0] = 1.0f / (AspectRatio * TanHalfFovy);
-		ProjectionMatrix[1][1] = 1.0f / (TanHalfFovy);
+		ProjectionMatrix[0][0] = 1.0f / (AspectRatio * TanHalfFovY);
+		ProjectionMatrix[1][1] = 1.0f / (TanHalfFovY);
 		ProjectionMatrix[2][2] = FarClippingPlane / (FarClippingPlane - NearClippingPlane);
 		ProjectionMatrix[2][3] = 1.0f;
 		ProjectionMatrix[3][2] = -(FarClippingPlane * NearClippingPlane) / (FarClippingPlane - NearClippingPlane);
@@ -53,27 +58,27 @@ namespace t3d
 
 	void FCamera::SetViewDirection(FVec3 Position, FVec3 Direction, FVec3 Up)
 	{
-		const FVec3 W{ glm::normalize(Direction) };
-		const FVec3 U{ glm::normalize(glm::cross(W, Up)) };
-		const FVec3 V{ glm::cross(W, U) };
+		BasisZ = glm::normalize(Direction);
+		BasisX = glm::normalize(glm::cross(BasisZ, Up));
+		BasisY = glm::cross(BasisZ, BasisX);
 
 		ViewMatrix = FMat4{ 1.f };
 
-		ViewMatrix[0][0] = U.x;
-		ViewMatrix[1][0] = U.y;
-		ViewMatrix[2][0] = U.z;
+		ViewMatrix[0][0] = BasisX.x;
+		ViewMatrix[1][0] = BasisX.y;
+		ViewMatrix[2][0] = BasisX.z;
 
-		ViewMatrix[0][1] = V.x;
-		ViewMatrix[1][1] = V.y;
-		ViewMatrix[2][1] = V.z;
+		ViewMatrix[0][1] = BasisY.x;
+		ViewMatrix[1][1] = BasisY.y;
+		ViewMatrix[2][1] = BasisY.z;
 
-		ViewMatrix[0][2] = W.x;
-		ViewMatrix[1][2] = W.y;
-		ViewMatrix[2][2] = W.z;
+		ViewMatrix[0][2] = BasisZ.x;
+		ViewMatrix[1][2] = BasisZ.y;
+		ViewMatrix[2][2] = BasisZ.z;
 
-		ViewMatrix[3][0] = -glm::dot(U, Position);
-		ViewMatrix[3][1] = -glm::dot(V, Position);
-		ViewMatrix[3][2] = -glm::dot(W, Position);
+		ViewMatrix[3][0] = -glm::dot(BasisX, Position);
+		ViewMatrix[3][1] = -glm::dot(BasisY, Position);
+		ViewMatrix[3][2] = -glm::dot(BasisZ, Position);
 	}
 
 	void FCamera::SetViewTarget(FVec3 Position, FVec3 Target, FVec3 Up)
@@ -81,38 +86,38 @@ namespace t3d
 		this->SetViewDirection(Position, Target - Position, Up);
 	}
 
-	void FCamera::SetViewYXZ(FVec3 Position, FVec3 Rotation)
+	void FCamera::SetViewZYX(FVec3 Position, FVec3 Rotation)
 	{
-		const float32 CosY = glm::cos(Rotation.y);
-		const float32 SinY = glm::sin(Rotation.y);
+		Sin1 = glm::sin(Rotation.z);
+		Cos1 = glm::cos(Rotation.z);
 
-		const float32 CosX = glm::cos(Rotation.x);
-		const float32 SinX = glm::sin(Rotation.x);
-
-		const float32 CosZ = glm::cos(Rotation.z);
-		const float32 SinZ = glm::sin(Rotation.z);
+		Sin2 = glm::sin(Rotation.y);
+		Cos2 = glm::cos(Rotation.y);
 		
-		const FVec3 U{ (CosY * CosZ + SinY * SinX * SinZ), (CosX * SinZ), (CosY * SinX * SinZ - CosZ * SinY) };
-		const FVec3 V{ (CosZ * SinY * SinX - CosY * SinZ), (CosX * CosZ), (CosY * CosZ * SinX + SinY * SinZ) };
-		const FVec3 W{ (CosX * SinY), (-SinX), (CosY * CosX) };
+		Sin3 = glm::sin(Rotation.x);
+		Cos3 = glm::cos(Rotation.x);
+		
+		BasisX = { (Cos1 * Cos2), (Cos2 * Sin1), (-Sin2) };
+		BasisY = { ( (Cos1 * Sin2 * Sin3) - (Cos3 * Sin1) ), ( (Cos1 * Cos3) + (Sin1 * Sin2 * Sin3) ), (Cos2 * Sin3) };
+		BasisZ = { ( (Sin1 * Sin3) + (Cos1 * Cos3 * Sin2) ), ( (Cos3 * Sin1 * Sin2) - (Cos1 * Sin3) ), (Cos2 * Cos3) };
 		
 		ViewMatrix = FMat4{ 1.f };
 
-		ViewMatrix[0][0] = U.x;
-		ViewMatrix[1][0] = U.y;
-		ViewMatrix[2][0] = U.z;		
+		ViewMatrix[0][0] = BasisX.x;
+		ViewMatrix[1][0] = BasisX.y;
+		ViewMatrix[2][0] = BasisX.z;		
 		
-		ViewMatrix[0][1] = V.x;
-		ViewMatrix[1][1] = V.y;
-		ViewMatrix[2][1] = V.z;		
+		ViewMatrix[0][1] = BasisY.x;
+		ViewMatrix[1][1] = BasisY.y;
+		ViewMatrix[2][1] = BasisY.z;		
 		
-		ViewMatrix[0][2] = W.x;
-		ViewMatrix[1][2] = W.y;
-		ViewMatrix[2][2] = W.z;		
+		ViewMatrix[0][2] = BasisZ.x;
+		ViewMatrix[1][2] = BasisZ.y;
+		ViewMatrix[2][2] = BasisZ.z;		
 		
-		ViewMatrix[3][0] = -glm::dot(U, Position);
-		ViewMatrix[3][1] = -glm::dot(V, Position);
-		ViewMatrix[3][2] = -glm::dot(W, Position);
+		ViewMatrix[3][0] = -glm::dot(BasisX, Position);
+		ViewMatrix[3][1] = -glm::dot(BasisY, Position);
+		ViewMatrix[3][2] = -glm::dot(BasisZ, Position);
 	}
 
 

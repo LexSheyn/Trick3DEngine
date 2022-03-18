@@ -19,8 +19,8 @@ namespace t3d
 
 	// Functions:
 
-		void T3D_CALL SetActive    (EScene Name);
-		void T3D_CALL Update       ();
+		void SetActive    (EScene Name);
+		void Update       ();
 
 	// Accessors:
 
@@ -30,10 +30,10 @@ namespace t3d
 
 	// Private Functions:
 
-		void T3D_CALL LoadScene       (EScene Name);
-		void T3D_CALL UnloadScene     (EScene Name);
-		void T3D_CALL LoadFromFile    (EScene Name);
-		void T3D_CALL SaveToFile      (EScene Name);
+		void LoadScene       (EScene Name);
+		void UnloadScene     (EScene Name);
+		void LoadFromFile    (EScene Name);
+		void SaveToFile      (EScene Name);
 
 	// Variables:
 
@@ -45,6 +45,6 @@ namespace t3d
 
 	// IEventListener Interface:
 
-		void T3D_CALL OnEvent(const FEvent* const Event) override;
+		void OnEvent(const FEvent* const Event) override;
 	};
 }

@@ -9,7 +9,7 @@ namespace t3d
 {
 // Window:
 
-	struct FFrameBufferSizeData { int32 Width; int32 Height; };
+	struct FFramebufferSizeData { int32 Width; int32 Height; };
 
 
 // Keyboard:

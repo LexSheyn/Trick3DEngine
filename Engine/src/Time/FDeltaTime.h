@@ -6,7 +6,18 @@ namespace t3d
 	{
 	public:
 
-		template<typename T>
-		T3D_INLINE static T Get() {}
+	// Accessors:
+
+		static const float32& T3D_CALL Get();
+
+	// Modifiers:
+
+		static void T3D_CALL Set(float32 Seconds);
+
+	private:
+
+	// Variables:
+
+		static float32 Time;
 	};
 }

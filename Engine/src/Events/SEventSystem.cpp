@@ -27,8 +27,6 @@ namespace t3d
 		for (auto& Entry = Range.first; Entry != Range.second; Entry++)
 		{
 			Entry->second->OnEvent(Event);
-
-		//	LOG_TRACE("Listener[" + std::to_string(Entry->second->GetID()) + "] recieved event of type: " + std::to_string(Event->GetType()));
 		}
 	}
 
@@ -50,8 +48,6 @@ namespace t3d
 		#endif
 
 		ListenerRegistry.emplace(Type, Listener);
-
-	//	LOG_TRACE("Listener[" + std::to_string(Listener->GetID()) + "] subscribed for event of type: " + std::to_string(EventType));
 	}
 
 	void SEventSystem::Unsubscribe(EEventType Type, IEventListener* Listener)
@@ -71,8 +67,6 @@ namespace t3d
 		}
 		#endif
 
-		uint32 ID = Listener->GetID();
-
 		std::pair Range = ListenerRegistry.equal_range(Type);
 
 		for (auto& Entry = Range.first; Entry != Range.second; Entry++)
@@ -80,8 +74,6 @@ namespace t3d
 			if (Entry->second == Listener)
 			{
 				Entry = ListenerRegistry.erase(Entry);
-
-			//	LOG_TRACE("Listener[" + std::to_string(ID) + "] unsubscribed from event of type: " + std::to_string(EventType));
 
 				return;
 			}

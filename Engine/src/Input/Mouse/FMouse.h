@@ -13,7 +13,7 @@ namespace t3d
 
 	// IEventListener interface:
 		
-		void T3D_CALL OnEvent(const FEvent* const) override;
+		void OnEvent(const FEvent* const) override;
 
 	// Functions:
 

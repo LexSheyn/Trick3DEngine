@@ -1,8 +1,11 @@
 #pragma once
 
-#include "../Render/Systems/RMeshRenderSystem.h"
+#include "../ECS/Systems/Render/RMeshRenderSystem.h"
 #include "../Scene/MSceneManager.h"
 #include "../SFX/FSound.h"
+#include "../Time/FClock.h"
+#include "../Time/FDeltaTime.h"
+#include "../Updater/FUpdater.h"
 
 namespace t3d
 {
@@ -20,9 +23,9 @@ namespace t3d
 
 	// Functions:
 
-		void T3D_CALL Run       ();
-		void T3D_CALL Update    ();
-		void T3D_CALL Render    ();
+		void Run       ();
+		void Update    ();
+		void Render    ();
 
 	private:
 
@@ -30,6 +33,8 @@ namespace t3d
 
 		int32 Width;
 		int32 Height;
+
+		FClock Clock;
 
 		FWindow   Window;
 		FDevice   Device;
