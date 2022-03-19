@@ -9,6 +9,7 @@ namespace t3d
 		: ActiveScene(EScene::MainMenu)
 	{
 		SEventSystem::Subscribe(EEventType::WindowResized, this);
+		SEventSystem::Subscribe(EEventType::KeyPressed   , this);
 	}
 
 	MSceneManager::~MSceneManager()
@@ -70,6 +71,18 @@ namespace t3d
 			float32 AspectRatio = static_cast<float32>(Event->FramebufferSizeData.Width) / static_cast<float32>(Event->FramebufferSizeData.Height);
 		
 			Scenes[ActiveScene].TestCamera.SetPerspectiveProjection(glm::radians(50.0f), AspectRatio, 0.1f, 100.0f);
+		}
+		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::C)
+		{
+			Scenes[ActiveScene].CreateTestEntity();
+		}
+		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::L)
+		{
+			Scenes[ActiveScene].LoadTestMesh();
+		}
+		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::D)
+		{
+			Scenes[ActiveScene].DeleteTestEntity();
 		}
 	}
 

@@ -16,10 +16,6 @@ namespace t3d
 		this->CreatePipelineLayout();
 		this->CreatePipeline();
 
-		// TEST
-		MModelManager::SetDevice(Renderer.GetDevice());
-		Mesh = MModelManager::LoadModel("D:/VULKAN_TUTORIAL_SHADERS/Models/paimon_ex.obj");
-
 		LOG_TRACE("Created.");
 	}
 
@@ -30,9 +26,6 @@ namespace t3d
 			delete UniformBuffers[i];
 		}
 
-		// TEST
-		delete Mesh;
-
 		LOG_TRACE("Deleted.");
 	}
 
@@ -41,26 +34,19 @@ namespace t3d
 
 	void RMeshRenderSystem::Render(FScene& Scene)
 	{
-		// TEST
-		static bool8 HasMesh = false;
-
-		if (!HasMesh)
+		for (uint64 i = 0u; i < Scene.EntityList.size(); i++)
 		{
-			Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh = Mesh;
+			Pipeline->Bind(Renderer.GetCurrentCommandBuffer());
 
-			HasMesh = true;
+			vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
+
+			Scene.ECS.GetComponent<CModel>(Scene.EntityList[i])->PushConstant.MeshMatrix = Scene.TestCamera.GetProjection() * Scene.TestCamera.GetView() * this->ToMatrix4x4(Scene.ECS.GetComponent<CTransform>(Scene.EntityList[i]));
+
+			vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &Scene.ECS.GetComponent<CModel>(Scene.EntityList[i])->PushConstant);
+
+			Scene.ECS.GetComponent<CModel>(Scene.EntityList[i])->Mesh->Bind(Renderer.GetCurrentCommandBuffer());
+			Scene.ECS.GetComponent<CModel>(Scene.EntityList[i])->Mesh->Draw(Renderer.GetCurrentCommandBuffer());
 		}
-
-		Pipeline->Bind(Renderer.GetCurrentCommandBuffer());
-
-		vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
-
-		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant.MeshMatrix = Scene.TestCamera.GetProjection() * Scene.TestCamera.GetView() * this->ToMatrix4x4(Scene.ECS.GetComponent<CTransform>(Scene.TestEntity));
-
-		vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->PushConstant);
-
-		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh->Bind(Renderer.GetCurrentCommandBuffer());
-		Scene.ECS.GetComponent<CModel>(Scene.TestEntity)->Mesh->Draw(Renderer.GetCurrentCommandBuffer());
 	}
 
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../../ECS/Core/SEntityComponentSystem.h"
+
 namespace t3d
 {
 	class ISystem

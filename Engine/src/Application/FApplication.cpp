@@ -13,6 +13,7 @@ namespace t3d
 		  Renderer(Window, Device),
 		  MeshRenderSystem(Renderer)
 	{
+		MModelManager::SetDevice(Device);
 	}
 
 	FApplication::~FApplication()

@@ -4,7 +4,6 @@
 #include "../Scene/MSceneManager.h"
 #include "../SFX/FSound.h"
 #include "../Time/FClock.h"
-#include "../Time/FDeltaTime.h"
 #include "../Updater/FUpdater.h"
 
 namespace t3d

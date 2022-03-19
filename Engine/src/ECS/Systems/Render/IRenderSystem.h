@@ -42,17 +42,14 @@ namespace t3d
 		FDescriptorSetLayout* DescriptorSetLayout;
 		TArray<VkDescriptorSet, FSwapchain::MAX_FRAMES_IN_FLIGHT> DescriptorSets;
 		FDescriptorPool*      DescriptorPool;
-
-		// Z
-		float32 Sin1;
+		
+		float32 Sin1; // Z
 		float32 Cos1;
-
-		// Y
-		float32 Sin2;
+		
+		float32 Sin2; // Y
 		float32 Cos2;
-
-		// X
-		float32 Sin3;
+		
+		float32 Sin3; // X
 		float32 Cos3;
 
 		FMat4 TransformationMatrix;

@@ -10,7 +10,9 @@ namespace t3d
 // Constructors and Destructor:
 
 	FMesh::FMesh()
-		: VertexCount(),
+		: VertexBuffer(nullptr), 
+		  VertexCount(),
+		  IndexBuffer(nullptr),
 		  IndexCount()
 	{
 

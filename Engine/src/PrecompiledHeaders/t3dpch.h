@@ -94,6 +94,7 @@
 
 // Engine:
 #include "../Time/FTimeStamp.h"
+#include "../Time/FDeltaTime.h"
 #include "../Logger/FLogger.h"
 #include "../Templates/TArray.h"
 #include "../Events/SEventSystem.h"

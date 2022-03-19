@@ -31,8 +31,6 @@ namespace t3d
 
 	// TEST
 
-		FMesh* Mesh;
-		FMeshData MeshData;
 		FMeshPushConstant MeshPushConstant;
 		TArray<FDeviceBuffer*, FSwapchain::MAX_FRAMES_IN_FLIGHT> UniformBuffers;
 

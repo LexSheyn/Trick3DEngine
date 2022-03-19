@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ECS/Core/SEntityComponentSystem.h"
+#include "../ResourceManagers/Model/MModelManager.h"
 
 namespace t3d
 {
@@ -21,6 +22,7 @@ namespace t3d
 		void Update ();
 		void CreateTestEntity();
 		void DeleteTestEntity();
+		void LoadTestMesh();
 
 //	private:
 
@@ -29,7 +31,9 @@ namespace t3d
 		// TEST
 		SEntityComponentSystem ECS;
 
-		T3D_EntityID TestEntity;
+		std::vector<T3D_EntityID> EntityList;
+
+		FMesh* MeshPtr;
 
 		FCamera TestCamera;
 
