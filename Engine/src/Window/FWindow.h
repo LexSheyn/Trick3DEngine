@@ -37,8 +37,9 @@ namespace t3d
 
 	// Modifiers:
 
-		void SetTitle    (const std::string& Title);
-		void SetIcon     (const std::string& FilePath);
+		void SetTitle     (const std::string& Title);
+		void SetIcon      (const std::string& FilePath);
+		void SetCursor    (const std::string& FilePath);
 
 	private:
 

@@ -27,17 +27,17 @@ namespace t3d
 
 	void FScene::CreateTestEntity()
 	{
-		T3D_EntityID NewEntity = ECS.CreateEntity();		
+		T3D_EntityID NewEntity = SEntityComponentSystem::CreateEntity();		
 
-		ECS.AddComponent<CTransform>(NewEntity);
-		ECS.AddComponent<CCamera>(NewEntity);
-		ECS.AddComponent<CModel>(NewEntity);
+		SEntityComponentSystem::AddComponent<CTransform>(NewEntity);
+		SEntityComponentSystem::AddComponent<CCamera>(NewEntity);
+		SEntityComponentSystem::AddComponent<CModel>(NewEntity);
 
-	//	ECS.GetComponent<CTransform>(NewEntity)->Translation = FVec3(0.0f, 0.0f, 5.0f);
-		ECS.GetComponent<CTransform>(NewEntity)->Translation = FVec3(static_cast<float32>(NewEntity), -static_cast<float32>(NewEntity), static_cast<float32>(NewEntity));
-		ECS.GetComponent<CTransform>(NewEntity)->Scale       = FVec3(0.3f, 0.3f, 0.3f);
+	//	SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Translation = FVec3(0.0f, 0.0f, 5.0f);
+		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Translation = FVec3(static_cast<float32>(NewEntity), -static_cast<float32>(NewEntity), static_cast<float32>(NewEntity));
+		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Scale       = FVec3(0.3f, 0.3f, 0.3f);
 
-		ECS.GetComponent<CModel>(NewEntity)->Mesh = MeshPtr;
+		SEntityComponentSystem::GetComponent<CModel>(NewEntity)->Mesh = MeshPtr;
 
 		EntityList.push_back(NewEntity);
 	}
@@ -46,7 +46,7 @@ namespace t3d
 	{
 		for (auto& Entity : EntityList)
 		{
-			ECS.RemoveEntity(Entity);
+			SEntityComponentSystem::RemoveEntity(Entity);
 		}
 
 		EntityList.clear();

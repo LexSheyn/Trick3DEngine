@@ -28,9 +28,6 @@ namespace t3d
 
 	// Variables:
 
-		// TEST
-		SEntityComponentSystem ECS;
-
 		std::vector<T3D_EntityID> EntityList;
 
 		FMesh* MeshPtr;

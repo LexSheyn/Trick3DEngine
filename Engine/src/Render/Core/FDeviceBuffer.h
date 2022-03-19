@@ -121,7 +121,7 @@ namespace t3d
 		/// <param name="InstanceSize">: The size of an instance. </param>
 		/// <param name="MinOffsetAlignment">: The minimum required alignment in bytes for the offset member (for example MinUniformBufferOffsetAlignment). </param>
 		/// <returns> VkResult of the buffer mapping call. </returns>
-		static VkDeviceSize GetAlignment(VkDeviceSize InstanceSize, VkDeviceSize MinOffsetAlignment);
+		static VkDeviceSize T3D_CALL GetAlignment(VkDeviceSize InstanceSize, VkDeviceSize MinOffsetAlignment);
 
 	// Variables:
 

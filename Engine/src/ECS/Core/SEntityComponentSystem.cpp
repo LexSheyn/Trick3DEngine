@@ -157,4 +157,11 @@ namespace t3d
 		return nullptr;
 	}
 
+
+// Static Variables:
+
+	std::vector<FEntity> SEntityComponentSystem::Entities;
+	std::vector<uint64>  SEntityComponentSystem::EntityReuseList;
+	std::unordered_map<T3D_ComponentID, std::vector<uint8>> SEntityComponentSystem::Components;
+
 }

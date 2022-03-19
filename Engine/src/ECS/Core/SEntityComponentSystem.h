@@ -9,7 +9,41 @@ namespace t3d
 	{
 	public:
 
-	// Constructors and Destructor:
+	// Entity Functions:
+
+		static T3D_NO_DISCARD T3D_EntityID CreateEntity();
+
+		static void AddChild                  (T3D_EntityID Parent, T3D_EntityID Child);
+		static void RemoveChild               (T3D_EntityID Parent, T3D_EntityID Child);
+		static void RemoveEntity              (T3D_EntityID& EntityID);
+		static void ReserveEntities           (uint64 NumEntities);
+		static void ReserveEntityReuseList    (uint64 NumEntities);
+
+	// Component Functions:
+
+		template<typename ComponentType>
+		static void AddComponent(T3D_EntityID EntityID)
+		{
+			AddComponentInternal(EntityID, CreateComponent<ComponentType>(Components[ComponentType::ID], EntityID));
+		}
+
+		template<typename ComponentType>
+		static void RemoveComponent(T3D_EntityID EntityID)
+		{
+			RemoveComponentInternal(EntityID, ComponentType::ID, ComponentType::Size);
+		}
+
+		template<typename ComponentType>
+		static ComponentType* GetComponent(T3D_EntityID EntityID)
+		{
+			return static_cast<ComponentType*>(GetComponentInternal(EntityID, ComponentType::ID));
+		}
+
+		static void RemoveAllComponents(T3D_EntityID EntityID);
+
+	private:
+
+	// Private Constructors and Destructor:
 
 		 SEntityComponentSystem () {}
 		~SEntityComponentSystem () {}
@@ -17,44 +51,10 @@ namespace t3d
 		T3D_NO_COPY(SEntityComponentSystem);
 		T3D_NO_MOVE(SEntityComponentSystem);
 
-	// Entity Functions:
-
-		T3D_NO_DISCARD T3D_EntityID CreateEntity();
-
-		void AddChild                  (T3D_EntityID Parent, T3D_EntityID Child);
-		void RemoveChild               (T3D_EntityID Parent, T3D_EntityID Child);
-		void RemoveEntity              (T3D_EntityID& EntityID);
-		void ReserveEntities           (uint64 NumEntities);
-		void ReserveEntityReuseList    (uint64 NumEntities);
-
-	// Component Functions:
-
-		template<typename ComponentType>
-		void AddComponent(T3D_EntityID EntityID)
-		{
-			AddComponentInternal(EntityID, CreateComponent<ComponentType>(Components[ComponentType::ID], EntityID));
-		}
-
-		template<typename ComponentType>
-		void RemoveComponent(T3D_EntityID EntityID)
-		{
-			RemoveComponentInternal(EntityID, ComponentType::ID, ComponentType::Size);
-		}
-
-		template<typename ComponentType>
-		ComponentType* GetComponent(T3D_EntityID EntityID)
-		{
-			return static_cast<ComponentType*>(GetComponentInternal(EntityID, ComponentType::ID));
-		}
-
-		void RemoveAllComponents(T3D_EntityID EntityID);
-
-	private:
-
 	// Private Component Functions:
 
 		template<typename ComponentType>
-		FComponentDescription CreateComponent(std::vector<uint8>& Memory, T3D_EntityID EntityID)
+		static FComponentDescription CreateComponent(std::vector<uint8>& Memory, T3D_EntityID EntityID)
 		{
 			uint64 Index = Memory.size();
 
@@ -67,17 +67,16 @@ namespace t3d
 			return FComponentDescription{ ComponentType::ID, ComponentType::Size, Index };
 		}
 		
-		void DeleteComponent            (T3D_ComponentID ID, uint64 Size, uint64 Index);		
-		void AddComponentInternal       (T3D_EntityID EntityID, FComponentDescription ComponentDescription);	
-		void RemoveComponentInternal    (T3D_EntityID EntityID, T3D_ComponentID ID, uint64 Size);
+		static void DeleteComponent            (T3D_ComponentID ID, uint64 Size, uint64 Index);		
+		static void AddComponentInternal       (T3D_EntityID EntityID, FComponentDescription ComponentDescription);	
+		static void RemoveComponentInternal    (T3D_EntityID EntityID, T3D_ComponentID ID, uint64 Size);
 
-		IComponent* GetComponentInternal(T3D_EntityID EntityID, T3D_ComponentID ID);
+		static IComponent* GetComponentInternal(T3D_EntityID EntityID, T3D_ComponentID ID);
 
 	// Variables:
 
-		std::vector<FEntity> Entities;
-		std::vector<uint64>  EntityReuseList;
-
-		std::unordered_map<T3D_ComponentID, std::vector<uint8>> Components;
+		static std::vector<FEntity> Entities;
+		static std::vector<uint64>  EntityReuseList;
+		static std::unordered_map<T3D_ComponentID, std::vector<uint8>> Components;
 	};
 }

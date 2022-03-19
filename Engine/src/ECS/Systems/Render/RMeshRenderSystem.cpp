@@ -40,12 +40,12 @@ namespace t3d
 
 			vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
 
-			Scene.ECS.GetComponent<CModel>(Scene.EntityList[i])->PushConstant.MeshMatrix = Scene.TestCamera.GetProjection() * Scene.TestCamera.GetView() * this->ToMatrix4x4(Scene.ECS.GetComponent<CTransform>(Scene.EntityList[i]));
+			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->PushConstant.MeshMatrix = Scene.TestCamera.GetProjection() * Scene.TestCamera.GetView() * this->ToMatrix4x4(SEntityComponentSystem::GetComponent<CTransform>(Scene.EntityList[i]));
 
-			vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &Scene.ECS.GetComponent<CModel>(Scene.EntityList[i])->PushConstant);
+			vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->PushConstant);
 
-			Scene.ECS.GetComponent<CModel>(Scene.EntityList[i])->Mesh->Bind(Renderer.GetCurrentCommandBuffer());
-			Scene.ECS.GetComponent<CModel>(Scene.EntityList[i])->Mesh->Draw(Renderer.GetCurrentCommandBuffer());
+			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Mesh->Bind(Renderer.GetCurrentCommandBuffer());
+			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Mesh->Draw(Renderer.GetCurrentCommandBuffer());
 		}
 	}
 
