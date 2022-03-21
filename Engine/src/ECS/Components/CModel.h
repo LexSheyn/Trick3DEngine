@@ -7,8 +7,6 @@ namespace t3d
 {
 	struct CModel : public TComponent<struct CModel>
 	{
-		FMesh*            Mesh = nullptr;
-		FMeshUniform      Uniform;
-		FMeshPushConstant PushConstant;
+		FMesh* Mesh = nullptr;
 	};
 }

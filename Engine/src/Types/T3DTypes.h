@@ -20,12 +20,15 @@ typedef double             float64;
 // Render related types:
 typedef uint32 T3D_Index;
 
-// GLM vectors:
-using FVec2 = glm::vec2;
-using FVec3 = glm::vec3;
-using FVec4 = glm::vec4;
+namespace t3d
+{
+	// GLM vectors:
+	using FVec2 = glm::vec2;
+	using FVec3 = glm::vec3;
+	using FVec4 = glm::vec4;
 
-// GLM matrices:
-using FMat2 = glm::mat2;
-using FMat3 = glm::mat3;
-using FMat4 = glm::mat4;
+	// GLM matrices:
+	using FMat2 = glm::mat2;
+	using FMat3 = glm::mat3;
+	using FMat4 = glm::mat4;
+}

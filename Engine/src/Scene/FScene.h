@@ -33,6 +33,7 @@ namespace t3d
 		FMesh* MeshPtr;
 
 		FCamera TestCamera;
+		T3D_EntityID LightSource;
 
 	// Systems:
 

@@ -249,8 +249,10 @@
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h" />
     <ClInclude Include="src\ECS\Components\CCamera.h" />
+    <ClInclude Include="src\ECS\Components\CDirectionalLight.h" />
     <ClInclude Include="src\ECS\Components\CModel.h" />
     <ClInclude Include="src\ECS\Components\Components.h" />
+    <ClInclude Include="src\ECS\Components\CPointLight.h" />
     <ClInclude Include="src\ECS\Components\CTransform.h" />
     <ClInclude Include="src\ECS\Components\FComponentDescription.h" />
     <ClInclude Include="src\ECS\Components\IComponent.h" />

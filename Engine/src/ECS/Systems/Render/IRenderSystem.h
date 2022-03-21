@@ -29,10 +29,6 @@ namespace t3d
 		virtual void CreatePipelineLayout    () = 0;
 		virtual void CreatePipeline          () = 0;
 
-	// Functions;
-
-		const FMat4& ToMatrix4x4 (CTransform* Transform);
-
 	// Variables:
 
 		FRenderer& Renderer;
@@ -42,17 +38,6 @@ namespace t3d
 		FDescriptorSetLayout* DescriptorSetLayout;
 		TArray<VkDescriptorSet, FSwapchain::MAX_FRAMES_IN_FLIGHT> DescriptorSets;
 		FDescriptorPool*      DescriptorPool;
-		
-		float32 Sin1; // Z
-		float32 Cos1;
-		
-		float32 Sin2; // Y
-		float32 Cos2;
-		
-		float32 Sin3; // X
-		float32 Cos3;
-
-		FMat4 TransformationMatrix;
 
 	private:
 

@@ -11,11 +11,18 @@ namespace t3d
 		TestCamera.SetViewTarget(FVec3(0.0f, 0.0f, -5.0f), FVec3(0.0f));
 
 		MeshPtr = nullptr;
+
+		LightSource = SEntityComponentSystem::CreateEntity();
+		SEntityComponentSystem::AddComponent<CDirectionalLight>(LightSource);
+		CDirectionalLight* LightComponent = SEntityComponentSystem::GetComponent<CDirectionalLight>(LightSource);
+		LightComponent->Direction = FVec3(1.0f, -3.0, -2.0f);
 	}
 
 	FScene::~FScene()
 	{
 		delete MeshPtr;
+
+		SEntityComponentSystem::RemoveEntity(LightSource);
 	}
 
 
@@ -27,14 +34,15 @@ namespace t3d
 
 	void FScene::CreateTestEntity()
 	{
-		T3D_EntityID NewEntity = SEntityComponentSystem::CreateEntity();		
+		T3D_EntityID NewEntity = SEntityComponentSystem::CreateEntity();
 
 		SEntityComponentSystem::AddComponent<CTransform>(NewEntity);
 		SEntityComponentSystem::AddComponent<CCamera>(NewEntity);
 		SEntityComponentSystem::AddComponent<CModel>(NewEntity);
 
 	//	SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Translation = FVec3(0.0f, 0.0f, 5.0f);
-		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Translation = FVec3(static_cast<float32>(NewEntity), -static_cast<float32>(NewEntity), static_cast<float32>(NewEntity));
+		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Translation = FVec3(static_cast<float32>(NewEntity) - 5.0f, 0.0f, static_cast<float32>(NewEntity) + 5.0f);
+		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Rotation    = FVec3(static_cast<float32>(NewEntity));
 		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Scale       = FVec3(0.3f, 0.3f, 0.3f);
 
 		SEntityComponentSystem::GetComponent<CModel>(NewEntity)->Mesh = MeshPtr;
