@@ -4,7 +4,9 @@ namespace t3d
 {
 	struct FMeshUniform
 	{
-		// Test
-		alignas(16) FMat4 Matrix;
+	// Camera:
+
+		alignas(16) FMat4 Projection;
+		alignas(16) FMat4 View;
 	};
 }

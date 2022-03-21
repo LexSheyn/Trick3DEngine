@@ -36,13 +36,29 @@ namespace t3d
 	{
 		for (uint64 i = 0u; i < Scene.EntityList.size(); i++)
 		{
+		// Binding Pipeline and Descriptor sets:
+
 			Pipeline->Bind(Renderer.GetCurrentCommandBuffer());
 
 			vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
 
-			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->PushConstant.MeshMatrix = Scene.TestCamera.GetProjection() * Scene.TestCamera.GetView() * this->ToMatrix4x4(SEntityComponentSystem::GetComponent<CTransform>(Scene.EntityList[i]));
+		// Camera:
+
+			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Uniform.Projection  = Scene.TestCamera.GetProjection();
+			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Uniform.View        = Scene.TestCamera.GetView();
+
+			UniformBuffers[Renderer.GetFrameIndex()]->WriteToBuffer(&SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Uniform);
+			UniformBuffers[Renderer.GetFrameIndex()]->Flush();
+
+		// Transform:
+
+			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->PushConstant.Translation = SEntityComponentSystem::GetComponent<CTransform>(Scene.EntityList[i])->Translation;
+			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->PushConstant.Rotation    = SEntityComponentSystem::GetComponent<CTransform>(Scene.EntityList[i])->Rotation;
+			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->PushConstant.Scale       = SEntityComponentSystem::GetComponent<CTransform>(Scene.EntityList[i])->Scale;
 
 			vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->PushConstant);
+
+		// Submitting draw command:
 
 			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Mesh->Bind(Renderer.GetCurrentCommandBuffer());
 			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Mesh->Draw(Renderer.GetCurrentCommandBuffer());

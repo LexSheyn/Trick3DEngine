@@ -4,7 +4,10 @@ namespace t3d
 {
 	struct FMeshPushConstant
 	{
-		alignas(16) FMat4 MeshMatrix   { 1.0f };
-		alignas(16) FMat4 NormalMatrix { 1.0f };
+	// Transform:
+
+		alignas(16) FVec3 Translation;
+		alignas(16) FVec3 Rotation;
+		alignas(16) FVec3 Scale;
 	};
 }

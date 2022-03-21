@@ -44,12 +44,12 @@ namespace t3d
 						Attributes.vertices[3 * Index.vertex_index + 2]
 					};
 
-					Vertex.Color =
-					{
-						Attributes.colors[3 * Index.vertex_index + 0],
-						Attributes.colors[3 * Index.vertex_index + 1],
-						Attributes.colors[3 * Index.vertex_index + 2]
-					};
+					Vertex.Color = FVec3(0.5f);
+				//	{
+				//		Attributes.colors[3 * Index.vertex_index + 0],
+				//		Attributes.colors[3 * Index.vertex_index + 1],
+				//		Attributes.colors[3 * Index.vertex_index + 2]
+				//	};
 				}
 
 				if (Index.normal_index >= 0)
