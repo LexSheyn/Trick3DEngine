@@ -42,6 +42,7 @@ namespace t3d
 	// Directional Light:
 
 		MeshUniform.LightDirection = SEntityComponentSystem::GetComponent<CDirectionalLight>(Scene.LightSource)->Direction;
+		MeshUniform.LightAmbient   = SEntityComponentSystem::GetComponent<CDirectionalLight>(Scene.LightSource)->Ambient;
 
 	// Uniform submition:
 

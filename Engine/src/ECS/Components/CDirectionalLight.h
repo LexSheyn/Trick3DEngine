@@ -6,7 +6,8 @@ namespace t3d
 {
 	struct CDirectionalLight : public TComponent<struct CDirectionalLight>
 	{
-		FVec3 Direction;
-		FVec4 Color; // w used for intensity.		
+		FVec3   Direction;
+		FVec4   Color; // w used for intensity.
+		float32 Ambient;
 	};
 }

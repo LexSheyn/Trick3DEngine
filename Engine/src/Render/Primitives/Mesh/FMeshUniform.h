@@ -11,6 +11,7 @@ namespace t3d
 
 	// Light:
 
-		alignas(16) FVec3 LightDirection;
+		alignas(16) FVec3   LightDirection;
+		alignas(4)  float32 LightAmbient;
 	};
 }

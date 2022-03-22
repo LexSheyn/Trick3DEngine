@@ -16,6 +16,7 @@ namespace t3d
 		SEntityComponentSystem::AddComponent<CDirectionalLight>(LightSource);
 		CDirectionalLight* LightComponent = SEntityComponentSystem::GetComponent<CDirectionalLight>(LightSource);
 		LightComponent->Direction = FVec3(1.0f, -3.0, -2.0f);
+		LightComponent->Ambient   = 0.02f;
 	}
 
 	FScene::~FScene()
@@ -40,10 +41,9 @@ namespace t3d
 		SEntityComponentSystem::AddComponent<CCamera>(NewEntity);
 		SEntityComponentSystem::AddComponent<CModel>(NewEntity);
 
-	//	SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Translation = FVec3(0.0f, 0.0f, 5.0f);
 		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Translation = FVec3(static_cast<float32>(NewEntity) - 5.0f, 0.0f, static_cast<float32>(NewEntity) + 5.0f);
 		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Rotation    = FVec3(static_cast<float32>(NewEntity));
-		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Scale       = FVec3(0.3f, 0.3f, 0.3f);
+	//	SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Scale       = FVec3(0.5f, 0.5f, 0.5f);
 
 		SEntityComponentSystem::GetComponent<CModel>(NewEntity)->Mesh = MeshPtr;
 
