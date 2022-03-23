@@ -15,7 +15,7 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		FEvent    (EEventType Type)                                           : Type (Type)                                            {}
+	//	FEvent    (EEventType Type)                                           : Type (Type)                                            {}
 		FEvent    (EEventType Type, FFramebufferSizeData FrameBufferSizeData) : Type (Type), FramebufferSizeData (FrameBufferSizeData) {}
 		FEvent    (EEventType Type, FKeyData             KeyData)             : Type (Type), KeyData             (KeyData)             {}
 		FEvent    (EEventType Type, FCharData            CharData)            : Type (Type), CharData            (CharData)            {}

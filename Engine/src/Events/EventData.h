@@ -22,18 +22,18 @@ namespace t3d
 
 	// Character represented in UTF-32 bit format.
 	// To retrieve ASCII 8 bit character use static_cast<char8>.
-	struct FCharModsData { uint32 Codepoint; int32  Mods; };
+	struct FCharModsData { uint32 Codepoint; int32 Mods; };
 
 
 // Mouse
 
 	struct FMouseButtonData    { int32 Button; int32 Action; int32 Mods; };
 
-	struct FCursorPositionData { float64 X; float64 Y; };
+	struct FCursorPositionData { float32 X; float32 Y; };
 
 	struct FCursorEnterData    { int32 Entered; };
 
-	struct FScrollData         { float64 OffsetX; float64 OffsetY; };
+	struct FScrollData         { float32 OffsetX; float32 OffsetY; };
 
 	struct FDropData           { int32 PathCount; const char8* Paths; };
 

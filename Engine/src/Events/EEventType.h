@@ -23,6 +23,7 @@ namespace t3d
 		KeyRepeated,
 		KeyReleased,
 		CharPressed,
+		CharWithModsPressed,
 
 	// Mouse:
 

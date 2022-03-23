@@ -43,7 +43,7 @@ namespace t3d
 
 		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Translation = FVec3(static_cast<float32>(NewEntity) - 5.0f, 0.0f, static_cast<float32>(NewEntity) + 5.0f);
 		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Rotation    = FVec3(static_cast<float32>(NewEntity));
-	//	SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Scale       = FVec3(0.5f, 0.5f, 0.5f);
+		SEntityComponentSystem::GetComponent<CTransform>(NewEntity)->Scale       = FVec3(0.4f, 0.4f, 0.4f);
 
 		SEntityComponentSystem::GetComponent<CModel>(NewEntity)->Mesh = MeshPtr;
 

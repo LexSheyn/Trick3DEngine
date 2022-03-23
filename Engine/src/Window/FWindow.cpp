@@ -194,15 +194,13 @@ namespace t3d
 
 	void FWindow::KeyCallback(GLFWwindow* Window, int32 Key, int32 ScanCode, int32 Action, int32 Mods)
 	{
-		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
-
 		if (Action == GLFW_PRESS)
 		{
 			SEventSystem::PushEvent(FEvent(EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods }));
 		}
 		else if (Action == GLFW_REPEAT)
 		{
-			//
+			SEventSystem::PushEvent(FEvent(EEventType::KeyRepeated, FKeyData{ Key, ScanCode, Action, Mods }));
 		}
 		else if (Action == GLFW_RELEASE)
 		{
@@ -212,12 +210,12 @@ namespace t3d
 
 	void FWindow::CharCallback(GLFWwindow* Window, uint32 Codepoint)
 	{
-		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
+		SEventSystem::PushEvent(FEvent(EEventType::CharPressed, FCharData{ Codepoint }));
 	}
 
 	void FWindow::CharModsCallback(GLFWwindow* Window, uint32 Codepoint, int32 Mods)
 	{
-		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
+		SEventSystem::PushEvent(FEvent(EEventType::CharWithModsPressed, FCharModsData{ Codepoint, Mods }));
 	}
 
 
@@ -225,36 +223,41 @@ namespace t3d
 
 	void FWindow::MouseButtonCallback(GLFWwindow* Window, int32 Button, int32 Action, int32 Mods)
 	{
-		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
-
 		if (Action == GLFW_PRESS)
 		{
-
+			SEventSystem::PushEvent(FEvent(EEventType::MouseButtonPressed, FMouseButtonData{ Button, Action, Mods }));
 		}
 		else if (Action == GLFW_RELEASE)
 		{
-
+			SEventSystem::PushEvent(FEvent(EEventType::MouseButtonReleased, FMouseButtonData{ Button, Action, Mods }));
 		}
 	}
 
 	void FWindow::CursorPosCallback(GLFWwindow* Window, float64 X, float64 Y)
 	{
-		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
+		SEventSystem::PushEvent(FEvent(EEventType::MouseMoved, FCursorPositionData{ static_cast<float32>(X), static_cast<float32>(Y) }));
 	}
 
 	void FWindow::CursorEnterCallback(GLFWwindow* Window, int32 Entered)
 	{
-		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
+		if (Entered)
+		{
+			SEventSystem::PushEvent(FEvent(EEventType::MouseEnteredWindow, FCursorEnterData{ Entered }));
+		}
+		else
+		{
+			SEventSystem::PushEvent(FEvent(EEventType::MouseLeftWindow, FCursorEnterData{ Entered }));
+		}		
 	}
 
 	void FWindow::ScrollCallback(GLFWwindow* Window, float64 OffsetX, float64 OffsetY)
 	{
-		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
+		SEventSystem::PushEvent(FEvent(EEventType::MouseScrolled, FScrollData{ static_cast<float32>(OffsetX), static_cast<float32>(OffsetY) }));
 	}
 
 	void FWindow::DropCallback(GLFWwindow* Window, int32 PathCount, const char8* Paths[])
 	{
-		FWindow* WindowPtr = reinterpret_cast<FWindow*>(glfwGetWindowUserPointer(Window));
+		SEventSystem::PushEvent(FEvent(EEventType::MousePathDropped, FDropData{ PathCount, *Paths }));
 	}
 
 }
