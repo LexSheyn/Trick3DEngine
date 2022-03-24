@@ -62,7 +62,7 @@ namespace t3d
 
 	void FScene::LoadTestMesh()
 	{
-		MeshPtr = MModelManager::LoadModel("D:/VULKAN_TUTORIAL_SHADERS/Models/paimon_ex.obj");
+		MeshPtr = MModelManager::LoadModel(T3D_RESOURCE_DIR + "Models/paimon_ex.obj");
 	}
 
 }

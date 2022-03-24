@@ -2,7 +2,12 @@
 // such as names of functions and macros.
 // For more information see https://go.microsoft.com/fwlink/?linkid=865984
 
-// Core
+// Logger:
+#define LOG_TRACE
+#define LOG_WARNING
+#define LOG_ERROR
+
+// Core:
 #define T3D_INLINE
 #define T3D_CALL
 #define T3D_NO_DISCARD
@@ -12,13 +17,12 @@
 #define T3D_DEFAULT_COPY
 #define T3D_DEFAULT_MOVE
 
-// ECS
+// ECS:
 #define T3D_ENTITY_INVALID_ID
 
-// Skeletal Mesh
+// Skeletal Mesh:
 #define T3D_MAX_BONE_INFLUENCE
 
-// Logger
-#define LOG_TRACE
-#define LOG_WARNING
-#define LOG_ERROR
+// Directories:
+#define T3D_RESOURCE_DIR
+#define T3D_SHADER_DIR  

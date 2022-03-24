@@ -1,0 +1,38 @@
+// COMPUTE Shader
+#version 450
+
+layout ( local_size_x = 16, local_size_y = 8 ) in; // 128
+
+layout ( set 0, binding = 0 ) uniform Config
+{
+	mat4 Transform;
+	uint MatrixCount;
+
+} TransformData;
+
+layout ( set 0, binding = 1 ) readonly buffer InputBuffer
+{
+	mat4 Matrices[];
+
+} SourceData;
+
+layout ( set 0, binding = 2 ) buffer OutputBuffer
+{
+	mat4 Matrices[];
+
+} OutputData;
+
+
+void main()
+{
+// Grab global ID:
+
+	uint gID = gl_GlobalInvocationID.x;
+
+// Make sure we do not access past the buffer size:
+
+	if (gID < MatrixCount)
+	{
+		OutputData.Matrices[gID] = SourceData.Matrices[gID] * TransformData.Tramsform;
+	}
+}

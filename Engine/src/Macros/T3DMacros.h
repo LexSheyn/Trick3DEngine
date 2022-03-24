@@ -60,3 +60,9 @@
 // Skeletal animation:
 
 #define T3D_MAX_BONE_INFLUENCE 4
+
+
+// Directories:
+
+#define T3D_RESOURCE_DIR std::string("../Resources/")
+#define T3D_SHADER_DIR   std::string("Shaders/SPIR-V/")

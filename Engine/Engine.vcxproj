@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b33d219f-f921-4289-84c3-093d0b14a469}</ProjectGuid>
+    <ProjectGuid>{9895cda3-a19c-40a3-a9bc-8df991aa7b1a}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -45,13 +45,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(ProjectDir)$(Platform)\Output\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)Output\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ProjectDir)$(Platform)\Output\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)Output\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -62,15 +62,15 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;$(SolutionDir)Linking\FMOD\Include;$(SolutionDir)Linking\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(VK_SDK_PATH)\Include;$(SolutionDir)\Linking\Assimp\Include;$(SolutionDir)\Linking\FMOD\Include;$(SolutionDir)\Linking\GLFW\Include;$(SolutionDir)\Linking\GLM\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;$(SolutionDir)Linking\FMOD\Lib;$(SolutionDir)Linking\Assimp\Lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;fmodL_vc.lib;shadercd.lib;shaderc_combinedd.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VK_SDK_PATH)\Lib;$(SolutionDir)\Linking\Assimp\Lib\Debug;$(SolutionDir)\Linking\FMOD\Lib;$(SolutionDir)\Linking\GLFW\Lib;$(SolutionDir)\Linking\GLM\Lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;assimp-vc143-mtd.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -84,17 +84,17 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Linking\GLFW\Include;$(SolutionDir)Linking\GLM\Include;$(SolutionDir)Linking\Vulkan\Include;$(SolutionDir)Linking\FMOD\Include;$(SolutionDir)Linking\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(VK_SDK_PATH)\Include;$(SolutionDir)\Linking\Assimp\Include;$(SolutionDir)\Linking\FMOD\Include;$(SolutionDir)\Linking\GLFW\Include;$(SolutionDir)\Linking\GLM\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Linking\GLFW\Lib;$(VULKAN_SDK)\Lib;$(SolutionDir)Linking\FMOD\Lib;$(SolutionDir)Linking\Assimp\Lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;vulkan-1.lib;fmod_vc.lib;shaderc.lib;shaderc_combined.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VK_SDK_PATH)\Lib;$(SolutionDir)\Linking\Assimp\Lib\Release;$(SolutionDir)\Linking\FMOD\Lib;$(SolutionDir)\Linking\GLFW\Lib;$(SolutionDir)\Linking\GLM\Lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;assimp-vc143-mt.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -114,6 +114,22 @@
     <ClCompile Include="src\ECS\Entity\FEntity.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Systems\Render\FBillboardRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Systems\Render\FPointLightRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Systems\Render\IRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Systems\Render\RMeshRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\EntryPoint\Main.cpp" />
     <ClCompile Include="src\Events\IEventListener.cpp" />
@@ -161,6 +177,22 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\Render\Pipeline\FDescriptorPool.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Pipeline\FDescriptorSetLayout.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Pipeline\FDescriptorWriter.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Render\Pipeline\FPipeline.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Render\Primitives\Billboard\FBillboard.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
@@ -181,43 +213,11 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Pipeline\FDescriptorPool.cpp">
+    <ClCompile Include="src\ResourceManagers\Image\MImageManager.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\Render\Pipeline\FDescriptorSetLayout.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\Render\Pipeline\FDescriptorWriter.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\Render\Pipeline\FPipeline.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\FBillboardRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\RMeshRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\FPointLightRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\IRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\Model\MModelManager.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ResourceManagers\Image\MImageManager.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -238,9 +238,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Time\FClock.cpp" />
     <ClCompile Include="src\Time\FDeltaTime.cpp" />
     <ClCompile Include="src\Time\FTime.cpp" />
-    <ClCompile Include="src\Time\FClock.cpp" />
     <ClCompile Include="src\Time\FTimeStamp.cpp" />
     <ClCompile Include="src\Types\T3DStaticConversion.cpp" />
     <ClCompile Include="src\Updater\FUpdater.cpp" />
@@ -256,13 +256,68 @@
     <ClInclude Include="src\ECS\Components\CTransform.h" />
     <ClInclude Include="src\ECS\Components\FComponentDescription.h" />
     <ClInclude Include="src\ECS\Components\IComponent.h" />
-    <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Components\TComponent.h" />
+    <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
+    <ClInclude Include="src\ECS\Entity\FEntity.h" />
     <ClInclude Include="src\ECS\Systems\Base\ISystem.h" />
-    <ClInclude Include="src\Logger\ELogLevel.h" />
+    <ClInclude Include="src\ECS\Systems\Render\FBillboardRenderSystem.h" />
+    <ClInclude Include="src\ECS\Systems\Render\FPointLightRenderSystem.h" />
     <ClInclude Include="src\ECS\Systems\Render\IRenderSystem.h" />
-    <ClInclude Include="src\ResourceManagers\Model\MModelManager.h" />
+    <ClInclude Include="src\ECS\Systems\Render\RMeshRenderSystem.h" />
+    <ClInclude Include="src\Events\EEventCategory.h" />
+    <ClInclude Include="src\Events\EEventType.h" />
+    <ClInclude Include="src\Events\EventData.h" />
+    <ClInclude Include="src\Events\FEvent.h" />
+    <ClInclude Include="src\Events\IEventListener.h" />
+    <ClInclude Include="src\Events\SEventSystem.h" />
+    <ClInclude Include="src\Input\Gamepad\FGamepad.h" />
+    <ClInclude Include="src\Input\IInputDevice.h" />
+    <ClInclude Include="src\Input\Keyboard\FCharEvent.h" />
+    <ClInclude Include="src\Input\Keyboard\FKey.h" />
+    <ClInclude Include="src\Input\Keyboard\FKeyboard.h" />
+    <ClInclude Include="src\Input\Keyboard\FKeyEvent.h" />
+    <ClInclude Include="src\Input\Keyboard\FKeyState.h" />
+    <ClInclude Include="src\Input\Mouse\FMouse.h" />
+    <ClInclude Include="src\Input\Mouse\FMouseButton.h" />
+    <ClInclude Include="src\Input\Mouse\FMouseButtonState.h" />
+    <ClInclude Include="src\Logger\ELogLevel.h" />
+    <ClInclude Include="src\Logger\FLogger.h" />
+    <ClInclude Include="src\Macros\T3DMacros.h" />
+    <ClInclude Include="src\PrecompiledHeaders\t3dpch.h" />
+    <ClInclude Include="src\Render\Core\FCamera.h" />
+    <ClInclude Include="src\Render\Core\FDevice.h" />
+    <ClInclude Include="src\Render\Core\FDeviceBuffer.h" />
+    <ClInclude Include="src\Render\Core\FMaterial.h" />
+    <ClInclude Include="src\Render\Core\FPushConstantData.h" />
+    <ClInclude Include="src\Render\Core\FQueueFamilyIndices.h" />
+    <ClInclude Include="src\Render\Core\FRenderer.h" />
+    <ClInclude Include="src\Render\Core\FSwapchain.h" />
+    <ClInclude Include="src\Render\Core\FSwapchainSupportDetails.h" />
+    <ClInclude Include="src\Render\Core\FTexture.h" />
+    <ClInclude Include="src\Render\Core\FUniformBufferData.h" />
+    <ClInclude Include="src\Render\Pipeline\FDescriptorPool.h" />
+    <ClInclude Include="src\Render\Pipeline\FDescriptorSetLayout.h" />
+    <ClInclude Include="src\Render\Pipeline\FDescriptorWriter.h" />
+    <ClInclude Include="src\Render\Pipeline\FPipeline.h" />
+    <ClInclude Include="src\Render\Pipeline\FPipelineConfigInfo.h" />
+    <ClInclude Include="src\Render\Primitives\Billboard\FBillboard.h" />
+    <ClInclude Include="src\Render\Primitives\Billboard\FBillboardPushConstant.h" />
+    <ClInclude Include="src\Render\Primitives\Billboard\FBillboardUniform.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FMesh.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FMeshData.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FMeshPushConstant.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FMeshUniform.h" />
+    <ClInclude Include="src\Render\Primitives\Mesh\FVertex.h" />
+    <ClInclude Include="src\Render\Primitives\PointLight\FPointLight.h" />
+    <ClInclude Include="src\Render\Primitives\PointLight\FPointLightPushConstant.h" />
+    <ClInclude Include="src\Render\Primitives\PointLight\FPointLightUniform.h" />
+    <ClInclude Include="src\Render\Primitives\Skybox\FSkybox.h" />
+    <ClInclude Include="src\Render\Primitives\Skybox\FSkyboxPushConstant.h" />
+    <ClInclude Include="src\Render\Primitives\Skybox\FSkyboxUniform.h" />
+    <ClInclude Include="src\ResourceManagers\Image\EColorFormat.h" />
+    <ClInclude Include="src\ResourceManagers\Image\FImagePNG.h" />
     <ClInclude Include="src\ResourceManagers\Image\MImageManager.h" />
+    <ClInclude Include="src\ResourceManagers\Model\MModelManager.h" />
     <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h" />
     <ClInclude Include="src\Scene\EScene.h" />
     <ClInclude Include="src\Scene\FScene.h" />
@@ -279,81 +334,14 @@
     <ClInclude Include="src\Templates\TScopedPointer.h" />
     <ClInclude Include="src\Templates\TSharedPointer.h" />
     <ClInclude Include="src\Templates\TTypeID.h" />
-    <ClInclude Include="src\Test\SkeletalAnimation\FAnimatedModel.h" />
-    <ClInclude Include="src\Test\SkeletalAnimation\FBone.h" />
-    <ClInclude Include="src\Test\SkeletalAnimation\FBoneInfo.h" />
-    <ClInclude Include="src\Test\SkeletalAnimation\FKeyPosition.h" />
-    <ClInclude Include="src\Test\SkeletalAnimation\FKeyRotation.h" />
-    <ClInclude Include="src\Test\SkeletalAnimation\FKeyScale.h" />
-    <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalMesh.h" />
-    <ClInclude Include="src\Test\SkeletalAnimation\FSkeletalVertex.h" />
-    <ClInclude Include="src\Types\T3DStaticConversion.h" />
-    <ClInclude Include="src\Types\ECSTypes.h" />
-    <ClInclude Include="src\ECS\Entity\FEntity.h" />
-    <ClInclude Include="src\Events\EEventCategory.h" />
-    <ClInclude Include="src\Events\EEventType.h" />
-    <ClInclude Include="src\Events\EventData.h" />
-    <ClInclude Include="src\Events\FEvent.h" />
-    <ClInclude Include="src\Events\SEventSystem.h" />
-    <ClInclude Include="src\Events\IEventListener.h" />
-    <ClInclude Include="src\Exception\FException.h" />
-    <ClInclude Include="src\Exception\FVulkanException.h" />
-    <ClInclude Include="src\GameObjects\IObject.h" />
-    <ClInclude Include="src\GameObjects\OGameObject.h" />
-    <ClInclude Include="src\Input\Gamepad\FGamepad.h" />
-    <ClInclude Include="src\Input\IInputDevice.h" />
-    <ClInclude Include="src\Input\Keyboard\FCharEvent.h" />
-    <ClInclude Include="src\Input\Keyboard\FKey.h" />
-    <ClInclude Include="src\Input\Keyboard\FKeyboard.h" />
-    <ClInclude Include="src\Input\Keyboard\FKeyEvent.h" />
-    <ClInclude Include="src\Input\Keyboard\FKeyState.h" />
-    <ClInclude Include="src\Input\Mouse\FMouse.h" />
-    <ClInclude Include="src\Input\Mouse\FMouseButton.h" />
-    <ClInclude Include="src\Input\Mouse\FMouseButtonState.h" />
-    <ClInclude Include="src\Logger\FLogger.h" />
-    <ClInclude Include="src\PrecompiledHeaders\t3dpch.h" />
-    <ClInclude Include="src\Render\Core\FCamera.h" />
-    <ClInclude Include="src\Render\Core\FDevice.h" />
-    <ClInclude Include="src\Render\Core\FDeviceBuffer.h" />
-    <ClInclude Include="src\Render\Core\FMaterial.h" />
-    <ClInclude Include="src\Render\Core\FPushConstantData.h" />
-    <ClInclude Include="src\Render\Core\FQueueFamilyIndices.h" />
-    <ClInclude Include="src\Render\Core\FRenderer.h" />
-    <ClInclude Include="src\Render\Core\FSwapchain.h" />
-    <ClInclude Include="src\Render\Core\FSwapchainSupportDetails.h" />
-    <ClInclude Include="src\Render\Core\FTexture.h" />
-    <ClInclude Include="src\Render\Core\FUniformBufferData.h" />
-    <ClInclude Include="src\Render\Primitives\Billboard\FBillboard.h" />
-    <ClInclude Include="src\Render\Primitives\Billboard\FBillboardPushConstant.h" />
-    <ClInclude Include="src\Render\Primitives\Billboard\FBillboardUniform.h" />
-    <ClInclude Include="src\Render\Primitives\Mesh\FMesh.h" />
-    <ClInclude Include="src\Render\Primitives\Mesh\FMeshData.h" />
-    <ClInclude Include="src\Render\Primitives\Mesh\FMeshPushConstant.h" />
-    <ClInclude Include="src\Render\Primitives\Mesh\FMeshUniform.h" />
-    <ClInclude Include="src\Render\Primitives\Mesh\FVertex.h" />
-    <ClInclude Include="src\Render\Primitives\PointLight\FPointLight.h" />
-    <ClInclude Include="src\Render\Primitives\PointLight\FPointLightPushConstant.h" />
-    <ClInclude Include="src\Render\Primitives\PointLight\FPointLightUniform.h" />
-    <ClInclude Include="src\Render\Primitives\Skybox\FSkybox.h" />
-    <ClInclude Include="src\Render\Primitives\Skybox\FSkyboxPushConstant.h" />
-    <ClInclude Include="src\Render\Primitives\Skybox\FSkyboxUniform.h" />
-    <ClInclude Include="src\Render\Pipeline\FDescriptorPool.h" />
-    <ClInclude Include="src\Render\Pipeline\FDescriptorSetLayout.h" />
-    <ClInclude Include="src\Render\Pipeline\FDescriptorWriter.h" />
-    <ClInclude Include="src\Render\Pipeline\FPipeline.h" />
-    <ClInclude Include="src\Render\Pipeline\FPipelineConfigInfo.h" />
-    <ClInclude Include="src\ECS\Systems\Render\FBillboardRenderSystem.h" />
-    <ClInclude Include="src\ECS\Systems\Render\RMeshRenderSystem.h" />
-    <ClInclude Include="src\ECS\Systems\Render\FPointLightRenderSystem.h" />
-    <ClInclude Include="src\ResourceManagers\Image\EColorFormat.h" />
-    <ClInclude Include="src\ResourceManagers\Image\FImagePNG.h" />
-    <ClInclude Include="src\Macros\T3DMacros.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
+    <ClInclude Include="src\Time\FClock.h" />
     <ClInclude Include="src\Time\FDeltaTime.h" />
     <ClInclude Include="src\Time\FTime.h" />
-    <ClInclude Include="src\Time\FClock.h" />
     <ClInclude Include="src\Time\FTimeStamp.h" />
+    <ClInclude Include="src\Types\ECSTypes.h" />
+    <ClInclude Include="src\Types\T3DStaticConversion.h" />
     <ClInclude Include="src\Types\T3DTypes.h" />
     <ClInclude Include="src\Updater\FUpdater.h" />
     <ClInclude Include="src\Window\FWindow.h" />

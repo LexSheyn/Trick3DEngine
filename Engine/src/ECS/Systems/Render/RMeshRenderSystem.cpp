@@ -86,7 +86,7 @@ namespace t3d
 	void RMeshRenderSystem::CreatePipelineLayout()
 	{
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//// Creating DescriptorSetLayout
+	//// Creating Uniform buffers and DescriptorSetLayout
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		for (uint64 i = 0u; i < UniformBuffers.Size(); i++)
@@ -95,7 +95,8 @@ namespace t3d
 				                                  sizeof(FMeshUniform),
 				                                  1,
 				                                  VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-				                                  VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+				                                  VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
+				                                  Renderer.GetDevice().Properties.limits.minUniformBufferOffsetAlignment);
 
 			UniformBuffers[i]->Map();
 		}
@@ -147,8 +148,8 @@ namespace t3d
 		
 		Pipeline = new FPipeline(Renderer.GetDevice(),
 			                     PipelineConfig,
-			                     "D:/T3D_Shaders/SPIR-V/MeshShader_vert.spv",
-			                     "D:/T3D_Shaders/SPIR-V/MeshShader_frag.spv");
+			                     T3D_SHADER_DIR + "MeshShader_vert.spv",
+			                     T3D_SHADER_DIR + "MeshShader_frag.spv");
 	}
 
 	void RMeshRenderSystem::Update()

@@ -17,7 +17,7 @@ namespace t3d
 	{
 		this->InitWindow();
 
-		this->SetIcon("../Resources/T3D_logo_32.png");
+		this->SetIcon(T3D_RESOURCE_DIR + "Icons/T3D_logo_32.png");
 
 	// Keyboard:
 
