@@ -42,7 +42,7 @@ namespace t3d
 
 	// Public Constants:
 
-		static constexpr uint64 MAX_FRAMES_IN_FLIGHT = 2;
+		static constexpr uint64 MaxFramesInFlight = 2;
 
 	private:
 

@@ -115,21 +115,9 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\FBillboardRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\FPointLightRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\IRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\RMeshRenderSystem.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    <ClCompile Include="src\ECS\Systems\NRenderSystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\EntryPoint\Main.cpp" />
     <ClCompile Include="src\Events\IEventListener.cpp" />
@@ -189,10 +177,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Pipeline\FPipeline.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="src\Render\Primitives\Billboard\FBillboard.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
@@ -230,8 +214,11 @@
     <ClCompile Include="src\SFX\FSound.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\Templates\TTypeID.cpp" />
-    <ClCompile Include="src\Test\IPipeline.cpp" />
-    <ClCompile Include="src\Test\PGraphicsPipeline.cpp" />
+    <ClCompile Include="src\Render\Pipeline\IPipeline.cpp" />
+    <ClCompile Include="src\Render\Pipeline\PGraphicsPipeline.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Test\Test_Pipeline.cpp" />
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
@@ -262,11 +249,8 @@
     <ClInclude Include="src\ECS\Components\TComponent.h" />
     <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Entity\FEntity.h" />
-    <ClInclude Include="src\ECS\Systems\Base\ISystem.h" />
-    <ClInclude Include="src\ECS\Systems\Render\FBillboardRenderSystem.h" />
-    <ClInclude Include="src\ECS\Systems\Render\FPointLightRenderSystem.h" />
-    <ClInclude Include="src\ECS\Systems\Render\IRenderSystem.h" />
-    <ClInclude Include="src\ECS\Systems\Render\RMeshRenderSystem.h" />
+    <ClInclude Include="src\ECS\Systems\ISystem.h" />
+    <ClInclude Include="src\ECS\Systems\NRenderSystem.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />
     <ClInclude Include="src\Events\EEventType.h" />
     <ClInclude Include="src\Events\EventData.h" />
@@ -301,7 +285,6 @@
     <ClInclude Include="src\Render\Pipeline\FDescriptorPool.h" />
     <ClInclude Include="src\Render\Pipeline\FDescriptorSetLayout.h" />
     <ClInclude Include="src\Render\Pipeline\FDescriptorWriter.h" />
-    <ClInclude Include="src\Render\Pipeline\FPipeline.h" />
     <ClInclude Include="src\Render\Pipeline\FPipelineConfigInfo.h" />
     <ClInclude Include="src\Render\Primitives\Billboard\FBillboard.h" />
     <ClInclude Include="src\Render\Primitives\Billboard\FBillboardPushConstant.h" />
@@ -339,8 +322,8 @@
     <ClInclude Include="src\Templates\TTypeID.h" />
     <ClInclude Include="src\Test\EPipelineType.h" />
     <ClInclude Include="src\Test\EShaderType.h" />
-    <ClInclude Include="src\Test\IPipeline.h" />
-    <ClInclude Include="src\Test\PGraphicsPipeline.h" />
+    <ClInclude Include="src\Render\Pipeline\IPipeline.h" />
+    <ClInclude Include="src\Render\Pipeline\PGraphicsPipeline.h" />
     <ClInclude Include="src\Test\Test_Pipeline.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ECS/Systems/Base/ISystem.h"
+#include "../ECS/Systems/ISystem.h"
 
 namespace t3d
 {

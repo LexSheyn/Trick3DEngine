@@ -59,12 +59,12 @@ namespace t3d
 		VkPipeline          VulkanPipeline;
 
 		FDescriptorSetLayout* DescriptorSetLayout;
-		TArray<VkDescriptorSet, FSwapchain::MAX_FRAMES_IN_FLIGHT> DescriptorSets;
+		TArray<VkDescriptorSet, FSwapchain::MaxFramesInFlight> DescriptorSets;
 		FDescriptorPool* DescriptorPool;
 
 		FMeshUniform      MeshUniform;
 		FMeshPushConstant MeshConstant;
-		TArray<FDeviceBuffer*, FSwapchain::MAX_FRAMES_IN_FLIGHT> UniformBuffers;
+		TArray<FDeviceBuffer*, FSwapchain::MaxFramesInFlight> UniformBuffers;
 
 		TArray<VkShaderModule, 6> ShaderModules;
 	};

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../ECS/Core/SEntityComponentSystem.h"
+#include "../../ECS/Core/SEntityComponentSystem.h"
 
 namespace t3d
 {

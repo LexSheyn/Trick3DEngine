@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ECS/Systems/Render/RMeshRenderSystem.h"
+#include "../ECS/Systems/NRenderSystem.h"
 #include "../Scene/MSceneManager.h"
 #include "../SFX/FSound.h"
 #include "../Time/FClock.h"
@@ -38,7 +38,7 @@ namespace t3d
 		FWindow   Window;
 		FDevice   Device;
 		FRenderer Renderer;
-		RMeshRenderSystem MeshRenderSystem;
+		NRenderSystem RenderSystem;
 
 		MSceneManager SceneManager;
 	};

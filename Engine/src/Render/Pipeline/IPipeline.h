@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Render/Pipeline/FPipelineConfigInfo.h"
-#include "../Render/Pipeline/FDescriptorWriter.h"
-#include "../Render/Core/FRenderer.h"
-#include "../ResourceManagers/Shaders/MShaderManager.h"
+#include "FPipelineConfigInfo.h"
+#include "FDescriptorWriter.h"
+#include "../Core/FRenderer.h"
+#include "../../ResourceManagers/Shaders/MShaderManager.h"
 
 namespace t3d
 {
@@ -25,11 +25,11 @@ namespace t3d
 		
 	// Private Interface:
 
+		virtual void Configure               () = 0;
 		virtual void CreateShaderModule      (VkShaderModule* ShaderModule, const std::vector<char8>& ShaderCode) = 0;
 		virtual void CreateUniformBuffers    () = 0;
 		virtual void CreateDescriptors       () = 0;
-		virtual void CreatePipelineLayout    () = 0;
-		virtual void Configure               () = 0;
+		virtual void CreatePipelineLayout    () = 0;		
 		virtual void Create                  () = 0;
 		
 	// Variables:

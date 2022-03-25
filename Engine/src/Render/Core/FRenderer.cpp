@@ -102,7 +102,7 @@ namespace t3d
 
 		IsFrameStarted = false;
 
-		CurrentFrameIndex = (CurrentFrameIndex + 1u) % FSwapchain::MAX_FRAMES_IN_FLIGHT;
+		CurrentFrameIndex = (CurrentFrameIndex + 1u) % FSwapchain::MaxFramesInFlight;
 	}
 
 	void FRenderer::BeginSwapchainRenderPass()
@@ -267,7 +267,7 @@ namespace t3d
 
 	void FRenderer::CreateCommandBuffers()
 	{
-		CommandBuffers.resize(FSwapchain::MAX_FRAMES_IN_FLIGHT);
+		CommandBuffers.resize(FSwapchain::MaxFramesInFlight);
 
 		VkCommandBufferAllocateInfo AllocateInfo{};
 

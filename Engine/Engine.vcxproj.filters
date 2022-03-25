@@ -30,18 +30,6 @@
     <ClCompile Include="src\ECS\Entity\FEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\FBillboardRenderSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\FPointLightRenderSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\IRenderSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ECS\Systems\Render\RMeshRenderSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\EntryPoint\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -91,9 +79,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Pipeline\FDescriptorWriter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Render\Pipeline\FPipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Primitives\Billboard\FBillboard.cpp">
@@ -165,10 +150,13 @@
     <ClCompile Include="src\Test\Test_Pipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Test\IPipeline.cpp">
+    <ClCompile Include="src\Render\Pipeline\IPipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Test\PGraphicsPipeline.cpp">
+    <ClCompile Include="src\Render\Pipeline\PGraphicsPipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Systems\NRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,19 +197,7 @@
     <ClInclude Include="src\ECS\Entity\FEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\Systems\Base\ISystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\Systems\Render\FBillboardRenderSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\Systems\Render\FPointLightRenderSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\Systems\Render\IRenderSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ECS\Systems\Render\RMeshRenderSystem.h">
+    <ClInclude Include="src\ECS\Systems\ISystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Events\EEventCategory.h">
@@ -324,9 +300,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\Pipeline\FDescriptorWriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Render\Pipeline\FPipeline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\Pipeline\FPipelineConfigInfo.h">
@@ -476,10 +449,13 @@
     <ClInclude Include="src\Test\EShaderType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Test\IPipeline.h">
+    <ClInclude Include="src\Render\Pipeline\IPipeline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Test\PGraphicsPipeline.h">
+    <ClInclude Include="src\Render\Pipeline\PGraphicsPipeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ECS\Systems\NRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

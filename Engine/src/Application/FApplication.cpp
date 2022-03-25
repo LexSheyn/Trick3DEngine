@@ -11,7 +11,7 @@ namespace t3d
 		  Window(Width, Height, "Trick 3D Engine"),
 		  Device(Window),
 		  Renderer(Window, Device),
-		  MeshRenderSystem(Renderer)
+		  RenderSystem(Renderer)
 	{
 		MModelManager::SetDevice(Device);
 	}
@@ -66,7 +66,7 @@ namespace t3d
 
 		Renderer.BeginSwapchainRenderPass();
 
-		MeshRenderSystem.Render(SceneManager.GetActiveScene());
+		RenderSystem.Render(SceneManager.GetActiveScene());
 
 		Renderer.EndSwapchainRenderPass();
 

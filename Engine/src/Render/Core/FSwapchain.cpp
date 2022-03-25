@@ -65,7 +65,7 @@ namespace t3d
 
 	// Cleanup synctonisation objects:
 
-		for (uint64 i = 0u; i < MAX_FRAMES_IN_FLIGHT; i++)
+		for (uint64 i = 0u; i < MaxFramesInFlight; i++)
 		{
 			vkDestroySemaphore(Device.Device(), RenderFinishedSemaphores[i], nullptr);
 			
@@ -141,7 +141,7 @@ namespace t3d
 
 		VkResult Result = vkQueuePresentKHR(Device.GetPresentQueue(), &PresentInfo);
 
-		CurrentFrame = (CurrentFrame + 1u) % MAX_FRAMES_IN_FLIGHT;
+		CurrentFrame = (CurrentFrame + 1u) % MaxFramesInFlight;
 
 		return Result;
 	}
@@ -474,9 +474,9 @@ namespace t3d
 
 	void FSwapchain::CreateSyncObjects()
 	{
-		ImageAvailableSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
-		RenderFinishedSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
-		InFlightFences.resize(MAX_FRAMES_IN_FLIGHT);
+		ImageAvailableSemaphores.resize(MaxFramesInFlight);
+		RenderFinishedSemaphores.resize(MaxFramesInFlight);
+		InFlightFences.resize(MaxFramesInFlight);
 		ImagesInFlight.resize(this->GetImageCount(), VK_NULL_HANDLE);
 
 		VkSemaphoreCreateInfo SemaphoreInfo{};
@@ -488,7 +488,7 @@ namespace t3d
 		FenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
 		FenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
-		for (uint64 i = 0u; i < MAX_FRAMES_IN_FLIGHT; i++)
+		for (uint64 i = 0u; i < MaxFramesInFlight; i++)
 		{
 			if (vkCreateSemaphore(Device.Device(), &SemaphoreInfo, nullptr, &ImageAvailableSemaphores[i]) != VK_SUCCESS)
 			{
