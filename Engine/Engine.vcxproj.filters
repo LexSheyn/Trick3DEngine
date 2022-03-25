@@ -156,7 +156,7 @@
     <ClCompile Include="src\Render\Pipeline\PGraphicsPipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\Systems\NRenderSystem.cpp">
+    <ClCompile Include="src\ECS\Systems\SRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -455,7 +455,7 @@
     <ClInclude Include="src\Render\Pipeline\PGraphicsPipeline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\Systems\NRenderSystem.h">
+    <ClInclude Include="src\ECS\Systems\SRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

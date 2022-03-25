@@ -115,7 +115,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\ECS\Systems\NRenderSystem.cpp">
+    <ClCompile Include="src\ECS\Systems\SRenderSystem.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -250,7 +250,7 @@
     <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Entity\FEntity.h" />
     <ClInclude Include="src\ECS\Systems\ISystem.h" />
-    <ClInclude Include="src\ECS\Systems\NRenderSystem.h" />
+    <ClInclude Include="src\ECS\Systems\SRenderSystem.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />
     <ClInclude Include="src\Events\EEventType.h" />
     <ClInclude Include="src\Events\EventData.h" />

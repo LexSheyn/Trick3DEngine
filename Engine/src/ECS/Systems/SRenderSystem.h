@@ -7,17 +7,17 @@
 
 namespace t3d
 {
-	class NRenderSystem : public ISystem
+	class SRenderSystem : public ISystem
 	{
 	public:
 
 	// Constructors and Destructor:
 
-		 NRenderSystem (FRenderer& Renderer);
-		~NRenderSystem ();
+		 SRenderSystem (FRenderer& Renderer);
+		~SRenderSystem ();
 
-		T3D_NO_COPY(NRenderSystem);
-		T3D_NO_MOVE(NRenderSystem);
+		T3D_NO_COPY(SRenderSystem);
+		T3D_NO_MOVE(SRenderSystem);
 
 	// Functions:
 

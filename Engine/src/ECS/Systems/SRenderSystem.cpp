@@ -1,18 +1,18 @@
 #include "../../PrecompiledHeaders/t3dpch.h"
-#include "NRenderSystem.h"
+#include "SRenderSystem.h"
 
 namespace t3d
 {
 // Constructors and Destructor:
 
-	NRenderSystem::NRenderSystem(FRenderer& Renderer)
+	SRenderSystem::SRenderSystem(FRenderer& Renderer)
 		: Renderer(Renderer),
 		  GraphicsPipeline(Renderer)
 	{
 		LOG_TRACE("Created.");
 	}
 
-	NRenderSystem::~NRenderSystem()
+	SRenderSystem::~SRenderSystem()
 	{
 		LOG_TRACE("Deleted.");
 	}
@@ -20,7 +20,7 @@ namespace t3d
 
 // Functions:
 
-	void NRenderSystem::Render(FScene& Scene)
+	void SRenderSystem::Render(FScene& Scene)
 	{
 	// Binding Graphics Pipeline:
 
@@ -38,8 +38,7 @@ namespace t3d
 
 	// Uniform submition:
 
-		GraphicsPipeline.UniformBuffers[Renderer.GetFrameIndex()]->WriteToBuffer(&GraphicsPipeline.MeshUniform);
-		GraphicsPipeline.UniformBuffers[Renderer.GetFrameIndex()]->Flush();
+		GraphicsPipeline.SubmitUniforms();
 
 		for (uint64 i = 0u; i < Scene.EntityList.size(); i++)
 		{
@@ -49,7 +48,7 @@ namespace t3d
 			GraphicsPipeline.MeshConstant.Rotation    = SEntityComponentSystem::GetComponent<CTransform>(Scene.EntityList[i])->Rotation;
 			GraphicsPipeline.MeshConstant.Scale       = SEntityComponentSystem::GetComponent<CTransform>(Scene.EntityList[i])->Scale;
 
-			vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), GraphicsPipeline.PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &GraphicsPipeline.MeshConstant);
+			GraphicsPipeline.PushConstants();
 
 		// Draw command submition:
 
@@ -61,8 +60,12 @@ namespace t3d
 
 // ISystem Interface:
 
-	void NRenderSystem::Update()
+	void SRenderSystem::Update()
 	{
+		// Access Scene somehow
+		// Submit uniforms and oush constants here		
+		// To do...
+		LOG_TRACE("FPS: " + std::to_string( static_cast<uint64>(1.0f / FDeltaTime::Get()) ));
 	}
 
 

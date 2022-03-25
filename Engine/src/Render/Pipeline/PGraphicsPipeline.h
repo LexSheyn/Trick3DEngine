@@ -19,14 +19,16 @@ namespace t3d
 
 	// IPipeline Public Interface:
 
-		void Bind (VkCommandBuffer CommandBuffer) override;
+		void Bind              (VkCommandBuffer CommandBuffer) override;
+		void SubmitUniforms    ()                              override;
+		void PushConstants     ()                              override;
 
 	private:
 
 	// IPipeline Private Interface:
 		
-		void Configure               () override;
 		void CreateShaderModule      (VkShaderModule* ShaderModule, const std::vector<char8>& ShaderCode) override;
+		void Configure               () override;		
 		void CreateUniformBuffers    () override;
 		void CreateDescriptors       () override;
 		void CreatePipelineLayout    () override;
@@ -52,6 +54,6 @@ namespace t3d
 		FMeshUniform      MeshUniform;
 		FMeshPushConstant MeshConstant;
 
-		friend class NRenderSystem;
+		friend class SRenderSystem;
 	};
 }

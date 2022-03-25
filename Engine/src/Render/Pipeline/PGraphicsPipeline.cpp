@@ -55,8 +55,36 @@ namespace t3d
 		vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, VK_NULL_HANDLE);
 	}
 
+	void PGraphicsPipeline::SubmitUniforms()
+	{
+		UniformBuffers[Renderer.GetFrameIndex()]->WriteToBuffer(&MeshUniform);
+		UniformBuffers[Renderer.GetFrameIndex()]->Flush();
+	}
+
+	void PGraphicsPipeline::PushConstants()
+	{
+		vkCmdPushConstants(Renderer.GetCurrentCommandBuffer(), PipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(FMeshPushConstant), &MeshConstant);
+	}
+
 
 // IPipeline Private Interface:
+
+	void PGraphicsPipeline::CreateShaderModule(VkShaderModule* ShaderModule, const std::vector<char8>& ShaderCode)
+	{
+		VkShaderModuleCreateInfo CreateInfo{};
+
+		CreateInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+		CreateInfo.pNext = VK_NULL_HANDLE;
+		CreateInfo.flags = {};
+		CreateInfo.codeSize = ShaderCode.size();
+		CreateInfo.pCode = reinterpret_cast<const uint32*>(ShaderCode.data());
+
+		if (vkCreateShaderModule(Renderer.GetDevice().Device(), &CreateInfo, VK_NULL_HANDLE, ShaderModule) != VK_SUCCESS)
+		{
+			LOG_ERROR("Failed to create shader module!");
+			throw;
+		}
+	}
 
 	void PGraphicsPipeline::Configure()
 	{
@@ -129,23 +157,6 @@ namespace t3d
 
 		Config.BindingDescriptions   = FVertex::GetBindingDescriptions();
 		Config.AttributeDescriptions = FVertex::GetAttributeDescriptions();
-	}
-
-	void PGraphicsPipeline::CreateShaderModule(VkShaderModule* ShaderModule, const std::vector<char8>& ShaderCode)
-	{
-		VkShaderModuleCreateInfo CreateInfo{};
-
-		CreateInfo.sType    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-		CreateInfo.pNext    = VK_NULL_HANDLE;
-		CreateInfo.flags    = {};
-		CreateInfo.codeSize = ShaderCode.size();
-		CreateInfo.pCode    = reinterpret_cast<const uint32*>(ShaderCode.data());
-
-		if (vkCreateShaderModule(Renderer.GetDevice().Device(), &CreateInfo, VK_NULL_HANDLE, ShaderModule) != VK_SUCCESS)
-		{
-			LOG_ERROR("Failed to create shader module!");
-			throw;
-		}
 	}
 
 	void PGraphicsPipeline::CreateUniformBuffers()

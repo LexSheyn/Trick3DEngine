@@ -21,12 +21,14 @@ namespace t3d
 
 	// Public Interface:
 
-		virtual void Bind (VkCommandBuffer CommandBuffer) = 0;
+		virtual void Bind              (VkCommandBuffer CommandBuffer) = 0;
+		virtual void SubmitUniforms    () = 0;
+		virtual void PushConstants     () = 0;
 		
 	// Private Interface:
 
-		virtual void Configure               () = 0;
 		virtual void CreateShaderModule      (VkShaderModule* ShaderModule, const std::vector<char8>& ShaderCode) = 0;
+		virtual void Configure               () = 0;		
 		virtual void CreateUniformBuffers    () = 0;
 		virtual void CreateDescriptors       () = 0;
 		virtual void CreatePipelineLayout    () = 0;		

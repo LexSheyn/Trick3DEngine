@@ -25,6 +25,14 @@ namespace t3d
 		}
 	}
 
+	void FUpdater::UnregisterAll()
+	{
+		for (uint64 i = 0u; i < SystemGroups.Size(); i++)
+		{
+			SystemGroups[i].clear();
+		}
+	}
+
 	void FUpdater::Update(uint64 Group)
 	{
 		for (auto& System : SystemGroups[Group])

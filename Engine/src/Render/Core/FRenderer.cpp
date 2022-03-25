@@ -45,7 +45,7 @@ namespace t3d
 	{
 		if (IsFrameStarted)
 		{
-			LOG_ERROR("Cannot call this function while already in progress!");
+			LOG_ERROR("Cannot call this function while frame already in progress!");
 			throw;
 		}
 
@@ -152,7 +152,7 @@ namespace t3d
 	{
 		if (!IsFrameStarted)
 		{
-			LOG_ERROR("Cannot call this function whilw frame is not in progress!");
+			LOG_ERROR("Cannot call this function while frame is not in progress!");
 			throw;
 		}
 
@@ -171,7 +171,7 @@ namespace t3d
 	{
 		if (!IsFrameStarted)
 		{
-			LOG_ERROR("Cannot get command buffer when frame not in progress!");
+			LOG_ERROR("Cannot get command buffer while frame not in progress!");
 			throw;
 		}
 
@@ -192,7 +192,7 @@ namespace t3d
 	{
 		if (!IsFrameStarted)
 		{
-			LOG_ERROR("Cannot get frame index when frame not in progress!");
+			LOG_ERROR("Cannot get frame index while frame not in progress!");
 			throw;
 		}
 

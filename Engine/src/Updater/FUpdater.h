@@ -10,9 +10,10 @@ namespace t3d
 
 	// Functions:
 
-		static void Register      (uint64 Group, ISystem* System);
-		static void Unregister    (uint64 Group, ISystem* System);
-		static void Update        (uint64 Group);
+		static void Register          (uint64 Group, ISystem* System);
+		static void Unregister        (uint64 Group, ISystem* System);
+		static void UnregisterAll     ();
+		static void Update            (uint64 Group);
 
 	private:
 

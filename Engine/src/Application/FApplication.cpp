@@ -14,10 +14,12 @@ namespace t3d
 		  RenderSystem(Renderer)
 	{
 		MModelManager::SetDevice(Device);
+		FUpdater::Register(0, &RenderSystem);
 	}
 
 	FApplication::~FApplication()
 	{
+		FUpdater::UnregisterAll();
 		FSound::Shutdown();
 	}
 
@@ -63,13 +65,11 @@ namespace t3d
 	void FApplication::Render()
 	{
 		Renderer.BeginFrame();
-
 		Renderer.BeginSwapchainRenderPass();
 
 		RenderSystem.Render(SceneManager.GetActiveScene());
 
 		Renderer.EndSwapchainRenderPass();
-
 		Renderer.EndFrame();
 	}
 
