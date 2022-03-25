@@ -230,6 +230,9 @@
     <ClCompile Include="src\SFX\FSound.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\Templates\TTypeID.cpp" />
+    <ClCompile Include="src\Test\IPipeline.cpp" />
+    <ClCompile Include="src\Test\PGraphicsPipeline.cpp" />
+    <ClCompile Include="src\Test\Test_Pipeline.cpp" />
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
@@ -334,6 +337,11 @@
     <ClInclude Include="src\Templates\TScopedPointer.h" />
     <ClInclude Include="src\Templates\TSharedPointer.h" />
     <ClInclude Include="src\Templates\TTypeID.h" />
+    <ClInclude Include="src\Test\EPipelineType.h" />
+    <ClInclude Include="src\Test\EShaderType.h" />
+    <ClInclude Include="src\Test\IPipeline.h" />
+    <ClInclude Include="src\Test\PGraphicsPipeline.h" />
+    <ClInclude Include="src\Test\Test_Pipeline.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Time\FClock.h" />

@@ -130,7 +130,7 @@ namespace t3d
 		std::vector<char8> VertexShaderCode   = MShaderManager::ReadAsBinary(VertexShaderPath);
 		std::vector<char8> FragmentShaderCode = MShaderManager::ReadAsBinary(FragmentShaderPath);
 
-		this->CreateShaderModule(VertexShaderCode, &VertexShaderModule);
+		this->CreateShaderModule(VertexShaderCode  , &VertexShaderModule);
 		this->CreateShaderModule(FragmentShaderCode, &FragmentShaderModule);
 
 		VkPipelineShaderStageCreateInfo ShaderStages[2]{};

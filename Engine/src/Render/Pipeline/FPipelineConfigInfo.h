@@ -1,5 +1,9 @@
 #pragma once
 
+// Disable warnings from Vulkan SDK:
+#pragma warning( push ) // Vulkan SDK - Begin
+#pragma warning( disable : 26812 ) // Uncoped Enum
+
 namespace t3d
 {
 	class FPipelineConfigInfo
@@ -15,8 +19,7 @@ namespace t3d
 
 	// Variables:
 
-	//	VkViewport Viewport;
-	//	VkRect2D   Scissor;
+		VkPipelineBindPoint BindPoint;
 
 		std::vector<VkVertexInputBindingDescription>   BindingDescriptions;
 		std::vector<VkVertexInputAttributeDescription> AttributeDescriptions;
@@ -38,3 +41,5 @@ namespace t3d
 		uint32       Subpass{};
 	};
 }
+
+#pragma warning( pop ) // Vulkan SDK - End

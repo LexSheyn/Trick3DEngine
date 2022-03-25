@@ -20,6 +20,9 @@ namespace t3d
 
 		this->CreateCommandBuffers();
 
+		Viewports.emplace_back(VkViewport{});
+		Scissors.emplace_back(VkRect2D{});
+
 		LOG_TRACE("Created.");
 	}
 
@@ -131,22 +134,18 @@ namespace t3d
 
 		vkCmdBeginRenderPass(CommandBuffer, &RenderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
 
-		VkViewport Viewport{};
+		Viewports.front().x        = 0.0f;
+		Viewports.front().y        = 0.0f;
+		Viewports.front().width    = static_cast<float32>(Swapchain->GetSwapchainExtent().width);
+		Viewports.front().height   = static_cast<float32>(Swapchain->GetSwapchainExtent().height);
+		Viewports.front().minDepth = 0.0f;
+		Viewports.front().maxDepth = 1.0f;
 
-		Viewport.x        = 0.0f;
-		Viewport.y        = 0.0f;
-		Viewport.width    = static_cast<float32>(Swapchain->GetSwapchainExtent().width);
-		Viewport.height   = static_cast<float32>(Swapchain->GetSwapchainExtent().height);
-		Viewport.minDepth = 0.0f;
-		Viewport.maxDepth = 1.0f;
-	
-		VkRect2D Scissor{};
+		Scissors.front().offset = { 0, 0 };
+		Scissors.front().extent = Swapchain->GetSwapchainExtent();
 
-		Scissor.offset = { 0, 0 };
-		Scissor.extent = Swapchain->GetSwapchainExtent();
-
-		vkCmdSetViewport(CommandBuffer, 0, 1, &Viewport);
-		vkCmdSetScissor(CommandBuffer, 0, 1, &Scissor);
+		vkCmdSetViewport(CommandBuffer, 0, 1, &Viewports.front());
+		vkCmdSetScissor (CommandBuffer, 0, 1, &Scissors.front());
 	}
 
 	void FRenderer::EndSwapchainRenderPass()
@@ -205,6 +204,16 @@ namespace t3d
 		return Device;
 	}
 
+	std::vector<VkViewport>& FRenderer::GetViewports()
+	{
+		return Viewports;
+	}
+
+	std::vector<VkRect2D>& FRenderer::GetScissors()
+	{
+		return Scissors;
+	}
+
 
 // Private Functions:
 
@@ -241,7 +250,7 @@ namespace t3d
 
 		FSwapchain* OldSwapchain = Swapchain;
 
-		LOG_TRACE("Recreation swapchain.");
+		LOG_TRACE("Recreating swapchain.");
 
 		Swapchain = new FSwapchain(Device, Extent, OldSwapchain);
 

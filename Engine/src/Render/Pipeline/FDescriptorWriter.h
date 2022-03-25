@@ -1,7 +1,7 @@
 #pragma once
 
-#include "FDescriptorSetLayout.h"
-#include "FDescriptorPool.h"
+#include "../../Render/Pipeline/FDescriptorSetLayout.h"
+#include "../../Render/Pipeline/FDescriptorPool.h"
 
 namespace t3d
 {

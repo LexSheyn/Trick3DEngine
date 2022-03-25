@@ -32,6 +32,9 @@ namespace t3d
 		const uint64&         GetFrameIndex              () const;
 		      FDevice&        GetDevice                  () const;
 
+		std::vector<VkViewport>& GetViewports    ();
+		std::vector<VkRect2D  >& GetScissors     ();
+
 	private:
 
 	// Private Functions:
@@ -56,5 +59,8 @@ namespace t3d
 		uint64 CurrentFrameIndex;
 
 		bool8  IsFrameStarted;
+
+		std::vector<VkViewport> Viewports;
+		std::vector<VkRect2D  > Scissors;
 	};
 }

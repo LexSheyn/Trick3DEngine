@@ -49,13 +49,15 @@ namespace t3d
 		UniformBuffers[Renderer.GetFrameIndex()]->WriteToBuffer(&MeshUniform);
 		UniformBuffers[Renderer.GetFrameIndex()]->Flush();
 
+	// Binding Pipeline and Descriptor sets:
+
+		Pipeline->Bind(Renderer.GetCurrentCommandBuffer());
+
+		vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
+
 		for (uint64 i = 0u; i < Scene.EntityList.size(); i++)
 		{
-		// Binding Pipeline and Descriptor sets:
 
-			Pipeline->Bind(Renderer.GetCurrentCommandBuffer());
-
-			vkCmdBindDescriptorSets(Renderer.GetCurrentCommandBuffer(), VK_PIPELINE_BIND_POINT_GRAPHICS, PipelineLayout, 0, 1, &DescriptorSets[Renderer.GetFrameIndex()], 0, nullptr);
 
 		// Transform:
 

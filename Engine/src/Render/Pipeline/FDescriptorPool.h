@@ -22,8 +22,8 @@ namespace t3d
 
 	// Functions:
 
-		bool8 AllocateDescriptorSet(const VkDescriptorSetLayout SetLayout, VkDescriptorSet& Set) const;
-		void  FreeDescriptorSets(std::vector<VkDescriptorSet>& Sets) const;
+		bool8 AllocateDescriptorSet    (const VkDescriptorSetLayout SetLayout, VkDescriptorSet& Set) const;
+		void  FreeDescriptorSets       (std::vector<VkDescriptorSet>& Sets) const;
 		void  ResetPool                ();
 
 		class Constructor
