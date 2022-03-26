@@ -304,7 +304,7 @@
     <ClInclude Include="src\ResourceManagers\Image\MImageManager.h" />
     <ClInclude Include="src\ResourceManagers\Model\MModelManager.h" />
     <ClInclude Include="src\ResourceManagers\Shaders\EShaderKind.h" />
-    <ClInclude Include="src\ResourceManagers\Shaders\EShaderOptimizationLevel.h" />
+    <ClInclude Include="src\ResourceManagers\Shaders\EShaderOptimization.h" />
     <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h" />
     <ClInclude Include="src\Scene\EScene.h" />
     <ClInclude Include="src\Scene\FScene.h" />

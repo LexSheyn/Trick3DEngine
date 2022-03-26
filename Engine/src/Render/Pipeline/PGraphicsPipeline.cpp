@@ -220,14 +220,8 @@ namespace t3d
 
 	void PGraphicsPipeline::Create()
 	{
-		// TEST
-	//	std::string TestCode1 = MShaderManager::LoadGLSL("Shaders/GLSL/MeshShader.vert");
-	//	MShaderManager::SaveAsAssembly(TestCode1, "Shaders/SPIR-V/MeshShader_vert.spv", EShaderKind::Vertex);
-		std::vector<uint32> VertexShaderCode   = MShaderManager::LoadAssembly("Shaders/SPIR-V/MeshShader_vert.spv");
-
-	//	std::string TestCode2 = MShaderManager::LoadGLSL("Shaders/GLSL/MeshShader.frag");
-	//	MShaderManager::SaveAsSPV(TestCode2, "Shaders/SPIR-V/MeshShader_frag.spv", EShaderKind::Fragment);
-		std::vector<uint32> FragmentShaderCode = MShaderManager::LoadSPV("Shaders/SPIR-V/MeshShader_frag.spv");
+		std::vector<uint32> VertexShaderCode   = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.vert", EShaderOptimization::Performance);
+		std::vector<uint32> FragmentShaderCode = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.frag", EShaderOptimization::Performance);
 
 		this->CreateShaderModule(&VertexShaderModule  , VertexShaderCode);
 		this->CreateShaderModule(&FragmentShaderModule, FragmentShaderCode);

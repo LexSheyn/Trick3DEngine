@@ -452,7 +452,7 @@
     <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ResourceManagers\Shaders\EShaderOptimizationLevel.h">
+    <ClInclude Include="src\ResourceManagers\Shaders\EShaderOptimization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ResourceManagers\Shaders\EShaderKind.h">

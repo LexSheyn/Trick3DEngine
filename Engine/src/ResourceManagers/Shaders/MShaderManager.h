@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EShaderOptimizationLevel.h"
+#include "EShaderOptimization.h"
 #include "EShaderKind.h"
 
 namespace t3d
@@ -13,11 +13,13 @@ namespace t3d
 
 		static std::string         T3D_CALL LoadGLSL (const std::string& FilePath);
 
-		static void                T3D_CALL SaveAsSPV    (const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimizationLevel OptimizationLevel = EShaderOptimizationLevel::None);
+		static void                T3D_CALL SaveAsSPV    (const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimization OptimizationLevel = EShaderOptimization::None);
 		static std::vector<uint32> T3D_CALL LoadSPV      (const std::string& FilePath);
 
-		static void                T3D_CALL SaveAsAssembly    (const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimizationLevel OptimizationLevel = EShaderOptimizationLevel::None);
+		static void                T3D_CALL SaveAsAssembly    (const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimization OptimizationLevel = EShaderOptimization::None);
 		static std::vector<uint32> T3D_CALL LoadAssembly      (const std::string& FilePath);
+
+		static std::vector<uint32> T3D_CALL TranslateToSPV(const std::string& FilePath, EShaderOptimization OptimizationLevel = EShaderOptimization::None);
 
 	private:
 

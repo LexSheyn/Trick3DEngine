@@ -37,7 +37,7 @@ namespace t3d
 		return ShaderCode;
 	}
 
-	void MShaderManager::SaveAsSPV(const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimizationLevel OptimizationLevel)
+	void MShaderManager::SaveAsSPV(const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimization OptimizationLevel)
 	{
 		std::vector<uint32> SPVData;
 
@@ -82,7 +82,7 @@ namespace t3d
 		return SPVData;
 	}
 
-	void MShaderManager::SaveAsAssembly(const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimizationLevel OptimizationLevel)
+	void MShaderManager::SaveAsAssembly(const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimization OptimizationLevel)
 	{
 		std::string SPVAssembly;
 
@@ -130,6 +130,43 @@ namespace t3d
 		}
 
 		return { Result.cbegin(), Result.cend() };
+	}
+
+	std::vector<uint32> MShaderManager::TranslateToSPV(const std::string& FilePath, EShaderOptimization OptimizationLevel)
+	{
+		std::string GLSLCode;
+		GLSLCode.reserve(10'000);
+		GLSLCode = LoadGLSL(FilePath);
+
+		std::vector<uint32> SPVData;
+		SPVData.reserve(100'000);
+
+		if      (FilePath.ends_with(".geom"))
+		{
+			SPVData = CompileToSPV(FilePath, shaderc_glsl_geometry_shader       , GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
+		}
+		else if (FilePath.ends_with(".tesc"))
+		{
+			SPVData = CompileToSPV(FilePath, shaderc_glsl_tess_control_shader   , GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
+		}
+		else if (FilePath.ends_with(".tese"))
+		{
+			SPVData = CompileToSPV(FilePath, shaderc_glsl_tess_evaluation_shader, GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
+		}
+		else if (FilePath.ends_with(".comp"))
+		{
+			SPVData = CompileToSPV(FilePath, shaderc_glsl_compute_shader        , GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
+		}
+		else if (FilePath.ends_with(".frag"))
+		{
+			SPVData = CompileToSPV(FilePath, shaderc_glsl_fragment_shader       , GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
+		}
+		else if (FilePath.ends_with(".vert"))
+		{
+			SPVData = CompileToSPV(FilePath, shaderc_glsl_vertex_shader         , GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
+		}
+
+		return SPVData;
 	}
 
 
