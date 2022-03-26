@@ -70,7 +70,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VK_SDK_PATH)\Lib;$(SolutionDir)\Linking\Assimp\Lib\Debug;$(SolutionDir)\Linking\FMOD\Lib;$(SolutionDir)\Linking\GLFW\Lib;$(SolutionDir)\Linking\GLM\Lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;assimp-vc143-mtd.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;shadercd.lib;shaderc_combinedd.lib;assimp-vc143-mtd.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -94,7 +94,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VK_SDK_PATH)\Lib;$(SolutionDir)\Linking\Assimp\Lib\Release;$(SolutionDir)\Linking\FMOD\Lib;$(SolutionDir)\Linking\GLFW\Lib;$(SolutionDir)\Linking\GLM\Lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;assimp-vc143-mt.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;shaderc.lib;shaderc_combined.lib;assimp-vc143-mt.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -206,8 +206,8 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\Shaders\MShaderManager.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Scene\FScene.cpp" />
     <ClCompile Include="src\Scene\MSceneManager.cpp" />
@@ -219,7 +219,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Test\Test_Pipeline.cpp" />
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
@@ -304,6 +303,8 @@
     <ClInclude Include="src\ResourceManagers\Image\FImagePNG.h" />
     <ClInclude Include="src\ResourceManagers\Image\MImageManager.h" />
     <ClInclude Include="src\ResourceManagers\Model\MModelManager.h" />
+    <ClInclude Include="src\ResourceManagers\Shaders\EShaderKind.h" />
+    <ClInclude Include="src\ResourceManagers\Shaders\EShaderOptimizationLevel.h" />
     <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h" />
     <ClInclude Include="src\Scene\EScene.h" />
     <ClInclude Include="src\Scene\FScene.h" />
@@ -324,7 +325,6 @@
     <ClInclude Include="src\Test\EShaderType.h" />
     <ClInclude Include="src\Render\Pipeline\IPipeline.h" />
     <ClInclude Include="src\Render\Pipeline\PGraphicsPipeline.h" />
-    <ClInclude Include="src\Test\Test_Pipeline.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Time\FClock.h" />

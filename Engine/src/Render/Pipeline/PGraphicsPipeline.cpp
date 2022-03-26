@@ -69,15 +69,15 @@ namespace t3d
 
 // IPipeline Private Interface:
 
-	void PGraphicsPipeline::CreateShaderModule(VkShaderModule* ShaderModule, const std::vector<char8>& ShaderCode)
+	void PGraphicsPipeline::CreateShaderModule(VkShaderModule* ShaderModule, const std::vector<uint32>& ShaderCode)
 	{
 		VkShaderModuleCreateInfo CreateInfo{};
 
-		CreateInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-		CreateInfo.pNext = VK_NULL_HANDLE;
-		CreateInfo.flags = {};
-		CreateInfo.codeSize = ShaderCode.size();
-		CreateInfo.pCode = reinterpret_cast<const uint32*>(ShaderCode.data());
+		CreateInfo.sType    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+		CreateInfo.pNext    = VK_NULL_HANDLE;
+		CreateInfo.flags    = {};
+		CreateInfo.codeSize = 4u * ShaderCode.size();
+		CreateInfo.pCode    = ShaderCode.data();
 
 		if (vkCreateShaderModule(Renderer.GetDevice().Device(), &CreateInfo, VK_NULL_HANDLE, ShaderModule) != VK_SUCCESS)
 		{
@@ -220,8 +220,14 @@ namespace t3d
 
 	void PGraphicsPipeline::Create()
 	{
-		std::vector<char8> VertexShaderCode   = MShaderManager::ReadAsBinary(T3D_SHADER_DIR + "MeshShader_vert.spv");
-		std::vector<char8> FragmentShaderCode = MShaderManager::ReadAsBinary(T3D_SHADER_DIR + "MeshShader_frag.spv");
+		// TEST
+	//	std::string TestCode1 = MShaderManager::LoadGLSL("Shaders/GLSL/MeshShader.vert");
+	//	MShaderManager::SaveAsAssembly(TestCode1, "Shaders/SPIR-V/MeshShader_vert.spv", EShaderKind::Vertex);
+		std::vector<uint32> VertexShaderCode   = MShaderManager::LoadAssembly("Shaders/SPIR-V/MeshShader_vert.spv");
+
+	//	std::string TestCode2 = MShaderManager::LoadGLSL("Shaders/GLSL/MeshShader.frag");
+	//	MShaderManager::SaveAsSPV(TestCode2, "Shaders/SPIR-V/MeshShader_frag.spv", EShaderKind::Fragment);
+		std::vector<uint32> FragmentShaderCode = MShaderManager::LoadSPV("Shaders/SPIR-V/MeshShader_frag.spv");
 
 		this->CreateShaderModule(&VertexShaderModule  , VertexShaderCode);
 		this->CreateShaderModule(&FragmentShaderModule, FragmentShaderCode);

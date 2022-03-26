@@ -27,7 +27,7 @@ namespace t3d
 
 	// IPipeline Private Interface:
 		
-		void CreateShaderModule      (VkShaderModule* ShaderModule, const std::vector<char8>& ShaderCode) override;
+		void CreateShaderModule      (VkShaderModule* ShaderModule, const std::vector<uint32>& ShaderCode) override;
 		void Configure               () override;		
 		void CreateUniformBuffers    () override;
 		void CreateDescriptors       () override;

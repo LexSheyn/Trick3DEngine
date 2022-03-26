@@ -102,9 +102,6 @@
     <ClCompile Include="src\ResourceManagers\Model\MModelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ResourceManagers\Shaders\MShaderManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Scene\FScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -147,9 +144,6 @@
     <ClCompile Include="src\Window\FWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Test\Test_Pipeline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Render\Pipeline\IPipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -157,6 +151,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ECS\Systems\SRenderSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceManagers\Shaders\MShaderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -359,9 +356,6 @@
     <ClInclude Include="src\ResourceManagers\Model\MModelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Scene\EScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -440,9 +434,6 @@
     <ClInclude Include="src\Window\FWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Test\Test_Pipeline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Test\EPipelineType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -456,6 +447,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ECS\Systems\SRenderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceManagers\Shaders\EShaderOptimizationLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceManagers\Shaders\EShaderKind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
