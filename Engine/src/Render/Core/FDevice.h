@@ -62,51 +62,48 @@ namespace t3d
 		void CreateInstance         ();
 		void SetupDebugMessenger    ();
 
-		static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT MessageSeverity, VkDebugUtilsMessageTypeFlagsEXT MessageType, const VkDebugUtilsMessengerCallbackDataEXT* PtrCallbackData, void* PtrUserData);
-
-		static VkResult CreateDebugUtilsMessengerEXT(VkInstance Instance, const VkDebugUtilsMessengerCreateInfoEXT* PtrCreateInfo, const VkAllocationCallbacks* PtrAllocator, VkDebugUtilsMessengerEXT* PtrDebugMessenger);
-
-		static void DestroyDebugUtilsMessengerEXT(VkInstance Instance, VkDebugUtilsMessengerEXT DebugMessenger, const VkAllocationCallbacks* PtrAllocator);
+		static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback                    (VkDebugUtilsMessageSeverityFlagBitsEXT      MessageSeverity,
+			                                                                    VkDebugUtilsMessageTypeFlagsEXT             MessageType,
+			                                                                    const VkDebugUtilsMessengerCallbackDataEXT* PtrCallbackData,
+			                                                                    void*                                       PtrUserData);
+																		       
+		static VKAPI_ATTR VkResult VKAPI_CALL CreateDebugUtilsMessengerEXT     (VkInstance                                  Instance,
+			                                                                    const VkDebugUtilsMessengerCreateInfoEXT*   PtrCreateInfo,
+			                                                                    const VkAllocationCallbacks*                PtrAllocator,
+			                                                                    VkDebugUtilsMessengerEXT*                   PtrDebugMessenger);
+																		       
+		static VKAPI_ATTR void     VKAPI_CALL DestroyDebugUtilsMessengerEXT    (VkInstance                                  Instance,
+			                                                                    VkDebugUtilsMessengerEXT                    DebugMessenger,
+			                                                                    const VkAllocationCallbacks*                PtrAllocator);
 
 		void CreateSurface          ();
 		void PickPhysicalDevice     ();
 		void CreateLogicalDevice    ();
 		void CreateCommandPool      ();
 
-		bool8 IsDeviceSuitable(VkPhysicalDevice Device);
-
-		std::vector<const char8*> GetRequiredExtensions();
-
-		bool8 CheckValidationLayerSupport();
-
-		FQueueFamilyIndices FindQueueFamilies(VkPhysicalDevice Device);
-
-		void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& CreateInfo);
-
-		void CheckGlfwRequiredExtensions();
-
-		bool8 CheckDeviceExtensionSupport(VkPhysicalDevice Device);
-
-		FSwapchainSupportDetails QuerySwapchainSupport(VkPhysicalDevice Device);
+		bool8                     IsDeviceSuitable                    (VkPhysicalDevice Device);
+		std::vector<const char8*> GetRequiredExtensions               ();
+		bool8                     CheckValidationLayerSupport         ();
+		FQueueFamilyIndices       FindQueueFamilies                   (VkPhysicalDevice Device);
+		void                      PopulateDebugMessengerCreateInfo    (VkDebugUtilsMessengerCreateInfoEXT& CreateInfo);
+		void                      CheckGlfwRequiredExtensions         ();
+		bool8                     CheckDeviceExtensionSupport         (VkPhysicalDevice Device);
+		FSwapchainSupportDetails  QuerySwapchainSupport               (VkPhysicalDevice Device);
 
 	// Variables:
 
-		FWindow& Window;
-
-		VkInstance Instance;
-
-		VkDevice LogicalDevice;
-
+		FWindow&     Window;
+		VkInstance   Instance;
 		VkSurfaceKHR Surface;
 
+		VkDevice         LogicalDevice;
 		VkPhysicalDevice PhysicalDevice;
 		
 		VkDebugUtilsMessengerEXT DebugMessenger;
 
-		VkCommandPool CommandPool;
-		
-		VkQueue GraphicsQueue;
-		VkQueue PresentQueue;
+		VkCommandPool CommandPool;		
+		VkQueue       GraphicsQueue;
+		VkQueue       PresentQueue;
 
 		const std::vector<const char8*> ValidationLayers = { "VK_LAYER_KHRONOS_validation" };
 		const std::vector<const char8*> DeviceExtensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };

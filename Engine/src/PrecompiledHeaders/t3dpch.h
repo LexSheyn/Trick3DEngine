@@ -84,6 +84,10 @@
 #include <sstream>
 #include <utility>
 
+#undef CreateEvent
+#undef LoadImage
+#undef LoadImageW
+
 // Custom types:
 #include "../Types/T3DTypes.h"
 #include "../Types/ECSTypes.h"
@@ -97,6 +101,7 @@
 #include "../Logger/FLogger.h"
 #include "../Templates/TArray.h"
 #include "../Events/SEventSystem.h"
+#include "../ResourceManagers/Image/MImageManager.h"
 
 //#ifndef DISABLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN
@@ -132,7 +137,4 @@
 #define NOPROXYSTUB
 #define NOIMAGE
 #define NOTAPE
-
-#undef CreateEvent
-#undef LoadImage
 //#endif // DISABLE_WINDOWS

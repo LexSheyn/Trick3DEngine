@@ -68,7 +68,7 @@ namespace t3d
 		Write.dstBinding      = Binding;
 		Write.descriptorCount = 1;
 		Write.descriptorType  = BindingDescription.descriptorType;
-		Write.pImageInfo     = ImageInfo;
+		Write.pImageInfo      = ImageInfo;
 
 		Writes.push_back(Write);
 

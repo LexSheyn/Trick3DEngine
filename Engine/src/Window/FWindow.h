@@ -3,7 +3,6 @@
 #include "../Input/Keyboard/FKeyboard.h"
 #include "../Input/Mouse/FMouse.h"
 #include "../Input/Gamepad/FGamepad.h"
-#include "../ResourceManagers/Image/MImageManager.h"
 
 namespace t3d
 {

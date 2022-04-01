@@ -10,17 +10,16 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		IEventListener();
-
+		         IEventListener();
 		virtual ~IEventListener();
 
-	// Functions:
+	// Interface:
 
-		virtual void OnEvent(const FEvent* const Event) = 0;
+		virtual void OnEvent (const FEvent* const Event) = 0;
 
 	// Accessors:
 
-		const uint32& GetID() const;
+		const uint32& GetID () const;
 
 	private:
 

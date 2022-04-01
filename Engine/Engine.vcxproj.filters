@@ -153,7 +153,10 @@
     <ClCompile Include="src\ECS\Systems\SRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ResourceManagers\Shaders\MShaderManager.cpp">
+    <ClCompile Include="src\ResourceManagers\Shader\MShaderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\Core\FTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -449,13 +452,13 @@
     <ClInclude Include="src\ECS\Systems\SRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ResourceManagers\Shaders\MShaderManager.h">
+    <ClInclude Include="src\ResourceManagers\Shader\MShaderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ResourceManagers\Shaders\EShaderOptimization.h">
+    <ClInclude Include="src\ResourceManagers\Shader\EShaderOptimization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ResourceManagers\Shaders\EShaderKind.h">
+    <ClInclude Include="src\ResourceManagers\Shader\EShaderKind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

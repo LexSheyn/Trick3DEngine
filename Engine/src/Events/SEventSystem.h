@@ -11,7 +11,7 @@ namespace t3d
 	// Functions:
 
 		static void  T3D_CALL PushEvent                (FEvent&& Event);
-		static void  T3D_CALL ProcessEvents            ();
+		static void  T3D_CALL PollEvents               ();
 		static void  T3D_CALL Dispatch                 (FEvent* Event);
 		static void  T3D_CALL Subscribe                (EEventType Type, IEventListener* Listener);
 		static void  T3D_CALL Unsubscribe              (EEventType Type, IEventListener* Listener);

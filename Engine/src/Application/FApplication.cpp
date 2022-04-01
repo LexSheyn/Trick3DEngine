@@ -50,7 +50,7 @@ namespace t3d
 
 	// Events:
 
-		SEventSystem::ProcessEvents();
+		SEventSystem::PollEvents();
 
 	// Update Systems:
 

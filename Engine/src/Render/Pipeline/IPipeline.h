@@ -3,8 +3,8 @@
 #include "FPipelineConfigInfo.h"
 #include "FDescriptorWriter.h"
 #include "../Core/FRenderer.h"
-#include "../../ResourceManagers/Shaders/MShaderManager.h"
-#include "../../ResourceManagers/Shaders/MShaderManager.h"
+#include "../../ResourceManagers/Shader/MShaderManager.h"
+#include "../../ResourceManagers/Shader/MShaderManager.h"
 
 namespace t3d
 {

@@ -10,7 +10,7 @@ namespace t3d
 		EventQueue.push_back(std::move(Event));
 	}
 
-	void SEventSystem::ProcessEvents()
+	void SEventSystem::PollEvents()
 	{
 		while (EventQueue.size() > 0u)
 		{
@@ -27,12 +27,17 @@ namespace t3d
 		for (auto& Entry = Range.first; Entry != Range.second; Entry++)
 		{
 			Entry->second->OnEvent(Event);
+
+			if (Event->IsHandled())
+			{
+				return;
+			}
 		}
 	}
 
 	void SEventSystem::Subscribe(EEventType Type, IEventListener* Listener)
 	{		
-		#if _DEBUG
+	#if _DEBUG
 		if (!Listener)
 		{
 			LOG_ERROR("Passed nullptr to the function!");
@@ -45,14 +50,14 @@ namespace t3d
 
 			return;
 		}
-		#endif
+	#endif
 
 		ListenerRegistry.emplace(Type, Listener);
 	}
 
 	void SEventSystem::Unsubscribe(EEventType Type, IEventListener* Listener)
 	{
-		#if _DEBUG
+	#if _DEBUG
 		if (!Listener)
 		{
 			LOG_ERROR("Passed nullptr to the function!");
@@ -65,7 +70,7 @@ namespace t3d
 
 			return;
 		}
-		#endif
+	#endif
 
 		std::pair Range = ListenerRegistry.equal_range(Type);
 

@@ -1,8 +1,5 @@
 #pragma once
 
-#pragma warning( push )
-#pragma warning( disable : 26495 ) // Uninitialized variables. Default initialization is not allowed for anonymous union.
-
 #include "EEventCategory.h"
 #include "EEventType.h"
 #include "EventData.h"
@@ -13,7 +10,7 @@ namespace t3d
 	{
 	public:
 
-	// Constructors and Destructor:
+	// Constructorss:
 
 	//	FEvent    (EEventType Type)                                           : Type (Type)                                            {}
 		FEvent    (EEventType Type, FFramebufferSizeData FrameBufferSizeData) : Type (Type), FramebufferSizeData (FrameBufferSizeData) {}
@@ -29,10 +26,15 @@ namespace t3d
 		T3D_NO_COPY(FEvent);
 		T3D_DEFAULT_MOVE(FEvent);
 
+	// Functions:
+
+		T3D_INLINE void Handle () { Handled = true; }
+
 	// Accessors:
 
 		T3D_INLINE const EEventCategory& GetCategory    () const { return Category; }
 		T3D_INLINE const EEventType&     GetType        () const { return Type; }
+		T3D_INLINE const bool8&          IsHandled      () const { return Handled; }
 
 	// Public Variables:
 
@@ -53,9 +55,9 @@ namespace t3d
 
 	// Variables:
 
-		EEventCategory Category;
-
+		EEventCategory Category {}; // Temporary unused.
 		EEventType     Type;
+
+		bool8 Handled = false;
 	};
 }
-#pragma warning( pop )
