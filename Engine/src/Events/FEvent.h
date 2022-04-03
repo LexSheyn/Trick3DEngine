@@ -4,6 +4,9 @@
 #include "EEventType.h"
 #include "EventData.h"
 
+#pragma warning( push )
+#pragma warning( disable : 26495 ) // Uninitialized variables. Unions does not allow default initialization.
+
 namespace t3d
 {
 	class FEvent
@@ -61,3 +64,5 @@ namespace t3d
 		bool8 Handled = false;
 	};
 }
+
+#pragma warning( pop )
