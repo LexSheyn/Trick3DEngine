@@ -138,6 +138,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Logger\FLogger.cpp" />
+    <ClCompile Include="src\Memory\FMemoryAllocator.cpp" />
     <ClCompile Include="src\PrecompiledHeaders\t3dpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">t3dpch.h</PrecompiledHeaderFile>
@@ -276,6 +277,7 @@
     <ClInclude Include="src\Logger\ELogLevel.h" />
     <ClInclude Include="src\Logger\FLogger.h" />
     <ClInclude Include="src\Macros\T3DMacros.h" />
+    <ClInclude Include="src\Memory\FMemoryAllocator.h" />
     <ClInclude Include="src\PrecompiledHeaders\t3dpch.h" />
     <ClInclude Include="src\Render\Core\FCamera.h" />
     <ClInclude Include="src\Render\Core\FDevice.h" />

@@ -5,7 +5,7 @@
 
 namespace t3d
 {
-	template<typename ComponentType>
+	template<typename T>
 	struct TComponent : public IComponent
 	{
 		static const T3D_ComponentID ID;
@@ -13,9 +13,9 @@ namespace t3d
 		static const uint64 Size;
 	};
 
-	template<typename ComponentType>
-	const T3D_ComponentID TComponent<ComponentType>::ID = TTypeID<ComponentType>::GetID();
+	template<typename T>
+	const T3D_ComponentID TComponent<T>::ID = TTypeID<T>::GetID();
 
-	template<typename ComponentType>
-	const uint64 TComponent<ComponentType>::Size = sizeof(ComponentType);
+	template<typename T>
+	const uint64 TComponent<T>::Size = sizeof(T);
 }

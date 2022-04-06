@@ -2,14 +2,6 @@
 
 // Core:
 
-//#if _DEBUG
-//// In Debug mode does nothing.
-//#define T3D_INLINE
-//#else
-//// In Release mode inlines the function call.
-//#define T3D_INLINE inline
-//#endif
-
 #define T3D_INLINE inline
 
 #define T3D_CALL __fastcall
@@ -44,11 +36,11 @@
 						   Class& operator = (Class&&) = delete
 
 // Defines default copy constructor and copy assignment operator.
-#define T3D_DEFAULT_COPY(Class) Class(const Class&) = default; \
+#define T3D_DEFAULT_COPY(Class) Class(const Class&) noexcept = default; \
                            Class& operator = (const Class&) = default
 
 // Defines default move constructor and move assignment operator.
-#define T3D_DEFAULT_MOVE(Class) Class(Class&&) = default; \
+#define T3D_DEFAULT_MOVE(Class) Class(Class&&) noexcept = default; \
 						   Class& operator = (Class&&) = default
 
 

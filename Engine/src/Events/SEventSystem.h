@@ -8,6 +8,11 @@ namespace t3d
 	{
 	public:
 
+	// Constructors and Destructor:
+
+		 SEventSystem () = delete;
+		~SEventSystem () = delete;
+
 	// Functions:
 
 		static void  T3D_CALL PushEvent                (FEvent&& Event);
@@ -23,14 +28,6 @@ namespace t3d
 		// Clear all data function here!
 
 	private:
-
-	// Private Constructors and Destructor:
-
-		 SEventSystem () {}
-		~SEventSystem () {}
-
-		T3D_NO_COPY(SEventSystem);
-		T3D_NO_MOVE(SEventSystem);
 
 	// Variables:
 

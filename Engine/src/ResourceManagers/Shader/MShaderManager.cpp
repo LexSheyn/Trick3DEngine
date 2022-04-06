@@ -41,16 +41,26 @@ namespace t3d
 	{
 		std::vector<uint32> SPVData;
 
-		SPVData = CompileToSPV("FileName", static_cast<shaderc_shader_kind>(Kind), GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
+		SPVData = CompileToSPV(FilePath, static_cast<shaderc_shader_kind>(Kind), GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
 
 		std::ofstream OutFile;
 
-		OutFile.open(FilePath, std::ios_base::out);
+	// Working sample:
+	// 
+	//	OutFile.open(FilePath);
+	//
+	//	for (auto Data : SPVData)
+	//	{
+	//		OutFile << Data << "\n";
+	//	}
+	//
+	//	OutFile.close();
 
-		for (auto Data : SPVData)
-		{
-			OutFile << Data << "\n";
-		}
+		// TEST works
+
+		OutFile.open(FilePath, std::ios::binary);
+
+		OutFile.write(reinterpret_cast<char8*>(SPVData.data()), SPVData.size() * sizeof(uint32));
 
 		OutFile.close();
 	}
@@ -60,24 +70,41 @@ namespace t3d
 		uint32 CodeFragment = 0u;
 
 		std::vector<uint32> SPVData;
-		SPVData.reserve(100'000);
+		SPVData.reserve(25'000);
 
 		std::ifstream InFile;
 
-		InFile.open(FilePath);
+	// Working sample:
+	// 
+	//	InFile.open(FilePath);
+	//
+	//	if (!InFile.is_open())
+	//	{
+	//		LOG_ERROR("Failed to open: " + FilePath);
+	//		throw;
+	//	}
+	//
+	//	while (InFile >> CodeFragment)
+	//	{
+	//		SPVData.push_back(CodeFragment);
+	//	}
+	//
+	//	InFile.close();
 
-		if (!InFile.is_open())
-		{
-			LOG_ERROR("Failed to open: " + FilePath);
-			throw;
-		}
+		// TEST does not work
+		InFile.open(FilePath, std::ios::binary);
 
-		while (InFile >> CodeFragment)
-		{
-			SPVData.push_back(CodeFragment);
-		}
+		uint64 FileSize = static_cast<uint64>(InFile.tellg());
+		std::vector<char8> Data;
+		Data.reserve(100'000);
+
+		InFile.seekg(0);
+
+		InFile.read(Data.data(), FileSize);
 
 		InFile.close();
+
+		memcpy_s(SPVData.data(), SPVData.size() * sizeof(uint32), Data.data(), Data.size());
 
 		return SPVData;
 	}
@@ -86,11 +113,11 @@ namespace t3d
 	{
 		std::string SPVAssembly;
 
-		SPVAssembly = CompileToAssembly("", static_cast<shaderc_shader_kind>(Kind), GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
+		SPVAssembly = CompileToAssembly(FilePath, static_cast<shaderc_shader_kind>(Kind), GLSLCode, static_cast<shaderc_optimization_level>(OptimizationLevel));
 
 		std::ofstream OutFile;
 
-		OutFile.open(FilePath, std::ios_base::out);
+		OutFile.open(FilePath);
 
 		OutFile << SPVAssembly;
 

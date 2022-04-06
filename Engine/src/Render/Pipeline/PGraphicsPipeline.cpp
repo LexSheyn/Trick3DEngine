@@ -76,7 +76,7 @@ namespace t3d
 		CreateInfo.sType    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		CreateInfo.pNext    = VK_NULL_HANDLE;
 		CreateInfo.flags    = {};
-		CreateInfo.codeSize = 4u * ShaderCode.size();
+		CreateInfo.codeSize = ShaderCode.size() * sizeof(uint32); // Size in bytes, uint32 type size is 4 bytes.
 		CreateInfo.pCode    = ShaderCode.data();
 
 		if (vkCreateShaderModule(Renderer.GetDevice().Device(), &CreateInfo, VK_NULL_HANDLE, ShaderModule) != VK_SUCCESS)
@@ -220,6 +220,10 @@ namespace t3d
 
 	void PGraphicsPipeline::Create()
 	{
+		// TEST
+	//	MShaderManager::SaveAsSPV(MShaderManager::LoadGLSL("Shaders/GLSL/MeshShader.vert"), "Shaders/SPIR-V/MeshShader.vert_TEST.spv", EShaderKind::Vertex);
+	//	std::vector<uint32> VertexShaderCode   = MShaderManager::LoadSPV("Shaders/SPIR-V/MeshShader.vert_TEST.spv");
+
 		std::vector<uint32> VertexShaderCode   = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.vert", EShaderOptimization::Performance);
 		std::vector<uint32> FragmentShaderCode = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.frag", EShaderOptimization::Performance);
 
