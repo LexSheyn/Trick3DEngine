@@ -20,7 +20,6 @@ namespace t3d
 	FApplication::~FApplication()
 	{
 		FUpdater::UnregisterAll();
-		FSound::Shutdown();
 	}
 
 
@@ -44,12 +43,9 @@ namespace t3d
 
 	void FApplication::Update()
 	{
-	// Dedicated window update, window events coming from it:
-
-		Window.Update();
-
 	// Events:
 
+		Window.CatchEvents();
 		SEventSystem::PollEvents();
 
 	// Update Systems:

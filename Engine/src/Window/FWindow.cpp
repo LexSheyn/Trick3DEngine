@@ -51,7 +51,7 @@ namespace t3d
 
 // Functions:
 
-	void FWindow::Update()
+	void FWindow::CatchEvents()
 	{
 		glfwPollEvents();
 	}

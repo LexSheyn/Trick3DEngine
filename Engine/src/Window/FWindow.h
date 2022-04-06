@@ -20,7 +20,7 @@ namespace t3d
 
 	// Functions:
 
-		void  Update              ();
+		void  CatchEvents         ();
 		bool8 ShouldClose         ();
 		void  CreateSurface       (VkInstance Instance, VkSurfaceKHR* Surface);
 		void  ResetResizedFlag    ();
