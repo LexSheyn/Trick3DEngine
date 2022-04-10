@@ -1,4 +1,4 @@
-#include "../../PrecompiledHeaders/t3dpch.h"
+#include "../../PCH/t3dpch.h"
 #include "SEntityComponentSystem.h"
 
 namespace t3d
@@ -103,7 +103,7 @@ namespace t3d
 			return;
 		}
 
-		memcpy_s(DestinationComponent, Size, SourceComponent, Size);
+		MemoryCopy(DestinationComponent, Size, SourceComponent);
 
 		std::vector<FComponentDescription>& ComponentDescriptions = Entities.at(SourceComponent->GetEntityID()).GetComponentDescriptions();
 

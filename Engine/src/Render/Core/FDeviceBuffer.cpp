@@ -1,4 +1,4 @@
-#include "../../PrecompiledHeaders/t3dpch.h"
+#include "../../PCH/t3dpch.h"
 #include "FDeviceBuffer.h"
 
 // Disable warnings from Vulkan SDK:
@@ -85,7 +85,7 @@ namespace t3d
 
 		if (Size == VK_WHOLE_SIZE)
 		{
-			memcpy_s(MappedMemory, BufferSize, Data, BufferSize);
+			MemoryCopy(MappedMemory, BufferSize, Data);
 		}
 		else
 		{
@@ -93,7 +93,7 @@ namespace t3d
 
 			MemoryOffset += Offset;
 
-			memcpy_s(MemoryOffset, Size, Data, Size);	
+			MemoryCopy(MemoryOffset, Size, Data);
 		}
 	}
 

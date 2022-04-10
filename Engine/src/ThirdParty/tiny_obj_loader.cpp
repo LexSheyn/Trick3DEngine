@@ -1,4 +1,4 @@
-#include "../PrecompiledHeaders/t3dpch.h"
+#include "../PCH/t3dpch.h"
 #include "tiny_obj_loader.h"
 
 #pragma warning( push ) // Begin

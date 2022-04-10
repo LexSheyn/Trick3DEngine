@@ -51,7 +51,7 @@
     <ClCompile Include="src\Logger\FLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\PrecompiledHeaders\t3dpch.cpp">
+    <ClCompile Include="src\PCH\t3dpch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Core\FCamera.cpp">
@@ -162,6 +162,9 @@
     <ClCompile Include="src\Memory\FMemoryAllocator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Memory\T3DMemory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h">
@@ -260,7 +263,7 @@
     <ClInclude Include="src\Macros\T3DMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\PrecompiledHeaders\t3dpch.h">
+    <ClInclude Include="src\PCH\t3dpch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\Core\FCamera.h">
@@ -458,13 +461,16 @@
     <ClInclude Include="src\ResourceManagers\Shader\MShaderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ResourceManagers\Shader\EShaderOptimization.h">
+    <ClInclude Include="src\ResourceManagers\Shader\EShaderOptimizationLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ResourceManagers\Shader\EShaderKind.h">
+    <ClInclude Include="src\ResourceManagers\Shader\EShaderType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Memory\FMemoryAllocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Memory\T3DMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

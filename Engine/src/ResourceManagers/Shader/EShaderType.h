@@ -2,7 +2,7 @@
 
 namespace t3d
 {
-	enum class EShaderKind
+	enum class EShaderType
 	{
 		Geometry              = shaderc_glsl_geometry_shader,
 		TesselationControl    = shaderc_glsl_tess_control_shader,

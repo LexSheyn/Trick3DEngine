@@ -1,4 +1,4 @@
-#include "../../PrecompiledHeaders/t3dpch.h"
+#include "../../PCH/t3dpch.h"
 #include "MShaderManager.h"
 
 // Disable warnings from shaderc:
@@ -37,7 +37,7 @@ namespace t3d
 		return ShaderCode;
 	}
 
-	void MShaderManager::SaveAsSPV(const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimization OptimizationLevel)
+	void MShaderManager::SaveAsSPV(const std::string& GLSLCode, const std::string& FilePath, EShaderType Kind, EShaderOptimizationLevel OptimizationLevel)
 	{
 		std::vector<uint32> SPVData;
 
@@ -56,12 +56,10 @@ namespace t3d
 	//
 	//	OutFile.close();
 
-		// TEST works
+	// TEST works:
 
 		OutFile.open(FilePath, std::ios::binary);
-
 		OutFile.write(reinterpret_cast<char8*>(SPVData.data()), SPVData.size() * sizeof(uint32));
-
 		OutFile.close();
 	}
 
@@ -91,7 +89,8 @@ namespace t3d
 	//
 	//	InFile.close();
 
-		// TEST does not work
+	// TEST does not work:
+
 		InFile.open(FilePath, std::ios::binary);
 
 		uint64 FileSize = static_cast<uint64>(InFile.tellg());
@@ -109,7 +108,7 @@ namespace t3d
 		return SPVData;
 	}
 
-	void MShaderManager::SaveAsAssembly(const std::string& GLSLCode, const std::string& FilePath, EShaderKind Kind, EShaderOptimization OptimizationLevel)
+	void MShaderManager::SaveAsAssembly(const std::string& GLSLCode, const std::string& FilePath, EShaderType Kind, EShaderOptimizationLevel OptimizationLevel)
 	{
 		std::string SPVAssembly;
 
@@ -159,7 +158,7 @@ namespace t3d
 		return { Result.cbegin(), Result.cend() };
 	}
 
-	std::vector<uint32> MShaderManager::TranslateToSPV(const std::string& FilePath, EShaderOptimization OptimizationLevel)
+	std::vector<uint32> MShaderManager::TranslateToSPV(const std::string& FilePath, EShaderOptimizationLevel OptimizationLevel)
 	{
 		std::string GLSLCode;
 		GLSLCode.reserve(10'000);

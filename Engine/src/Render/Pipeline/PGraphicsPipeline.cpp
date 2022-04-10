@@ -1,4 +1,4 @@
-#include "../../PrecompiledHeaders/t3dpch.h"
+#include "../../PCH/t3dpch.h"
 #include "PGraphicsPipeline.h"
 
 // Disable warnings from Vulkan SDK:
@@ -220,12 +220,12 @@ namespace t3d
 
 	void PGraphicsPipeline::Create()
 	{
-		// TEST
+	// TEST:
 	//	MShaderManager::SaveAsSPV(MShaderManager::LoadGLSL("Shaders/GLSL/MeshShader.vert"), "Shaders/SPIR-V/MeshShader.vert_TEST.spv", EShaderKind::Vertex);
 	//	std::vector<uint32> VertexShaderCode   = MShaderManager::LoadSPV("Shaders/SPIR-V/MeshShader.vert_TEST.spv");
 
-		std::vector<uint32> VertexShaderCode   = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.vert", EShaderOptimization::Performance);
-		std::vector<uint32> FragmentShaderCode = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.frag", EShaderOptimization::Performance);
+		std::vector<uint32> VertexShaderCode   = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.vert", EShaderOptimizationLevel::Performance);
+		std::vector<uint32> FragmentShaderCode = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.frag", EShaderOptimizationLevel::Performance);
 
 		this->CreateShaderModule(&VertexShaderModule  , VertexShaderCode);
 		this->CreateShaderModule(&FragmentShaderModule, FragmentShaderCode);

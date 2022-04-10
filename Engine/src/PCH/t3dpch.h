@@ -102,6 +102,7 @@
 #include "../Templates/TArray.h"
 #include "../Events/SEventSystem.h"
 #include "../ResourceManagers/Image/MImageManager.h"
+#include "../Memory/T3DMemory.h"
 
 //#ifndef DISABLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN

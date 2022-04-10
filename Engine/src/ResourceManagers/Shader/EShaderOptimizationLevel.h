@@ -2,7 +2,7 @@
 
 namespace t3d
 {
-	enum class EShaderOptimization
+	enum class EShaderOptimizationLevel
 	{
 		// No optimization
 		None        = shaderc_optimization_level_zero,

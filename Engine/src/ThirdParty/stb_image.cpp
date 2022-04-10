@@ -1,4 +1,4 @@
-#include "../PrecompiledHeaders/t3dpch.h"
+#include "../PCH/t3dpch.h"
 #include "stb_image.h"
 
 // Disable warnings from stb_image:
