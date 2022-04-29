@@ -38,8 +38,7 @@ namespace t3d
 
 		std::vector<FComponentDescription> ComponentDescriptions;
 
-		T3D_EntityID Parent;
-
+		T3D_EntityID              Parent;
 		std::vector<T3D_EntityID> Children;
 	};
 }

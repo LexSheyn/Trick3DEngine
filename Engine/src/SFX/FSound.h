@@ -3,6 +3,9 @@
 #include "ESound.h"
 #include "ESoundGroup.h"
 
+// TEST
+#include "../Input/Keyboard/FKey.h"
+
 namespace t3d
 {
 	class FSound : public IEventListener
@@ -78,6 +81,10 @@ namespace t3d
 
 	// IEventListener Interface:
 
-		void OnEvent(const FEvent* const Event) override;
+		void OnEvent    (const FEvent* const Event) override;
+
+	// Event Callbacks:
+
+		static void OnKey    (const FKeyData& Data);
 	};
 }

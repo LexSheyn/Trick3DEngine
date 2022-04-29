@@ -194,18 +194,20 @@ namespace t3d
 
 	void FWindow::KeyCallback(GLFWwindow* Window, int32 Key, int32 ScanCode, int32 Action, int32 Mods)
 	{
-		if (Action == GLFW_PRESS)
-		{
-			SEventSystem::PushEvent(FEvent(EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods }));
-		}
-		else if (Action == GLFW_REPEAT)
-		{
-			SEventSystem::PushEvent(FEvent(EEventType::KeyRepeated, FKeyData{ Key, ScanCode, Action, Mods }));
-		}
-		else if (Action == GLFW_RELEASE)
-		{
-			SEventSystem::PushEvent(FEvent(EEventType::KeyReleased, FKeyData{ Key, ScanCode, Action, Mods }));
-		}
+	//	if (Action == GLFW_PRESS)
+	//	{
+	//		SEventSystem::PushEvent(FEvent(EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods }));
+	//	}
+	//	else if (Action == GLFW_REPEAT)
+	//	{
+	//		SEventSystem::PushEvent(FEvent(EEventType::KeyRepeated, FKeyData{ Key, ScanCode, Action, Mods }));
+	//	}
+	//	else if (Action == GLFW_RELEASE)
+	//	{
+	//		SEventSystem::PushEvent(FEvent(EEventType::KeyReleased, FKeyData{ Key, ScanCode, Action, Mods }));
+	//	}
+
+		SEventSystem::EventKey.Invoke(FKeyData{ Key, ScanCode, Action, Mods });
 	}
 
 	void FWindow::CharCallback(GLFWwindow* Window, uint32 Codepoint)

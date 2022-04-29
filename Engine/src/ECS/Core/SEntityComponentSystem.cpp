@@ -90,22 +90,29 @@ namespace t3d
 	{
 		std::vector<uint8>& ComponentArray = Components[ID];
 
-		uint64 SourceIndex = ComponentArray.size() - Size;
+		uint64 IndexLast = ComponentArray.size() - Size;
 
-		IComponent* DestinationComponent = reinterpret_cast<IComponent*>(&ComponentArray[Index]);
+		IComponent* ComponentToReplace = reinterpret_cast<IComponent*>(&ComponentArray[Index]);
 
-		IComponent* SourceComponent      = reinterpret_cast<IComponent*>(&ComponentArray[SourceIndex]);
+		IComponent* ComponentLast      = reinterpret_cast<IComponent*>(&ComponentArray[IndexLast]);
 
-		if (Index == SourceIndex)
+	// If Component to replace is the last Component - just trim last Component of the array:
+
+		if (Index == IndexLast)
 		{
-			ComponentArray.resize(SourceIndex);
+			ComponentArray.resize(IndexLast);
 
 			return;
 		}
 
-		MemoryCopy(DestinationComponent, Size, SourceComponent);
+	// Otherwise replace Component by the last Component in the array:
 
-		std::vector<FComponentDescription>& ComponentDescriptions = Entities.at(SourceComponent->GetEntityID()).GetComponentDescriptions();
+		MemoryCopy(ComponentToReplace, Size, ComponentLast);
+
+	// Find Entity that owns the last Component in the array and change Component index for this Entity, because
+	// it has been moved to the index of replaced Component:
+
+		std::vector<FComponentDescription>& ComponentDescriptions = Entities.at(ComponentLast->GetEntityID()).GetComponentDescriptions();
 
 		for (uint64 i = 0u; i < ComponentDescriptions.size(); i++)
 		{
@@ -117,7 +124,9 @@ namespace t3d
 			}
 		}
 
-		ComponentArray.resize(SourceIndex);
+	// Trim last Component of the array:
+
+		ComponentArray.resize(IndexLast);
 	}
 
 	void SEntityComponentSystem::AddComponentInternal(T3D_EntityID EntityID, FComponentDescription ComponentDescription)

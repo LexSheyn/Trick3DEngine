@@ -125,6 +125,7 @@
     <ClCompile Include="src\EntryPoint\Main.cpp" />
     <ClCompile Include="src\Events\IEventListener.cpp" />
     <ClCompile Include="src\Events\SEventSystem.cpp" />
+    <ClCompile Include="src\Events\TEventDispatcher.cpp" />
     <ClCompile Include="src\Input\Gamepad\FGamepad.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
@@ -261,10 +262,13 @@
     <ClInclude Include="src\ECS\Systems\SRenderSystem.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />
     <ClInclude Include="src\Events\EEventType.h" />
+    <ClInclude Include="src\Events\EventCallbackTypes.h" />
     <ClInclude Include="src\Events\EventData.h" />
     <ClInclude Include="src\Events\FEvent.h" />
     <ClInclude Include="src\Events\IEventListener.h" />
     <ClInclude Include="src\Events\SEventSystem.h" />
+    <ClInclude Include="src\Events\TEventCallbackRecord.h" />
+    <ClInclude Include="src\Events\TEventDispatcher.h" />
     <ClInclude Include="src\Input\Gamepad\FGamepad.h" />
     <ClInclude Include="src\Input\IInputDevice.h" />
     <ClInclude Include="src\Input\Keyboard\FCharEvent.h" />

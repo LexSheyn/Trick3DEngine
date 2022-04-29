@@ -134,4 +134,16 @@ namespace t3d
 
 	std::multimap<EEventType, IEventListener*> SEventSystem::ListenerRegistry;
 
+// TEST:
+
+	TEventDispatcher<FEventCallbackFramebufferSize, FFramebufferSizeData> SEventSystem::EventFramebufferSize;
+	TEventDispatcher<FEventCallbackKey            , FKeyData>             SEventSystem::EventKey;
+	TEventDispatcher<FEventCallbackChar           , FCharData>            SEventSystem::EventChar;
+	TEventDispatcher<FEventCallbackCharMods       , FCharModsData>        SEventSystem::EventCharMods;
+	TEventDispatcher<FEventCallbackMouseButton    , FMouseButtonData>     SEventSystem::EventMouseButton;
+	TEventDispatcher<FEventCallbackMousePosition  , FCursorPositionData>  SEventSystem::EventMouseMove;
+	TEventDispatcher<FEventCallbackMouseEnter     , FCursorEnterData>     SEventSystem::EventMouseEnter;
+	TEventDispatcher<FEventCallbackMouseScroll    , FScrollData>          SEventSystem::EventMouseScroll;
+	TEventDispatcher<FEventCallbackMouseDropPath  , FDropData>            SEventSystem::EventMouseDropPath;
+
 }

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../Entity/FEntity.h"
 #include "../Components/Components.h"
 
@@ -75,8 +74,8 @@ namespace t3d
 
 	// Variables:
 
-		static std::vector<FEntity> Entities;
-		static std::vector<uint64>  EntityReuseList;
+		static std::vector<FEntity>      Entities;
+		static std::vector<T3D_EntityID> EntityReuseList;
 		static std::unordered_map<T3D_ComponentID, std::vector<uint8>> Components;
 	};
 }
