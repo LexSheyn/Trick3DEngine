@@ -27,14 +27,6 @@ namespace t3d
 			}
 		}
 
-		void Invoke(const T& Data)
-		{
-			for (auto& Delegate : Delegates)
-			{
-				(*Delegate.Callback) (Data);
-			}
-		}
-
 		bool8 IsSubscribed(void (*Callback) (const T&))
 		{
 			for (size_t i = 0u; i < Delegates.size(); i++)
@@ -46,6 +38,14 @@ namespace t3d
 			}
 
 			return false;
+		}
+
+		void Invoke(const T& Data)
+		{
+			for (auto& Delegate : Delegates)
+			{
+				(*Delegate.Callback) (Data);
+			}
 		}
 
 	private:
