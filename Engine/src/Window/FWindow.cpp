@@ -259,7 +259,7 @@ namespace t3d
 
 	void FWindow::DropCallback(GLFWwindow* Window, int32 PathCount, const char8* Paths[])
 	{
-		SEventSystem::PushEvent(FEvent(EEventType::MousePathDropped, FDropData{ PathCount, *Paths }));
+		SEventSystem::PushEvent(FEvent(EEventType::MousePathDropped, FDropPathData{ PathCount, *Paths }));
 	}
 
 }

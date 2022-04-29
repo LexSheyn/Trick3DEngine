@@ -35,7 +35,7 @@ namespace t3d
 
 	struct FScrollData         { float32 OffsetX; float32 OffsetY; };
 
-	struct FDropData           { int32 PathCount; const char8* Paths; };
+	struct FDropPathData       { int32 PathCount; const char8* Paths; };
 
 }
 #pragma warning( pop )

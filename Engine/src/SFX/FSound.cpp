@@ -161,14 +161,13 @@ namespace t3d
 		FSound::LoadFile(ESound::KeyPress  , "D:/Royalty FREE Music/ZapSplat/SFX/zapsplat_multimedia_button_click_001_78078.mp3");
 		FSound::LoadFile(ESound::KeyRelease, "D:/Royalty FREE Music/ZapSplat/SFX/zapsplat_multimedia_button_click_002_78079.mp3");
 
-	//	SEventSystem::Subscribe(EEventType::KeyPressed , this);
-	//	SEventSystem::Subscribe(EEventType::KeyReleased, this);
+	// Events:
+
 		SEventSystem::EventKey += OnKey;
 	}
 
 	FSound::~FSound()
 	{
-	//	SEventSystem::UnsubscribeFromAll(this);
 		SEventSystem::EventKey -= OnKey;
 
 		FSound::Shutdown();
@@ -179,28 +178,15 @@ namespace t3d
 
 	FSound FSound::Instance;
 
-
-// IEventListener Interface:
-
-	void FSound::OnEvent(const FEvent* const Event)
-	{
-	//	if (Event->GetType() == EEventType::KeyPressed)
-	//	{
-	//		Instance.Play(ESound::KeyPress, ESoundGroup::UI);
-	//	}
-	//	else if (Event->GetType() == EEventType::KeyReleased)
-	//	{
-	//		Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
-	//	}
-	}
+// Event Callbacks:
 
 	void FSound::OnKey(const FKeyData& Data)
 	{
-		if (Data.Action == GLFW_PRESS)
+		if (Data.Action == FKeyState::Pressed)
 		{
 			Instance.Play(ESound::KeyPress, ESoundGroup::UI);
 		}
-		else if (Data.Action == GLFW_RELEASE)
+		else if (Data.Action == FKeyState::Released)
 		{
 			Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
 		}

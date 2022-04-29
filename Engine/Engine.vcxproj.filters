@@ -165,7 +165,7 @@
     <ClCompile Include="src\Memory\T3DMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Events\TEventDispatcher.cpp">
+    <ClCompile Include="src\Events\TEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -476,10 +476,10 @@
     <ClInclude Include="src\Memory\T3DMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Events\TEventDispatcher.h">
+    <ClInclude Include="src\Events\TEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Events\EventCallbackTypes.h">
+    <ClInclude Include="src\Events\TDelegate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Events\TEventCallbackRecord.h">

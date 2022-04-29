@@ -5,10 +5,11 @@
 
 // TEST
 #include "../Input/Keyboard/FKey.h"
+#include "../Input/Keyboard/FKeystate.h"
 
 namespace t3d
 {
-	class FSound : public IEventListener
+	class FSound
 	{
 	public:
 
@@ -76,12 +77,6 @@ namespace t3d
 		static constexpr float32 VolumeMin = 0.0f;
 		static constexpr float32 VolumeMax = 1.0f;
 		float32 Volume;
-
-	public:
-
-	// IEventListener Interface:
-
-		void OnEvent    (const FEvent* const Event) override;
 
 	// Event Callbacks:
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TEventDispatcher.h"
+#include "TEvent.h"
 #include "IEventListener.h"
 
 namespace t3d
@@ -28,18 +28,6 @@ namespace t3d
 
 		// Clear all data function here!
 
-	// TEST:
-
-		static TEventDispatcher<FEventCallbackFramebufferSize, FFramebufferSizeData> EventFramebufferSize;
-		static TEventDispatcher<FEventCallbackKey            , FKeyData>             EventKey;
-		static TEventDispatcher<FEventCallbackChar           , FCharData>            EventChar;
-		static TEventDispatcher<FEventCallbackCharMods       , FCharModsData>        EventCharMods;
-		static TEventDispatcher<FEventCallbackMouseButton    , FMouseButtonData>     EventMouseButton;
-		static TEventDispatcher<FEventCallbackMousePosition  , FCursorPositionData>  EventMouseMove;
-		static TEventDispatcher<FEventCallbackMouseEnter     , FCursorEnterData>     EventMouseEnter;
-		static TEventDispatcher<FEventCallbackMouseScroll    , FScrollData>          EventMouseScroll;
-		static TEventDispatcher<FEventCallbackMouseDropPath  , FDropData>            EventMouseDropPath;
-
 	private:
 
 	// Variables:
@@ -47,5 +35,19 @@ namespace t3d
 		static std::list<FEvent> EventQueue;
 
 		static std::multimap<EEventType, IEventListener*> ListenerRegistry;
+
+	public:
+
+	// Events and Delegates:
+
+		static TEvent<FFramebufferSizeData> EventFramebufferSize;
+		static TEvent<FKeyData>             EventKey;
+		static TEvent<FCharData>            EventChar;
+		static TEvent<FCharModsData>        EventCharMods;
+		static TEvent<FMouseButtonData>     EventMouseButton;
+		static TEvent<FCursorPositionData>  EventMouseMove;
+		static TEvent<FCursorEnterData>     EventMouseEnter;
+		static TEvent<FScrollData>          EventMouseScroll;
+		static TEvent<FDropPathData>        EventMouseDropPath;
 	};
 }

@@ -24,7 +24,7 @@ namespace t3d
 		FEvent    (EEventType Type, FCursorPositionData  CursorPositionData)  : Type (Type), CursorPositionData  (CursorPositionData)  {}
 		FEvent    (EEventType Type, FCursorEnterData     CursorEnterData)     : Type (Type), CursorEnterData     (CursorEnterData)     {}
 		FEvent    (EEventType Type, FScrollData          ScrollData)          : Type (Type), ScrollData          (ScrollData)          {}
-		FEvent    (EEventType Type, FDropData            DropData)            : Type (Type), DropData            (DropData)            {}
+		FEvent    (EEventType Type, FDropPathData        DropData)            : Type (Type), DropData            (DropData)            {}
 
 		T3D_NO_COPY(FEvent);
 		T3D_DEFAULT_MOVE(FEvent);
@@ -51,7 +51,7 @@ namespace t3d
 			FCursorPositionData  CursorPositionData; 
 			FCursorEnterData     CursorEnterData;    
 			FScrollData          ScrollData;         
-			FDropData            DropData;           
+			FDropPathData        DropData;           
 		};
 
 	private:
