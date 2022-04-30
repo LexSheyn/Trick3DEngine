@@ -80,6 +80,6 @@ namespace t3d
 
 	// Event Callbacks:
 
-		static void OnKey    (const FKeyData& Data);
+		static bool8 OnKey    (const FKeyData& Data);
 	};
 }

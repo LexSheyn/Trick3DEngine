@@ -9,12 +9,12 @@ namespace t3d
 	{
 	public:
 
-		void Subscribe(void (*Callback) (const T&))
+		void Subscribe(TDelegate<T>::Callback_Type Callback)
 		{
 			Delegates.push_back(TDelegate<T>{ Callback });
 		}
 
-		void Unsubscribe(void (*Callback) (const T&))
+		void Unsubscribe(TDelegate<T>::Callback_Type Callback)
 		{
 			for (size_t i = 0u; i < Delegates.size(); i++)
 			{
@@ -27,7 +27,7 @@ namespace t3d
 			}
 		}
 
-		bool8 IsSubscribed(void (*Callback) (const T&))
+		bool8 IsSubscribed(TDelegate<T>::Callback_Type Callback)
 		{
 			for (size_t i = 0u; i < Delegates.size(); i++)
 			{
@@ -44,7 +44,10 @@ namespace t3d
 		{
 			for (auto& Delegate : Delegates)
 			{
-				(*Delegate.Callback) (Data);
+				if ( (*Delegate.Callback) (Data) == false )
+				{
+					return;
+				}
 			}
 		}
 
@@ -54,13 +57,13 @@ namespace t3d
 	};
 
 	template<typename T>
-	void operator += (TEvent<T>& Event, void (*Callback) (const T&))
+	void operator += (TEvent<T>& Event, typename TDelegate<T>::Callback_Type Callback)
 	{
 		Event.Subscribe(Callback);
 	}
 
 	template<typename T>
-	void operator -= (TEvent<T>& Event, void (*Callback) (const T&))
+	void operator -= (TEvent<T>& Event, typename TDelegate<T>::Callback_Type Callback)
 	{
 		Event.Unsubscribe(Callback);
 	}

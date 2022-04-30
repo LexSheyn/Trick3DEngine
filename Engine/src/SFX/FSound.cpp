@@ -180,7 +180,7 @@ namespace t3d
 
 // Event Callbacks:
 
-	void FSound::OnKey(const FKeyData& Data)
+	bool8 FSound::OnKey(const FKeyData& Data)
 	{
 		if (Data.Action == FKeyState::Pressed)
 		{
@@ -190,6 +190,8 @@ namespace t3d
 		{
 			Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
 		}
+
+		return true;
 	}
 
 }

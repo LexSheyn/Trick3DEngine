@@ -5,6 +5,8 @@ namespace t3d
 	template<typename T>
 	struct TDelegate
 	{
-		void (*Callback) (const T&);
+		using Callback_Type = bool8 (*) (const T&);
+
+		Callback_Type Callback;
 	};
 }
