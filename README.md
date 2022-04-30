@@ -7,6 +7,8 @@ The important difference between SEventSystem & FEvent versus TEvent & TDelegate
 		
 		+ Works only with class instances, but singletons also can have static instances.
 		+ Event notification can be stopped by changing event status 'IsHandled' to 'true'.
+		+ Listener can unsubscribe from all events at once by calling UnsubscribeFromAll(LISTENER);
+
 		- Uses std::multimap for listener registry, element access has O(log N) complexity
 		  and might be slow with a huge amounts of subscribers.
 		- Event subscribers have to inherit from IEventListener and implement its interface (OnEvent(const FEvent* const Event)).
@@ -23,4 +25,6 @@ The important difference between SEventSystem & FEvent versus TEvent & TDelegate
 		+ Callback invocation order can be changed at runtime.
 		+ Event callbacks has to have a bool8 type and this should be interpreted as
 		  'Continue invocation?' where 'return true' means 'Yes' and 'return false' means 'No'.
-		- Currently works only with static functions which means singletons only;
+
+		- Currently works with static functions only which means - singletons only;
+		- Currently subscriber have to manually unsubscribe from each event it has been subscribed on.
