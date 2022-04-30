@@ -2,7 +2,7 @@
 
 The important difference between SEventSystem & FEvent versus TEvent & TDelegate:
 	
-	SEventSystem & FEvent:
+	SEventSystem with FEvent:
 		Event system singleton class contains and manages event queue.
 		
 		+ Works only with class instances, but singletons also can have static instances.
@@ -16,7 +16,7 @@ The important difference between SEventSystem & FEvent versus TEvent & TDelegate
 		- Notification order depends only on subscribition order and can not be changed at runtime.
 		
 
-	TEvent & TDelegate:
+	SEventSystem with TEvent & TDelegate:
 		Events are self sufficient, event system operates only like a namespace. Easy schaduling for multithreading.
 		
 		+ Uses std::vector for subscribers list which is faster than map to iterate through,
