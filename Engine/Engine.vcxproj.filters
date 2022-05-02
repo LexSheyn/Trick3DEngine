@@ -165,7 +165,16 @@
     <ClCompile Include="src\Memory\T3DMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Events\TEvent.cpp">
+    <ClCompile Include="src\Events\Experimental\TEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Events\Experimental\IEventSenderEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Events\Experimental\SEventSystemEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Events\Experimental\IEventListenerEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -476,13 +485,22 @@
     <ClInclude Include="src\Memory\T3DMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Events\TEvent.h">
+    <ClInclude Include="src\Events\Experimental\TEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Events\TDelegate.h">
+    <ClInclude Include="src\Events\Experimental\TDelegate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Events\TEventCallbackRecord.h">
+    <ClInclude Include="src\Events\Experimental\TEventCallbackRecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\Experimental\IEventSenderEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\Experimental\SEventSystemEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\Experimental\IEventListenerEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

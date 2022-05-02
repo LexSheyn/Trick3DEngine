@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TDelegate.h"
+#include "TEventCallbackRecord.h"
 
 namespace t3d
 {

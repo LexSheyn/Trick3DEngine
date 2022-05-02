@@ -31,11 +31,6 @@ namespace t3d
 		}
 
 		Instance.MasterGroup->setVolume(Instance.Volume);
-
-	// TEST:
-
-	//	SEventSystem::EventKey.Subscribe(FSound::OnKey);
-	//	SEventSystem::EventKey += OnKey;
 	}
 
 	void FSound::LoadFile(ESound Name, const std::string& FilePath)
@@ -163,12 +158,14 @@ namespace t3d
 
 	// Events:
 
-		SEventSystem::EventKey += OnKey;
+		IEventListenerEx::EventKeyPress   += OnKeyPress;
+		IEventListenerEx::EventKeyRelease += OnKeyRelease;
 	}
 
 	FSound::~FSound()
 	{
-		SEventSystem::EventKey -= OnKey;
+		IEventListenerEx::EventKeyPress   -= OnKeyPress;
+		IEventListenerEx::EventKeyRelease -= OnKeyRelease;
 
 		FSound::Shutdown();
 	}
@@ -180,16 +177,16 @@ namespace t3d
 
 // Event Callbacks:
 
-	bool8 FSound::OnKey(const FKeyData& Data)
+	bool8 FSound::OnKeyPress(const FKeyData& Data)
 	{
-		if (Data.Action == FKeyState::Pressed)
-		{
-			Instance.Play(ESound::KeyPress, ESoundGroup::UI);
-		}
-		else if (Data.Action == FKeyState::Released)
-		{
-			Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
-		}
+		Instance.Play(ESound::KeyPress, ESoundGroup::UI);
+
+		return true;
+	}
+
+	bool8 FSound::OnKeyRelease(const FKeyData& Data)
+	{
+		Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
 
 		return true;
 	}

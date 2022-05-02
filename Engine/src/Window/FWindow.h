@@ -3,10 +3,11 @@
 #include "../Input/Keyboard/FKeyboard.h"
 #include "../Input/Mouse/FMouse.h"
 #include "../Input/Gamepad/FGamepad.h"
+#include "../Events/Experimental/IEventSenderEx.h"
 
 namespace t3d
 {
-	class FWindow
+	class FWindow : IEventSenderEx
 	{
 	public:
 

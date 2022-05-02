@@ -6,10 +6,11 @@
 // TEST
 #include "../Input/Keyboard/FKey.h"
 #include "../Input/Keyboard/FKeystate.h"
+#include "../Events/Experimental/IEventListenerEx.h"
 
 namespace t3d
 {
-	class FSound
+	class FSound : IEventListenerEx
 	{
 	public:
 
@@ -80,6 +81,7 @@ namespace t3d
 
 	// Event Callbacks:
 
-		static bool8 OnKey    (const FKeyData& Data);
+		static bool8 OnKeyPress      (const FKeyData& Data);
+		static bool8 OnKeyRelease    (const FKeyData& Data);
 	};
 }

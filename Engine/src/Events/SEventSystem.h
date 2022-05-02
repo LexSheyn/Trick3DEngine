@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TEvent.h"
+#include "FEvent.h"
 #include "IEventListener.h"
 
 namespace t3d
@@ -35,19 +35,5 @@ namespace t3d
 		static std::list<FEvent> EventQueue;
 
 		static std::multimap<EEventType, IEventListener*> ListenerRegistry;
-
-	public:
-
-	// Events and Delegates:
-
-		static TEvent<FFramebufferSizeData> EventFramebufferSize;
-		static TEvent<FKeyData>             EventKey;
-		static TEvent<FCharData>            EventChar;
-		static TEvent<FCharModsData>        EventCharMods;
-		static TEvent<FMouseButtonData>     EventMouseButton;
-		static TEvent<FCursorPositionData>  EventMouseMove;
-		static TEvent<FCursorEnterData>     EventMouseEnter;
-		static TEvent<FScrollData>          EventMouseScroll;
-		static TEvent<FDropPathData>        EventMouseDropPath;
 	};
 }

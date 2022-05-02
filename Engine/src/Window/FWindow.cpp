@@ -186,7 +186,11 @@ namespace t3d
 		WindowPtr->Width  = Width;
 		WindowPtr->Height = Height;
 
+		// SEventSystem
 		SEventSystem::PushEvent(FEvent(EEventType::WindowResized, FFramebufferSizeData(Width, Height)));
+
+		// TEvent & TDelegate
+	//	IEventSenderEx::EventFramebufferSize.Invoke(FFramebufferSizeData{Width, Height});
 	}
 
 
@@ -194,20 +198,24 @@ namespace t3d
 
 	void FWindow::KeyCallback(GLFWwindow* Window, int32 Key, int32 ScanCode, int32 Action, int32 Mods)
 	{
-	//	if (Action == GLFW_PRESS)
-	//	{
-	//		SEventSystem::PushEvent(FEvent(EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods }));
-	//	}
-	//	else if (Action == GLFW_REPEAT)
-	//	{
-	//		SEventSystem::PushEvent(FEvent(EEventType::KeyRepeated, FKeyData{ Key, ScanCode, Action, Mods }));
-	//	}
-	//	else if (Action == GLFW_RELEASE)
-	//	{
-	//		SEventSystem::PushEvent(FEvent(EEventType::KeyReleased, FKeyData{ Key, ScanCode, Action, Mods }));
-	//	}
+		if (Action == GLFW_PRESS)
+		{
+			// SEventSystem
+			SEventSystem::PushEvent(FEvent{ EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods } });
 
-		SEventSystem::EventKey.Invoke(FKeyData{ Key, ScanCode, Action, Mods });
+			// TEvent & TDelegate
+			IEventSenderEx::EventKeyPress.Invoke(FKeyData{ Key, ScanCode, Action, Mods });
+		}
+		else if (Action == GLFW_RELEASE)
+		{
+			IEventSenderEx::EventKeyRelease.Invoke(FKeyData{ Key, ScanCode, Action, Mods });
+		}
+		else if (Action == GLFW_REPEAT)
+		{
+			IEventSenderEx::EventKeyRepeat.Invoke(FKeyData{ Key, ScanCode, Action, Mods });
+		}
+
+	//	SEventSystem::EventKey.Invoke(FKeyData{ Key, ScanCode, Action, Mods });
 	}
 
 	void FWindow::CharCallback(GLFWwindow* Window, uint32 Codepoint)

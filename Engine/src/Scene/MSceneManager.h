@@ -5,7 +5,7 @@
 
 namespace t3d
 {
-	class MSceneManager : public IEventListener
+	class MSceneManager : IEventListener
 	{
 	public:
 

@@ -57,6 +57,7 @@
 //#include <utility>
 #include <tuple>
 #include <typeinfo>
+#include <functional>
 
 // STB Image:
 #include <stdarg.h>
@@ -100,9 +101,9 @@
 #include "../Time/FDeltaTime.h"
 #include "../Logger/FLogger.h"
 #include "../Templates/TArray.h"
-#include "../Events/SEventSystem.h"
 #include "../ResourceManagers/Image/MImageManager.h"
 #include "../Memory/T3DMemory.h"
+#include "../Events/SEventSystem.h"
 
 //#ifndef DISABLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN

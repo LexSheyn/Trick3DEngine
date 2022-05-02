@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FEvent.h"
+//#include "FEvent.h"
 
 namespace t3d
 {
@@ -15,7 +15,7 @@ namespace t3d
 
 	// Interface:
 
-		virtual void OnEvent (const FEvent* const Event) = 0;
+		virtual void OnEvent (const class FEvent* const Event) = 0;
 
 	// Accessors:
 
