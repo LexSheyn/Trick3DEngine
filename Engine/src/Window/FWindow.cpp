@@ -187,7 +187,7 @@ namespace t3d
 		WindowPtr->Height = Height;
 
 		// SEventSystem
-		PushEvent(FEvent(EEventType::WindowResized, FFramebufferSizeData(Width, Height)));
+		IEventSender::PushEvent(FEvent(EEventType::WindowResized, FFramebufferSizeData(Width, Height)));
 
 		// TEvent & TDelegate
 	//	IEventSenderEx::EventFramebufferSize.Invoke(FFramebufferSizeData{Width, Height});
@@ -201,7 +201,7 @@ namespace t3d
 		if (Action == GLFW_PRESS)
 		{
 			// SEventSystem
-			PushEvent(FEvent{ EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods } });
+			IEventSender::PushEvent(FEvent{ EEventType::KeyPressed, FKeyData{ Key, ScanCode, Action, Mods } });
 
 			// TEvent & TDelegate
 			IEventSenderEx::EventKeyPress.Invoke(FKeyData{ Key, ScanCode, Action, Mods });
@@ -220,12 +220,12 @@ namespace t3d
 
 	void FWindow::CharCallback(GLFWwindow* Window, uint32 Codepoint)
 	{
-		PushEvent(FEvent(EEventType::CharPressed, FCharData{ Codepoint }));
+		IEventSender::PushEvent(FEvent(EEventType::CharPressed, FCharData{ Codepoint }));
 	}
 
 	void FWindow::CharModsCallback(GLFWwindow* Window, uint32 Codepoint, int32 Mods)
 	{
-		PushEvent(FEvent(EEventType::CharWithModsPressed, FCharModsData{ Codepoint, Mods }));
+		IEventSender::PushEvent(FEvent(EEventType::CharWithModsPressed, FCharModsData{ Codepoint, Mods }));
 	}
 
 
@@ -235,39 +235,39 @@ namespace t3d
 	{
 		if (Action == GLFW_PRESS)
 		{
-			PushEvent(FEvent(EEventType::MouseButtonPressed, FMouseButtonData{ Button, Action, Mods }));
+			IEventSender::PushEvent(FEvent(EEventType::MouseButtonPressed, FMouseButtonData{ Button, Action, Mods }));
 		}
 		else if (Action == GLFW_RELEASE)
 		{
-			PushEvent(FEvent(EEventType::MouseButtonReleased, FMouseButtonData{ Button, Action, Mods }));
+			IEventSender::PushEvent(FEvent(EEventType::MouseButtonReleased, FMouseButtonData{ Button, Action, Mods }));
 		}
 	}
 
 	void FWindow::CursorPosCallback(GLFWwindow* Window, float64 X, float64 Y)
 	{
-		PushEvent(FEvent(EEventType::MouseMoved, FCursorPositionData{ static_cast<float32>(X), static_cast<float32>(Y) }));
+		IEventSender::PushEvent(FEvent(EEventType::MouseMoved, FCursorPositionData{ static_cast<float32>(X), static_cast<float32>(Y) }));
 	}
 
 	void FWindow::CursorEnterCallback(GLFWwindow* Window, int32 Entered)
 	{
 		if (Entered)
 		{
-			PushEvent(FEvent(EEventType::MouseEnteredWindow, FCursorEnterData{ Entered }));
+			IEventSender::PushEvent(FEvent(EEventType::MouseEnteredWindow, FCursorEnterData{ Entered }));
 		}
 		else
 		{
-			PushEvent(FEvent(EEventType::MouseLeftWindow, FCursorEnterData{ Entered }));
+			IEventSender::PushEvent(FEvent(EEventType::MouseLeftWindow, FCursorEnterData{ Entered }));
 		}		
 	}
 
 	void FWindow::ScrollCallback(GLFWwindow* Window, float64 OffsetX, float64 OffsetY)
 	{
-		PushEvent(FEvent(EEventType::MouseScrolled, FScrollData{ static_cast<float32>(OffsetX), static_cast<float32>(OffsetY) }));
+		IEventSender::PushEvent(FEvent(EEventType::MouseScrolled, FScrollData{ static_cast<float32>(OffsetX), static_cast<float32>(OffsetY) }));
 	}
 
 	void FWindow::DropCallback(GLFWwindow* Window, int32 PathCount, const char8* Paths[])
 	{
-		PushEvent(FEvent(EEventType::MousePathDropped, FDropPathData{ PathCount, *Paths }));
+		IEventSender::PushEvent(FEvent(EEventType::MousePathDropped, FDropPathData{ PathCount, *Paths }));
 	}
 
 }
