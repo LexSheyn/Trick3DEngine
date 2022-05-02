@@ -42,8 +42,4 @@ namespace t3d
 	}
 
 
-// Static Variables:
-
-	TArray<std::vector<ISystem*>, FUpdater::GroupsMax> FUpdater::SystemGroups;
-
 }

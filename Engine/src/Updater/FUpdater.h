@@ -8,27 +8,27 @@ namespace t3d
 	{
 	public:
 
-	// Functions:
+	// Constructors and Destructor:
 
-		static void Register          (uint64 Group, ISystem* System);
-		static void Unregister        (uint64 Group, ISystem* System);
-		static void UnregisterAll     ();
-		static void Update            (uint64 Group);
-
-	private:
-
-	// Private Constructors and Destructor:
-
-		 FUpdater() {}
-		~FUpdater() {}
+		 FUpdater    () {}
+		~FUpdater    () {}
 
 		T3D_NO_COPY(FUpdater);
 		T3D_NO_MOVE(FUpdater);
+
+	// Functions:
+
+		void Register          (uint64 Group, ISystem* System);
+		void Unregister        (uint64 Group, ISystem* System);
+		void UnregisterAll     ();
+		void Update            (uint64 Group);
+
+	private:
 
 	// Variables:
 
 		static constexpr uint64 GroupsMax = 4;
 
-		static TArray<std::vector<ISystem*>, GroupsMax> SystemGroups;
+		TArray<std::vector<ISystem*>, GroupsMax> SystemGroups;
 	};
 }

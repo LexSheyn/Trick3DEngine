@@ -11,8 +11,8 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		 MSceneManager ();
-		~MSceneManager ();
+		 MSceneManager    ();
+		~MSceneManager    ();
 
 		T3D_NO_COPY(MSceneManager);
 		T3D_NO_MOVE(MSceneManager);
@@ -45,6 +45,6 @@ namespace t3d
 
 	// IEventListener Interface:
 
-		void OnEvent(const FEvent* const Event) override;
+		void OnEvent    (const FEvent* const Event) override;
 	};
 }

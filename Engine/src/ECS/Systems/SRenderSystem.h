@@ -13,15 +13,15 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		 SRenderSystem (FRenderer& Renderer);
-		~SRenderSystem ();
+		 SRenderSystem    (FRenderer& Renderer);
+		~SRenderSystem    ();
 
 		T3D_NO_COPY(SRenderSystem);
 		T3D_NO_MOVE(SRenderSystem);
 
 	// Functions:
 
-		void Render (FScene& Scene);
+		void Render    (FScene& Scene);
 
 	private:
 
@@ -35,6 +35,6 @@ namespace t3d
 
 	// ISystem Interface:
 
-		void Update () override;
+		void Update    () override;
 	};
 }

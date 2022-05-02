@@ -3,13 +3,21 @@
 
 namespace t3d
 {
-// Constructors and Destructor:
+// Accessors:
+
+	const uint64& IEventListener::GetId() const
+	{
+		return Id;
+	}
+
+
+// Protected Constructors and Destructor:
 
 	IEventListener::IEventListener()
 	{
-		static int32 ID = 0u;
+		static uint64 NewId = 0;
 
-		this->ID = ID++;
+		Id = NewId++;
 	}
 
 	IEventListener::~IEventListener()
@@ -17,11 +25,27 @@ namespace t3d
 	}
 
 
-// Accessors:
+// SEventSystem Interface:
 
-	const uint32& IEventListener::GetID() const
+	void IEventListener::Subscribe(EEventType Type, IEventListener* Listener)
 	{
-		return ID;
+		SEventSystem::Subscribe(Type, Listener);
 	}
+
+	void IEventListener::Unsubscribe(EEventType Type, IEventListener* Listener)
+	{
+		SEventSystem::Unsubscribe(Type, Listener);
+	}
+
+	void IEventListener::UnsubscribeFromAll(IEventListener* Listener)
+	{
+		SEventSystem::UnsubscribeFromAll(Listener);
+	}
+
+	bool8 IEventListener::IsSubscribed(EEventType Type, IEventListener* Listener)
+	{
+		return SEventSystem::IsSubscribed(Type, Listener);
+	}
+
 
 }

@@ -130,6 +130,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Events\IEventListener.cpp" />
+    <ClCompile Include="src\Events\IEventSender.cpp" />
     <ClCompile Include="src\Events\SEventSystem.cpp" />
     <ClCompile Include="src\Events\Experimental\SEventSystemEx.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
@@ -278,6 +279,7 @@
     <ClInclude Include="src\Events\EventData.h" />
     <ClInclude Include="src\Events\FEvent.h" />
     <ClInclude Include="src\Events\IEventListener.h" />
+    <ClInclude Include="src\Events\IEventSender.h" />
     <ClInclude Include="src\Events\SEventSystem.h" />
     <ClInclude Include="src\Events\Experimental\TEventCallbackRecord.h" />
     <ClInclude Include="src\Events\Experimental\TEvent.h" />

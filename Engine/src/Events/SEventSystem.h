@@ -7,7 +7,7 @@ namespace t3d
 {
 	class SEventSystem
 	{
-	public:
+	private:
 
 	// Constructors and Destructor:
 
@@ -26,14 +26,16 @@ namespace t3d
 		static void  T3D_CALL ClearEventQueue          ();
 		static void  T3D_CALL ClearListenerRegistry    ();
 
-		// Clear all data function here!
-
-	private:
-
 	// Variables:
 
 		static std::list<FEvent> EventQueue;
 
 		static std::multimap<EEventType, IEventListener*> ListenerRegistry;
+
+	// Friends:
+
+		friend class IEventListener;
+		friend class IEventSender;
+		friend class FApplication;
 	};
 }

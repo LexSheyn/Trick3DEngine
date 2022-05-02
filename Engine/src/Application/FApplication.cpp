@@ -14,12 +14,13 @@ namespace t3d
 		  RenderSystem(Renderer)
 	{
 		MModelManager::SetDevice(Device);
-		FUpdater::Register(0, &RenderSystem);
+
+		Updater.Register(0, &RenderSystem);
 	}
 
 	FApplication::~FApplication()
 	{
-		FUpdater::UnregisterAll();
+		Updater.UnregisterAll();
 	}
 
 
@@ -27,7 +28,7 @@ namespace t3d
 
 	void FApplication::Run()
 	{
-		while (!Window.ShouldClose())
+		do
 		{
 			Clock.Restart();
 
@@ -38,7 +39,8 @@ namespace t3d
 			std::this_thread::sleep_for(std::chrono::microseconds(16600)); // ~60 FPS // NEED TO BE MOVED SOMEWHERE ELSE!!!
 
 			FDeltaTime::Set( Clock.GetElapsedTime().AsSeconds() );
-		}
+
+		} while (Window.ShouldClose() == false);
 	}
 
 	void FApplication::Update()
@@ -50,12 +52,19 @@ namespace t3d
 
 	// Update Systems:
 
-		FUpdater::Update(0);
-		FUpdater::Update(1);
+		Updater.Update(0);
 
 	// Update SFX:
 
 		FSound::Update();
+	}
+
+	void FApplication::FixedUpdate()
+	{
+	}
+
+	void FApplication::LateUpdate()
+	{
 	}
 
 	void FApplication::Render()

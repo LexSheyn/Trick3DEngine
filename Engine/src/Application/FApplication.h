@@ -14,17 +14,19 @@ namespace t3d
 
 	// Constructors and Destructor:
 
-		 FApplication ();
-		~FApplication ();
+		 FApplication    ();
+		~FApplication    ();
 
 		T3D_NO_COPY(FApplication);
 		T3D_NO_MOVE(FApplication);
 
 	// Functions:
 
-		void Run       ();
-		void Update    ();
-		void Render    ();
+		void Run            ();
+		void Update         ();
+		void FixedUpdate    ();
+		void LateUpdate     ();
+		void Render         ();
 
 	private:
 
@@ -35,6 +37,7 @@ namespace t3d
 
 		FClock Clock;
 
+		FUpdater  Updater;
 		FWindow   Window;
 		FDevice   Device;
 		FRenderer Renderer;

@@ -46,7 +46,7 @@ namespace t3d
 		}
 		else if (IsSubscribed(Type, Listener))
 		{
-			LOG_ERROR("Listener[" + std::to_string(Listener->GetID()) + "] is already subscribed for event of type: " + std::to_string(static_cast<uint32>(Type)) + "!");
+			LOG_ERROR("Listener[" + std::to_string(Listener->GetId()) + "] is already subscribed for event of type: " + std::to_string(static_cast<uint32>(Type)) + "!");
 
 			return;
 		}
@@ -66,7 +66,7 @@ namespace t3d
 		}
 		else if (!IsSubscribed(Type, Listener))
 		{
-			LOG_ERROR("Listener[" + std::to_string(Listener->GetID()) + "] is not subscribed for event of type: " + std::to_string(static_cast<uint32>(Type)) + "!");
+			LOG_ERROR("Listener[" + std::to_string(Listener->GetId()) + "] is not subscribed for event of type: " + std::to_string(static_cast<uint32>(Type)) + "!");
 
 			return;
 		}

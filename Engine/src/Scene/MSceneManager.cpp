@@ -8,13 +8,13 @@ namespace t3d
 	MSceneManager::MSceneManager()
 		: ActiveScene(EScene::MainMenu)
 	{
-		SEventSystem::Subscribe(EEventType::WindowResized, this);
-		SEventSystem::Subscribe(EEventType::KeyPressed   , this);
+		Subscribe(EEventType::WindowResized, this);
+		Subscribe(EEventType::KeyPressed   , this);
 	}
 
 	MSceneManager::~MSceneManager()
 	{
-		SEventSystem::UnsubscribeFromAll(this);
+		UnsubscribeFromAll(this);
 	}
 
 

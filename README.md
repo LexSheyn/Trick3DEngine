@@ -31,4 +31,4 @@ FEvent versus TEvent & TDelegate and important difference between them:
 		- Currently works with static functions only which means - singletons only;
 		- Currently subscriber have to manually unsubscribe from each event it has been subscribed on.
 
-Seems like TEvent & TDelegate are usefull only for some specific cases, when SEventSystem is suitable for everything.
+Seems like TEvent & TDelegate are usefull only for some specific cases, where SEventSystem is suitable for everything.
