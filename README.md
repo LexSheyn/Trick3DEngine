@@ -16,7 +16,7 @@ SEventSystem versus TEvent & TDelegate and important difference between them:
 		  and might be slow with a huge amounts of subscribers.
 		- Event subscribers have to inherit from IEventListener and implement its interface (OnEvent(const FEvent* const Event)).
 		- In OnEvent function every subscriber have to dispatch events by type using switch statement to appropriate functions.
-		- Notification order depends only on subscribition order and can not be changed at runtime.
+		- Notification order depends only on subscription order and can not be changed at runtime.
 		
 
 	TEvent & TDelegate:
