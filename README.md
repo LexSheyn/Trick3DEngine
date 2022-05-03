@@ -1,15 +1,17 @@
 "# Trick3DEngine" 
 
-FEvent versus TEvent & TDelegate and important difference between them:
+SEventSystem versus TEvent & TDelegate and important difference between them:
 	
-	FEvent:
+	SEventSystem:
 
-		Event system singleton class contains and manages event queue.
+		Singleton class contains and manages event queue.
 		
 		+ Works only with class instances, but singletons also can have static instances.
 		+ Event notification can be stopped by changing event status 'IsHandled' to 'true'.
 		+ Listener can unsubscribe from all events at once by calling UnsubscribeFromAll(LISTENER);
 
+		- Since all events are in the same queue, multithreading implementation could be complicated.
+		  Each listener has to implement its own multithreading to make things easier.
 		- Uses std::multimap for listener registry, element search has O(log N) complexity
 		  and might be slow with a huge amounts of subscribers.
 		- Event subscribers have to inherit from IEventListener and implement its interface (OnEvent(const FEvent* const Event)).
@@ -19,16 +21,19 @@ FEvent versus TEvent & TDelegate and important difference between them:
 
 	TEvent & TDelegate:
 
-		Events are self sufficient, event system operates only like a namespace. Easy schaduling for multithreading.
+		Events are self sufficient.
 		
+		+ Each event can be processed by a dedicated thread apart from the others.
+		  Listeners also could have their own multithreading at the same time.
 		+ Uses std::vector for subscribers list which is faster than map to iterate through,
 		  expected to be faster for huge amounts of subscribers.
-		+ Easy to use, callback functions can be assigned to the event directly with '+=' operator, no switch statements needed.
+		+ Easy to use, callback functions can be assigned to the event directly, no switch statements needed.
 		+ Callback invocation order can be changed at runtime.
 		+ Event callbacks has to have a bool8 type and this should be interpreted as
 		  'Continue invocation?' where 'return true' means 'Yes' and 'return false' means 'No'.
 		+ Supports static functions with instance pointer as a parameter which instance can be accessed through.
 
-		- Currently subscriber have to manually unsubscribe from each event it has been subscribed on.
+		- Subscriber have to manually unsubscribe from each event it has been subscribed on.
+		  UnsubscribeFromAll like function is too expensive operation for TEvent & TDelegate.
 
-Seems like TEvent & TDelegate are usefull only for some specific cases, where SEventSystem is suitable for everything.
+TEvent & TDelegate now belongs to SEvent static class.
