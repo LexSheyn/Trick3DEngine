@@ -2,10 +2,11 @@
 
 #include "FScene.h"
 #include "EScene.h"
+#include "../Events/Experimental/IEventListenerEx.h"
 
 namespace t3d
 {
-	class MSceneManager : IEventListener
+	class MSceneManager : IEventListener, IEventListenerEx
 	{
 	public:
 
@@ -46,5 +47,7 @@ namespace t3d
 	// IEventListener Interface:
 
 		void OnEvent    (const FEvent* const Event) override;
+
+		static bool8 OnKeyPress    (void* Instance, const FKeyData& Data);
 	};
 }

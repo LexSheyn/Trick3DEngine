@@ -158,14 +158,14 @@ namespace t3d
 
 	// Events:
 
-		IEventListenerEx::EventKeyPress   += OnKeyPress;
-		IEventListenerEx::EventKeyRelease += OnKeyRelease;
+		IEventListenerEx::EventKeyPress.Subscribe(&Instance, OnKeyPress);
+		IEventListenerEx::EventKeyRelease.Subscribe(&Instance, OnKeyRelease);
 	}
 
 	FSound::~FSound()
 	{
-		IEventListenerEx::EventKeyPress   -= OnKeyPress;
-		IEventListenerEx::EventKeyRelease -= OnKeyRelease;
+		IEventListenerEx::EventKeyPress.Unsubscribe(OnKeyPress);
+		IEventListenerEx::EventKeyRelease.Unsubscribe(OnKeyRelease);
 
 		FSound::Shutdown();
 	}
@@ -177,16 +177,16 @@ namespace t3d
 
 // Event Callbacks:
 
-	bool8 FSound::OnKeyPress(const FKeyData& Data)
+	bool8 FSound::OnKeyPress(void* Instance, const FKeyData& Data)
 	{
-		Instance.Play(ESound::KeyPress, ESoundGroup::UI);
+		FSound::Instance.Play(ESound::KeyPress, ESoundGroup::UI);
 
 		return true;
 	}
 
-	bool8 FSound::OnKeyRelease(const FKeyData& Data)
+	bool8 FSound::OnKeyRelease(void* Instance, const FKeyData& Data)
 	{
-		Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
+		FSound::Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
 
 		return true;
 	}

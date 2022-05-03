@@ -81,7 +81,7 @@ namespace t3d
 
 	// Event Callbacks:
 
-		static bool8 OnKeyPress      (const FKeyData& Data);
-		static bool8 OnKeyRelease    (const FKeyData& Data);
+		static bool8 OnKeyPress      (void* Instance, const FKeyData& Data);
+		static bool8 OnKeyRelease    (void* Instance, const FKeyData& Data);
 	};
 }

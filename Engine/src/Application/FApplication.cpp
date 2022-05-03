@@ -52,7 +52,7 @@ namespace t3d
 
 	// Update Systems:
 
-		Updater.Update(0);
+	//	Updater.Update(0);
 
 	// Update SFX:
 

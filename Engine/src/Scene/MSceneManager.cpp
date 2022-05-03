@@ -9,12 +9,16 @@ namespace t3d
 		: ActiveScene(EScene::MainMenu)
 	{
 		IEventListener::Subscribe(EEventType::WindowResized, this);
-		IEventListener::Subscribe(EEventType::KeyPressed   , this);
+	//	IEventListener::Subscribe(EEventType::KeyPressed   , this);
+
+		IEventListenerEx::EventKeyPress.Subscribe(this, OnKeyPress);
 	}
 
 	MSceneManager::~MSceneManager()
 	{
-		IEventListener::UnsubscribeFromAll(this);
+	//	IEventListener::UnsubscribeFromAll(this);
+
+		IEventListenerEx::EventKeyPress.Unsubscribe(OnKeyPress);
 	}
 
 
@@ -43,7 +47,7 @@ namespace t3d
 
 	void MSceneManager::LoadScene(EScene Name)
 	{
-		// To do...
+		std::cout << "Hello from LoadScene!" << std::endl;
 	}
 
 	void MSceneManager::UnloadScene(EScene Name)
@@ -72,18 +76,38 @@ namespace t3d
 		
 			Scenes[ActiveScene].TestCamera.SetPerspectiveProjection(glm::radians(50.0f), AspectRatio, 0.1f, 100.0f);
 		}
-		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::C)
+//		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::C)
+//		{
+//			Scenes[ActiveScene].CreateTestEntity();
+//		}
+//		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::L)
+//		{
+//			Scenes[ActiveScene].LoadTestMesh();
+//		}
+//		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::D)
+//		{
+//			Scenes[ActiveScene].DeleteTestEntity();
+//		}
+	}
+
+	bool8 MSceneManager::OnKeyPress(void* Instance, const FKeyData& Data)
+	{
+		MSceneManager* Manager = reinterpret_cast<MSceneManager*>(Instance);
+
+		if (Data.Key == FKey::C)
 		{
-			Scenes[ActiveScene].CreateTestEntity();
+			Manager->Scenes[Manager->ActiveScene].CreateTestEntity();
 		}
-		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::L)
+		else if (Data.Key == FKey::L)
 		{
-			Scenes[ActiveScene].LoadTestMesh();
+			Manager->Scenes[Manager->ActiveScene].LoadTestMesh();
 		}
-		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::D)
+		else if (Data.Key == FKey::D)
 		{
-			Scenes[ActiveScene].DeleteTestEntity();
+			Manager->Scenes[Manager->ActiveScene].DeleteTestEntity();
 		}
+
+		return true;
 	}
 
 }

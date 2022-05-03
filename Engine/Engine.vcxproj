@@ -102,6 +102,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application\FApplication.cpp" />
+    <ClCompile Include="src\Templates\TCommand.cpp" />
     <ClCompile Include="src\ECS\Components\Components.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
@@ -257,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h" />
+    <ClInclude Include="src\Templates\TCommand.h" />
     <ClInclude Include="src\ECS\Components\CCamera.h" />
     <ClInclude Include="src\ECS\Components\CDirectionalLight.h" />
     <ClInclude Include="src\ECS\Components\CModel.h" />
