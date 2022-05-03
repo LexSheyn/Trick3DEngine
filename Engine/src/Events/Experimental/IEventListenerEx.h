@@ -18,9 +18,9 @@ namespace t3d
 		static constexpr TEvent<FMouseButtonData>     &EventMouseButton        = SEventSystemEx::EventMouseButton;
 		static constexpr TEvent<FMouseButtonData>     &EventMouseButtonPress   = SEventSystemEx::EventMouseButtonPress;
 		static constexpr TEvent<FMouseButtonData>     &EventMouseButtonRelease = SEventSystemEx::EventMouseButtonRelease;
-		static constexpr TEvent<FCursorPositionData>  &EventMouseMove          = SEventSystemEx::EventMouseMove;
-		static constexpr TEvent<FCursorEnterData>     &EventMouseEnter         = SEventSystemEx::EventMouseEnter;
-		static constexpr TEvent<FScrollData>          &EventMouseScroll        = SEventSystemEx::EventMouseScroll;
-		static constexpr TEvent<FDropPathData>        &EventMouseDropPath      = SEventSystemEx::EventMouseDropPath;
+		static constexpr TEvent<FMousePositionData>   &EventMouseMove          = SEventSystemEx::EventMouseMove;
+		static constexpr TEvent<FMouseEnterData>      &EventMouseEnter         = SEventSystemEx::EventMouseEnter;
+		static constexpr TEvent<FMouseScrollData>     &EventMouseScroll        = SEventSystemEx::EventMouseScroll;
+		static constexpr TEvent<FMouseDropPathData>   &EventMouseDropPath      = SEventSystemEx::EventMouseDropPath;
 	};
 }

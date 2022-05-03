@@ -19,9 +19,9 @@ namespace t3d
 		static TEvent<FMouseButtonData>     EventMouseButton;
 		static TEvent<FMouseButtonData>     EventMouseButtonPress;
 		static TEvent<FMouseButtonData>     EventMouseButtonRelease;
-		static TEvent<FCursorPositionData>  EventMouseMove;
-		static TEvent<FCursorEnterData>     EventMouseEnter;
-		static TEvent<FScrollData>          EventMouseScroll;
-		static TEvent<FDropPathData>        EventMouseDropPath;
+		static TEvent<FMousePositionData>   EventMouseMove;
+		static TEvent<FMouseEnterData>      EventMouseEnter;
+		static TEvent<FMouseScrollData>     EventMouseScroll;
+		static TEvent<FMouseDropPathData>   EventMouseDropPath;
 	};
 }

@@ -160,12 +160,14 @@ namespace t3d
 
 		IEventListenerEx::EventKeyPress.Subscribe(&Instance, OnKeyPress);
 		IEventListenerEx::EventKeyRelease.Subscribe(&Instance, OnKeyRelease);
+		IEventListenerEx::EventMouseButtonPress.Subscribe(&Instance, OnMouseButtonPress);
 	}
 
 	FSound::~FSound()
 	{
 		IEventListenerEx::EventKeyPress.Unsubscribe(OnKeyPress);
 		IEventListenerEx::EventKeyRelease.Unsubscribe(OnKeyRelease);
+		IEventListenerEx::EventMouseButtonPress.Unsubscribe(OnMouseButtonPress);
 
 		FSound::Shutdown();
 	}
@@ -177,16 +179,25 @@ namespace t3d
 
 // Event Callbacks:
 
-	bool8 FSound::OnKeyPress(void* Instance, const FKeyData& Data)
+	bool8 FSound::OnKeyPress(FObject Instance, const FKeyData& Data)
 	{
-		FSound::Instance.Play(ESound::KeyPress, ESoundGroup::UI);
+		Instance.Get<FSound>()->Play(ESound::KeyPress, ESoundGroup::UI);
 
 		return true;
 	}
 
-	bool8 FSound::OnKeyRelease(void* Instance, const FKeyData& Data)
+	bool8 FSound::OnKeyRelease(FObject Instance, const FKeyData& Data)
 	{
-		FSound::Instance.Play(ESound::KeyRelease, ESoundGroup::UI);
+		Instance.Get<FSound>()->Play(ESound::KeyRelease, ESoundGroup::UI);
+
+		return true;
+	}
+
+	bool8 FSound::OnMouseButtonPress(FObject Instance, const FMouseButtonData& Data)
+	{
+		Instance.Get<FSound>()->Play(ESound::KeyPress, ESoundGroup::UI);
+
+		std::cout << "X: " << Data.X << " Y: " << Data.Y << std::endl;
 
 		return true;
 	}

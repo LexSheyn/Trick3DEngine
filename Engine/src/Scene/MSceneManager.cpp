@@ -8,16 +8,14 @@ namespace t3d
 	MSceneManager::MSceneManager()
 		: ActiveScene(EScene::MainMenu)
 	{
-		IEventListener::Subscribe(EEventType::WindowResized, this);
-	//	IEventListener::Subscribe(EEventType::KeyPressed   , this);
 
+		IEventListenerEx::EventFramebufferSize.Subscribe(this, OnFramebufferSize);
 		IEventListenerEx::EventKeyPress.Subscribe(this, OnKeyPress);
 	}
 
 	MSceneManager::~MSceneManager()
 	{
-	//	IEventListener::UnsubscribeFromAll(this);
-
+		IEventListenerEx::EventFramebufferSize.Unsubscribe(OnFramebufferSize);
 		IEventListenerEx::EventKeyPress.Unsubscribe(OnKeyPress);
 	}
 
@@ -47,52 +45,41 @@ namespace t3d
 
 	void MSceneManager::LoadScene(EScene Name)
 	{
-		std::cout << "Hello from LoadScene!" << std::endl;
+		// To do
 	}
 
 	void MSceneManager::UnloadScene(EScene Name)
 	{
-		// To do...
+		// To do
 	}
 
 	void MSceneManager::LoadFromFile(EScene Name)
 	{
-		// To do...
+		// To do
 	}
 
 	void MSceneManager::SaveToFile(EScene Name)
 	{
-		// To do...
+		// To do
 	}
 
 
-// IEventListener Interface:
+// Event Callbacks:
 
-	void MSceneManager::OnEvent(const FEvent* const Event)
+	bool8 MSceneManager::OnFramebufferSize(FObject Instance, const FFramebufferSizeData& Data)
 	{
-		if (Event->GetType() == EEventType::WindowResized)
-		{
-			float32 AspectRatio = static_cast<float32>(Event->FramebufferSizeData.Width) / static_cast<float32>(Event->FramebufferSizeData.Height);
-		
-			Scenes[ActiveScene].TestCamera.SetPerspectiveProjection(glm::radians(50.0f), AspectRatio, 0.1f, 100.0f);
-		}
-//		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::C)
-//		{
-//			Scenes[ActiveScene].CreateTestEntity();
-//		}
-//		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::L)
-//		{
-//			Scenes[ActiveScene].LoadTestMesh();
-//		}
-//		else if (Event->GetType() == EEventType::KeyPressed && Event->KeyData.Key == FKey::D)
-//		{
-//			Scenes[ActiveScene].DeleteTestEntity();
-//		}
+		MSceneManager* Manager = Instance.Get<MSceneManager>();
+
+		float32 AspectRatio = static_cast<float32>(Data.Width) / static_cast<float32>(Data.Height);
+
+		Manager->Scenes[Manager->ActiveScene].TestCamera.SetPerspectiveProjection(glm::radians(50.0f), AspectRatio, 0.1f, 100.0f);
+	
+		return true;
 	}
 
-	bool8 MSceneManager::OnKeyPress(void* Instance, const FKeyData& Data)
+	bool8 MSceneManager::OnKeyPress(FObject Instance, const FKeyData& Data)
 	{
-		MSceneManager* Manager = reinterpret_cast<MSceneManager*>(Instance);
+		MSceneManager* Manager = Instance.Get<MSceneManager>();
 
 		if (Data.Key == FKey::C)
 		{

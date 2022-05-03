@@ -1,5 +1,7 @@
 #pragma once
 
+#include "FObject.h"
+
 namespace t3d
 {
 	template<typename T>
@@ -7,13 +9,12 @@ namespace t3d
 	{
 	public:
 
-		using Instance_Type = void*;
-		using Callback_Type = bool8(*) (Instance_Type, const T&);
+		using Callback_Type = bool8(*) (FObject, const T&);
 
 		template<class C>
 		void Bind(C* Instance, Callback_Type Callback)
 		{
-			this->Instance = reinterpret_cast<Instance_Type>(Instance);
+			this->Instance.Set<C>(Instance);
 
 			this->Callback = Callback;
 		}
@@ -35,7 +36,7 @@ namespace t3d
 
 	private:
 
-		Instance_Type Instance;
+		FObject       Instance;
 		Callback_Type Callback;
 	};
 }

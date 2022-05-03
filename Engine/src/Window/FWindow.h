@@ -48,9 +48,13 @@ namespace t3d
 
 		void InitWindow();
 
+	// Error Callback:
+
+		static void T3D_CALL ErrorCallback    (int32 ErrorCode, const char8* Description);
+
 	// Window Callbacks:
 
-		static void T3D_CALL FramebufferSizeCallback(GLFWwindow* Window, int32 Width, int32 Height);
+		static void T3D_CALL FramebufferSizeCallback    (GLFWwindow* Window, int32 Width, int32 Height);
 
 	// Keyboard Callbacks:
 

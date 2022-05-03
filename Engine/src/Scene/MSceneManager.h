@@ -6,7 +6,7 @@
 
 namespace t3d
 {
-	class MSceneManager : IEventListener, IEventListenerEx
+	class MSceneManager : IEventListenerEx
 	{
 	public:
 
@@ -42,12 +42,9 @@ namespace t3d
 
 		TArray<FScene, 1> Scenes;
 
-	public:
+	// Event Callbacks:
 
-	// IEventListener Interface:
-
-		void OnEvent    (const FEvent* const Event) override;
-
-		static bool8 OnKeyPress    (void* Instance, const FKeyData& Data);
+		static bool8 OnFramebufferSize    (FObject Instance, const FFramebufferSizeData& Data);
+		static bool8 OnKeyPress           (FObject Instance, const FKeyData& Data);
 	};
 }

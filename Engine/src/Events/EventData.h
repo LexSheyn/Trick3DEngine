@@ -27,15 +27,15 @@ namespace t3d
 
 // Mouse
 
-	struct FMouseButtonData    { int32 Button; int32 Action; int32 Mods; };
+	struct FMouseButtonData    { int32 Button; int32 Action; int32 Mods; float32 X; float32 Y; };
 
-	struct FCursorPositionData { float32 X; float32 Y; };
+	struct FMousePositionData  { float32 X; float32 Y; };
+							   
+	struct FMouseEnterData     { int32 Entered; };
 
-	struct FCursorEnterData    { int32 Entered; };
+	struct FMouseScrollData    { float32 OffsetX; float32 OffsetY; };
 
-	struct FScrollData         { float32 OffsetX; float32 OffsetY; };
-
-	struct FDropPathData       { int32 PathCount; const char8* Paths; };
+	struct FMouseDropPathData  { int32 PathCount; const char8* Paths; };
 
 }
 #pragma warning( pop )

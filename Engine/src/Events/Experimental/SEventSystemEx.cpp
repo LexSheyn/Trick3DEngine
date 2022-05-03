@@ -13,8 +13,8 @@ namespace t3d
 	TEvent<FMouseButtonData>     SEventSystemEx::EventMouseButton;
 	TEvent<FMouseButtonData>     SEventSystemEx::EventMouseButtonPress;
 	TEvent<FMouseButtonData>     SEventSystemEx::EventMouseButtonRelease;
-	TEvent<FCursorPositionData>  SEventSystemEx::EventMouseMove;
-	TEvent<FCursorEnterData>     SEventSystemEx::EventMouseEnter;
-	TEvent<FScrollData>          SEventSystemEx::EventMouseScroll;
-	TEvent<FDropPathData>        SEventSystemEx::EventMouseDropPath;
+	TEvent<FMousePositionData>   SEventSystemEx::EventMouseMove;
+	TEvent<FMouseEnterData>      SEventSystemEx::EventMouseEnter;
+	TEvent<FMouseScrollData>     SEventSystemEx::EventMouseScroll;
+	TEvent<FMouseDropPathData>   SEventSystemEx::EventMouseDropPath;
 }

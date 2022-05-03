@@ -100,10 +100,13 @@
 #include "../Time/FTimeStamp.h"
 #include "../Time/FDeltaTime.h"
 #include "../Logger/FLogger.h"
-#include "../Templates/TArray.h"
 #include "../ResourceManagers/Image/MImageManager.h"
 #include "../Memory/T3DMemory.h"
 #include "../Events/SEventSystem.h"
+#include "../Templates/TArray.h"
+#include "../Events/Experimental/FObject.h"
+#include "../Events/Experimental/TDelegate.h"
+#include "../Events/Experimental/TEvent.h"
 
 //#ifndef DISABLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN

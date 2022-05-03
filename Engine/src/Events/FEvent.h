@@ -21,10 +21,10 @@ namespace t3d
 		FEvent    (EEventType Type, FCharData            CharData)            : Type (Type), CharData            (CharData)            {}
 		FEvent    (EEventType Type, FCharModsData        CharModsData)        : Type (Type), CharModsData        (CharModsData)        {}
 		FEvent    (EEventType Type, FMouseButtonData     MouseButtonData)     : Type (Type), MouseButtonData     (MouseButtonData)     {}
-		FEvent    (EEventType Type, FCursorPositionData  CursorPositionData)  : Type (Type), CursorPositionData  (CursorPositionData)  {}
-		FEvent    (EEventType Type, FCursorEnterData     CursorEnterData)     : Type (Type), CursorEnterData     (CursorEnterData)     {}
-		FEvent    (EEventType Type, FScrollData          ScrollData)          : Type (Type), ScrollData          (ScrollData)          {}
-		FEvent    (EEventType Type, FDropPathData        DropData)            : Type (Type), DropData            (DropData)            {}
+		FEvent    (EEventType Type, FMousePositionData   MousePositionData)   : Type (Type), MousePositionData   (MousePositionData)   {}
+		FEvent    (EEventType Type, FMouseEnterData      MouseEnterData)      : Type (Type), MouseEnterData      (MouseEnterData)      {}
+		FEvent    (EEventType Type, FMouseScrollData     MouseScrollData)     : Type (Type), MouseScrollData     (MouseScrollData)     {}
+		FEvent    (EEventType Type, FMouseDropPathData   MouseDropPathData)   : Type (Type), MouseDropPathData   (MouseDropPathData)   {}
 
 		T3D_NO_COPY(FEvent);
 		T3D_DEFAULT_MOVE(FEvent);
@@ -48,10 +48,10 @@ namespace t3d
 			FCharData            CharData;           
 			FCharModsData        CharModsData;       
 			FMouseButtonData     MouseButtonData;    
-			FCursorPositionData  CursorPositionData; 
-			FCursorEnterData     CursorEnterData;    
-			FScrollData          ScrollData;         
-			FDropPathData        DropData;           
+			FMousePositionData   MousePositionData; 
+			FMouseEnterData      MouseEnterData;    
+			FMouseScrollData     MouseScrollData;         
+			FMouseDropPathData   MouseDropPathData;           
 		};
 
 	private:
