@@ -27,14 +27,14 @@ namespace t3d
 			throw;
 		}
 
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	FDescriptorPool::~FDescriptorPool()
 	{
 		vkDestroyDescriptorPool(Device.Device(), Pool, nullptr);
 
-		LOG_TRACE("Deleted.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 

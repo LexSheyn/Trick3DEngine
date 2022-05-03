@@ -5,6 +5,7 @@
 #pragma warning( disable : 26812 ) // Uncoped Enum
 
 #include "FDevice.h"
+#include "../../Memory/T3DMemory.h"
 
 namespace t3d
 {

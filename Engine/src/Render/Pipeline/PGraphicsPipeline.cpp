@@ -20,7 +20,7 @@ namespace t3d
 		this->CreatePipelineLayout();
 		this->Create();
 
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	PGraphicsPipeline::~PGraphicsPipeline()
@@ -42,7 +42,7 @@ namespace t3d
 			delete UniformBuffers[i];
 		}
 
-		LOG_TRACE("Deleted.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 

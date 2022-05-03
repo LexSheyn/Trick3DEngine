@@ -2,6 +2,7 @@
 
 #include "IPipeline.h"
 #include "../Primitives/Mesh/FMesh.h"
+#include "../../Templates/TArray.h"
 
 namespace t3d
 {
@@ -54,6 +55,6 @@ namespace t3d
 		FMeshUniform      MeshUniform;
 		FMeshPushConstant MeshConstant;
 
-		friend class SRenderSystem;
+		friend class FRenderSystem;
 	};
 }

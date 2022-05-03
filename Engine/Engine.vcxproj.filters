@@ -150,7 +150,7 @@
     <ClCompile Include="src\Render\Pipeline\PGraphicsPipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ECS\Systems\SRenderSystem.cpp">
+    <ClCompile Include="src\ECS\Systems\FRenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ResourceManagers\Shader\MShaderManager.cpp">
@@ -168,22 +168,16 @@
     <ClCompile Include="src\Events\Experimental\TEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Events\Experimental\IEventSenderEx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Events\Experimental\SEventSystemEx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Events\Experimental\IEventListenerEx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Events\IEventSender.cpp">
+    <ClCompile Include="src\Events\Experimental\SEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Templates\TCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Events\Experimental\FObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Logger\FLoggerEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -476,7 +470,7 @@
     <ClInclude Include="src\Render\Pipeline\PGraphicsPipeline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ECS\Systems\SRenderSystem.h">
+    <ClInclude Include="src\ECS\Systems\FRenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ResourceManagers\Shader\MShaderManager.h">
@@ -500,25 +494,16 @@
     <ClInclude Include="src\Events\Experimental\TDelegate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Events\Experimental\TEventCallbackRecord.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Events\Experimental\IEventSenderEx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Events\Experimental\SEventSystemEx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Events\Experimental\IEventListenerEx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Events\IEventSender.h">
+    <ClInclude Include="src\Events\Experimental\SEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Templates\TCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Events\Experimental\FObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logger\FLoggerEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

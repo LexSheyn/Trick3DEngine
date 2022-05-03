@@ -6,7 +6,6 @@
 
 #define T3D_CALL __fastcall
 
-
 #define T3D_NO_DISCARD [[nodiscard]]
 
 
@@ -23,6 +22,14 @@
 						 typedef unsigned short     uint16;\
 						 typedef unsigned int       uint32;\
 						 typedef unsigned long long uint64;
+
+// Logger:
+
+#if _MSC_VER
+#define T3D_FUNCTION __FUNCTION__
+#else
+#define T3D_FUNCTION __func__
+#endif
 
 
 // Constructors:

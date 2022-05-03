@@ -48,7 +48,6 @@ namespace t3d
 	// Events:
 
 		Window.CatchEvents();
-		SEventSystem::PollEvents();
 
 	// Update Systems:
 

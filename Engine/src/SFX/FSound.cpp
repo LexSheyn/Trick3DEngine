@@ -158,16 +158,16 @@ namespace t3d
 
 	// Events:
 
-		IEventListenerEx::EventKeyPress.Subscribe(&Instance, OnKeyPress);
-		IEventListenerEx::EventKeyRelease.Subscribe(&Instance, OnKeyRelease);
-		IEventListenerEx::EventMouseButtonPress.Subscribe(&Instance, OnMouseButtonPress);
+		SEvent::KeyPress.Subscribe(&Instance, OnKeyPress);
+		SEvent::KeyRelease.Subscribe(&Instance, OnKeyRelease);
+		SEvent::MouseButtonPress.Subscribe(&Instance, OnMouseButtonPress);
 	}
 
 	FSound::~FSound()
 	{
-		IEventListenerEx::EventKeyPress.Unsubscribe(OnKeyPress);
-		IEventListenerEx::EventKeyRelease.Unsubscribe(OnKeyRelease);
-		IEventListenerEx::EventMouseButtonPress.Unsubscribe(OnMouseButtonPress);
+		SEvent::KeyPress.Unsubscribe(OnKeyPress);
+		SEvent::KeyRelease.Unsubscribe(OnKeyRelease);
+		SEvent::MouseButtonPress.Unsubscribe(OnMouseButtonPress);
 
 		FSound::Shutdown();
 	}

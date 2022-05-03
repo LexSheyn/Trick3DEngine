@@ -2,7 +2,7 @@
 
 namespace t3d
 {	
-	enum class EEventType : uint32
+	enum class EEventType
 	{
 	// Window:
 

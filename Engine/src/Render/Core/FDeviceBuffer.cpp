@@ -28,7 +28,7 @@ namespace t3d
 
 		if (Buffer && Memory)
 		{
-			LOG_TRACE("Created.");
+			SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 		}
 
 	#if _DEBUG
@@ -55,6 +55,8 @@ namespace t3d
 		vkDestroyBuffer(Device.Device(), Buffer, nullptr);
 
 		vkFreeMemory(Device.Device(), Memory, nullptr);
+
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 

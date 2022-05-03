@@ -16,7 +16,7 @@ namespace t3d
 		  IndexCount()
 	{
 
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	FMesh::~FMesh()
@@ -25,7 +25,7 @@ namespace t3d
 
 		delete VertexBuffer;
 
-		LOG_TRACE("Deleted.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -35,7 +35,7 @@ namespace t3d
 	{
 		VertexCount = static_cast<uint32>(Vertices.size());
 
-		LOG_TRACE("Vertex count: " + std::to_string(VertexCount));
+		SEvent::Trace.Invoke({ T3D_FUNCTION, std::string("Vertex count: " + std::to_string(VertexCount)).c_str() });
 
 	#if _DEBUG
 		if (VertexCount < 3u)
@@ -64,7 +64,7 @@ namespace t3d
 	{
 		IndexCount = static_cast<uint32>(Indices.size());
 
-		LOG_TRACE("Index count: " + std::to_string(IndexCount));
+		SEvent::Trace.Invoke({ T3D_FUNCTION, std::string("Index count: " + std::to_string(IndexCount)).c_str() });
 
 	#if _DEBUG
 		if (IndexCount == 0u)

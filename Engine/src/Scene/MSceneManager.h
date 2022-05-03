@@ -2,11 +2,12 @@
 
 #include "FScene.h"
 #include "EScene.h"
-#include "../Events/Experimental/IEventListenerEx.h"
+#include "../Templates/TArray.h"
+#include "../Events/Experimental/SEvent.h"
 
 namespace t3d
 {
-	class MSceneManager : IEventListenerEx
+	class MSceneManager
 	{
 	public:
 

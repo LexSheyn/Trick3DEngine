@@ -7,7 +7,7 @@
 
 namespace t3d
 {
-	class FKeyboard : public IInputDevice, public IEventListener
+	class FKeyboard : public IInputDevice, IEventListener
 	{
 	public:
 

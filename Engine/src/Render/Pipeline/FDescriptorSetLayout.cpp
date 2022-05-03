@@ -32,14 +32,14 @@ namespace t3d
 			throw;
 		}
 
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	FDescriptorSetLayout::~FDescriptorSetLayout()
 	{
 		vkDestroyDescriptorSetLayout(Device.Device(), DescriptorSetLayout, nullptr);
 
-		LOG_TRACE("Deleted.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ELogLevel.h"
+#include "../Time/FTimeStamp.h"
+#include "../Events/Experimental/SEvent.h"
 
 namespace t3d
 {
@@ -8,9 +10,13 @@ namespace t3d
 	{
 	public:
 
-	// Levels:
+	// Constructors and Destructor:
 
+		 FLogger    () = delete;
+		~FLogger    () = delete;
 
+		T3D_NO_COPY(FLogger);
+		T3D_NO_MOVE(FLogger);
 
 	// Functions:
 
@@ -20,17 +26,9 @@ namespace t3d
 
 	// Modifiers:
 
-		static void T3D_CALL SetLevel(ELogLevel Level);
+		static void T3D_CALL SetLevel    (ELogLevel Level);
 
 	private:
-
-	// Private Constructors and Destructor:
-
-		 FLogger () {}
-		~FLogger () {}
-
-		T3D_NO_COPY(FLogger);
-		T3D_NO_MOVE(FLogger);
 
 	// Variables:
 

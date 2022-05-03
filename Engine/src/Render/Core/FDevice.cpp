@@ -24,7 +24,7 @@ namespace t3d
 
 		this->CreateCommandPool();
 
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	FDevice::~FDevice()
@@ -42,6 +42,8 @@ namespace t3d
 		vkDestroySurfaceKHR(Instance, Surface, nullptr);
 
 		vkDestroyInstance(Instance, nullptr);
+
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -392,11 +394,11 @@ namespace t3d
 
 		if (DeviceCount == 0u)
 		{
-			LOG_ERROR("Failed to find GPUs with Vulkan support!");
+			SEvent::Error.Invoke({ T3D_FUNCTION, "Failed to find GPUs with Vulkan support!" });
 			throw;
 		}
 
-		LOG_TRACE("Device count: " + std::to_string(DeviceCount));
+		SEvent::Trace.Invoke({ T3D_FUNCTION, std::string("Device count: " + std::to_string(DeviceCount)).c_str() });
 		
 		std::vector<VkPhysicalDevice> Devices(DeviceCount);
 
@@ -414,13 +416,13 @@ namespace t3d
 
 		if (PhysicalDevice == VK_NULL_HANDLE)
 		{
-			LOG_ERROR("Failed to find s suitable GPU!");
+			SEvent::Error.Invoke({ T3D_FUNCTION, "Failed to find a suitable GPU!" });
 			throw;
 		}
 
 		vkGetPhysicalDeviceProperties(PhysicalDevice, &Properties);
 
-		LOG_TRACE(std::string("Device: ") + Properties.deviceName);
+		SEvent::Trace.Invoke({ T3D_FUNCTION, std::string(std::string("Device: ") + Properties.deviceName).c_str() });
 	}
 
 	void FDevice::CreateLogicalDevice()
@@ -635,24 +637,24 @@ namespace t3d
 
 		vkEnumerateInstanceExtensionProperties(nullptr, &ExtensionCount, Extensions.data());
 
-		LOG_TRACE("Available extensions:");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Available extensions: " });
 
 		std::unordered_set<std::string> AvailableExtensions;
 
 		for (const auto& Extension : Extensions)
 		{
-			LOG_TRACE(std::string("\t") + Extension.extensionName);
+			SEvent::Trace.Invoke({ T3D_FUNCTION, std::string(std::string("\t") + Extension.extensionName).c_str() });
 
 			AvailableExtensions.insert(Extension.extensionName);
 		}
 
-		LOG_TRACE("Required extensions:");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Required extensions: " });
 
 		std::vector<const char8*> RequiredExtensions = this->GetRequiredExtensions();
 
 		for (const auto& RequiredExtension : RequiredExtensions)
 		{
-			LOG_TRACE(std::string("\t") + RequiredExtension);
+			SEvent::Trace.Invoke({ T3D_FUNCTION, std::string(std::string("\t") + RequiredExtension).c_str() });
 
 			if (AvailableExtensions.find(RequiredExtension) == AvailableExtensions.end())
 			{

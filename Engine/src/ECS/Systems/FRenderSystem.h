@@ -4,20 +4,22 @@
 #include "../../Render/Core/FRenderer.h"
 #include "../../Render/Pipeline/PGraphicsPipeline.h"
 #include "../../Scene/FScene.h"
+#include "../../Time/FDeltaTime.h"
+#include "../../Events/Experimental/SEvent.h"
 
 namespace t3d
 {
-	class SRenderSystem : public ISystem
+	class FRenderSystem : public ISystem
 	{
 	public:
 
 	// Constructors and Destructor:
 
-		 SRenderSystem    (FRenderer& Renderer);
-		~SRenderSystem    ();
+		 FRenderSystem    (FRenderer& Renderer);
+		~FRenderSystem    ();
 
-		T3D_NO_COPY(SRenderSystem);
-		T3D_NO_MOVE(SRenderSystem);
+		T3D_NO_COPY(FRenderSystem);
+		T3D_NO_MOVE(FRenderSystem);
 
 	// Functions:
 

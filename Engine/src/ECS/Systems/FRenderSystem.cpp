@@ -1,26 +1,26 @@
 #include "../../PCH/t3dpch.h"
-#include "SRenderSystem.h"
+#include "FRenderSystem.h"
 
 namespace t3d
 {
 // Constructors and Destructor:
 
-	SRenderSystem::SRenderSystem(FRenderer& Renderer)
+	FRenderSystem::FRenderSystem(FRenderer& Renderer)
 		: Renderer(Renderer),
 		  GraphicsPipeline(Renderer)
 	{
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
-	SRenderSystem::~SRenderSystem()
+	FRenderSystem::~FRenderSystem()
 	{
-		LOG_TRACE("Deleted.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 
 // Functions:
 
-	void SRenderSystem::Render(FScene& Scene)
+	void FRenderSystem::Render(FScene& Scene)
 	{
 	// Binding Graphics Pipeline:
 
@@ -60,12 +60,12 @@ namespace t3d
 
 // ISystem Interface:
 
-	void SRenderSystem::Update()
+	void FRenderSystem::Update()
 	{
 		// Access Scene somehow
 		// Submit uniforms and oush constants here		
 		// To do...
-		LOG_TRACE("FPS: " + std::to_string( static_cast<uint64>(1.0f / FDeltaTime::Get()) ));
+	//	LOG_TRACE("FPS: " + std::to_string( static_cast<uint64>(1.0f / FDeltaTime::Get()) ));
 	}
 
 

@@ -1,4 +1,4 @@
-#include "../PCH/t3dpch.h"
+#include "../../PCH/t3dpch.h"
 #include "IPipeline.h"
 
 // Disable warnings from Vulkan SDK:
@@ -14,7 +14,7 @@ namespace t3d
 		  PipelineLayout(VK_NULL_HANDLE),
 		  VulkanPipeline(VK_NULL_HANDLE)
 	{
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	IPipeline::~IPipeline()
@@ -25,7 +25,7 @@ namespace t3d
 
 		vkDestroyPipeline(Renderer.GetDevice().Device(), VulkanPipeline, nullptr);
 
-		LOG_TRACE("Deleted.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 }

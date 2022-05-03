@@ -15,6 +15,7 @@ namespace t3d
 		this->Init();
 
 		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	FSwapchain::FSwapchain(FDevice& Device, VkExtent2D WindowExtent, FSwapchain* PreviousSwapchain)
@@ -29,7 +30,7 @@ namespace t3d
 	//		delete OldSwapchain;
 	//	}
 
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	FSwapchain::~FSwapchain()
@@ -74,7 +75,7 @@ namespace t3d
 			vkDestroyFence(Device.Device(), InFlightFences[i], nullptr);
 		}
 
-		LOG_TRACE("Deleted.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -529,13 +530,13 @@ namespace t3d
 		{
 			if (AvailablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR)
 			{
-				LOG_TRACE("Present mode: Mailbox");
+				SEvent::Trace.Invoke({ T3D_FUNCTION, "Presend mode: Mailbox." });
 
 				return AvailablePresentMode;
 			}
 		}
 
-		LOG_TRACE("Present mode: V-Sync");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Presend mode: V-Sync." });
 
 		return VK_PRESENT_MODE_FIFO_KHR;
 	}

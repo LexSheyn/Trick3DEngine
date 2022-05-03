@@ -25,7 +25,7 @@ namespace t3d
 	struct FCharModsData { uint32 Codepoint; int32 Mods; };
 
 
-// Mouse
+// Mouse:
 
 	struct FMouseButtonData    { int32 Button; int32 Action; int32 Mods; float32 X; float32 Y; };
 
@@ -36,6 +36,10 @@ namespace t3d
 	struct FMouseScrollData    { float32 OffsetX; float32 OffsetY; };
 
 	struct FMouseDropPathData  { int32 PathCount; const char8* Paths; };
+
+// Logger:
+
+	struct FLogData { const char8* FunctionName; const char8* Message; };
 
 }
 #pragma warning( pop )

@@ -1,6 +1,7 @@
 #pragma once
 #include "../Entity/FEntity.h"
 #include "../Components/Components.h"
+#include "../../Memory/T3DMemory.h"
 
 namespace t3d
 {
@@ -8,15 +9,22 @@ namespace t3d
 	{
 	public:
 
+	// Constructors and Destructor:
+
+		 SEntityComponentSystem    () = delete;
+		~SEntityComponentSystem    () = delete;
+
+		T3D_NO_COPY(SEntityComponentSystem);
+		T3D_NO_MOVE(SEntityComponentSystem);
+
 	// Entity Functions:
 
-		static T3D_NO_DISCARD T3D_EntityID CreateEntity();
-
-		static void AddChild                  (T3D_EntityID Parent, T3D_EntityID Child);
-		static void RemoveChild               (T3D_EntityID Parent, T3D_EntityID Child);
-		static void RemoveEntity              (T3D_EntityID& EntityID);
-		static void ReserveEntities           (uint64 NumEntities);
-		static void ReserveEntityReuseList    (uint64 NumEntities);
+		static T3D_EntityID CreateEntity              ();
+		static void         AddChild                  (T3D_EntityID Parent, T3D_EntityID Child);
+		static void         RemoveChild               (T3D_EntityID Parent, T3D_EntityID Child);
+		static void         RemoveEntity              (T3D_EntityID& EntityID);
+		static void         ReserveEntities           (uint64 NumEntities);
+		static void         ReserveEntityReuseList    (uint64 NumEntities);
 
 	// Component Functions:
 
@@ -41,14 +49,6 @@ namespace t3d
 		static void RemoveAllComponents(T3D_EntityID EntityID);
 
 	private:
-
-	// Private Constructors and Destructor:
-
-		 SEntityComponentSystem () {}
-		~SEntityComponentSystem () {}
-
-		T3D_NO_COPY(SEntityComponentSystem);
-		T3D_NO_MOVE(SEntityComponentSystem);
 
 	// Private Component Functions:
 

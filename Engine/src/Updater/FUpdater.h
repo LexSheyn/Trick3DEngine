@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ECS/Systems/ISystem.h"
+#include "../Templates/TArray.h"
 
 namespace t3d
 {

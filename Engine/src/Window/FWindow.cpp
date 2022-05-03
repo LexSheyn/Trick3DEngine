@@ -198,7 +198,7 @@ namespace t3d
 		WindowPtr->Width  = Width;
 		WindowPtr->Height = Height;
 
-		IEventSenderEx::EventFramebufferSize.Invoke({ Width, Height });
+		SEvent::FramebufferSize.Invoke({ Width, Height });
 	}
 
 
@@ -208,15 +208,15 @@ namespace t3d
 	{
 		if (Action == GLFW_PRESS)
 		{
-			IEventSenderEx::EventKeyPress.Invoke({ Key, ScanCode, Action, Mods });
+			SEvent::KeyPress.Invoke({ Key, ScanCode, Action, Mods });
 		}
 		else if (Action == GLFW_RELEASE)
 		{
-			IEventSenderEx::EventKeyRelease.Invoke({ Key, ScanCode, Action, Mods });
+			SEvent::KeyRelease.Invoke({ Key, ScanCode, Action, Mods });
 		}
 		else if (Action == GLFW_REPEAT)
 		{
-			IEventSenderEx::EventKeyRepeat.Invoke({ Key, ScanCode, Action, Mods });
+			SEvent::KeyRepeat.Invoke({ Key, ScanCode, Action, Mods });
 		}
 	}
 
@@ -242,17 +242,17 @@ namespace t3d
 
 		if (Action == GLFW_PRESS)
 		{
-			IEventSenderEx::EventMouseButtonPress.Invoke({ Button, Action, Mods, static_cast<float32>(X), static_cast<float32>(Y) });
+			SEvent::MouseButtonPress.Invoke({ Button, Action, Mods, static_cast<float32>(X), static_cast<float32>(Y) });
 		}
 		else if (Action == GLFW_RELEASE)
 		{
-			IEventSenderEx::EventMouseButtonRelease.Invoke({ Button, Action, Mods, static_cast<float32>(X), static_cast<float32>(Y) });
+			SEvent::MouseButtonRelease.Invoke({ Button, Action, Mods, static_cast<float32>(X), static_cast<float32>(Y) });
 		}
 	}
 
 	void FWindow::CursorPosCallback(GLFWwindow* Window, float64 X, float64 Y)
 	{
-		IEventSenderEx::EventMouseMove.Invoke({ static_cast<float32>(X), static_cast<float32>(Y) });
+		SEvent::MouseMove.Invoke({ static_cast<float32>(X), static_cast<float32>(Y) });
 	}
 
 	void FWindow::CursorEnterCallback(GLFWwindow* Window, int32 Entered)

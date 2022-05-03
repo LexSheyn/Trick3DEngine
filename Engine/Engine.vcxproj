@@ -105,6 +105,7 @@
     <ClCompile Include="src\Events\Experimental\FObject.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\Logger\FLoggerEx.cpp" />
     <ClCompile Include="src\Templates\TCommand.cpp" />
     <ClCompile Include="src\ECS\Components\Components.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
@@ -122,24 +123,19 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\ECS\Systems\SRenderSystem.cpp">
+    <ClCompile Include="src\ECS\Systems\FRenderSystem.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\EntryPoint\Main.cpp" />
-    <ClCompile Include="src\Events\Experimental\IEventListenerEx.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\Events\Experimental\IEventSenderEx.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="src\Events\IEventListener.cpp" />
-    <ClCompile Include="src\Events\IEventSender.cpp" />
     <ClCompile Include="src\Events\SEventSystem.cpp" />
-    <ClCompile Include="src\Events\Experimental\SEventSystemEx.cpp">
+    <ClCompile Include="src\Events\Experimental\SEvent.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Events\Experimental\TEvent.cpp" />
+    <ClCompile Include="src\Events\Experimental\TEvent.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Input\Gamepad\FGamepad.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
@@ -238,7 +234,9 @@
     <ClCompile Include="src\SFX\FSound.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\Templates\TTypeID.cpp" />
-    <ClCompile Include="src\Render\Pipeline\IPipeline.cpp" />
+    <ClCompile Include="src\Render\Pipeline\IPipeline.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Render\Pipeline\PGraphicsPipeline.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
@@ -262,6 +260,7 @@
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h" />
     <ClInclude Include="src\Events\Experimental\FObject.h" />
+    <ClInclude Include="src\Logger\FLoggerEx.h" />
     <ClInclude Include="src\Templates\TCommand.h" />
     <ClInclude Include="src\ECS\Components\CCamera.h" />
     <ClInclude Include="src\ECS\Components\CDirectionalLight.h" />
@@ -275,19 +274,15 @@
     <ClInclude Include="src\ECS\Core\SEntityComponentSystem.h" />
     <ClInclude Include="src\ECS\Entity\FEntity.h" />
     <ClInclude Include="src\ECS\Systems\ISystem.h" />
-    <ClInclude Include="src\ECS\Systems\SRenderSystem.h" />
+    <ClInclude Include="src\ECS\Systems\FRenderSystem.h" />
     <ClInclude Include="src\Events\EEventCategory.h" />
     <ClInclude Include="src\Events\EEventType.h" />
-    <ClInclude Include="src\Events\Experimental\IEventListenerEx.h" />
-    <ClInclude Include="src\Events\Experimental\IEventSenderEx.h" />
-    <ClInclude Include="src\Events\Experimental\SEventSystemEx.h" />
+    <ClInclude Include="src\Events\Experimental\SEvent.h" />
     <ClInclude Include="src\Events\Experimental\TDelegate.h" />
     <ClInclude Include="src\Events\EventData.h" />
     <ClInclude Include="src\Events\FEvent.h" />
     <ClInclude Include="src\Events\IEventListener.h" />
-    <ClInclude Include="src\Events\IEventSender.h" />
     <ClInclude Include="src\Events\SEventSystem.h" />
-    <ClInclude Include="src\Events\Experimental\TEventCallbackRecord.h" />
     <ClInclude Include="src\Events\Experimental\TEvent.h" />
     <ClInclude Include="src\Input\Gamepad\FGamepad.h" />
     <ClInclude Include="src\Input\IInputDevice.h" />

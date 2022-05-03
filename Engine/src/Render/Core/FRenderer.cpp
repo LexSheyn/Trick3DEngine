@@ -23,7 +23,7 @@ namespace t3d
 		Viewports.emplace_back(VkViewport{});
 		Scissors.emplace_back(VkRect2D{});
 
-		LOG_TRACE("Created.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
 
 	FRenderer::~FRenderer()
@@ -36,6 +36,8 @@ namespace t3d
 		{
 			delete Swapchain;
 		}
+
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -230,7 +232,7 @@ namespace t3d
 
 		vkDeviceWaitIdle(Device.Device());
 
-		LOG_TRACE("Creating swapchain.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Creating swapchain." });
 
 		Swapchain = new FSwapchain(Device, Extent);
 	}
@@ -250,7 +252,7 @@ namespace t3d
 
 		FSwapchain* OldSwapchain = Swapchain;
 
-		LOG_TRACE("Recreating swapchain.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Recreating swapchain." });
 
 		Swapchain = new FSwapchain(Device, Extent, OldSwapchain);
 
@@ -260,7 +262,7 @@ namespace t3d
 			throw;
 		}
 
-		LOG_TRACE("Deleting old swapchain.");
+		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleting old swapchain." });
 
 		delete OldSwapchain;
 	}

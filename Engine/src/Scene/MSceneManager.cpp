@@ -9,14 +9,14 @@ namespace t3d
 		: ActiveScene(EScene::MainMenu)
 	{
 
-		IEventListenerEx::EventFramebufferSize.Subscribe(this, OnFramebufferSize);
-		IEventListenerEx::EventKeyPress.Subscribe(this, OnKeyPress);
+		SEvent::FramebufferSize.Subscribe(this, OnFramebufferSize);
+		SEvent::KeyPress.Subscribe(this, OnKeyPress);
 	}
 
 	MSceneManager::~MSceneManager()
 	{
-		IEventListenerEx::EventFramebufferSize.Unsubscribe(OnFramebufferSize);
-		IEventListenerEx::EventKeyPress.Unsubscribe(OnKeyPress);
+		SEvent::FramebufferSize.Unsubscribe(OnFramebufferSize);
+		SEvent::KeyPress.Unsubscribe(OnKeyPress);
 	}
 
 

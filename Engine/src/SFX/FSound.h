@@ -2,15 +2,14 @@
 
 #include "ESound.h"
 #include "ESoundGroup.h"
-
-// TEST
 #include "../Input/Keyboard/FKey.h"
 #include "../Input/Keyboard/FKeystate.h"
-#include "../Events/Experimental/IEventListenerEx.h"
+#include "../Templates/TArray.h"
+#include "../Events/Experimental/SEvent.h"
 
 namespace t3d
 {
-	class FSound : IEventListenerEx
+	class FSound
 	{
 	public:
 
