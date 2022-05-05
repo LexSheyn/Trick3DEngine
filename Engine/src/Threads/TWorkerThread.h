@@ -13,8 +13,8 @@ namespace t3d
 
 		TWorkerThread()
 			:
-			SleepDuration(33),
-			ShouldStop(false)
+			SleepDuration (33),
+			b_ShouldStop  (false)
 		{
 			 SEvent::ApplicationClose.Subscribe(this, OnApplicationClose);
 			 SEvent::WindowClose.Subscribe(this, OnWindowClose);
@@ -30,7 +30,8 @@ namespace t3d
 
 		T3D_INLINE void Launch()
 		{
-			ShouldStop = false;
+			b_ShouldStop = false;
+			b_Running    = true;
 
 			std::thread Thread(&TWorkerThread::Run, this);
 
@@ -39,7 +40,13 @@ namespace t3d
 
 		T3D_INLINE void Stop()
 		{
-			ShouldStop = true;
+			b_ShouldStop = true;
+			b_Running    = false;
+		}
+
+		T3D_INLINE bool8 IsRunning()
+		{
+			return b_Running;
 		}
 
 		T3D_INLINE void ScheduleJob(TJob<T> Job)
@@ -72,9 +79,9 @@ namespace t3d
 
 		T3D_INLINE void Run()
 		{
-			while (ShouldStop == false)
+			while (b_ShouldStop == false)
 			{
-				while ( (Jobs.empty() == false) && (ShouldStop == false) )
+				while ( (Jobs.empty() == false) && (b_ShouldStop == false) )
 				{
 					JobMutex.lock();
 
@@ -105,10 +112,13 @@ namespace t3d
 			return true;
 		}
 
-		int32              SleepDuration;
-		bool8              ShouldStop;
+
 		std::list<TJob<T>> Jobs;
 		std::mutex         JobMutex;
 		std::mutex         SleepMutex;
+
+		int32 SleepDuration;
+		bool8 b_ShouldStop;
+		bool8 b_Running;
 	};
 }
