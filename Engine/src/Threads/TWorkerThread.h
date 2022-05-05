@@ -22,6 +22,8 @@ namespace t3d
 
 		~TWorkerThread()
 		{
+			this->Stop();
+
 			SEvent::ApplicationClose.Unsubscribe(OnApplicationClose);
 			SEvent::WindowClose.Unsubscribe(OnWindowClose);
 		}

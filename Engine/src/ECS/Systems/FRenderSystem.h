@@ -18,8 +18,11 @@ namespace t3d
 		 FRenderSystem    (FRenderer& Renderer);
 		~FRenderSystem    ();
 
-		T3D_NO_COPY(FRenderSystem);
-		T3D_NO_MOVE(FRenderSystem);
+	// ISystem Interface:
+
+		void OnUpdate         () override;
+		void OnFixedUpdate    () override;
+		void OnLastUpdate     () override;
 
 	// Functions:
 
@@ -29,14 +32,7 @@ namespace t3d
 
 	// Variables:
 
-		FRenderer& Renderer;
-
+		FRenderer&        Renderer;
 		PGraphicsPipeline GraphicsPipeline;
-
-	public:
-
-	// ISystem Interface:
-
-		void Update    () override;
 	};
 }

@@ -1,13 +1,15 @@
 #include "../../PCH/t3dpch.h"
 #include "FRenderSystem.h"
+#include "../../Updater/FUpdaterEx.h"
 
 namespace t3d
 {
 // Constructors and Destructor:
 
 	FRenderSystem::FRenderSystem(FRenderer& Renderer)
-		: Renderer(Renderer),
-		  GraphicsPipeline(Renderer)
+		:
+		Renderer         (Renderer),
+		GraphicsPipeline (Renderer)
 	{
 		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
 	}
@@ -15,6 +17,29 @@ namespace t3d
 	FRenderSystem::~FRenderSystem()
 	{
 		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+	}
+
+
+// ISystem Interface:
+
+	void FRenderSystem::OnUpdate()
+	{
+		// Access Scene somehow
+		// Submit uniforms and oush constants here		
+		// To do...
+	//	LOG_TRACE("FPS: " + std::to_string( static_cast<uint64>(1.0f / FDeltaTime::Get()) ));
+
+		std::cout << "Render System Update" << std::endl;
+	}
+
+	void FRenderSystem::OnFixedUpdate()
+	{
+		std::cout << "Render System Fixed Update" << std::endl;
+	}
+
+	void FRenderSystem::OnLastUpdate()
+	{
+		std::cout << "Render System Last Update" << std::endl;
 	}
 
 
@@ -55,17 +80,6 @@ namespace t3d
 			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Mesh->Bind(Renderer.GetCurrentCommandBuffer());
 			SEntityComponentSystem::GetComponent<CModel>(Scene.EntityList[i])->Mesh->Draw(Renderer.GetCurrentCommandBuffer());
 		}
-	}
-
-
-// ISystem Interface:
-
-	void FRenderSystem::Update()
-	{
-		// Access Scene somehow
-		// Submit uniforms and oush constants here		
-		// To do...
-	//	LOG_TRACE("FPS: " + std::to_string( static_cast<uint64>(1.0f / FDeltaTime::Get()) ));
 	}
 
 

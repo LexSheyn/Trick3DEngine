@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../ECS/Systems/ISystem.h"
 #include "ESound.h"
 #include "ESoundGroup.h"
 #include "../Input/Keyboard/FKey.h"
@@ -9,7 +10,7 @@
 
 namespace t3d
 {
-	class FSoundSystem
+	class FSoundSystem : public ISystem
 	{
 	public:
 
@@ -18,12 +19,9 @@ namespace t3d
 		 FSoundSystem    ();
 		~FSoundSystem    ();
 
-		T3D_NO_COPY(FSoundSystem);
-		T3D_NO_MOVE(FSoundSystem);
+	// ISystem Interface:
 
-	// Functions:
-
-		void Update    ();
+		void OnLastUpdate    () override;
 
 	// Accessors:
 

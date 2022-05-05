@@ -37,7 +37,7 @@ namespace t3d
 	{
 		for (auto& System : SystemGroups[Group])
 		{
-			System->Update();
+		//	System->Update();
 		}
 	}
 

@@ -102,6 +102,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application\FApplication.cpp" />
+    <ClCompile Include="src\ECS\Systems\ISystem.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Events\Experimental\FObject.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -256,7 +260,9 @@
     <ClCompile Include="src\Time\FTime.cpp" />
     <ClCompile Include="src\Time\FTimeStamp.cpp" />
     <ClCompile Include="src\Types\T3DStaticConversion.cpp" />
+    <ClCompile Include="src\Updater\FSystemCallback.cpp" />
     <ClCompile Include="src\Updater\FUpdater.cpp" />
+    <ClCompile Include="src\Updater\FUpdaterEx.cpp" />
     <ClCompile Include="src\Window\FWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -370,7 +376,9 @@
     <ClInclude Include="src\Types\ECSTypes.h" />
     <ClInclude Include="src\Types\T3DStaticConversion.h" />
     <ClInclude Include="src\Types\T3DTypes.h" />
+    <ClInclude Include="src\Updater\FSystemCallback.h" />
     <ClInclude Include="src\Updater\FUpdater.h" />
+    <ClInclude Include="src\Updater\FUpdaterEx.h" />
     <ClInclude Include="src\Window\FWindow.h" />
   </ItemGroup>
   <ItemGroup>

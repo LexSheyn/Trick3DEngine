@@ -8,18 +8,18 @@ namespace t3d
 	{
 	public:
 
-	// Interface:
+	// Constructors and Destructor:
 
-		virtual void Update() = 0;
-
-	protected:
-
-	// Protected Constructors and Destructor:
-
-		         ISystem() {}
-		virtual ~ISystem() {}
+		         ISystem    ();
+		virtual ~ISystem    ();
 
 		T3D_NO_COPY(ISystem);
 		T3D_NO_MOVE(ISystem);
+
+	// Interface:
+
+		virtual void OnUpdate         ();
+		virtual void OnFixedUpdate    ();
+		virtual void OnLastUpdate     ();
 	};
 }

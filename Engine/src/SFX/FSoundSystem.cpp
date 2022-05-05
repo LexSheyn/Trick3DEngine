@@ -59,10 +59,11 @@ namespace t3d
 	}
 
 
-// Functions:
+// ISystem Interface:
 
-	void FSoundSystem::Update()
+	void FSoundSystem::OnLastUpdate()
 	{
+		std::cout << "Sound System Last Update" << std::endl;
 		System->update();
 	}
 

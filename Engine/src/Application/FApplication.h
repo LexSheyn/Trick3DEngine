@@ -4,10 +4,10 @@
 #include "../SFX/FSoundSystem.h"
 #include "../Scene/MSceneManager.h"
 #include "../Time/FClock.h"
-#include "../Updater/FUpdater.h"
 #include "../Time/FDeltaTime.h"
 #include "../Logger/FLoggerEx.h"
 #include "../Threads/TWorkerThread.h"
+#include "../Updater/FUpdaterEx.h"
 
 namespace t3d
 {
@@ -27,13 +27,17 @@ namespace t3d
 
 		void Run            ();
 		void Update         ();
-		void FixedUpdate    ();
-		void LateUpdate     ();
 		void Render         ();
 
 	private:
 
-		TWorkerThread<FLogData> TestWorkerThread;
+		// TEST:
+		static T3D_INLINE void T3D_CALL FixedUpdate(FObject Instance, const FLogData& Data)
+		{
+			Instance.Get<FApplication>()->Updater.FixedUpdate();
+		}
+
+		TWorkerThread<FLogData> FixedUpdateThread;
 		FLoggerEx     Logger;
 
 	// Variables:
@@ -43,10 +47,11 @@ namespace t3d
 
 		FClock Clock;
 
-		FUpdater  Updater;
 		FWindow   Window;
 		FDevice   Device;
 		FRenderer Renderer;
+
+		FUpdaterEx    Updater;
 		FRenderSystem RenderSystem;
 		FSoundSystem  SoundSystem;
 

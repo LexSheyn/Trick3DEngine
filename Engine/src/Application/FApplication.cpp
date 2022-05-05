@@ -16,12 +16,13 @@ namespace t3d
 	{
 		MModelManager::SetDevice(Device);
 
-		Updater.Register(0, &RenderSystem);
+		Updater.Subscribe(&RenderSystem);
+		Updater.Subscribe(&SoundSystem);
 	}
 
 	FApplication::~FApplication()
 	{
-		Updater.UnregisterAll();
+		Updater.UnsubscribeAll();
 	}
 
 
@@ -29,11 +30,14 @@ namespace t3d
 
 	void FApplication::Run()
 	{
-		TestWorkerThread.Launch();
+		FixedUpdateThread.SetSleepDuration(20);
+		FixedUpdateThread.Launch();
 
 		do
 		{
 			Clock.Restart();
+
+			FixedUpdateThread.ScheduleJob(TJob(this, FixedUpdate, {}));
 
 			this->Update();
 
@@ -58,21 +62,9 @@ namespace t3d
 			SEvent::ApplicationClose.Invoke({ 1 });
 		}
 
-	// Update Systems:
+		Updater.Update();
 
-	//	Updater.Update(0);
-
-	// Update SFX:
-
-		SoundSystem.Update();
-	}
-
-	void FApplication::FixedUpdate()
-	{
-	}
-
-	void FApplication::LateUpdate()
-	{
+		Updater.LastUpdate();
 	}
 
 	void FApplication::Render()
