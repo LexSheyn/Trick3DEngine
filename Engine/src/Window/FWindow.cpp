@@ -39,10 +39,14 @@ namespace t3d
 	//	SEventSystem::Subscribe(EEventType::MouseEnteredWindow , &Mouse);
 	//	SEventSystem::Subscribe(EEventType::MouseLeftWindow    , &Mouse);
 	//	SEventSystem::Subscribe(EEventType::MousePathDropped   , &Mouse);
+
+		SEvent::ApplicationClose.Subscribe(this, OnApplicationClose);
 	}
 
 	FWindow::~FWindow()
 	{
+		SEvent::ApplicationClose.Unsubscribe(OnApplicationClose);
+
 		glfwDestroyWindow(Window);
 		
 		glfwTerminate();
@@ -54,6 +58,11 @@ namespace t3d
 	void FWindow::CatchEvents()
 	{
 		glfwPollEvents();
+	}
+
+	void FWindow::Close()
+	{
+		glfwSetWindowShouldClose(Window, 1);
 	}
 
 	bool8 FWindow::ShouldClose()
@@ -79,6 +88,11 @@ namespace t3d
 // Accessors:
 
 	const GLFWwindow* FWindow::GetGLFWwindow() const
+	{
+		return Window;
+	}
+
+	GLFWwindow* FWindow::GetGLFWwindow()
 	{
 		return Window;
 	}
@@ -275,6 +289,16 @@ namespace t3d
 	void FWindow::DropCallback(GLFWwindow* Window, int32 PathCount, const char8* Paths[])
 	{
 		//
+	}
+
+
+// Event Callbacks:
+
+	bool8 FWindow::OnApplicationClose(FObject Instance, const FApplicationData& Data)
+	{
+		Instance.Get<FWindow>()->Close();
+
+		return true;
 	}
 
 }

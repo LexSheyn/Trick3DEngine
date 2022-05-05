@@ -24,6 +24,7 @@ namespace t3d
 	// Functions:
 
 		void  CatchEvents         ();
+		void  Close               ();
 		bool8 ShouldClose         ();
 		void  CreateSurface       (VkInstance Instance, VkSurfaceKHR* Surface);
 		void  ResetResizedFlag    ();
@@ -31,6 +32,7 @@ namespace t3d
 	// Accessors:
 
 		const GLFWwindow* GetGLFWwindow    () const;
+		      GLFWwindow* GetGLFWwindow    ();
 		const bool8&      WasResized       () const;
 		const int32&      GetWidth         () const;
 		const int32&      GetHeight        () const;
@@ -70,6 +72,10 @@ namespace t3d
 		static void T3D_CALL CursorEnterCallback    (GLFWwindow* Window, int32 Entered);
 		static void T3D_CALL ScrollCallback         (GLFWwindow* Window, float64 OffsetX, float64 OffsetY);
 		static void T3D_CALL DropCallback           (GLFWwindow* Window, int32 PathCount, const char8* Paths[]);
+
+	// Event Callbacks:
+
+		static bool8 OnApplicationClose    (FObject Instance, const FApplicationData& Data);
 
 	// Variables:
 

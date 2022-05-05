@@ -29,5 +29,7 @@ namespace t3d
 		static TEvent<FLogData>             Trace;
 		static TEvent<FLogData>             Warning;
 		static TEvent<FLogData>             Error;
+		static TEvent<FApplicationData>     ApplicationClose;
+		static TEvent<FWindowData>          WindowClose;
 	};
 }

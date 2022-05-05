@@ -9,8 +9,7 @@ namespace t3d
 {
 // Constructors and Destructor:
 
-	PGraphicsPipeline::PGraphicsPipeline(FRenderer& Renderer)
-		: IPipeline(Renderer)
+	PGraphicsPipeline::PGraphicsPipeline(FRenderer& Renderer) : IPipeline(Renderer)
 	{
 		this->Init();
 
@@ -226,7 +225,7 @@ namespace t3d
 
 		std::vector<uint32> VertexShaderCode   = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.vert", EShaderOptimizationLevel::Performance);
 		std::vector<uint32> FragmentShaderCode = MShaderManager::TranslateToSPV("Shaders/GLSL/MeshShader.frag", EShaderOptimizationLevel::Performance);
-
+	
 		this->CreateShaderModule(&VertexShaderModule  , VertexShaderCode);
 		this->CreateShaderModule(&FragmentShaderModule, FragmentShaderCode);
 

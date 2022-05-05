@@ -5,7 +5,7 @@ namespace t3d
 {
 // Constructors and Destructor:
 
-	FLoggerEx::FLoggerEx()
+	FLoggerEx::FLoggerEx() : LogLevel(ELogLevel::Trace)
 	{
 		SEvent::Trace.Subscribe(this, OnTrace);
 		SEvent::Warning.Subscribe(this, OnWarning);
@@ -24,9 +24,11 @@ namespace t3d
 
 	bool8 FLoggerEx::OnTrace(FObject Instance, const FLogData& Data)
 	{
-		if (LogLevel == ELogLevel::Trace)
+		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+
+		if (Logger->LogLevel == ELogLevel::Trace)
 		{
-			std::cout << "[ " << FTimeStamp::GetAsString() << " ]" << "[  Trace  ]::" << Data.FunctionName << ": " << Data.Message << std::endl;
+			Logger->Log("[  Trace  ]", Data.FunctionName, Data.Message);
 		}
 
 		return false;
@@ -34,9 +36,11 @@ namespace t3d
 
 	bool8 FLoggerEx::OnWarning(FObject Instance, const FLogData& Data)
 	{
-		if (LogLevel <= ELogLevel::Warning)
+		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+
+		if (Logger->LogLevel <= ELogLevel::Warning)
 		{
-			std::cout << "[ " << FTimeStamp::GetAsString() << " ]" << "[ Warning ]::" << Data.FunctionName << ": " << Data.Message << std::endl;
+			Logger->Log("[ Warning ]", Data.FunctionName, Data.Message);
 		}
 
 		return false;
@@ -44,9 +48,11 @@ namespace t3d
 
 	bool8 FLoggerEx::OnError(FObject Instance, const FLogData& Data)
 	{
-		if (LogLevel <= ELogLevel::Error)
+		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+
+		if (Logger->LogLevel <= ELogLevel::Error)
 		{
-			std::cout << "[ " << FTimeStamp::GetAsString() << " ]" << "[  Error  ]::" << Data.FunctionName << ": " << Data.Message << std::endl;
+			Logger->Log("[  Error  ]", Data.FunctionName, Data.Message);
 		}
 
 		return false;
@@ -61,9 +67,12 @@ namespace t3d
 	}
 
 
-// Static Variables:
+// Private Functions:
 
-	ELogLevel FLoggerEx::LogLevel = ELogLevel::Trace;
+	void FLoggerEx::Log(const char8* LogLevel, const char8* FunctionName, const char8* Message)
+	{
+		std::cout << "[ " << FTimeStamp::GetAsString() << " ]" << LogLevel << "::" << FunctionName << ": " << Message << std::endl;
+	}
 
 
 }

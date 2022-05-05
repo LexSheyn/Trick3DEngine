@@ -23,12 +23,16 @@ namespace t3d
 
 	// Modifiers:
 
-		static void T3D_CALL SetLevel    (ELogLevel Level);
+		void T3D_CALL SetLevel    (ELogLevel Level);
 
 	private:
 
+	// Private Functions:
+
+		void Log(const char8* LogLevel, const char8* FunctionName, const char8* Message);
+
 	// Variables:
 
-		static ELogLevel LogLevel;
+		ELogLevel LogLevel;
 	};
 }

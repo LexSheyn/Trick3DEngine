@@ -1,12 +1,13 @@
 #pragma once
 
 #include "../ECS/Systems/FRenderSystem.h"
+#include "../SFX/FSoundSystem.h"
 #include "../Scene/MSceneManager.h"
-#include "../SFX/FSound.h"
 #include "../Time/FClock.h"
 #include "../Updater/FUpdater.h"
 #include "../Time/FDeltaTime.h"
 #include "../Logger/FLoggerEx.h"
+#include "../Threads/TWorkerThread.h"
 
 namespace t3d
 {
@@ -32,7 +33,8 @@ namespace t3d
 
 	private:
 
-		FLoggerEx Logger;
+		TWorkerThread<FLogData> TestWorkerThread;
+		FLoggerEx     Logger;
 
 	// Variables:
 
@@ -46,6 +48,7 @@ namespace t3d
 		FDevice   Device;
 		FRenderer Renderer;
 		FRenderSystem RenderSystem;
+		FSoundSystem  SoundSystem;
 
 		MSceneManager SceneManager;
 	};

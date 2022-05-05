@@ -6,12 +6,13 @@ namespace t3d
 // Constructors and Destructor:
 
 	FApplication::FApplication()
-		: Width(800),
-		  Height(600),
-		  Window(Width, Height, "Trick 3D Engine"),
-		  Device(Window),
-		  Renderer(Window, Device),
-		  RenderSystem(Renderer)
+		:
+		Width(800),
+		Height(600),
+		Window(Width, Height, "Trick 3D Engine"),
+		Device(Window),
+		Renderer(Window, Device),
+		RenderSystem(Renderer)
 	{
 		MModelManager::SetDevice(Device);
 
@@ -28,6 +29,8 @@ namespace t3d
 
 	void FApplication::Run()
 	{
+		TestWorkerThread.Launch();
+
 		do
 		{
 			Clock.Restart();
@@ -49,13 +52,19 @@ namespace t3d
 
 		Window.CatchEvents();
 
+		// TEST:
+		if (glfwGetKey(Window.GetGLFWwindow(), FKey::Escape) == FKeyState::Pressed)
+		{
+			SEvent::ApplicationClose.Invoke({ 1 });
+		}
+
 	// Update Systems:
 
 	//	Updater.Update(0);
 
 	// Update SFX:
 
-		FSound::Update();
+		SoundSystem.Update();
 	}
 
 	void FApplication::FixedUpdate()

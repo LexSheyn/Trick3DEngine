@@ -20,4 +20,6 @@ namespace t3d
 	TEvent<FLogData>             SEvent::Trace;
 	TEvent<FLogData>             SEvent::Warning;
 	TEvent<FLogData>             SEvent::Error;
+	TEvent<FApplicationData>     SEvent::ApplicationClose;
+	TEvent<FWindowData>          SEvent::WindowClose;
 }

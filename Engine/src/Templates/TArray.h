@@ -34,6 +34,9 @@ namespace t3d
 
 		const T& operator [] (enum class EEvent Index) const { return Array[static_cast<SizeType>(Index)]; }
 		      T& operator [] (enum class EEvent Index)       { return Array[static_cast<SizeType>(Index)]; }
+
+		const T& operator [] (enum class EThread Index) const { return Array[static_cast<SizeType>(Index)]; }
+		      T& operator [] (enum class EThread Index)       { return Array[static_cast<SizeType>(Index)]; }
 	
 	private:
 	

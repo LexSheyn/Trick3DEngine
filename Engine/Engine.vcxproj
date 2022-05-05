@@ -231,7 +231,7 @@
     </ClCompile>
     <ClCompile Include="src\Scene\FScene.cpp" />
     <ClCompile Include="src\Scene\MSceneManager.cpp" />
-    <ClCompile Include="src\SFX\FSound.cpp" />
+    <ClCompile Include="src\SFX\FSoundSystem.cpp" />
     <ClCompile Include="src\Templates\TAutoID.cpp" />
     <ClCompile Include="src\Templates\TTypeID.cpp" />
     <ClCompile Include="src\Render\Pipeline\IPipeline.cpp">
@@ -249,6 +249,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Threads\FJobScheduler.cpp" />
+    <ClCompile Include="src\Threads\TWorkerThread.cpp" />
     <ClCompile Include="src\Time\FClock.cpp" />
     <ClCompile Include="src\Time\FDeltaTime.cpp" />
     <ClCompile Include="src\Time\FTime.cpp" />
@@ -341,7 +343,7 @@
     <ClInclude Include="src\Scene\MSceneManager.h" />
     <ClInclude Include="src\SFX\ESound.h" />
     <ClInclude Include="src\SFX\ESoundGroup.h" />
-    <ClInclude Include="src\SFX\FSound.h" />
+    <ClInclude Include="src\SFX\FSoundSystem.h" />
     <ClInclude Include="src\Templates\poormemory.h" />
     <ClInclude Include="src\Templates\TArray.h" />
     <ClInclude Include="src\Templates\TAutoID.h" />
@@ -357,6 +359,10 @@
     <ClInclude Include="src\Render\Pipeline\PGraphicsPipeline.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
+    <ClInclude Include="src\Threads\EThread.h" />
+    <ClInclude Include="src\Threads\FJobScheduler.h" />
+    <ClInclude Include="src\Threads\TJob.h" />
+    <ClInclude Include="src\Threads\TWorkerThread.h" />
     <ClInclude Include="src\Time\FClock.h" />
     <ClInclude Include="src\Time\FDeltaTime.h" />
     <ClInclude Include="src\Time\FTime.h" />

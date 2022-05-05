@@ -41,5 +41,10 @@ namespace t3d
 
 	struct FLogData { const char8* FunctionName; const char8* Message; };
 
+// Application:
+
+	struct FApplicationData { int8 Dummy; };
+	struct FWindowData      { int8 Dummy; };
+
 }
 #pragma warning( pop )
