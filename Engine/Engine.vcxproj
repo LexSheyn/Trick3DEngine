@@ -109,7 +109,7 @@
     <ClCompile Include="src\Events\Experimental\FObject.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Logger\FLoggerEx.cpp" />
+    <ClCompile Include="src\Logger\FLogger.cpp" />
     <ClCompile Include="src\Templates\TCommand.cpp" />
     <ClCompile Include="src\ECS\Components\Components.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
@@ -253,8 +253,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Threads\FJobScheduler.cpp" />
+    <ClCompile Include="src\Threads\TWorkerThreadStatic.cpp" />
     <ClCompile Include="src\Threads\TWorkerThread.cpp" />
-    <ClCompile Include="src\Threads\TWorkerThreadEx.cpp" />
     <ClCompile Include="src\Time\FClock.cpp" />
     <ClCompile Include="src\Time\FDeltaTime.cpp" />
     <ClCompile Include="src\Time\FTime.cpp" />
@@ -268,7 +268,7 @@
   <ItemGroup>
     <ClInclude Include="src\Application\FApplication.h" />
     <ClInclude Include="src\Events\Experimental\FObject.h" />
-    <ClInclude Include="src\Logger\FLoggerEx.h" />
+    <ClInclude Include="src\Logger\FLogger.h" />
     <ClInclude Include="src\Templates\TCommand.h" />
     <ClInclude Include="src\ECS\Components\CCamera.h" />
     <ClInclude Include="src\ECS\Components\CDirectionalLight.h" />
@@ -366,10 +366,10 @@
     <ClInclude Include="src\ThirdParty\tiny_obj_loader.h" />
     <ClInclude Include="src\Threads\EThread.h" />
     <ClInclude Include="src\Threads\FJobScheduler.h" />
+    <ClInclude Include="src\Threads\TJobStatic.h" />
     <ClInclude Include="src\Threads\TJob.h" />
-    <ClInclude Include="src\Threads\TJobEx.h" />
+    <ClInclude Include="src\Threads\TWorkerThreadStatic.h" />
     <ClInclude Include="src\Threads\TWorkerThread.h" />
-    <ClInclude Include="src\Threads\TWorkerThreadEx.h" />
     <ClInclude Include="src\Time\FClock.h" />
     <ClInclude Include="src\Time\FDeltaTime.h" />
     <ClInclude Include="src\Time\FTime.h" />

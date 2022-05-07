@@ -1,11 +1,10 @@
 #pragma once
 
 #include "TJob.h"
-#include "../Events/Experimental/SEvent.h"
 
 namespace t3d
 {
-	template<typename T>
+	template<class C, typename T>
 	class TWorkerThread
 	{
 	public:
@@ -15,40 +14,38 @@ namespace t3d
 		TWorkerThread()
 			:
 			SleepDuration (33),
-			b_ShouldStop  (false),
 			b_Running     (false)
 		{
-			 SEvent::ApplicationClose.Subscribe(this, OnApplicationClose);
-			 SEvent::WindowClose.Subscribe(this, OnWindowClose);
 		}
 
 		~TWorkerThread()
 		{
-			this->Stop();
-
-			SEvent::ApplicationClose.Unsubscribe(OnApplicationClose);
-			SEvent::WindowClose.Unsubscribe(OnWindowClose);
+			this->StopAndFinish();
 		}
 
 	// Functions:
 
 		void Launch()
 		{
-			b_ShouldStop = false;
-			b_Running    = true;
+			if (b_Running == false)
+			{
+				b_Running = true;			
 
-			std::thread Thread(&TWorkerThread::Run, this);
-
-			Thread.detach();
+				Thread = std::thread{ &TWorkerThread::Run, this };
+			}
 		}
 
 		void Stop()
 		{
-			b_ShouldStop = true;
-			b_Running    = false;
+			if (b_Running)
+			{
+				b_Running = false;
+
+				Thread.join();
+			}
 		}
 
-		void ScheduleJob(TJob<T> Job)
+		void ScheduleJob(TJob<C, T> Job)
 		{
 			Jobs.push_back(Job);
 		}
@@ -78,19 +75,25 @@ namespace t3d
 
 		void Sleep()
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(SleepDuration));
+			SleepMutex.lock();
+
+			if (b_Running)
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(SleepDuration));
+			}
+
+			SleepMutex.unlock();
 		}
 
 		void Run()
 		{
-			while (b_ShouldStop == false)
+			while (b_Running)
 			{
-				while ( (Jobs.empty() == false) && (b_ShouldStop == false) )
+				while ( (Jobs.empty() == false) && (b_Running) )
 				{
 					JobMutex.lock();
 
 					Jobs.front().Perform();
-
 					Jobs.pop_front();
 
 					JobMutex.unlock();
@@ -100,29 +103,24 @@ namespace t3d
 			}
 		}
 
-	// Event Callbacks:
-
-		static bool8 T3D_CALL OnApplicationClose(FObject Instance, const FApplicationData& Data)
+		void StopAndFinish()
 		{
-			Instance.Get<TWorkerThread>()->Stop();
+			this->Stop();
 
-			return true;
+			while (Jobs.empty() == false)
+			{
+				Jobs.front().Perform();
+				Jobs.pop_front();
+			}
 		}
 
-		static bool8 T3D_CALL OnWindowClose(FObject Instance, const FWindowData& Data)
-		{
-			Instance.Get<TWorkerThread>()->Stop();
+		std::list<TJob<C, T>> Jobs;
+		std::mutex            JobMutex;
+		std::mutex            SleepMutex;
 
-			return true;
-		}
+		std::thread Thread;
 
-
-		std::list<TJob<T>> Jobs;
-		std::mutex         JobMutex;
-		std::mutex         SleepMutex;
-
-		int32 SleepDuration;
-		bool8 b_ShouldStop;
 		bool8 b_Running;
+		int32 SleepDuration;		
 	};
 }

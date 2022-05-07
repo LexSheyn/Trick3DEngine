@@ -3,18 +3,18 @@
 #include "ELogLevel.h"
 #include "../Time/FTimeStamp.h"
 #include "../Events/Experimental/SEvent.h"
-#include "../Threads/TWorkerThreadEx.h"
+#include "../Threads/TWorkerThread.h"
 
 namespace t3d
 {
-	class FLoggerEx
+	class FLogger
 	{
 	public:
 
 	// Constructors and Destructor:
 
-		 FLoggerEx    ();
-		~FLoggerEx    ();
+		 FLogger    ();
+		~FLogger    ();
 
 	// Modifiers:
 
@@ -37,6 +37,6 @@ namespace t3d
 	// Variables:
 
 		ELogLevel LogLevel;
-		TWorkerThreadEx<FLoggerEx, FLogData> LoggerThread;
+		TWorkerThread<FLogger, FLogData> LoggerThread;
 	};
 }

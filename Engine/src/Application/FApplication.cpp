@@ -37,7 +37,7 @@ namespace t3d
 		{
 			Clock.Restart();
 
-		//	FixedUpdateThread.ScheduleJob(TJob(this, FixedUpdate, 1));
+		//	FixedUpdateThread.ScheduleJob(TJobStatic(this, FixedUpdate, 1));
 
 			this->Update();
 

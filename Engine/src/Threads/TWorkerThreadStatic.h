@@ -1,25 +1,25 @@
 #pragma once
 
-#include "TJobEx.h"
+#include "TJobStatic.h"
+#include "../Events/Experimental/SEvent.h"
 
 namespace t3d
 {
-	template<class C, typename T>
-	class TWorkerThreadEx
+	template<typename T>
+	class TWorkerThreadStatic
 	{
 	public:
 
 	// Constructors and Destructor:
 
-		TWorkerThreadEx()
+		TWorkerThreadStatic()
 			:
 			SleepDuration (33),
-			b_ShouldStop  (false),
 			b_Running     (false)
 		{
 		}
 
-		~TWorkerThreadEx()
+		~TWorkerThreadStatic()
 		{
 			this->StopAndFinish();
 		}
@@ -30,10 +30,9 @@ namespace t3d
 		{
 			if (b_Running == false)
 			{
-				b_Running    = true;
-				b_ShouldStop = false;				
+				b_Running = true;
 
-				Thread = std::thread{ &TWorkerThreadEx::Run, this };
+				Thread = std::thread{ &TWorkerThreadStatic::Run, this };
 			}
 		}
 
@@ -41,14 +40,13 @@ namespace t3d
 		{
 			if (b_Running)
 			{
-				b_Running    = false;
-				b_ShouldStop = true;
+				b_Running = false;
 
 				Thread.join();
 			}
 		}
 
-		void ScheduleJob(TJobEx<C, T> Job)
+		void ScheduleJob(TJobStatic<T> Job)
 		{
 			Jobs.push_back(Job);
 		}
@@ -80,7 +78,7 @@ namespace t3d
 		{
 			SleepMutex.lock();
 
-			if (b_ShouldStop == false)
+			if (b_Running)
 			{
 				std::this_thread::sleep_for(std::chrono::milliseconds(SleepDuration));
 			}
@@ -90,9 +88,9 @@ namespace t3d
 
 		void Run()
 		{
-			while (b_ShouldStop == false)
+			while (b_Running)
 			{
-				while ( (Jobs.empty() == false) && (b_ShouldStop == false) )
+				while ( (Jobs.empty() == false) && (b_Running) )
 				{
 					JobMutex.lock();
 
@@ -117,14 +115,13 @@ namespace t3d
 			}
 		}
 
-		std::list<TJobEx<C, T>> Jobs;
-		std::mutex              JobMutex;
-		std::mutex              SleepMutex;
+		std::list<TJobStatic<T>> Jobs;
+		std::mutex               JobMutex;
+		std::mutex               SleepMutex;
 
 		std::thread Thread;
 
-		int32 SleepDuration;
-		bool8 b_ShouldStop;
 		bool8 b_Running;
+		int32 SleepDuration;		
 	};
 }

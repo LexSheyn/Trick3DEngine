@@ -1,33 +1,30 @@
 #pragma once
 
-#include "../Events/Experimental/FObject.h"
-
 namespace t3d
 {
-	template<typename T>
+	template<class C, typename T>
 	class TJob
 	{
 	public:
 
-		using Callback_Type = void(*) (FObject Instance, T);
+		using Callback_Type = void(C::*) (T);
 
-		template<class C>
 		TJob(C* Instance, Callback_Type Callback, T Data)
 			:
+			Instance (Instance),
 			Callback (Callback),
 			Data     (Data)
 		{
-			this->Instance.Set<C>(Instance);
 		}
 
 		void Perform()
 		{
-			(*Callback) (Instance, Data);
+			(*Instance.*Callback) (Data);
 		}
 
 	private:
 
-		FObject       Instance;
+		C*            Instance;
 		Callback_Type Callback;
 		T             Data;
 	};

@@ -171,13 +171,13 @@
     <ClCompile Include="src\Events\Experimental\FObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Logger\FLoggerEx.cpp">
+    <ClCompile Include="src\Logger\FLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Threads\FJobScheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Threads\TWorkerThread.cpp">
+    <ClCompile Include="src\Threads\TWorkerThreadStatic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Updater\FUpdaterEx.cpp">
@@ -189,7 +189,7 @@
     <ClCompile Include="src\ECS\Systems\ISystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Threads\TWorkerThreadEx.cpp">
+    <ClCompile Include="src\Threads\TWorkerThread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Time\FTimeStamp.cpp">
@@ -512,7 +512,7 @@
     <ClInclude Include="src\Events\Experimental\FObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Logger\FLoggerEx.h">
+    <ClInclude Include="src\Logger\FLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Threads\FJobScheduler.h">
@@ -521,10 +521,10 @@
     <ClInclude Include="src\Threads\EThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Threads\TWorkerThread.h">
+    <ClInclude Include="src\Threads\TWorkerThreadStatic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Threads\TJob.h">
+    <ClInclude Include="src\Threads\TJobStatic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Updater\FUpdaterEx.h">
@@ -533,10 +533,10 @@
     <ClInclude Include="src\Updater\FSystemRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Threads\TWorkerThreadEx.h">
+    <ClInclude Include="src\Threads\TWorkerThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Threads\TJobEx.h">
+    <ClInclude Include="src\Threads\TJob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Time\FTimeStamp.h">

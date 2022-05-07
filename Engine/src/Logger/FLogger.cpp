@@ -1,11 +1,11 @@
 #include "../PCH/t3dpch.h"
-#include "FLoggerEx.h"
+#include "FLogger.h"
 
 namespace t3d
 {
 // Constructors and Destructor:
 
-	FLoggerEx::FLoggerEx()
+	FLogger::FLogger()
 		:
 		LogLevel(ELogLevel::Trace)
 	{
@@ -17,7 +17,7 @@ namespace t3d
 		SEvent::Error  .Subscribe(this, OnError);
 	}
 
-	FLoggerEx::~FLoggerEx()
+	FLogger::~FLogger()
 	{
 		LoggerThread.Stop();
 
@@ -29,7 +29,7 @@ namespace t3d
 
 // Modifiers:
 
-	void FLoggerEx::SetLevel(ELogLevel Level)
+	void FLogger::SetLevel(ELogLevel Level)
 	{
 		LogLevel = Level;
 	}
@@ -37,7 +37,7 @@ namespace t3d
 
 // Private Functions:
 
-	void FLoggerEx::Trace(FLogData Data)
+	void FLogger::Trace(FLogData Data)
 	{
 		if (LogLevel == ELogLevel::Trace)
 		{
@@ -45,7 +45,7 @@ namespace t3d
 		}
 	}
 
-	void FLoggerEx::Warning(FLogData Data)
+	void FLogger::Warning(FLogData Data)
 	{
 		if (LogLevel <= ELogLevel::Warning)
 		{
@@ -53,7 +53,7 @@ namespace t3d
 		}
 	}
 
-	void FLoggerEx::Error(FLogData Data)
+	void FLogger::Error(FLogData Data)
 	{
 		if (LogLevel <= ELogLevel::Error)
 		{
@@ -64,29 +64,29 @@ namespace t3d
 
 // Event Callbacks:
 
-	bool8 FLoggerEx::OnTrace(FObject Instance, const FLogData& Data)
+	bool8 FLogger::OnTrace(FObject Instance, const FLogData& Data)
 	{
-		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+		FLogger* Logger = Instance.Get<FLogger>();
 
-		Logger->LoggerThread.ScheduleJob(TJobEx(Logger, &FLoggerEx::Trace, Data));
+		Logger->LoggerThread.ScheduleJob(TJob(Logger, &FLogger::Trace, Data));
 
 		return false;
 	}
 
-	bool8 FLoggerEx::OnWarning(FObject Instance, const FLogData& Data)
+	bool8 FLogger::OnWarning(FObject Instance, const FLogData& Data)
 	{
-		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+		FLogger* Logger = Instance.Get<FLogger>();
 
-		Logger->LoggerThread.ScheduleJob(TJobEx(Logger, &FLoggerEx::Warning, Data));
+		Logger->LoggerThread.ScheduleJob(TJob(Logger, &FLogger::Warning, Data));
 
 		return false;
 	}
 
-	bool8 FLoggerEx::OnError(FObject Instance, const FLogData& Data)
+	bool8 FLogger::OnError(FObject Instance, const FLogData& Data)
 	{
-		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+		FLogger* Logger = Instance.Get<FLogger>();
 
-		Logger->LoggerThread.ScheduleJob(TJobEx(Logger, &FLoggerEx::Error, Data));
+		Logger->LoggerThread.ScheduleJob(TJob(Logger, &FLogger::Error, Data));
 
 		return false;
 	}

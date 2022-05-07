@@ -5,8 +5,8 @@
 #include "../Scene/MSceneManager.h"
 #include "../Time/FClock.h"
 #include "../Time/FDeltaTime.h"
-#include "../Logger/FLoggerEx.h"
-//#include "../Threads/TWorkerThread.h"
+#include "../Logger/FLogger.h"
+//#include "../Threads/TWorkerThreadStatic.h"
 #include "../Updater/FUpdaterEx.h"
 
 namespace t3d
@@ -37,8 +37,8 @@ namespace t3d
 			Instance.Get<FApplication>()->Updater.FixedUpdate();
 		}
 
-	//	TWorkerThread<int> FixedUpdateThread;
-		FLoggerEx Logger;
+	//	TWorkerThreadStatic<int> FixedUpdateThread;
+		FLogger Logger;
 
 	// Variables:
 
