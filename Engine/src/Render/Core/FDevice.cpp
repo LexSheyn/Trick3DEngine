@@ -24,7 +24,7 @@ namespace t3d
 
 		this->CreateCommandPool();
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FDevice::~FDevice()
@@ -43,7 +43,7 @@ namespace t3d
 
 		vkDestroyInstance(Instance, nullptr);
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -63,7 +63,7 @@ namespace t3d
 			}
 		}
 
-		LOG_ERROR("Failed to find suitable memroy type!");
+		SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to find suitable memroy type!" });
 		throw;
 	}
 
@@ -85,7 +85,7 @@ namespace t3d
 			}
 		}
 
-		LOG_ERROR("Failed to find supported format!");
+		SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to find supported format!" });
 		throw;
 	}
 
@@ -100,7 +100,7 @@ namespace t3d
 
 		if (vkCreateBuffer(LogicalDevice, &BufferInfo, nullptr, &Buffer) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create buffer!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create buffer!" });
 			throw;
 		}
 
@@ -116,7 +116,7 @@ namespace t3d
 
 		if (vkAllocateMemory(LogicalDevice, &AllocateInfo, nullptr, &BufferMemory) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to allocate buffer memory!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to allocate buffer memory!" });
 			throw;
 		}
 
@@ -204,7 +204,7 @@ namespace t3d
 	{
 		if (vkCreateImage(LogicalDevice, &ImageInfo, nullptr, &Image) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create image!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create image!" });
 			throw;
 		}
 
@@ -220,13 +220,13 @@ namespace t3d
 
 		if (vkAllocateMemory(LogicalDevice, &AllocateInfo, nullptr, &ImageMemory) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to allocate image memory!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to allocate image memory!" });
 			throw;
 		}
 
 		if (vkBindImageMemory(LogicalDevice, Image, ImageMemory, 0) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to bind image memory!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to bind image memory!" });
 			throw;
 		}
 	}
@@ -276,7 +276,7 @@ namespace t3d
 	{
 		if (ValidationLayerEnabled && !this->CheckValidationLayerSupport())
 		{
-			LOG_ERROR("Validation layers requested, but not available!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Validation layers requested, but not available!" });
 			throw;
 		}
 
@@ -319,7 +319,7 @@ namespace t3d
 
 		if (vkCreateInstance(&CreateInfo, nullptr, &Instance) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create instance!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create instance!" });
 			throw;
 		}
 
@@ -340,14 +340,14 @@ namespace t3d
 		// Why not to use this function instead of creating static one?
 		if (this->CreateDebugUtilsMessengerEXT(Instance, &CreateInfo, nullptr, &DebugMessenger) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to set up debug messenger!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to set up debug messenger!" });
 			throw;
 		}
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL FDevice::DebugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT MessageSeverity, VkDebugUtilsMessageTypeFlagsEXT MessageType, const VkDebugUtilsMessengerCallbackDataEXT* PtrCallbackData, void* PtrUserData)
 	{
-		std::cout << "[ Vulkan validation layer ]::" << __FUNCTION__ << ": " << PtrCallbackData->pMessage << "\n" << std::endl;
+		std::cout << "[ Vulkan validation layer ]::" << T3D_FUNCTION << ": " << PtrCallbackData->pMessage << "\n" << std::endl;
 
 		if (MessageSeverity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
 		{
@@ -394,11 +394,11 @@ namespace t3d
 
 		if (DeviceCount == 0u)
 		{
-			SEvent::Error.Invoke({ T3D_FUNCTION, "Failed to find GPUs with Vulkan support!" });
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to find GPUs with Vulkan support!" });
 			throw;
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, std::string("Device count: " + std::to_string(DeviceCount)).c_str() });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string("Device count: " + std::to_string(DeviceCount)).c_str() });
 		
 		std::vector<VkPhysicalDevice> Devices(DeviceCount);
 
@@ -416,13 +416,13 @@ namespace t3d
 
 		if (PhysicalDevice == VK_NULL_HANDLE)
 		{
-			SEvent::Error.Invoke({ T3D_FUNCTION, "Failed to find a suitable GPU!" });
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to find a suitable GPU!" });
 			throw;
 		}
 
 		vkGetPhysicalDeviceProperties(PhysicalDevice, &Properties);
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, std::string(std::string("Device: ") + Properties.deviceName).c_str() });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string(std::string("Device: ") + Properties.deviceName).c_str() });
 	}
 
 	void FDevice::CreateLogicalDevice()
@@ -476,7 +476,7 @@ namespace t3d
 
 		if (vkCreateDevice(PhysicalDevice, &CreateInfo, nullptr, &LogicalDevice) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create logical device!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create logical device!" });
 			throw;
 		}
 
@@ -496,7 +496,7 @@ namespace t3d
 
 		if (vkCreateCommandPool(LogicalDevice, &PoolInfo, nullptr, &CommandPool) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create command pool!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create command pool!" });
 			throw;
 		}
 	}
@@ -637,28 +637,28 @@ namespace t3d
 
 		vkEnumerateInstanceExtensionProperties(nullptr, &ExtensionCount, Extensions.data());
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Available extensions: " });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Available extensions: " });
 
 		std::unordered_set<std::string> AvailableExtensions;
 
 		for (const auto& Extension : Extensions)
 		{
-			SEvent::Trace.Invoke({ T3D_FUNCTION, std::string(std::string("\t") + Extension.extensionName).c_str() });
+			SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string(std::string("\t") + Extension.extensionName).c_str() });
 
 			AvailableExtensions.insert(Extension.extensionName);
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Required extensions: " });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Required extensions: " });
 
 		std::vector<const char8*> RequiredExtensions = this->GetRequiredExtensions();
 
 		for (const auto& RequiredExtension : RequiredExtensions)
 		{
-			SEvent::Trace.Invoke({ T3D_FUNCTION, std::string(std::string("\t") + RequiredExtension).c_str() });
+			SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string(std::string("\t") + RequiredExtension).c_str() });
 
 			if (AvailableExtensions.find(RequiredExtension) == AvailableExtensions.end())
 			{
-				LOG_ERROR("Missing required GLFW extension!");
+				SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Missing required GLFW extension!" });
 				throw;
 			}
 		}

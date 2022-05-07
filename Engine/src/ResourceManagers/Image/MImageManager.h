@@ -1,6 +1,7 @@
 #pragma once
 
 #include "FImagePNG.h"
+#include "../../Events/Experimental/SEvent.h"
 
 namespace t3d
 {

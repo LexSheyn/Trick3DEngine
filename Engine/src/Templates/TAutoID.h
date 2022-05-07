@@ -7,7 +7,7 @@ namespace t3d
 	{
 	public:
 
-		T3D_INLINE static const T T3D_CALL NewID() { return Counter++; }
+		static const T T3D_CALL NewID() { return Counter++; }
 
 	private:
 

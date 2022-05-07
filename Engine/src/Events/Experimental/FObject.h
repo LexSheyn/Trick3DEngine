@@ -9,13 +9,13 @@ namespace t3d
 	public:
 
 		template<class C>
-		T3D_INLINE void Set(C* Instance)
+		void Set(C* Instance)
 		{
 			this->Instance = reinterpret_cast<Pointer_Type>(Instance);
 		}
 
 		template<class C>
-		T3D_INLINE C* Get()
+		C* Get()
 		{
 			return reinterpret_cast<C*>(Instance);
 		}

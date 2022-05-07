@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FSystemCallback.h"
+#include "FSystemRecord.h"
 
 namespace t3d
 {
@@ -15,14 +15,14 @@ namespace t3d
 
 	// Functions:
 
-		void  Subscribe         (ISystem* System);
-		void  Unsubscribe       (ISystem* System);
-		void  UnsubscribeAll    ();
-		bool8 IsSubscribed      (ISystem* System);
+		void  Register         (ISystem* System);
+		void  Unregister       (ISystem* System);
+		void  UnregisterAll    ();
+		bool8 IsRegistered     (ISystem* System);
 
 		void  Update            ();
 		void  FixedUpdate       ();
-		void  LastUpdate        ();
+		void  LateUpdate        ();
 
 	// Accessors:
 
@@ -40,9 +40,6 @@ namespace t3d
 
 	// Callbacks:
 
-		std::vector<ISystem*>        Systems;
-		std::vector<FSystemCallback> SystemCallbacks;
-		std::vector<FSystemCallback> FixedSystemCallbacks;
-		std::vector<FSystemCallback> LastSystemCallbacks;
+		std::vector<FSystemRecord> SystemRecords;
 	};
 }

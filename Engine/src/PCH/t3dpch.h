@@ -89,6 +89,8 @@
 #undef CreateEvent
 #undef LoadImage
 #undef LoadImageW
+#undef GetMessage
+#undef GetMessageW
 
 // Custom types:
 #include "../Types/T3DTypes.h"
@@ -96,9 +98,6 @@
 
 // Custom defines:
 #include "../Macros/T3DMacros.h"
-
-// Engine:
-#include "../Logger/FLogger.h"
 
 //#ifndef DISABLE_WINDOWS
 #define WIN32_LEAN_AND_MEAN

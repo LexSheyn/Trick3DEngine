@@ -28,19 +28,19 @@ namespace t3d
 
 		if (Buffer && Memory)
 		{
-			SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+			SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 		}
 
 	#if _DEBUG
 		if (!Buffer)
 		{
-			LOG_ERROR("Failed to create buffer!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create buffer!" });
 			throw;
 		}
 
 		if (!Memory)
 		{
-			LOG_ERROR("Failed to allocate memory for buffer!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to allocate memory for buffer!" });
 			throw;
 		}
 	#endif
@@ -56,7 +56,7 @@ namespace t3d
 
 		vkFreeMemory(Device.Device(), Memory, nullptr);
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -81,7 +81,7 @@ namespace t3d
 	{
 		if (!MappedMemory)
 		{
-			LOG_ERROR("Cannot copy to unmapped buffer!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Cannot copy to unmapped buffer!" });
 			throw;
 		}
 

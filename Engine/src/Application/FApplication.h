@@ -6,7 +6,7 @@
 #include "../Time/FClock.h"
 #include "../Time/FDeltaTime.h"
 #include "../Logger/FLoggerEx.h"
-#include "../Threads/TWorkerThread.h"
+//#include "../Threads/TWorkerThread.h"
 #include "../Updater/FUpdaterEx.h"
 
 namespace t3d
@@ -32,13 +32,13 @@ namespace t3d
 	private:
 
 		// TEST:
-		static T3D_INLINE void T3D_CALL FixedUpdate(FObject Instance, const FLogData& Data)
+		static void T3D_CALL FixedUpdate(FObject Instance, const int& Data)
 		{
 			Instance.Get<FApplication>()->Updater.FixedUpdate();
 		}
 
-		TWorkerThread<FLogData> FixedUpdateThread;
-		FLoggerEx     Logger;
+	//	TWorkerThread<int> FixedUpdateThread;
+		FLoggerEx Logger;
 
 	// Variables:
 

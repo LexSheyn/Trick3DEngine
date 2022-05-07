@@ -23,7 +23,7 @@ namespace t3d
 		Viewports.emplace_back(VkViewport{});
 		Scissors.emplace_back(VkRect2D{});
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FRenderer::~FRenderer()
@@ -37,7 +37,7 @@ namespace t3d
 			delete Swapchain;
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -47,7 +47,7 @@ namespace t3d
 	{
 		if (IsFrameStarted)
 		{
-			LOG_ERROR("Cannot call this function while frame already in progress!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Cannot call this function while frame already in progress!" });
 			throw;
 		}
 
@@ -60,7 +60,7 @@ namespace t3d
 
 		if (Result != VK_SUCCESS && Result != VK_SUBOPTIMAL_KHR)
 		{
-			LOG_ERROR("Failed to acquire next swapchain image!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to acquire next swapchain image!" });
 			throw;
 		}
 
@@ -72,7 +72,7 @@ namespace t3d
 
 		if (vkBeginCommandBuffer(this->GetCurrentCommandBuffer(), &BeginInfo) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to begin recording command buffer!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to begin recording command buffer!" });
 			throw;
 		}
 	}
@@ -81,7 +81,7 @@ namespace t3d
 	{
 		if (!IsFrameStarted)
 		{
-			LOG_ERROR("Cannot call this function while frame is not in progress!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Cannot call this function while frame is not in progress!" });
 			throw;
 		}
 
@@ -89,7 +89,7 @@ namespace t3d
 
 		if (vkEndCommandBuffer(CommandBuffer) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to record command buffer!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to record command buffer!" });
 			throw;
 		}
 
@@ -111,7 +111,7 @@ namespace t3d
 	{
 		if (!IsFrameStarted)
 		{
-			LOG_ERROR("Cannot call this function while frame is not in progress!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Cannot call this function while frame is not in progress!" });
 			throw;
 		}
 
@@ -154,7 +154,7 @@ namespace t3d
 	{
 		if (!IsFrameStarted)
 		{
-			LOG_ERROR("Cannot call this function while frame is not in progress!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Cannot call this function while frame is not in progress!" });
 			throw;
 		}
 
@@ -173,7 +173,7 @@ namespace t3d
 	{
 		if (!IsFrameStarted)
 		{
-			LOG_ERROR("Cannot get command buffer while frame not in progress!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Cannot get command buffer while frame not in progress!" });
 			throw;
 		}
 
@@ -194,7 +194,7 @@ namespace t3d
 	{
 		if (!IsFrameStarted)
 		{
-			LOG_ERROR("Cannot get frame index while frame not in progress!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Cannot get frame index while frame not in progress!" });
 			throw;
 		}
 
@@ -232,7 +232,7 @@ namespace t3d
 
 		vkDeviceWaitIdle(Device.Device());
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Creating swapchain." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Creating swapchain." });
 
 		Swapchain = new FSwapchain(Device, Extent);
 	}
@@ -252,17 +252,17 @@ namespace t3d
 
 		FSwapchain* OldSwapchain = Swapchain;
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Recreating swapchain." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Recreating swapchain." });
 
 		Swapchain = new FSwapchain(Device, Extent, OldSwapchain);
 
 		if (!OldSwapchain->HasEqualSwapFormats(*Swapchain))
 		{
-			LOG_ERROR("Swapchain image or depth format has changed!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Swapchain image or depth format has changed!" });
 			throw;
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleting old swapchain." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleting old swapchain." });
 
 		delete OldSwapchain;
 	}
@@ -280,7 +280,7 @@ namespace t3d
 
 		if (vkAllocateCommandBuffers(Device.Device(), &AllocateInfo, CommandBuffers.data()) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to allocate command buffers!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to allocate command buffers!" });
 			throw;
 		}
 	}

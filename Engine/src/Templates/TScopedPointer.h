@@ -32,9 +32,9 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE       T* Get()       { return Pointer; }
+		      T* Get()       { return Pointer; }
 
-		T3D_INLINE const T* Get() const { return Pointer; }
+		const T* Get() const { return Pointer; }
 
 	// Operators:
 
@@ -47,9 +47,9 @@ namespace t3d
 			DyingObject.Pointer = nullptr;
 		}
 
-		T3D_INLINE T* operator->() { return Pointer; }
+		T* operator->() { return Pointer; }
 
-		T3D_INLINE T& operator*()  { return *Pointer; }
+		T& operator*()  { return *Pointer; }
 
 		TScopedPointer& operator=(const TScopedPointer&) = delete;
 
@@ -104,9 +104,9 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE       T* Get()       { return Pointer; }
+		      T* Get()       { return Pointer; }
 
-		T3D_INLINE const T* Get() const { return Pointer; }
+		const T* Get() const { return Pointer; }
 
 	// Operators:
 
@@ -119,11 +119,11 @@ namespace t3d
 			DyingObject.Pointer = nullptr;
 		}
 
-		T3D_INLINE T* operator->()             { return Pointer; }
+		T* operator->()             { return Pointer; }
 
-		T3D_INLINE T& operator*()              { return *Pointer; }
+		T& operator*()              { return *Pointer; }
 
-		T3D_INLINE T& operator[](uint32 Index) { return Pointer[Index]; } // No bounds check.
+		T& operator[](uint32 Index) { return Pointer[Index]; } // No bounds check.
 
 		TScopedPointer& operator=(const TScopedPointer&) = delete;
 

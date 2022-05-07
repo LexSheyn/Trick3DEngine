@@ -3,6 +3,7 @@
 #include "ELogLevel.h"
 #include "../Time/FTimeStamp.h"
 #include "../Events/Experimental/SEvent.h"
+#include "../Threads/TWorkerThreadEx.h"
 
 namespace t3d
 {
@@ -15,12 +16,6 @@ namespace t3d
 		 FLoggerEx    ();
 		~FLoggerEx    ();
 
-	// Functions:
-
-		static bool8 T3D_CALL OnTrace      (FObject Instance, const FLogData& Data);
-		static bool8 T3D_CALL OnWarning    (FObject Instance, const FLogData& Data);
-		static bool8 T3D_CALL OnError      (FObject Instance, const FLogData& Data);
-
 	// Modifiers:
 
 		void T3D_CALL SetLevel    (ELogLevel Level);
@@ -29,10 +24,19 @@ namespace t3d
 
 	// Private Functions:
 
-		void Log(const char8* LogLevel, const char8* FunctionName, const char8* Message);
+		void Trace      (FLogData Data);
+		void Warning    (FLogData Data);
+		void Error      (FLogData Data);
+
+	// Event Callbacks:
+
+		static bool8 T3D_CALL OnTrace      (FObject Instance, const FLogData& Data);
+		static bool8 T3D_CALL OnWarning    (FObject Instance, const FLogData& Data);
+		static bool8 T3D_CALL OnError      (FObject Instance, const FLogData& Data);
 
 	// Variables:
 
 		ELogLevel LogLevel;
+		TWorkerThreadEx<FLoggerEx, FLogData> LoggerThread;
 	};
 }

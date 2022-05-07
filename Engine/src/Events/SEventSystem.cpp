@@ -36,42 +36,12 @@ namespace t3d
 	}
 
 	void SEventSystem::Subscribe(EEventType Type, IEventListener* Listener)
-	{		
-	#if _DEBUG
-		if (!Listener)
-		{
-			LOG_ERROR("Passed nullptr to the function!");
-
-			return;
-		}
-		else if (IsSubscribed(Type, Listener))
-		{
-			LOG_ERROR("Listener[" + std::to_string(Listener->GetId()) + "] is already subscribed for event of type: " + std::to_string(static_cast<uint32>(Type)) + "!");
-
-			return;
-		}
-	#endif
-
+	{
 		ListenerRegistry.emplace(Type, Listener);
 	}
 
 	void SEventSystem::Unsubscribe(EEventType Type, IEventListener* Listener)
 	{
-	#if _DEBUG
-		if (!Listener)
-		{
-			LOG_ERROR("Passed nullptr to the function!");
-
-			return;
-		}
-		else if (!IsSubscribed(Type, Listener))
-		{
-			LOG_ERROR("Listener[" + std::to_string(Listener->GetId()) + "] is not subscribed for event of type: " + std::to_string(static_cast<uint32>(Type)) + "!");
-
-			return;
-		}
-	#endif
-
 		std::pair Range = ListenerRegistry.equal_range(Type);
 
 		for (auto& Entry = Range.first; Entry != Range.second; Entry++)

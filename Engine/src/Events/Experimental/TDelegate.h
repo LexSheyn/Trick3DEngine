@@ -10,12 +10,18 @@ namespace t3d
 	public:
 
 		using Callback_Type = bool8(*) (FObject, const T&);
+		
+		template<class C>
+		TDelegate(C* Instance, Callback_Type Callback)
+		{
+			this->Instance.Set<C>(Instance);
+			this->Callback = Callback;
+		}
 
 		template<class C>
 		void Bind(C* Instance, Callback_Type Callback)
 		{
 			this->Instance.Set<C>(Instance);
-
 			this->Callback = Callback;
 		}
 

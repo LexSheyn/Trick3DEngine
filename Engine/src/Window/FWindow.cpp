@@ -74,7 +74,7 @@ namespace t3d
 	{
 		if (glfwCreateWindowSurface(Instance, Window, nullptr, Surface) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create window surface!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create window surface!" });
 			throw;
 		}
 	}
@@ -197,7 +197,7 @@ namespace t3d
 
 	void FWindow::ErrorCallback(int32 ErrorCode, const char8* Description)
 	{
-		LOG_ERROR("Code[" + std::to_string(ErrorCode) + "]: " + Description);
+		SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string("Code[" + std::to_string(ErrorCode) + "]: " + Description).c_str() });
 	}
 
 

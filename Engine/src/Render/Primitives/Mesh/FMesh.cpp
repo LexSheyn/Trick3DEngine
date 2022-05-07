@@ -16,7 +16,7 @@ namespace t3d
 		  IndexCount()
 	{
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FMesh::~FMesh()
@@ -25,7 +25,7 @@ namespace t3d
 
 		delete VertexBuffer;
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -35,12 +35,12 @@ namespace t3d
 	{
 		VertexCount = static_cast<uint32>(Vertices.size());
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, std::string("Vertex count: " + std::to_string(VertexCount)).c_str() });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string("Vertex count: " + std::to_string(VertexCount)).c_str() });
 
 	#if _DEBUG
 		if (VertexCount < 3u)
 		{
-			LOG_ERROR("Vertex count must be at least 3!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Vertex count must be at least 3!" });
 			throw;
 		}
 	#endif
@@ -64,12 +64,12 @@ namespace t3d
 	{
 		IndexCount = static_cast<uint32>(Indices.size());
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, std::string("Index count: " + std::to_string(IndexCount)).c_str() });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string("Index count: " + std::to_string(IndexCount)).c_str() });
 
 	#if _DEBUG
 		if (IndexCount == 0u)
 		{
-			LOG_ERROR("Non indexed mesh is not supported!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Non indexed mesh is not supported!" });
 			throw;
 		}
 	#endif

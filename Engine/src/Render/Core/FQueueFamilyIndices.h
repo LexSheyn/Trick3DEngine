@@ -9,6 +9,6 @@ namespace t3d
 
 	// Accessors:
 
-		T3D_INLINE bool IsComplete() { return GraphicsFamily >= 0 && PresentFamily >= 0; }
+		bool IsComplete() { return GraphicsFamily >= 0 && PresentFamily >= 0; }
 	};
 }

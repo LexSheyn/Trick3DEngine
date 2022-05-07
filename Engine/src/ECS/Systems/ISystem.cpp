@@ -24,7 +24,7 @@ namespace t3d
 	{
 	}
 
-	void ISystem::OnLastUpdate()
+	void ISystem::OnLateUpdate()
 	{
 	}
 

@@ -14,12 +14,12 @@ namespace t3d
 	public:
 
 		template<class C>
-		T3D_INLINE void Bind(C* Instance, void (C::*Callback) (const T&))
+		void Bind(C* Instance, void (C::*Callback) (const T&))
 		{
 			Command = std::bind(Callback, Instance, std::placeholders::_1);
 		}
 
-		T3D_INLINE void Invoke(const T& Data)
+		void Invoke(const T& Data)
 		{
 			if (Command)
 			{

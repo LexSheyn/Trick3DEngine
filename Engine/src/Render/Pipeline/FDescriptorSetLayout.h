@@ -32,7 +32,7 @@ namespace t3d
 			{
 				if (Bindings.count(Binding) != 0u)
 				{
-					LOG_ERROR("Binding already in use!");
+					SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Binding is already in use!" });
 					throw;
 				}
 
@@ -48,7 +48,7 @@ namespace t3d
 				return *this;
 			}
 
-			T3D_NO_DISCARD T3D_INLINE FDescriptorSetLayout* Create() const { return new FDescriptorSetLayout(Device, Bindings); }
+			T3D_NO_DISCARD FDescriptorSetLayout* Create() const { return new FDescriptorSetLayout(Device, Bindings); }
 
 		private:
 

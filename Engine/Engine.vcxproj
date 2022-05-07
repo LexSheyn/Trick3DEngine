@@ -152,7 +152,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PCH/t3dpch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Logger\FLogger.cpp" />
     <ClCompile Include="src\Memory\FMemoryAllocator.cpp" />
     <ClCompile Include="src\Memory\T3DMemory.cpp" />
     <ClCompile Include="src\PCH\t3dpch.cpp">
@@ -255,12 +254,13 @@
     </ClCompile>
     <ClCompile Include="src\Threads\FJobScheduler.cpp" />
     <ClCompile Include="src\Threads\TWorkerThread.cpp" />
+    <ClCompile Include="src\Threads\TWorkerThreadEx.cpp" />
     <ClCompile Include="src\Time\FClock.cpp" />
     <ClCompile Include="src\Time\FDeltaTime.cpp" />
     <ClCompile Include="src\Time\FTime.cpp" />
     <ClCompile Include="src\Time\FTimeStamp.cpp" />
     <ClCompile Include="src\Types\T3DStaticConversion.cpp" />
-    <ClCompile Include="src\Updater\FSystemCallback.cpp" />
+    <ClCompile Include="src\Updater\FSystemRecord.cpp" />
     <ClCompile Include="src\Updater\FUpdater.cpp" />
     <ClCompile Include="src\Updater\FUpdaterEx.cpp" />
     <ClCompile Include="src\Window\FWindow.cpp" />
@@ -303,7 +303,6 @@
     <ClInclude Include="src\Input\Mouse\FMouseButton.h" />
     <ClInclude Include="src\Input\Mouse\FMouseButtonState.h" />
     <ClInclude Include="src\Logger\ELogLevel.h" />
-    <ClInclude Include="src\Logger\FLogger.h" />
     <ClInclude Include="src\Macros\T3DMacros.h" />
     <ClInclude Include="src\Memory\FMemoryAllocator.h" />
     <ClInclude Include="src\Memory\T3DMemory.h" />
@@ -368,7 +367,9 @@
     <ClInclude Include="src\Threads\EThread.h" />
     <ClInclude Include="src\Threads\FJobScheduler.h" />
     <ClInclude Include="src\Threads\TJob.h" />
+    <ClInclude Include="src\Threads\TJobEx.h" />
     <ClInclude Include="src\Threads\TWorkerThread.h" />
+    <ClInclude Include="src\Threads\TWorkerThreadEx.h" />
     <ClInclude Include="src\Time\FClock.h" />
     <ClInclude Include="src\Time\FDeltaTime.h" />
     <ClInclude Include="src\Time\FTime.h" />
@@ -376,7 +377,7 @@
     <ClInclude Include="src\Types\ECSTypes.h" />
     <ClInclude Include="src\Types\T3DStaticConversion.h" />
     <ClInclude Include="src\Types\T3DTypes.h" />
-    <ClInclude Include="src\Updater\FSystemCallback.h" />
+    <ClInclude Include="src\Updater\FSystemRecord.h" />
     <ClInclude Include="src\Updater\FUpdater.h" />
     <ClInclude Include="src\Updater\FUpdaterEx.h" />
     <ClInclude Include="src\Window\FWindow.h" />

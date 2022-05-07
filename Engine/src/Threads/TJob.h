@@ -9,7 +9,7 @@ namespace t3d
 	{
 	public:
 
-		using Callback_Type = void(*) (FObject Instance, const T&);
+		using Callback_Type = void(*) (FObject Instance, T);
 
 		template<class C>
 		TJob(C* Instance, Callback_Type Callback, T Data)

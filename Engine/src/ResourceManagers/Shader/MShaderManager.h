@@ -1,6 +1,7 @@
 #pragma once
 #include "EShaderType.h"
 #include "EShaderOptimizationLevel.h"
+#include "../../Events/Experimental/SEvent.h"
 
 namespace t3d
 {

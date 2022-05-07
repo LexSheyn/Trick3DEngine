@@ -40,7 +40,7 @@ namespace t3d
 
 		if (vkCreateImage(Device.Device(), &ImageInfo, VK_NULL_HANDLE, &Texture.Image) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create image!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create image!" });
 			throw;
 		}
 
@@ -57,7 +57,7 @@ namespace t3d
 
 		if (vkAllocateMemory(Device.Device(), &AllocateInfo, VK_NULL_HANDLE, &Texture.ImageMemory) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to allocate memory for image!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to allocate memory for image!" });
 			throw;
 		}
 

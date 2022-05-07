@@ -23,18 +23,18 @@ namespace t3d
 
 		if (vkCreateDescriptorPool(Device.Device(), &PoolInfo, nullptr, &Pool) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create descriptor pool!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create descriptor pool!" });
 			throw;
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FDescriptorPool::~FDescriptorPool()
 	{
 		vkDestroyDescriptorPool(Device.Device(), Pool, nullptr);
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -64,7 +64,7 @@ namespace t3d
 	{
 		if (vkFreeDescriptorSets(Device.Device(), Pool, static_cast<uint32>(Sets.size()), Sets.data()) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to free descriptor sets!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to free descriptor sets!" });
 		}
 	}
 
@@ -72,7 +72,7 @@ namespace t3d
 	{
 		if (vkResetDescriptorPool(Device.Device(), Pool, 0) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to reset rescriptor pool!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to reset rescriptor pool!" });
 		}
 	}
 

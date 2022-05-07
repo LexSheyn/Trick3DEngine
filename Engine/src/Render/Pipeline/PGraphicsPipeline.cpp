@@ -19,7 +19,7 @@ namespace t3d
 		this->CreatePipelineLayout();
 		this->Create();
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	PGraphicsPipeline::~PGraphicsPipeline()
@@ -41,7 +41,7 @@ namespace t3d
 			delete UniformBuffers[i];
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -80,7 +80,7 @@ namespace t3d
 
 		if (vkCreateShaderModule(Renderer.GetDevice().Device(), &CreateInfo, VK_NULL_HANDLE, ShaderModule) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create shader module!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create shader module!" });
 			throw;
 		}
 	}
@@ -212,7 +212,7 @@ namespace t3d
 
 		if (vkCreatePipelineLayout(Renderer.GetDevice().Device(), &PipelineLayoutInfo, VK_NULL_HANDLE, &PipelineLayout) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create pipeline layout!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create pipeline layout!" });
 			throw;
 		}
 	}
@@ -281,7 +281,7 @@ namespace t3d
 
 		if (vkCreateGraphicsPipelines(Renderer.GetDevice().Device(), VK_NULL_HANDLE, 1, &PipelineInfo, VK_NULL_HANDLE, &VulkanPipeline) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create graphics pipeline!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create graphics pipeline!" });
 			throw;
 		}
 	}

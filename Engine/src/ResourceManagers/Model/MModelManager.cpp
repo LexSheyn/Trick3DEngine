@@ -22,8 +22,8 @@ namespace t3d
 
 		if (!tinyobj::LoadObj(&Attributes, &Shapes, &Materials, &WarningMessage, &ErrorMessage, FilePath.c_str()))
 		{
-			LOG_WARNING(WarningMessage);
-			LOG_ERROR(ErrorMessage);
+			SEvent::Warning.Invoke({ FTimeStamp(), T3D_FUNCTION, WarningMessage.c_str() });
+			SEvent::Error  .Invoke({ FTimeStamp(), T3D_FUNCTION, ErrorMessage.c_str() });
 			throw;
 		}
 

@@ -23,7 +23,7 @@ namespace t3d
 
 		if (!InFile.is_open())
 		{
-			LOG_ERROR("Failed to open: " + FilePath);
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string("Failed to open: " + FilePath).c_str() });
 			throw;
 		}
 

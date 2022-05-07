@@ -48,9 +48,6 @@
     <ClCompile Include="src\Input\Mouse\FMouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Logger\FLogger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\PCH\t3dpch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -132,9 +129,6 @@
     <ClCompile Include="src\Time\FTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Time\FTimeStamp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Types\T3DStaticConversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -189,10 +183,16 @@
     <ClCompile Include="src\Updater\FUpdaterEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Updater\FSystemCallback.cpp">
+    <ClCompile Include="src\Updater\FSystemRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ECS\Systems\ISystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Threads\TWorkerThreadEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time\FTimeStamp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -285,9 +285,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Logger\ELogLevel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Logger\FLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Macros\T3DMacros.h">
@@ -455,9 +452,6 @@
     <ClInclude Include="src\Time\FTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Time\FTimeStamp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Types\ECSTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -536,7 +530,16 @@
     <ClInclude Include="src\Updater\FUpdaterEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Updater\FSystemCallback.h">
+    <ClInclude Include="src\Updater\FSystemRecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Threads\TWorkerThreadEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Threads\TJobEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Time\FTimeStamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

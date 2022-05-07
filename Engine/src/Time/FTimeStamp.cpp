@@ -3,20 +3,26 @@
 
 namespace t3d
 {
-// Functions:
+// Constructor:
 
-	std::string FTimeStamp::GetAsString()
+	FTimeStamp::FTimeStamp()
 	{
 		std::time_t CurrentCalendarTime = std::time(nullptr);
 
 		std::tm LocalTime{};
 
-		char8 TimeAsCharArray[9]{}; // HH:MM:SS, 9 chars: 8 for numbers + 1 for '\0' (null terminator).
-
 		localtime_s(&LocalTime, &CurrentCalendarTime);
 
 		std::strftime(TimeAsCharArray, sizeof(TimeAsCharArray), "%H:%M:%S", &LocalTime);
+	}
 
+	char8* FTimeStamp::Get()
+	{
+		return TimeAsCharArray;
+	}
+
+	std::string FTimeStamp::GetAsString()
+	{
 		return std::string(TimeAsCharArray);
 	}
 

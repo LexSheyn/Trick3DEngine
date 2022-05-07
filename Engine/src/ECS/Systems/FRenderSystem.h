@@ -22,7 +22,7 @@ namespace t3d
 
 		void OnUpdate         () override;
 		void OnFixedUpdate    () override;
-		void OnLastUpdate     () override;
+		void OnLateUpdate     () override;
 
 	// Functions:
 

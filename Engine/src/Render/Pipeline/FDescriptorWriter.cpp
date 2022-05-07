@@ -9,19 +9,19 @@ namespace t3d
 		: SetLayout(SetLayout),
 		  Pool(Pool)
 	{
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FDescriptorWriter::~FDescriptorWriter()
 	{
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 	FDescriptorWriter& FDescriptorWriter::WriteBuffer(uint32 Binding, VkDescriptorBufferInfo* BufferInfo)
 	{
 		if (SetLayout.Bindings.count(Binding) != 1u)
 		{
-			LOG_ERROR("Layout does not contain specified binding!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Layout does not contain specified binding!" });
 			throw;
 		}
 
@@ -29,7 +29,7 @@ namespace t3d
 
 		if (BindingDescription.descriptorCount != 1u) // INCORRECT, NEEDS REWORK!
 		{
-			LOG_ERROR("Binding single descriptor info, but bunding expects multiple!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Binding single descriptor info, but bunding expects multiple!" });
 			throw;
 		}
 
@@ -50,7 +50,7 @@ namespace t3d
 	{
 		if (SetLayout.Bindings.count(Binding) != 1u)
 		{
-			LOG_ERROR("Layout does not contain specified binding!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Layout does not contain specified binding!" });
 			throw;
 		}
 
@@ -58,7 +58,7 @@ namespace t3d
 
 		if (BindingDescription.descriptorCount != 1u) // INCORRECT, NEEDS REWORK!
 		{
-			LOG_ERROR("Binding single descriptor info, but binding expects multiple!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Binding single descriptor info, but binding expects multiple!" });
 			throw;
 		}
 

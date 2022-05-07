@@ -31,13 +31,13 @@ namespace t3d
 
 	// Functions:
 
-		T3D_INLINE void Handle () { Handled = true; }
+		void MarkHandled () { b_Handled = true; }
 
 	// Accessors:
 
-		T3D_INLINE const EEventCategory& GetCategory    () const { return Category; }
-		T3D_INLINE const EEventType&     GetType        () const { return Type; }
-		T3D_INLINE const bool8&          IsHandled      () const { return Handled; }
+		const EEventCategory& GetCategory    () const { return Category; }
+		const EEventType&     GetType        () const { return Type; }
+		const bool8&          IsHandled      () const { return b_Handled; }
 
 	// Public Variables:
 
@@ -61,7 +61,7 @@ namespace t3d
 		EEventCategory Category {}; // Temporary unused.
 		EEventType     Type;
 
-		bool8 Handled = false;
+		bool8 b_Handled = false;
 	};
 }
 

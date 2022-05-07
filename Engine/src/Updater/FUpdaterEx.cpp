@@ -9,10 +9,7 @@ namespace t3d
 		:
 		FixedUpdateDelay(10)
 	{
-		Systems             .reserve(10);
-		SystemCallbacks     .reserve(10);
-		FixedSystemCallbacks.reserve(10);
-		LastSystemCallbacks .reserve(10);
+		SystemRecords.reserve(10);
 	}
 
 	FUpdaterEx::~FUpdaterEx()
@@ -22,78 +19,34 @@ namespace t3d
 
 // Functions:
 
-	void FUpdaterEx::Subscribe(ISystem* System)
+	void FUpdaterEx::Register(ISystem* System)
 	{
-		Systems             .push_back(System);
-		SystemCallbacks     .push_back(FSystemCallback(System, &ISystem::OnUpdate));
-		FixedSystemCallbacks.push_back(FSystemCallback(System, &ISystem::OnFixedUpdate));
-		LastSystemCallbacks .push_back(FSystemCallback(System, &ISystem::OnLastUpdate));
+		SystemRecords.push_back(FSystemRecord(System, &ISystem::OnUpdate, &ISystem::OnFixedUpdate, &ISystem::OnLateUpdate));
 	}
 
-	void  FUpdaterEx::Unsubscribe(ISystem* System)
+	void  FUpdaterEx::Unregister(ISystem* System)
 	{
-		for (size_t i = 0u; i < Systems.size(); i++)
+		for (size_t i = 0u; i < SystemRecords.size(); i++)
 		{
-			if (Systems.at(i) == System)
+			if (SystemRecords.at(i).IsEqual(System))
 			{
-				Systems.at(i) = Systems.back();
+				SystemRecords.erase(SystemRecords.begin() + i);
 
-				Systems.pop_back();
-
-				break;
-			}
-		}
-
-		for (size_t i = 0u; i < SystemCallbacks.size(); i++)
-		{
-			if (SystemCallbacks.at(i).IsEqual(System))
-			{
-				SystemCallbacks.at(i) = SystemCallbacks.back();
-
-				SystemCallbacks.pop_back();
-
-				break;
-			}
-		}
-
-		for (size_t i = 0u; i < FixedSystemCallbacks.size(); i++)
-		{
-			if (FixedSystemCallbacks.at(i).IsEqual(System))
-			{
-				FixedSystemCallbacks.at(i) = FixedSystemCallbacks.back();
-
-				FixedSystemCallbacks.pop_back();
-
-				break;
-			}
-		}
-
-		for (size_t i = 0u; i < LastSystemCallbacks.size(); i++)
-		{
-			if (LastSystemCallbacks.at(i).IsEqual(System))
-			{
-				LastSystemCallbacks.at(i) = LastSystemCallbacks.back();
-
-				LastSystemCallbacks.pop_back();
-
-				break;
+				return;
 			}
 		}
 	}
 
-	void FUpdaterEx::UnsubscribeAll()
+	void FUpdaterEx::UnregisterAll()
 	{
-		Systems             .clear();
-		SystemCallbacks     .clear();
-		FixedSystemCallbacks.clear();
-		LastSystemCallbacks .clear();
+		SystemRecords.clear();
 	}
 
-	bool8 FUpdaterEx::IsSubscribed(ISystem* System)
+	bool8 FUpdaterEx::IsRegistered(ISystem* System)
 	{
-		for (auto& SubscribedSystem : Systems)
+		for (auto& Record : SystemRecords)
 		{
-			if (SubscribedSystem == System)
+			if (Record.IsEqual(System))
 			{
 				return true;
 			}
@@ -104,25 +57,25 @@ namespace t3d
 
 	void FUpdaterEx::Update()
 	{
-		for (auto& SystemCallback : SystemCallbacks)
+		for (auto& System : SystemRecords)
 		{
-			SystemCallback.Invoke();
+			System.InvokeUpdate();
 		}
 	}
 
 	void FUpdaterEx::FixedUpdate()
 	{
-		for (auto& FixedSystemCallback : FixedSystemCallbacks)
+		for (auto& System : SystemRecords)
 		{
-			FixedSystemCallback.Invoke();
+			System.InvokeFixedUpdate();
 		}
 	}
 
-	void FUpdaterEx::LastUpdate()
+	void FUpdaterEx::LateUpdate()
 	{
-		for (auto& LastSystemCallback : LastSystemCallbacks)
+		for (auto& System : SystemRecords)
 		{
-			LastSystemCallback.Invoke();
+			System.InvokeLateUpdate();
 		}
 	}
 

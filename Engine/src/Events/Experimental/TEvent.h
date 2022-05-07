@@ -10,14 +10,12 @@ namespace t3d
 	public:
 		
 		template<class C>
-		T3D_INLINE void Subscribe(C* Instance, TDelegate<T>::Callback_Type Callback)
+		void Subscribe(C* Instance, TDelegate<T>::Callback_Type Callback)
 		{
-			Delegates.push_back(TDelegate<T>());
-
-			Delegates.back().Bind<C>(Instance, Callback);
+			Delegates.push_back(TDelegate<T>(Instance, Callback));
 		}
 
-		T3D_INLINE void Unsubscribe(TDelegate<T>::Callback_Type Callback)
+		void Unsubscribe(TDelegate<T>::Callback_Type Callback)
 		{
 			for (size_t i = 0u; i < Delegates.size(); i++)
 			{
@@ -32,7 +30,7 @@ namespace t3d
 			}
 		}
 
-		T3D_INLINE bool8 IsSubscribed(TDelegate<T>::Callback_Type Callback)
+		bool8 IsSubscribed(TDelegate<T>::Callback_Type Callback)
 		{
 			for (auto& Delegate : Delegates)
 			{
@@ -45,7 +43,7 @@ namespace t3d
 			return false;
 		}
 
-		T3D_INLINE void Invoke(const T& Data)
+		void Invoke(const T& Data)
 		{
 			for (auto& Delegate : Delegates)
 			{

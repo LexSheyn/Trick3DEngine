@@ -28,18 +28,18 @@ namespace t3d
 
 		if (vkCreateDescriptorSetLayout(Device.Device(), &DescriptorSetLayoutInfo, nullptr, &DescriptorSetLayout) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create descriptor set layout!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create descriptor set layout!" });
 			throw;
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FDescriptorSetLayout::~FDescriptorSetLayout()
 	{
 		vkDestroyDescriptorSetLayout(Device.Device(), DescriptorSetLayout, nullptr);
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 

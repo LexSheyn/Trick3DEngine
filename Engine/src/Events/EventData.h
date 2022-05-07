@@ -4,6 +4,8 @@
 #pragma warning( disable : 26495 ) // Uninitialized variables.
 
 #include "../Types/T3DTypes.h"
+#include "../Memory/T3DMemory.h"
+#include "../Time/FTimeStamp.h"
 
 namespace t3d
 {
@@ -39,7 +41,38 @@ namespace t3d
 
 // Logger:
 
-	struct FLogData { const char8* FunctionName; const char8* Message; };
+	class FLogData
+	{
+	public:
+
+		FLogData(FTimeStamp TimeStamp, const char8* FunctionName, const char8* Message)
+		{
+			MemoryCopy(this->TimeStamp   ,   9, reinterpret_cast<void*>(TimeStamp.Get()));
+			MemoryCopy(this->FunctionName, 128, reinterpret_cast<void*>(const_cast<char8*>(FunctionName)));
+			MemoryCopy(this->Message     , 128, reinterpret_cast<void*>(const_cast<char8*>(Message)));
+		}
+
+		char8* GetTimeStamp()
+		{
+			return TimeStamp;
+		}
+
+		char8* GetFunctionName()
+		{
+			return FunctionName;
+		}
+
+		char8* GetMessage()
+		{
+			return Message;
+		}
+
+	private:
+
+		char8 TimeStamp    [9]; // HH:MM:SS, 9 chars: 8 for numbers + 1 for '\0' (null terminator).
+		char8 FunctionName [128];
+		char8 Message      [128];
+	};
 
 // Application:
 

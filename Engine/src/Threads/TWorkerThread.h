@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TJob.h"
+#include "../Events/Experimental/SEvent.h"
 
 namespace t3d
 {
@@ -14,7 +15,8 @@ namespace t3d
 		TWorkerThread()
 			:
 			SleepDuration (33),
-			b_ShouldStop  (false)
+			b_ShouldStop  (false),
+			b_Running     (false)
 		{
 			 SEvent::ApplicationClose.Subscribe(this, OnApplicationClose);
 			 SEvent::WindowClose.Subscribe(this, OnWindowClose);
@@ -30,7 +32,7 @@ namespace t3d
 
 	// Functions:
 
-		T3D_INLINE void Launch()
+		void Launch()
 		{
 			b_ShouldStop = false;
 			b_Running    = true;
@@ -40,32 +42,32 @@ namespace t3d
 			Thread.detach();
 		}
 
-		T3D_INLINE void Stop()
+		void Stop()
 		{
 			b_ShouldStop = true;
 			b_Running    = false;
 		}
 
-		T3D_INLINE bool8 IsRunning()
-		{
-			return b_Running;
-		}
-
-		T3D_INLINE void ScheduleJob(TJob<T> Job)
+		void ScheduleJob(TJob<T> Job)
 		{
 			Jobs.push_back(Job);
 		}
 
 	// Accessors:
 
-		T3D_INLINE const int32& GetSleepDuration()
+		bool8 IsRunning()
+		{
+			return b_Running;
+		}
+
+		const int32& GetSleepDuration()
 		{
 			return SleepDuration;
 		}
 
 	// Modifiers:
 
-		T3D_INLINE void SetSleepDuration(int32 Duration)
+		void SetSleepDuration(int32 Duration)
 		{
 			SleepDuration = Duration;
 		}
@@ -74,12 +76,12 @@ namespace t3d
 
 	// Private Functions:
 
-		T3D_INLINE void Sleep()
+		void Sleep()
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(SleepDuration));
 		}
 
-		T3D_INLINE void Run()
+		void Run()
 		{
 			while (b_ShouldStop == false)
 			{
@@ -100,14 +102,14 @@ namespace t3d
 
 	// Event Callbacks:
 
-		static T3D_INLINE bool8 T3D_CALL OnApplicationClose(FObject Instance, const FApplicationData& Data)
+		static bool8 T3D_CALL OnApplicationClose(FObject Instance, const FApplicationData& Data)
 		{
 			Instance.Get<TWorkerThread>()->Stop();
 
 			return true;
 		}
 
-		static T3D_INLINE bool8 T3D_CALL OnWindowClose(FObject Instance, const FWindowData& Data)
+		static bool8 T3D_CALL OnWindowClose(FObject Instance, const FWindowData& Data)
 		{
 			Instance.Get<TWorkerThread>()->Stop();
 

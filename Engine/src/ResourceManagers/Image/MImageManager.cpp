@@ -15,7 +15,7 @@ namespace t3d
 
 		if (!Image.Pixels)
 		{
-			LOG_ERROR("Failed to load image: " + FilePath);
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, std::string("Failed to load image: " + FilePath).c_str() });
 
 			return FImagePNG();
 		}

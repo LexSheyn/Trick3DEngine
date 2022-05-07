@@ -14,8 +14,7 @@ namespace t3d
 	{
 		this->Init();
 
-		LOG_TRACE("Created.");
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FSwapchain::FSwapchain(FDevice& Device, VkExtent2D WindowExtent, FSwapchain* PreviousSwapchain)
@@ -30,7 +29,7 @@ namespace t3d
 	//		delete OldSwapchain;
 	//	}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FSwapchain::~FSwapchain()
@@ -75,7 +74,7 @@ namespace t3d
 			vkDestroyFence(Device.Device(), InFlightFences[i], nullptr);
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -125,7 +124,7 @@ namespace t3d
 
 		if (vkQueueSubmit(Device.GetGraphicsQueue(), 1, &SubmitInfo, InFlightFences[CurrentFrame]) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to submit draw command buffer!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to submit draw command buffer!" });
 			throw;
 		}
 
@@ -268,7 +267,7 @@ namespace t3d
 
 		if (vkCreateSwapchainKHR(Device.Device(), &CreateInfo, nullptr, &Swapchain) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create swapchain!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create swapchain!" });
 			throw;
 		}
 
@@ -309,7 +308,7 @@ namespace t3d
 
 			if (vkCreateImageView(Device.Device(), &ImageViewInfo, nullptr, &SwapchainImageViews[i]) != VK_SUCCESS)
 			{
-				LOG_ERROR("Failed to create texture image view!");
+				SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create texture image view!" });
 				throw;
 			}
 		}
@@ -363,7 +362,7 @@ namespace t3d
 
 			if (vkCreateImageView(Device.Device(), &ImageViewInfo, nullptr, &DepthImageViews[i]) != VK_SUCCESS)
 			{
-				LOG_ERROR("Failed to create texture image view!");
+				SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create texture image view!" });
 				throw;
 			}
 		}
@@ -436,7 +435,7 @@ namespace t3d
 
 		if (vkCreateRenderPass(Device.Device(), &RenderPassInfo, nullptr, &RenderPass) != VK_SUCCESS)
 		{
-			LOG_ERROR("Failed to create render pass!");
+			SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create render pass!" });
 			throw;
 		}
 	}
@@ -467,7 +466,7 @@ namespace t3d
 
 			if (vkCreateFramebuffer(Device.Device(), &FramebufferInfo, nullptr, &SwapchainFramebuffers[i]) != VK_SUCCESS)
 			{
-				LOG_ERROR("Failed to create framebuffer!");
+				SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create framebuffer!" });
 				throw;
 			}
 		}
@@ -493,19 +492,19 @@ namespace t3d
 		{
 			if (vkCreateSemaphore(Device.Device(), &SemaphoreInfo, nullptr, &ImageAvailableSemaphores[i]) != VK_SUCCESS)
 			{
-				LOG_ERROR("Failed to create semaphore for image available signal!");
+				SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create semaphore for image available signal!" });
 				throw;
 			}
 
 			if (vkCreateSemaphore(Device.Device(), &SemaphoreInfo, nullptr, &RenderFinishedSemaphores[i]) != VK_SUCCESS)
 			{
-				LOG_ERROR("Failed to create semaphore for render finished signal!");
+				SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create semaphore for render finished signal!" });
 				throw;
 			}
 
 			if (vkCreateFence(Device.Device(), &FenceInfo, nullptr, &InFlightFences[i]) != VK_SUCCESS)
 			{
-				LOG_ERROR("Failed to create fence for a frame!");
+				SEvent::Error.Invoke({ FTimeStamp(), T3D_FUNCTION, "Failed to create fence for a frame!" });
 				throw;
 			}
 		}
@@ -530,13 +529,13 @@ namespace t3d
 		{
 			if (AvailablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR)
 			{
-				SEvent::Trace.Invoke({ T3D_FUNCTION, "Presend mode: Mailbox." });
+				SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Presend mode: Mailbox." });
 
 				return AvailablePresentMode;
 			}
 		}
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Presend mode: V-Sync." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Presend mode: V-Sync." });
 
 		return VK_PRESENT_MODE_FIFO_KHR;
 	}

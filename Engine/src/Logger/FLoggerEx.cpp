@@ -5,57 +5,25 @@ namespace t3d
 {
 // Constructors and Destructor:
 
-	FLoggerEx::FLoggerEx() : LogLevel(ELogLevel::Trace)
+	FLoggerEx::FLoggerEx()
+		:
+		LogLevel(ELogLevel::Trace)
 	{
-		SEvent::Trace.Subscribe(this, OnTrace);
+		LoggerThread.SetSleepDuration(200);
+		LoggerThread.Launch();
+
+		SEvent::Trace  .Subscribe(this, OnTrace);
 		SEvent::Warning.Subscribe(this, OnWarning);
-		SEvent::Error.Subscribe(this, OnError);
+		SEvent::Error  .Subscribe(this, OnError);
 	}
 
 	FLoggerEx::~FLoggerEx()
 	{
-		SEvent::Trace.Unsubscribe(OnTrace);
+		LoggerThread.Stop();
+
+		SEvent::Trace  .Unsubscribe(OnTrace);
 		SEvent::Warning.Unsubscribe(OnWarning);
-		SEvent::Error.Unsubscribe(OnError);
-	}
-
-
-// Functions:
-
-	bool8 FLoggerEx::OnTrace(FObject Instance, const FLogData& Data)
-	{
-		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
-
-		if (Logger->LogLevel == ELogLevel::Trace)
-		{
-			Logger->Log("[  Trace  ]", Data.FunctionName, Data.Message);
-		}
-
-		return false;
-	}
-
-	bool8 FLoggerEx::OnWarning(FObject Instance, const FLogData& Data)
-	{
-		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
-
-		if (Logger->LogLevel <= ELogLevel::Warning)
-		{
-			Logger->Log("[ Warning ]", Data.FunctionName, Data.Message);
-		}
-
-		return false;
-	}
-
-	bool8 FLoggerEx::OnError(FObject Instance, const FLogData& Data)
-	{
-		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
-
-		if (Logger->LogLevel <= ELogLevel::Error)
-		{
-			Logger->Log("[  Error  ]", Data.FunctionName, Data.Message);
-		}
-
-		return false;
+		SEvent::Error  .Unsubscribe(OnError);
 	}
 
 
@@ -69,9 +37,58 @@ namespace t3d
 
 // Private Functions:
 
-	void FLoggerEx::Log(const char8* LogLevel, const char8* FunctionName, const char8* Message)
+	void FLoggerEx::Trace(FLogData Data)
 	{
-		std::cout << "[ " << FTimeStamp::GetAsString() << " ]" << LogLevel << "::" << FunctionName << ": " << Message << std::endl;
+		if (LogLevel == ELogLevel::Trace)
+		{
+			std::cout << "[ " << Data.GetTimeStamp() << " ]" << "[  Trace  ]" << "::" << Data.GetFunctionName() << ": " << Data.GetMessage() << std::endl;
+		}
+	}
+
+	void FLoggerEx::Warning(FLogData Data)
+	{
+		if (LogLevel <= ELogLevel::Warning)
+		{
+			std::cout << "[ " << Data.GetTimeStamp() << " ]" << "[ Warning ]" << "::" << Data.GetFunctionName() << ": " << Data.GetMessage() << std::endl;
+		}
+	}
+
+	void FLoggerEx::Error(FLogData Data)
+	{
+		if (LogLevel <= ELogLevel::Error)
+		{
+			std::cout << "[ " << Data.GetTimeStamp() << " ]" << "[  Error  ]" << "::" << Data.GetFunctionName() << ": " << Data.GetMessage() << std::endl;
+		}
+	}
+
+
+// Event Callbacks:
+
+	bool8 FLoggerEx::OnTrace(FObject Instance, const FLogData& Data)
+	{
+		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+
+		Logger->LoggerThread.ScheduleJob(TJobEx(Logger, &FLoggerEx::Trace, Data));
+
+		return false;
+	}
+
+	bool8 FLoggerEx::OnWarning(FObject Instance, const FLogData& Data)
+	{
+		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+
+		Logger->LoggerThread.ScheduleJob(TJobEx(Logger, &FLoggerEx::Warning, Data));
+
+		return false;
+	}
+
+	bool8 FLoggerEx::OnError(FObject Instance, const FLogData& Data)
+	{
+		FLoggerEx* Logger = Instance.Get<FLoggerEx>();
+
+		Logger->LoggerThread.ScheduleJob(TJobEx(Logger, &FLoggerEx::Error, Data));
+
+		return false;
 	}
 
 

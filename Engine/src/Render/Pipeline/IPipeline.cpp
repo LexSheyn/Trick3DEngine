@@ -14,7 +14,7 @@ namespace t3d
 		  PipelineLayout(VK_NULL_HANDLE),
 		  VulkanPipeline(VK_NULL_HANDLE)
 	{
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	IPipeline::~IPipeline()
@@ -25,7 +25,7 @@ namespace t3d
 
 		vkDestroyPipeline(Renderer.GetDevice().Device(), VulkanPipeline, nullptr);
 
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 }

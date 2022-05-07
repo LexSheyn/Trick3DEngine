@@ -11,12 +11,12 @@ namespace t3d
 		Renderer         (Renderer),
 		GraphicsPipeline (Renderer)
 	{
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Created." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Created." });
 	}
 
 	FRenderSystem::~FRenderSystem()
 	{
-		SEvent::Trace.Invoke({ T3D_FUNCTION, "Deleted." });
+		SEvent::Trace.Invoke({ FTimeStamp(), T3D_FUNCTION, "Deleted." });
 	}
 
 
@@ -29,17 +29,17 @@ namespace t3d
 		// To do...
 	//	LOG_TRACE("FPS: " + std::to_string( static_cast<uint64>(1.0f / FDeltaTime::Get()) ));
 
-		std::cout << "Render System Update" << std::endl;
+		
 	}
 
 	void FRenderSystem::OnFixedUpdate()
 	{
-		std::cout << "Render System Fixed Update" << std::endl;
+		
 	}
 
-	void FRenderSystem::OnLastUpdate()
+	void FRenderSystem::OnLateUpdate()
 	{
-		std::cout << "Render System Last Update" << std::endl;
+		
 	}
 
 

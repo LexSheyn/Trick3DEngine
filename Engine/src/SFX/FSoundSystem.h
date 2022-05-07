@@ -21,7 +21,7 @@ namespace t3d
 
 	// ISystem Interface:
 
-		void OnLastUpdate    () override;
+		void OnLateUpdate    () override;
 
 	// Accessors:
 
